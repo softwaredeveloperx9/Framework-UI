@@ -1,26 +1,7 @@
-pas.andaru-apps.co.id
+no_deployment
 
 pas.andaru-apps.co.id
 ti.andaru-apps.co.id
 tip.andaru-apps.co.id
 jld.andaru-apps.co.id
-
-ENVIRONMENT=development
-ENVIRONMENT=production
-
-sudo systemctl status actions.runner.*
-
-actions-runner-App-Framework 
-actions-runner-ERP-NEW-FrontEnd
-actions-runner-ERP-NEW-Satellite
-
-
-# Masih di root, buat user baru
-sudo useradd -m -s /bin/bash github-runner
-sudo su - github-runner
-
-sudo ./svc.sh install
-sudo ./svc.sh start
-
-# Check status:
-sudo ./svc.sh status
+no_deployment

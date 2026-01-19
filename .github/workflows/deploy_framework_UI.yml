@@ -1,4 +1,4 @@
-name: Deploy ERP-NEW-FrontEnd (Auto Target)
+name: Deploy Framework-UI (Auto Target)
 
 on:
   push:
@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 concurrency:
-  group: deploy-erp-new-frontend
+  group: deploy-framework-ui
   cancel-in-progress: false
 
 jobs:
@@ -41,37 +41,46 @@ jobs:
       run: |
         TARGET="${{ steps.read-target.outputs.TARGET }}"
         
+        echo "SHOULD_DEPLOY=true" >> $GITHUB_ENV
+        
         case "$TARGET" in
           pas.andaru-apps.co.id)
             echo "APP_VERSION=PAS" >> $GITHUB_ENV
             echo "ENVIRONMENT=production" >> $GITHUB_ENV
-            echo "DEPLOY_PATH=/var/www-custom/Comp_Peksi-FrontEnd" >> $GITHUB_ENV
+            echo "DEPLOY_PATH=/var/www-custom/Comp_Peksi-Framework-UI" >> $GITHUB_ENV
             ;;
           ti.andaru-apps.co.id)
             echo "APP_VERSION=TI" >> $GITHUB_ENV
             echo "ENVIRONMENT=production" >> $GITHUB_ENV
-            echo "DEPLOY_PATH=/var/www-custom/Comp_Trikaya-FrontEnd" >> $GITHUB_ENV
+            echo "DEPLOY_PATH=/var/www-custom/Comp_Trikaya-Framework-UI" >> $GITHUB_ENV
             ;;
           tip.andaru-apps.co.id)
             echo "APP_VERSION=TIP" >> $GITHUB_ENV
             echo "ENVIRONMENT=production" >> $GITHUB_ENV
-            echo "DEPLOY_PATH=/var/www-custom/Comp_Trikaya_Padjadjaran-FrontEnd" >> $GITHUB_ENV
+            echo "DEPLOY_PATH=/var/www-custom/Comp_Trikaya_Padjadjaran-Framework-UI" >> $GITHUB_ENV
             ;;
           jld.andaru-apps.co.id)
             echo "APP_VERSION=JLD" >> $GITHUB_ENV
             echo "ENVIRONMENT=production" >> $GITHUB_ENV
-            echo "DEPLOY_PATH=/var/www-custom/Comp_Jaladara-FrontEnd" >> $GITHUB_ENV
+            echo "DEPLOY_PATH=/var/www-custom/Comp_Jaladara-Framework-UI" >> $GITHUB_ENV
+            ;;
+          no_deployment)
+            echo "📦 No deployment - git push only"
+            echo "SHOULD_DEPLOY=false" >> $GITHUB_ENV
             ;;
           *)
             echo "Error: Invalid target '$TARGET'"
-            echo "Valid targets: pas.andaru-apps.co.id, ti.andaru-apps.co.id, tip.andaru-apps.co.id, jld.andaru-apps.co.id"
+            echo "Valid targets: pas.andaru-apps.co.id, ti.andaru-apps.co.id, tip.andaru-apps.co.id, jld.andaru-apps.co.id, no_deployment"
             exit 1
             ;;
         esac
         
-        echo "✅ Variables set for: ${{ env.APP_VERSION }} - ${{ env.ENVIRONMENT }}"
+        if [ "${{ env.SHOULD_DEPLOY }}" == "true" ]; then
+          echo "✅ Variables set for: ${{ env.APP_VERSION }} - ${{ env.ENVIRONMENT }}"
+        fi
     
     - name: Deploy application
+      if: env.SHOULD_DEPLOY == 'true'
       run: |
         echo "🚀 Deploying ${{ env.APP_VERSION }} to ${{ env.ENVIRONMENT }}"
         
