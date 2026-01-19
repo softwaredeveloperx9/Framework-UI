@@ -1,0 +1,137 @@
+/*
+ * It is advised not to edit the smartadmin_production.css
+ * as this will override any changes you make in the 
+ * later versions of this theme. 
+ * 
+ * We advise that you use use this CSS to override 
+ * SmartAdmin styles. 
+ * 
+ * Rename the stylesheet to whatever your liking so it will stay
+ * unique to you with each update of SmartAdmin.
+ */
+
+/*
+ * INDEX
+ * 
+ * - HTML
+ * - BODY
+ * - CUSTOM STYLES
+ */
+
+table.table {
+    border-bottom: 1px solid #ddd;
+    margin-bottom: 0px;
+}
+
+td.view {
+    cursor: pointer;
+    color: #1a82b2 !important;
+    text-decoration: underline;
+}
+
+td.detailOff,
+td.detailOn {
+    font-family: 'FontAwesome';
+    font-weight: 300;
+    font-size: 15px;
+
+    color: #886ab5 !important;
+    text-align: center;
+    cursor: pointer;
+}
+
+td.detailOn:before {
+    content: '\f147';
+}
+
+td.detailOff:before {
+    content: '\f196';
+}
+
+.info_row th {
+    font-size: 12px !important;
+    font-weight: 700;
+    white-space: nowrap;
+    padding: 0px 4px;
+}
+
+.info_row td {
+    border: 1px solid #ddd;
+    text-align: right;
+    padding: 2px 3px !important;
+}
+
+.info_row h4 {
+    font-size: 16px !important;
+    font-weight: 700 !important;
+    margin-top: 10px !important;
+    margin-bottom: 5px !important;
+}
+
+.detailLoading {
+    animation: fa-spin 2s infinite linear;
+    display: inline-block;
+    font-family: 'FontAwesome';
+    font-weight: 300;
+    font-size: 18px;
+    text-rendering: auto;
+    -webkit-font-smoothing: antialiased;
+}
+
+.detailLoading:before {
+    content: '\f110';
+}
+
+.clear-fixx:after {
+    content: '.';
+    display: block;
+    clear: both;
+    visibility: hidden;
+    line-height: 0;
+    height: 0;
+}
+
+.clear-fixx {
+    zoom: 1;
+}
+
+/* Warna default untuk baris ganjil */
+.table-responsive tbody tr:nth-child(odd) {
+    background-color: #ffffff !important;
+}
+
+/* Warna default untuk baris genap */
+.table-responsive tbody tr:nth-child(even) {
+    background-color: #f9f9f9 !important;
+}
+
+.table-responsive tbody tr.striped-row:nth-child(odd) {
+    background-color: #f9f9f9 !important;
+}
+
+.table-responsive tbody tr.striped-row:nth-child(even) {
+    background-color: #ffffff !important;
+}
+
+/* Jika checkbox dalam baris dipilih, ubah warna background untuk seluruh baris */
+.table-responsive tr.ng-scope:has(input[type='checkbox'][ng-model="row['rowSelected']"]:checked) {
+    background-color: #afeeee !important;
+    color: black !important;
+}
+
+div.table-responsive table.table tr:hover td {
+    background-color: #afeeee !important;
+}
+
+div.table-responsive table.table tr.info_row td,
+div.table-responsive table.table tr.info_RowItem td {
+    background-color: #ffffff !important;
+}
+
+div.table-responsive table.table tr.info_row:hover {
+    background-color: #afeeee !important;
+}
+
+div.table-responsive table.table tr.info_RowItem:hover {
+    background-color: #afeeee !important;
+}

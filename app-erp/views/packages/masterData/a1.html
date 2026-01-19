@@ -1,0 +1,342 @@
+<div id="content" ng-app="app.erp" ng-controller="SalesPromoFormCtrl" ng-class="{'sedangSubmitForm': form.submitted}">
+    <div class="row">
+        <big-breadcrumbs items="['Pricing', 'Sales Promo Form']" icon="table" class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></big-breadcrumbs>
+    </div>
+    <div class="jarviswidget">
+        <header>
+            <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+            <h2>Sales Promo Form</h2>
+        </header>
+        <div class="widget-body">
+            <div class="alert alert-info">
+                <div class="toolBarTop toolbar transparent" style="height: 33px">
+                    <button class="pull-left btn btn-primary" ng-click="saveData()" ng-show="Is_Writeable"><i class="fa fa-save"></i> Save</button>
+                    <div class="pull-left" style="width: 50px; text-align: center; padding-top: 5px"><i class="fa fa-spinner fa-spin" style="font-size: 24px; display: none" id="idLoading"></i>&nbsp;</div>
+                    <button style="float: right" type="button" class="btn btn-default" ng-click="sdr_GoBack()"><i class="fa fa-sign-out"></i> Back</button>
+                </div>
+            </div>
+            <div style="margin: -20px 0px 0px -10px">
+                <form class="smart-form">
+                    <fieldset style="padding-top: 20px">
+                        <div class="row">
+                            <section class="col col-3">
+                                <span class="help-block"> Promo Display Name <span style="color: red">*</span></span>
+                                <label class="input">
+                                    <input type="text" class="form-control form-control-sm" ng-model="model.PromoDisplayName" ng-required="true" placeholder="Promo Imlek - Cashback 10%" />
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Branch </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.Branch">
+                                        <option value="">All</option>
+                                    </select>
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Status </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.Status">
+                                        <option value="Approved">Approved</option>
+                                        <option value="Draft">Draft</option>
+                                        <option value="Cancelled">Cancelled</option>
+                                    </select>
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-2">
+                                <span class="help-block"> Valid From <span style="color: red">*</span></span>
+                                <label class="input">
+                                    <input type="date" class="form-control form-control-sm" ng-model="model.ValidFrom" ng-required="true" placeholder="Date Start" />
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Category </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.Category">
+                                        <option value="Developer">Developer</option>
+                                    </select>
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-2">
+                                <span class="help-block"> Valid Until <span style="color: red">*</span></span>
+                                <label class="input">
+                                    <input type="date" class="form-control form-control-sm" ng-model="model.ValidUntil" ng-required="true" placeholder="Date End" />
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Business Line </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.BusinessLine">
+                                        <option value="High Rise Building">High Rise Building</option>
+                                    </select>
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-2">
+                                <span class="help-block"> Promo Type <span style="color: red">*</span></span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.PromoType" ng-required="true">
+                                        <option value="Cashback">Cashback</option>
+                                        <option value="Discount">Discount</option>
+                                        <option value="Free Goods">Free Goods</option>
+                                        <option value="Points">Points</option>
+                                    </select>
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Applies to B/R </span>
+                                <label class="input">
+                                    <input type="text" class="form-control form-control-sm" ng-model="model.AppliesToBR" placeholder="nama customer" />
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-7">
+                                <span class="help-block"> Promo Description </span>
+                                <label class="textarea">
+                                    <textarea rows="3" class="form-control" ng-model="model.PromoDescription" placeholder="Promo Imlek - Cashback 10% - ..."></textarea>
+                                </label>
+                            </section>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div style="margin: 0px 0px 0px -13px">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item active">
+                        <a class="nav-link" data-toggle="tab" href="#dvConditionalPromo" role="tab">Conditional Promo</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#dvTieredPromo" role="tab">Tiered Promo</a>
+                    </li>
+                </ul>
+                <div class="tab-content border-top-0 p-3">
+                    <div class="tab-pane active" id="dvConditionalPromo" role="tabpanel">
+                        <div style="padding: 25px 14px">
+                            <p><i>Conditional Promo content will be here</i></p>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="dvTieredPromo" role="tabpanel">
+                        <div style="padding: 25px 14px">
+                            <form class="smart-form">
+                                <fieldset>
+                                    <div class="row">
+                                        <section class="col col-2">
+                                            <label class="checkbox">
+                                                <input type="checkbox" ng-model="model.AppliesToAllItems" />
+                                                <i></i> Applies to All Items
+                                            </label>
+                                        </section>
+                                    </div>
+                                    <div class="row" style="margin-top: 15px">
+                                        <section class="col col-12">
+                                            <button class="btn btn-sm btn-default" ng-click="addPromoTier()"><i class="fa fa-plus"></i> Add Promo Tier</button>
+                                        </section>
+                                    </div>
+                                    <div class="row" style="margin-top: 15px">
+                                        <section class="col col-12">
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr style="background-color: #f5f5f5">
+                                                            <th style="width: 50px">No.</th>
+                                                            <th style="width: 200px">Conditions Type</th>
+                                                            <th style="width: 150px">Minimum Purchase Qty</th>
+                                                            <th style="width: 150px">Applied Cashback (%)</th>
+                                                            <th style="width: 50px"></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="tier in data_PromoTiers">
+                                                            <td style="text-align: center">{{$index + 1}}</td>
+                                                            <td>
+                                                                <select class="form-control form-control-sm" ng-model="tier.ConditionsType">
+                                                                    <option value="Minimum Purchase">Minimum Purchase</option>
+                                                                    <option value="Accumulation per Orders">Accumulation per Orders</option>
+                                                                </select>
+                                                            </td>
+                                                            <td>
+                                                                <input type="number" class="form-control form-control-sm" ng-model="tier.MinimumPurchaseQty" style="text-align: right" />
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" class="form-control form-control-sm" ng-model="tier.AppliedCashback" />
+                                                            </td>
+                                                            <td style="text-align: center">
+                                                                <button class="btn btn-xs btn-danger" ng-click="removePromoTier($index)"><i class="fa fa-trash"></i></button>
+                                                            </td>
+                                                        </tr>
+                                                        <tr ng-if="!data_PromoTiers || data_PromoTiers.length == 0">
+                                                            <td colspan="5" class="text-center"><i>Tidak ada data..</i></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </section>
+                                    </div>
+                                    <div class="row" style="margin-top: 25px">
+                                        <section class="col col-12">
+                                            <h4>Specify Tiered Promo</h4>
+                                            <button class="btn btn-sm btn-default" ng-click="addSpecifyTieredPromo()"><i class="fa fa-plus"></i> Add</button>
+                                        </section>
+                                    </div>
+                                    <div class="row" style="margin-top: 15px">
+                                        <section class="col col-12">
+                                            <div class="table-responsive">
+                                                <table class="table table-bordered">
+                                                    <thead>
+                                                        <tr style="background-color: #f5f5f5">
+                                                            <th style="width: 50px">No.</th>
+                                                            <th style="width: 150px">Brand</th>
+                                                            <th style="width: 150px">Category</th>
+                                                            <th style="width: 150px">Type</th>
+                                                            <th style="width: 150px">Item Code</th>
+                                                            <th style="width: 200px">Description</th>
+                                                            <th style="width: 50px"></th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <tr ng-repeat="item in data_SpecifyTieredPromo">
+                                                            <td style="text-align: center">{{$index + 1}}</td>
+                                                            <td>
+                                                                <select class="form-control form-control-sm" ng-model="item.Brand">
+                                                                    <option value="Rucika">Rucika</option>
+                                                                    <option value="Vinilon">Vinilon</option>
+                                                                    <option value="Wavin">Wavin</option>
+                                                                </select>
+                                                            </td>
+                                                            <td>
+                                                                <select class="form-control form-control-sm" ng-model="item.Category">
+                                                                    <option value="All">All</option>
+                                                                    <option value="1 - Pipa">1 - Pipa</option>
+                                                                    <option value="1.01 - Pipa PVC">1.01 - Pipa PVC</option>
+                                                                </select>
+                                                            </td>
+                                                            <td>
+                                                                <select class="form-control form-control-sm" ng-model="item.Type">
+                                                                    <option value="All">All</option>
+                                                                    <option value="Pipa">Pipa</option>
+                                                                    <option value="Non Pipa">Non Pipa</option>
+                                                                </select>
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" class="form-control form-control-sm" ng-model="item.ItemCode" />
+                                                            </td>
+                                                            <td>
+                                                                <input type="text" class="form-control form-control-sm" ng-model="item.Description" />
+                                                            </td>
+                                                            <td style="text-align: center">
+                                                                <button class="btn btn-xs btn-danger" ng-click="removeSpecifyTieredPromo($index)"><i class="fa fa-trash"></i></button>
+                                                            </td>
+                                                        </tr>
+                                                        <tr ng-if="!data_SpecifyTieredPromo || data_SpecifyTieredPromo.length == 0">
+                                                            <td colspan="7" class="text-center"><i>Tidak ada data..</i></td>
+                                                        </tr>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </section>
+                                    </div>
+                                    <div class="row" style="margin-top: 15px" ng-repeat="item in data_SpecifyTieredPromo">
+                                        <section class="col col-12">
+                                            <div style="border: 1px solid #ddd; padding: 15px; margin-bottom: 10px; background-color: #fafafa">
+                                                <h5>Item #{{$index + 1}} - {{item.Brand}} - {{item.Description}}</h5>
+                                                <div class="table-responsive" style="margin-top: 10px">
+                                                    <table class="table table-bordered table-sm">
+                                                        <thead>
+                                                            <tr style="background-color: #e9ecef">
+                                                                <th style="width: 50px">No.</th>
+                                                                <th style="width: 200px">Conditions Type</th>
+                                                                <th style="width: 150px">SO Accumulation Amount</th>
+                                                                <th style="width: 150px">Applied Cashback (%)</th>
+                                                                <th style="width: 50px"></th>
+                                                            </tr>
+                                                        </thead>
+                                                        <tbody>
+                                                            <tr ng-repeat="condition in item.conditions">
+                                                                <td style="text-align: center">{{$index + 1}}</td>
+                                                                <td>
+                                                                    <select class="form-control form-control-sm" ng-model="condition.ConditionsType">
+                                                                        <option value="Accumulation per Orders">Accumulation per Orders</option>
+                                                                        <option value="Minimum Purchase">Minimum Purchase</option>
+                                                                    </select>
+                                                                </td>
+                                                                <td>
+                                                                    <input type="text" class="form-control form-control-sm" ng-model="condition.SOAccumulationAmount" style="text-align: right" />
+                                                                </td>
+                                                                <td>
+                                                                    <input type="text" class="form-control form-control-sm" ng-model="condition.AppliedCashback" />
+                                                                </td>
+                                                                <td style="text-align: center">
+                                                                    <button class="btn btn-xs btn-danger" ng-click="removeItemCondition($parent.$index, $index)"><i class="fa fa-trash"></i></button>
+                                                                </td>
+                                                            </tr>
+                                                        </tbody>
+                                                    </table>
+                                                </div>
+                                            </div>
+                                        </section>
+                                    </div>
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-if="allData_toJson"><pre>{{ allData_toJson2 | json:4 }}</pre></div>
+</div>
+
+<style>
+    table.table {
+        border-bottom: 1px solid #ddd;
+        margin-bottom: 0px;
+    }
+
+    .small-checkbox {
+        transform: scale(1);
+        -webkit-transform: scale(1);
+        padding-left: 10px !important;
+    }
+
+    .sedangSubmitForm .ng-invalid {
+        border-color: #b94a48 !important;
+        border-width: 2px !important;
+    }
+
+    .sedangEditForm {
+        background-color: #eee !important;
+        cursor: not-allowed;
+    }
+
+    .table-bordered {
+        border: 1px solid #ddd;
+    }
+
+    .table-bordered th,
+    .table-bordered td {
+        border: 1px solid #ddd;
+        padding: 8px;
+    }
+
+    .nav-tabs {
+        border-bottom: 1px solid #ddd;
+    }
+
+    .nav-tabs .nav-link {
+        border: 1px solid transparent;
+        border-top-left-radius: 0.25rem;
+        border-top-right-radius: 0.25rem;
+    }
+
+    .nav-tabs .nav-link.active {
+        color: #495057;
+        background-color: #fff;
+        border-color: #ddd #ddd #fff;
+    }
+</style>

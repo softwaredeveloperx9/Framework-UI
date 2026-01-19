@@ -1,0 +1,1398 @@
+<div id="content" ng-app="app.erp" ng-controller="CustomerFormCtrl" ng-class="{'sedangSubmitForm': form.submitted}">
+    <div class="row">
+        <big-breadcrumbs items="['Setup', 'Customers', 'Customer Form']" icon="users" class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></big-breadcrumbs>
+    </div>
+    <div class="jarviswidget">
+        <header>
+            <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+            <h2 ng-click="Toggle_debugScope()" style="cursor: help">Customers > Customer Form</h2>
+        </header>
+        <div class="widget-body">
+            <div class="alert alert-info">
+                <div class="toolBarTop toolbar transparent" style="height: 33px">
+                    <button class="pull-left btn btn-warning" ng-click="Set_Editable()" ng-show="!Is_Writeable"><i class="fa fa-save"></i> Edit</button>
+                    <button class="pull-left btn btn-primary" ng-click="saveData()" ng-show="Is_Writeable"><i class="fa fa-save"></i> Save</button>
+                    <div class="pull-left" style="width: 50px; text-align: center; padding-top: 5px"><i class="fa fa-spinner fa-spin" style="font-size: 24px; display: none" id="idLoading"></i>&nbsp;</div>
+                    <button style="float: right" type="button" class="btn btn-default" ng-click="sdr_GoBack()"><i class="fa fa-sign-out"></i> Back</button>
+                </div>
+            </div>
+            <div style="margin: -20px 0px 0px -10px">
+                <form class="smart-form">
+                    <fieldset style="padding-top: 20px">
+                        <div class="row">
+                            <section class="col col-3">
+                                <div style="cursor: pointer !important; width: 230px; margin-left: 20px">
+                                    <img src="app-erp/_assets/img/no-image.jpg" id="imgCustomer" class="rounded" style="width: 100%; height: 100%; object-fit: cover; border: 1px solid !important" ng-click="changePicture()" />
+                                    <input type="file" class="custom-file-input" ng-change="fileUploadChanged(model.FileUpload)" accept="image/*" style="display: none" ng-model="model.FileUpload" />
+                                </div>
+                            </section>
+                            <section class="col col-9">
+                                <div class="row">
+                                    <section class="col col-3">
+                                        <span class="help-block"> Code </span>
+                                        <label class="input">
+                                            <input type="text" class="form-control form-control-sm" ng-model="model.Code" ng-required="true" ng-readonly="!Is_Create" ng-class="{'sedangEditForm': !Is_Create}" />
+                                        </label>
+                                    </section>
+                                    <section class="col col-3">
+                                        <span class="help-block"> Alias Code </span>
+                                        <label class="input">
+                                            <input type="text" class="form-control form-control-sm" ng-model="model.AliasCode" />
+                                        </label>
+                                    </section>
+                                    <section class="col col-3">
+                                        <span class="help-block"> Holding Company </span>
+                                        <label class="input">
+                                            <input type="text" class="form-control form-control-sm" ng-model="model.HoldingCompany" placeholder="Ketik Nama Perusahaan" />
+                                        </label>
+                                    </section>
+                                    <section class="col col-3">
+                                        <span class="help-block"> Category </span>
+                                        <label class="input">
+                                            <select class="form-control form-control-sm" ng-model="model.CategoryCode" ng-options="item.Code as item.Description for item in data_Category">
+                                                <option value="">Select an Item</option>
+                                            </select>
+                                        </label>
+                                    </section>
+                                </div>
+                                <div class="row">
+                                    <section class="col col-3">
+                                        <span class="help-block"> Name </span>
+                                        <label class="input">
+                                            <input type="text" class="form-control form-control-sm" ng-model="model.Name" ng-required="true" />
+                                        </label>
+                                    </section>
+                                    <section class="col col-3">
+                                        <span class="help-block"> Title </span>
+                                        <label class="input">
+                                            <select class="form-control form-control-sm" ng-model="model.TitleCode" ng-options="item.Code as item.Description for item in data_Title">
+                                                <option value="">Select an Item</option>
+                                            </select>
+                                        </label>
+                                    </section>
+                                    <section class="col col-3">
+                                        <span class="help-block"> Business Line </span>
+                                        <label class="input">
+                                            <select class="form-control form-control-sm" ng-model="model.BusinessLineCode" ng-options="item.Code as item.Description for item in data_BusinessLine">
+                                                <option value="">Select an Item</option>
+                                            </select>
+                                        </label>
+                                    </section>
+                                    <section class="col col-3">
+                                        <span class="help-block"> Corporate Size </span>
+                                        <label class="input">
+                                            <select class="form-control form-control-sm" ng-model="model.CorporateSizeCode" ng-options="item.Code as item.Description for item in data_CorporateSize">
+                                                <option value="">Select an Item</option>
+                                            </select>
+                                        </label>
+                                    </section>
+                                </div>
+                                <div class="row">
+                                    <section class="col col-3">
+                                        <span class="help-block"> Default Branch </span>
+                                        <label class="input">
+                                            <select class="form-control form-control-sm" ng-model="model.DefaultBranchCode" ng-options="item.Code as item.Description for item in data_Branch">
+                                                <option value="">PKS - Peksi</option>
+                                            </select>
+                                        </label>
+                                    </section>
+                                    <section class="col col-3">
+                                        <span class="help-block"> Group </span>
+                                        <label class="input">
+                                            <select class="form-control form-control-sm" ng-model="model.GroupCode" ng-options="item.Code as item.Description for item in data_Group">
+                                                <option value="">Select an Item</option>
+                                            </select>
+                                        </label>
+                                    </section>
+                                    <section class="col col-3">
+                                        <span class="help-block"> Status </span>
+                                        <label class="input">
+                                            <select class="form-control form-control-sm" ng-model="model.StatusCode" ng-options="item.Code as item.Description for item in data_Status">
+                                                <option value="">Active</option>
+                                            </select>
+                                        </label>
+                                    </section>
+                                    <section class="col col-3">
+                                        <span class="help-block"> Customer Holiday </span>
+                                        <label class="input">
+                                            <select class="form-control form-control-sm" ng-model="model.CustomerHolidayCode" ng-options="item.Code as item.Description for item in data_CustomerHoliday">
+                                                <option value="">Minggu</option>
+                                            </select>
+                                        </label>
+                                    </section>
+                                </div>
+                                <div class="row">
+                                    <section class="col col-12">
+                                        <span class="help-block"> Reference Notes </span>
+                                        <label class="input">
+                                            <input type="text" class="form-control form-control-sm" ng-model="model.ReferenceNotes" />
+                                        </label>
+                                    </section>
+                                </div>
+                            </section>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div class="overview-section">
+                <div class="section-header">
+                    <div class="section-title"><i class="fa fa-angle-up"></i> Customer Overview</div>
+                </div>
+
+                <!-- Sales & Delivery Stats -->
+                <div class="section-title" style="font-size: 14px; margin-bottom: 15px; color: #7f8c8d">Sales & Delivery</div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Total Quotation</div>
+                        <div class="stat-value">12</div>
+                        <div class="stat-sublabel">Active Quotation</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Total Quotation Value</div>
+                        <div class="stat-value">Rp. 250.000.000</div>
+                        <div class="stat-sublabel">Of 3 Projects</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Total Project</div>
+                        <div class="stat-value">3</div>
+                        <div class="stat-sublabel">Active Project</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Total Contract</div>
+                        <div class="stat-value">7</div>
+                        <div class="stat-sublabel">Signed Contract</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Total Sales Order Value</div>
+                        <div class="stat-value">Rp. 175.000.000</div>
+                        <div class="stat-sublabel">Verified Sales Orders</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Total DO Delivered</div>
+                        <div class="stat-value">20</div>
+                        <div class="stat-sublabel">Reconciled Delivery Orders</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-label">Total DO Unbilled</div>
+                        <div class="stat-value">Rp. 15.000.000</div>
+                        <div class="stat-sublabel">Total DO Ready to be Invoiced</div>
+                    </div>
+                </div>
+
+                <!-- AR Aging & Payments -->
+                <div class="section-title" style="font-size: 14px; margin-bottom: 15px; margin-top: 30px; color: #7f8c8d">AR Aging & Payments</div>
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-label">Total Invoice Value</div>
+                        <div class="stat-value">Rp. 150.000.000</div>
+                        <div class="stat-sublabel">Include Giro</div>
+                    </div>
+                    <div class="stat-card success">
+                        <div class="stat-label">Total Paid Invoice <i class="fa fa-check-circle" style="color: #27ae60"></i></div>
+                        <div class="stat-value green">Rp. 100.000.000</div>
+                        <div class="stat-sublabel">Paid</div>
+                    </div>
+                    <div class="stat-card warning">
+                        <div class="stat-label">Total Overdue Value <i class="fa fa-exclamation-circle" style="color: #f39c12"></i></div>
+                        <div class="stat-value red">Rp. 37.500.000</div>
+                        <div class="stat-sublabel">Overdue</div>
+                    </div>
+                    <div class="stat-card danger">
+                        <div class="stat-label">Total Critical Overdue <i class="fa fa-times-circle" style="color: #e74c3c"></i></div>
+                        <div class="stat-value red">Rp. 12.500.000</div>
+                        <div class="stat-sublabel">All Exceeding Overdue Tolerance</div>
+                    </div>
+                </div>
+
+                <!-- Customer Credit Information -->
+                <div class="section-title" style="font-size: 14px; margin-bottom: 15px; margin-top: 30px; color: #7f8c8d">Customer Credit Information</div>
+                <div class="stats-grid">
+                    <div class="stat-card info">
+                        <div class="stat-label">Total Credit Limit</div>
+                        <div class="stat-value">Rp. 500.000.000</div>
+                        <div class="stat-sublabel">Customer Credit Limit</div>
+                    </div>
+                    <div class="stat-card info">
+                        <div class="stat-label">Available Credit Limit</div>
+                        <div class="stat-value">Rp. 225.000.000</div>
+                        <div class="stat-sublabel">Available</div>
+                    </div>
+                </div>
+            </div>
+            <div style="margin-left: -13px">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item active">
+                        <a class="nav-link" data-toggle="tab" href="#dvAddressesContacts" role="tab"><i class="fa fa-home mr-1"></i> Addresses/Contacts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#dvTaxProfile" role="tab"><i class="fa fa-file-text mr-1"></i> Tax Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#dvFinancialProfile" role="tab"><i class="fa fa-money mr-1"></i> Financial Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#dvBankAccounts" role="tab"><i class="fa fa-bank mr-1"></i> Bank Accounts</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#dvLegalDocuments" role="tab"><i class="fa fa-certificate mr-1"></i> Legal Documents</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#dvSalesProfile" role="tab"><i class="fa fa-shopping-cart mr-1"></i> Sales Profile</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#dvOverview" role="tab"><i class="fa fa-shopping-cart mr-1"></i> OverView</a>
+                    </li>
+                </ul>
+                <div class="tab-content border-top-0 p-3">
+                    <div class="tab-pane active" id="dvAddressesContacts" role="tabpanel">
+                        <div style="padding: 25px 14px">
+                            <div class="alert alert-info">
+                                <div class="toolBarTop toolbar transparent fixed-top">
+                                    <button class="btn btn-default" ng-click="AddAddress()" ng-disabled="!Is_Writeable"><i class="fa fa-plus"></i> Add Address</button>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>No</th>
+                                            <th style="min-width: 150px">Address Type</th>
+                                            <th style="min-width: 200px">Business Name</th>
+                                            <th style="min-width: 250px">Address</th>
+                                            <th style="min-width: 150px">Region/Area</th>
+                                            <th style="width: 150px">Phone</th>
+                                            <th style="width: 150px">Fax</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="row in details.Addresses | filter:{Deleted: 0}">
+                                            <td>
+                                                <button type="button" class="btn btn-sm btn-default" ng-click="RemoveAddress(row['recordNumber'])" ng-show="Is_Writeable">
+                                                    <i class="fa fa-trash-o" style="color: red"></i>
+                                                </button>
+                                            </td>
+                                            <td style="text-align: right">{{$index + 1 | number : 0}}.</td>
+                                            <td>
+                                                <select ng-show="Is_Writeable" class="form-control form-control-sm" ng-model="row['AddressTypeCode']" ng-options="item.Code as item.Description for item in data_AddressType">
+                                                    <option value="">Select</option>
+                                                </select>
+                                                <span ng-show="!Is_Writeable">{{ row['AddressTypeDescription'] }}</span>
+                                            </td>
+                                            <td><input type="text" ng-model="row['BusinessName']" class="form-control form-control-sm" ng-readonly="!Is_Writeable" /></td>
+                                            <td><textarea ng-model="row['Address']" class="form-control form-control-sm" rows="2" ng-readonly="!Is_Writeable"></textarea></td>
+                                            <td><input type="text" ng-model="row['RegionArea']" class="form-control form-control-sm" ng-readonly="!Is_Writeable" /></td>
+                                            <td><input type="text" ng-model="row['Phone']" class="form-control form-control-sm" ng-readonly="!Is_Writeable" /></td>
+                                            <td><input type="text" ng-model="row['Fax']" class="form-control form-control-sm" ng-readonly="!Is_Writeable" /></td>
+                                        </tr>
+                                        <tr ng-if="!details.Addresses || details.Addresses.length == 0">
+                                            <td colspan="8" class="text-center"><i>Tidak ada data..</i></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div class="alert alert-info" style="margin-top: 20px">
+                                <div class="toolBarTop toolbar transparent fixed-top">
+                                    <button class="btn btn-default" ng-click="AddContact()" ng-disabled="!Is_Writeable"><i class="fa fa-plus"></i> Add Contact</button>
+                                </div>
+                            </div>
+                            <div class="table-responsive">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th></th>
+                                            <th>No</th>
+                                            <th style="min-width: 200px">Contact Name</th>
+                                            <th style="min-width: 150px">Position</th>
+                                            <th style="width: 150px">Phone</th>
+                                            <th style="width: 150px">Fax</th>
+                                            <th style="min-width: 200px">Email</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="row in details.Contacts | filter:{Deleted: 0}">
+                                            <td>
+                                                <button type="button" class="btn btn-sm btn-default" ng-click="RemoveContact(row['recordNumber'])" ng-show="Is_Writeable">
+                                                    <i class="fa fa-trash-o" style="color: red"></i>
+                                                </button>
+                                            </td>
+                                            <td style="text-align: right">{{$index + 1 | number : 0}}.</td>
+                                            <td><input type="text" ng-model="row['ContactName']" class="form-control form-control-sm" ng-readonly="!Is_Writeable" /></td>
+                                            <td><input type="text" ng-model="row['Position']" class="form-control form-control-sm" ng-readonly="!Is_Writeable" /></td>
+                                            <td><input type="text" ng-model="row['Phone']" class="form-control form-control-sm" ng-readonly="!Is_Writeable" /></td>
+                                            <td><input type="text" ng-model="row['Fax']" class="form-control form-control-sm" ng-readonly="!Is_Writeable" /></td>
+                                            <td><input type="email" ng-model="row['Email']" class="form-control form-control-sm" ng-readonly="!Is_Writeable" /></td>
+                                        </tr>
+                                        <tr ng-if="!details.Contacts || details.Contacts.length == 0">
+                                            <td colspan="7" class="text-center"><i>Tidak ada data..</i></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="dvTaxProfile" role="tabpanel">
+                        <form class="smart-form">
+                            <fieldset>
+                                <div class="row">
+                                    <section class="col col-4">
+                                        <span class="help-block"> Tax ID </span>
+                                        <label class="input">
+                                            <input type="text" class="form-control form-control-sm" ng-model="model.TaxId" />
+                                        </label>
+                                    </section>
+                                    <section class="col col-4">
+                                        <span class="help-block"> Tax Name </span>
+                                        <label class="input">
+                                            <input type="text" class="form-control form-control-sm" ng-model="model.TaxName" />
+                                        </label>
+                                    </section>
+                                    <section class="col col-4">
+                                        <span class="help-block"> Tax ID Date </span>
+                                        <label class="input">
+                                            <input type="date" class="form-control form-control-sm" ng-model="model.TaxIdDate" placeholder="dd/mm/yyyy" />
+                                        </label>
+                                    </section>
+                                </div>
+                                <div class="row">
+                                    <section class="col col-4">
+                                        <span class="help-block"> Tax Location </span>
+                                        <label class="input">
+                                            <input type="text" class="form-control form-control-sm" ng-model="model.TaxLocation" />
+                                        </label>
+                                    </section>
+                                    <section class="col col-4">
+                                        <span class="help-block"> Tax Address </span>
+                                        <label class="input">
+                                            <input type="text" class="form-control form-control-sm" ng-model="model.TaxAddress" />
+                                        </label>
+                                    </section>
+                                    <section class="col col-4">
+                                        <span class="help-block"> Tax Address 2 </span>
+                                        <label class="input">
+                                            <input type="text" class="form-control form-control-sm" ng-model="model.TaxAddress2" />
+                                        </label>
+                                    </section>
+                                </div>
+                                <div class="row">
+                                    <section class="col col-4">
+                                        <span class="help-block"> NPPKP </span>
+                                        <label class="input">
+                                            <input type="text" class="form-control form-control-sm" ng-model="model.NPPKP" />
+                                        </label>
+                                    </section>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div class="tab-pane" id="dvFinancialProfile" role="tabpanel">
+                        <form class="smart-form">
+                            <fieldset>
+                                <div class="row">
+                                    <section class="col col-2">
+                                        <span class="help-block"> Reserve Stock </span>
+                                        <label class="checkbox">
+                                            <input type="checkbox" ng-model="model.ReserveStock" />
+                                            <i></i>
+                                        </label>
+                                    </section>
+                                    <section class="col col-2">
+                                        <span class="help-block"> Days </span>
+                                        <label class="input">
+                                            <input type="number" class="form-control form-control-sm" ng-model="model.ReserveStockDays" style="text-align: right" />
+                                        </label>
+                                    </section>
+                                    <section class="col col-2">
+                                        <span class="help-block"> DO Method </span>
+                                        <label class="input">
+                                            <select class="form-control form-control-sm" ng-model="model.DOMethod">
+                                                <option value="PerAddress">Per Address</option>
+                                                <option value="PerItem">Per Item</option>
+                                            </select>
+                                        </label>
+                                    </section>
+                                    <section class="col col-2">
+                                        <span class="help-block"> C/R Grade </span>
+                                        <label class="input">
+                                            <select class="form-control form-control-sm" ng-model="model.CRGrade">
+                                                <option value="PerAddress">Per Address</option>
+                                                <option value="PerCustomer">Per Customer</option>
+                                            </select>
+                                        </label>
+                                    </section>
+                                    <section class="col col-2">
+                                        <span class="help-block"> Down Payment </span>
+                                        <label class="input">
+                                            <input type="number" class="form-control form-control-sm" ng-model="model.DownPayment" style="text-align: right" />
+                                        </label>
+                                    </section>
+                                    <section class="col col-1">
+                                        <span class="help-block"> % </span>
+                                        <label class="input" style="padding-top: 10px"> % </label>
+                                    </section>
+                                </div>
+                                <div class="row">
+                                    <section class="col col-2">
+                                        <span class="help-block"> Credit Verification </span>
+                                        <label class="input">
+                                            <select class="form-control form-control-sm" ng-model="model.CreditVerification">
+                                                <option value="SalesInvoice">Sales Invoice</option>
+                                                <option value="DeliveryOrder">Delivery Order</option>
+                                            </select>
+                                        </label>
+                                    </section>
+                                    <section class="col col-2">
+                                        <span class="help-block"> Overdue Period Verification </span>
+                                        <label class="input">
+                                            <select class="form-control form-control-sm" ng-model="model.OverduePeriodVerification">
+                                                <option value="InvoiceDate">Invoice Date</option>
+                                                <option value="DueDate">Due Date</option>
+                                            </select>
+                                        </label>
+                                    </section>
+                                    <section class="col col-2">
+                                        <span class="help-block"> Payment Method </span>
+                                        <label class="input">
+                                            <select class="form-control form-control-sm" ng-model="model.PaymentMethod">
+                                                <option value="AfterDelivery">After Delivery</option>
+                                                <option value="BeforeDelivery">Before Delivery</option>
+                                            </select>
+                                        </label>
+                                    </section>
+                                    <section class="col col-2">
+                                        <span class="help-block"> Cover Giro </span>
+                                        <label class="input">
+                                            <select class="form-control form-control-sm" ng-model="model.CoverGiro">
+                                                <option value="BeforeDelivery">Before Delivery</option>
+                                                <option value="AfterDelivery">After Delivery</option>
+                                            </select>
+                                        </label>
+                                    </section>
+                                    <section class="col col-2">
+                                        <span class="help-block"> Full </span>
+                                        <label class="checkbox">
+                                            <input type="checkbox" ng-model="model.FullCoverGiro" />
+                                            <i></i>
+                                        </label>
+                                    </section>
+                                </div>
+                                <div class="row">
+                                    <section class="col col-2">
+                                        <span class="help-block"> Credit Limit </span>
+                                        <label class="input">
+                                            <div style="display: flex">
+                                                <span style="padding: 5px 10px; background: #eee; border: 1px solid #ccc">Rp.</span>
+                                                <input type="text" class="form-control form-control-sm" ng-model="model.CreditLimit" style="text-align: right; flex: 1" />
+                                            </div>
+                                        </label>
+                                    </section>
+                                    <section class="col col-2">
+                                        <span class="help-block"> Overdue Period </span>
+                                        <label class="input">
+                                            <div style="display: flex">
+                                                <input type="number" class="form-control form-control-sm" ng-model="model.OverduePeriod" style="text-align: right; flex: 1" />
+                                                <span style="padding: 5px 10px; background: #eee; border: 1px solid #ccc">Days</span>
+                                            </div>
+                                        </label>
+                                    </section>
+                                    <section class="col col-2">
+                                        <span class="help-block"> Full Delivery </span>
+                                        <label class="checkbox">
+                                            <input type="checkbox" ng-model="model.FullDelivery" />
+                                            <i></i>
+                                        </label>
+                                    </section>
+                                </div>
+                                <div class="row">
+                                    <section class="col col-2">
+                                        <span class="help-block"> Area Code </span>
+                                        <label class="input">
+                                            <input type="text" class="form-control form-control-sm" ng-model="model.AreaCode" />
+                                        </label>
+                                    </section>
+                                </div>
+                                <hr />
+                                <h4>Customer Discount Configuration</h4>
+                                <div class="row">
+                                    <section class="col col-4">
+                                        <span class="help-block"> Discount </span>
+                                        <label class="input">
+                                            <div style="display: flex">
+                                                <input type="text" class="form-control form-control-sm" ng-model="model.DiscountName" placeholder="Diskon NATAL 2025" style="flex: 1" />
+                                                <button class="btn btn-sm btn-default" style="margin-left: 5px"><i class="fa fa-close"></i></button>
+                                            </div>
+                                        </label>
+                                    </section>
+                                </div>
+                                <div class="alert alert-info">
+                                    <div class="toolBarTop toolbar transparent fixed-top">
+                                        <button class="btn btn-default" ng-click="AddDiscountItem()" ng-disabled="!Is_Writeable"><i class="fa fa-plus"></i> New Item</button>
+                                    </div>
+                                </div>
+                                <div class="table-responsive">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th>No</th>
+                                                <th>Brand</th>
+                                                <th>Category</th>
+                                                <th>Disc.Group Item Code</th>
+                                                <th>Condition</th>
+                                                <th>Promo Min Qty</th>
+                                                <th>Price Class</th>
+                                                <th>Class (All)</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-if="!details.DiscountItems || details.DiscountItems.length == 0">
+                                                <td colspan="8" class="text-center"><i>Tidak ada data..</i></td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </fieldset>
+                        </form>
+                    </div>
+                    <div class="tab-pane" id="dvBankAccounts" role="tabpanel">
+                        <div class="tab-pane active" id="dvBankAccounts" role="tabpanel">
+                            <div class="alert alert-info">
+                                <button class="btn-add" ng-click="AddBankAccount()" ng-disabled="!Is_Writeable"><i class="fa fa-plus"></i> Add Bank Account</button>
+                            </div>
+
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 50px"></th>
+                                            <th style="width: 60px">No.</th>
+                                            <th style="min-width: 200px">A/C Number</th>
+                                            <th style="min-width: 250px">Account Name</th>
+                                            <th style="min-width: 250px">Bank Name</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="row in details.BankAccounts | filter:{Deleted: 0}">
+                                            <td class="text-center">
+                                                <button type="button" class="btn-delete" ng-click="RemoveBankAccount(row['recordNumber'])" ng-show="Is_Writeable">
+                                                    <i class="fa fa-trash-o"></i>
+                                                </button>
+                                            </td>
+                                            <td class="row-number">{{$index + 1}}.</td>
+                                            <td>
+                                                <input type="text" ng-model="row['AccountNumber']" class="form-control form-control-sm" placeholder="A/C Number" ng-readonly="!Is_Writeable" />
+                                            </td>
+                                            <td>
+                                                <input type="text" ng-model="row['AccountName']" class="form-control form-control-sm" placeholder="Account Name" ng-readonly="!Is_Writeable" />
+                                            </td>
+                                            <td>
+                                                <select ng-show="Is_Writeable" class="form-control form-control-sm" ng-model="row['BankCode']" ng-options="item.Code as item.Name for item in data_Banks">
+                                                    <option value="">Select Bank Name</option>
+                                                </select>
+                                                <span ng-show="!Is_Writeable">{{ row['BankName'] }}</span>
+                                            </td>
+                                        </tr>
+                                        <tr ng-if="!details.BankAccounts || details.BankAccounts.length == 0">
+                                            <td colspan="5" class="text-center">
+                                                <i>Tidak ada data..</i>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="dvLegalDocuments" role="tabpanel">
+                        <div class="tab-pane active" id="dvLegalDocuments" role="tabpanel">
+                            <div class="row-legal">
+                                <!-- NPWP -->
+                                <div class="col-legal">
+                                    <div class="document-section">
+                                        <h4>NPWP</h4>
+                                        <div class="form-group">
+                                            <label>Document File</label>
+                                            <div class="file-input-wrapper">
+                                                <div class="file-input-display">
+                                                    <input type="text" readonly placeholder="No file chosen" ng-model="documents.NPWP.FileName" />
+                                                    <button type="button">Choose File</button>
+                                                </div>
+                                                <input type="file" ng-model="documents.NPWP.File" accept=".pdf,.jpg,.jpeg,.png" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Expired Date</label>
+                                            <div class="date-input-wrapper">
+                                                <input type="text" class="form-control" placeholder="dd/mm/yyyy" ng-model="documents.NPWP.ExpiredDate" />
+                                                <button type="button" class="btn-icon"><i class="fa fa-calendar"></i></button>
+                                                <button type="button" class="btn-icon"><i class="fa fa-refresh"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Comments</label>
+                                            <textarea class="form-control" ng-model="documents.NPWP.Comments"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- NIB -->
+                                <div class="col-legal">
+                                    <div class="document-section">
+                                        <h4>NIB</h4>
+                                        <div class="form-group">
+                                            <label>Document File</label>
+                                            <div class="file-input-wrapper">
+                                                <div class="file-input-display">
+                                                    <input type="text" readonly placeholder="No file chosen" ng-model="documents.NIB.FileName" />
+                                                    <button type="button">Choose File</button>
+                                                </div>
+                                                <input type="file" ng-model="documents.NIB.File" accept=".pdf,.jpg,.jpeg,.png" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Expired Date</label>
+                                            <div class="date-input-wrapper">
+                                                <input type="text" class="form-control" placeholder="dd/mm/yyyy" ng-model="documents.NIB.ExpiredDate" />
+                                                <button type="button" class="btn-icon"><i class="fa fa-calendar"></i></button>
+                                                <button type="button" class="btn-icon"><i class="fa fa-refresh"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Comments</label>
+                                            <textarea class="form-control" ng-model="documents.NIB.Comments"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row-legal">
+                                <!-- Domisili -->
+                                <div class="col-legal">
+                                    <div class="document-section">
+                                        <h4>Domisili</h4>
+                                        <div class="form-group">
+                                            <label>Document File</label>
+                                            <div class="file-input-wrapper">
+                                                <div class="file-input-display">
+                                                    <input type="text" readonly placeholder="No file chosen" ng-model="documents.Domisili.FileName" />
+                                                    <button type="button">Choose File</button>
+                                                </div>
+                                                <input type="file" ng-model="documents.Domisili.File" accept=".pdf,.jpg,.jpeg,.png" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Expired Date</label>
+                                            <div class="date-input-wrapper">
+                                                <input type="text" class="form-control" placeholder="dd/mm/yyyy" ng-model="documents.Domisili.ExpiredDate" />
+                                                <button type="button" class="btn-icon"><i class="fa fa-calendar"></i></button>
+                                                <button type="button" class="btn-icon"><i class="fa fa-refresh"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Comments</label>
+                                            <textarea class="form-control" ng-model="documents.Domisili.Comments"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Akte -->
+                                <div class="col-legal">
+                                    <div class="document-section">
+                                        <h4>Akte</h4>
+                                        <div class="form-group">
+                                            <label>Document File</label>
+                                            <div class="file-input-wrapper">
+                                                <div class="file-input-display">
+                                                    <input type="text" readonly placeholder="No file chosen" ng-model="documents.Akte.FileName" />
+                                                    <button type="button">Choose File</button>
+                                                </div>
+                                                <input type="file" ng-model="documents.Akte.File" accept=".pdf,.jpg,.jpeg,.png" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Expired Date</label>
+                                            <div class="date-input-wrapper">
+                                                <input type="text" class="form-control" placeholder="dd/mm/yyyy" ng-model="documents.Akte.ExpiredDate" />
+                                                <button type="button" class="btn-icon"><i class="fa fa-calendar"></i></button>
+                                                <button type="button" class="btn-icon"><i class="fa fa-refresh"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Comments</label>
+                                            <textarea class="form-control" ng-model="documents.Akte.Comments"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="row-legal">
+                                <!-- KTP -->
+                                <div class="col-legal">
+                                    <div class="document-section">
+                                        <h4>KTP</h4>
+                                        <div class="form-group">
+                                            <label>Document File</label>
+                                            <div class="file-input-wrapper">
+                                                <div class="file-input-display">
+                                                    <input type="text" readonly placeholder="No file chosen" ng-model="documents.KTP.FileName" />
+                                                    <button type="button">Choose File</button>
+                                                </div>
+                                                <input type="file" ng-model="documents.KTP.File" accept=".pdf,.jpg,.jpeg,.png" />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Expired Date</label>
+                                            <div class="date-input-wrapper">
+                                                <input type="text" class="form-control" placeholder="dd/mm/yyyy" ng-model="documents.KTP.ExpiredDate" />
+                                                <button type="button" class="btn-icon"><i class="fa fa-calendar"></i></button>
+                                                <button type="button" class="btn-icon"><i class="fa fa-refresh"></i></button>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label>Comments</label>
+                                            <textarea class="form-control" ng-model="documents.KTP.Comments"></textarea>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-legal"></div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="dvSalesProfile" role="tabpanel">
+                        <div class="form-section">
+                            <div class="form-row">
+                                <div class="form-field medium">
+                                    <label>Reserve Stock</label>
+                                    <div class="checkbox-field">
+                                        <input type="checkbox" ng-model="financial.ReserveStock" />
+                                    </div>
+                                </div>
+                                <div class="form-field small">
+                                    <label>&nbsp;</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control with-right text-right" ng-model="financial.ReserveStockDays" placeholder="14" />
+                                        <span class="input-group-addon right">Days</span>
+                                    </div>
+                                </div>
+                                <div class="form-field">
+                                    <label>DO Method</label>
+                                    <select class="form-control" ng-model="financial.DOMethod">
+                                        <option value="PerAddress">Per Address</option>
+                                        <option value="PerItem">Per Item</option>
+                                    </select>
+                                </div>
+                                <div class="form-field">
+                                    <label>C/R Grade</label>
+                                    <select class="form-control" ng-model="financial.CRGrade">
+                                        <option value="PerAddress">Per Address</option>
+                                        <option value="PerCustomer">Per Customer</option>
+                                    </select>
+                                </div>
+                                <div class="form-field">
+                                    <label>Down Payment</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control with-right text-right" ng-model="financial.DownPayment" />
+                                        <span class="input-group-addon right">%</span>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-field">
+                                    <label>Credit Verification</label>
+                                    <select class="form-control" ng-model="financial.CreditVerification">
+                                        <option value="SalesInvoice">Sales Invoice</option>
+                                        <option value="DeliveryOrder">Delivery Order</option>
+                                    </select>
+                                </div>
+                                <div class="form-field">
+                                    <label>Overdue Period Verification</label>
+                                    <select class="form-control" ng-model="financial.OverduePeriodVerification">
+                                        <option value="InvoiceDate">Invoice Date</option>
+                                        <option value="DueDate">Due Date</option>
+                                    </select>
+                                </div>
+                                <div class="form-field">
+                                    <label>Payment Method</label>
+                                    <select class="form-control" ng-model="financial.PaymentMethod">
+                                        <option value="AfterDelivery">After Delivery</option>
+                                        <option value="BeforeDelivery">Before Delivery</option>
+                                    </select>
+                                </div>
+                                <div class="form-field">
+                                    <label>Cover Giro</label>
+                                    <select class="form-control" ng-model="financial.CoverGiro">
+                                        <option value="BeforeDelivery">Before Delivery</option>
+                                        <option value="AfterDelivery">After Delivery</option>
+                                    </select>
+                                </div>
+                                <div class="form-field small">
+                                    <label>Full</label>
+                                    <div class="checkbox-field">
+                                        <input type="checkbox" ng-model="financial.FullCoverGiro" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-field">
+                                    <label>Credit Limit</label>
+                                    <div class="input-group">
+                                        <span class="input-group-addon left">Rp.</span>
+                                        <input type="text" class="form-control with-left text-right" ng-model="financial.CreditLimit" placeholder="0.00" />
+                                    </div>
+                                </div>
+                                <div class="form-field">
+                                    <label>Overdue Period</label>
+                                    <div class="input-group">
+                                        <input type="number" class="form-control with-right text-right" ng-model="financial.OverduePeriod" />
+                                        <span class="input-group-addon right">Days</span>
+                                    </div>
+                                </div>
+                                <div class="form-field medium">
+                                    <label>Full Delivery</label>
+                                    <div class="checkbox-field">
+                                        <input type="checkbox" ng-model="financial.FullDelivery" />
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-field">
+                                    <label>Area Code</label>
+                                    <input type="text" class="form-control" ng-model="financial.AreaCode" />
+                                </div>
+                                <div class="form-field"></div>
+                                <div class="form-field"></div>
+                            </div>
+                        </div>
+
+                        <div class="section-title">Customer Discount Configuration</div>
+
+                        <div class="discount-header">
+                            <div class="form-field discount-input">
+                                <label>Discount</label>
+                                <input type="text" class="form-control" ng-model="financial.DiscountName" placeholder="Diskon NATAL 2025" />
+                            </div>
+                            <button class="btn-remove-discount" ng-click="clearDiscount()">
+                                <i class="fa fa-times"></i>
+                            </button>
+                        </div>
+
+                        <div class="action-bar">
+                            <button class="btn-new-item" ng-click="AddDiscountItem()"><i class="fa fa-plus"></i> New Item</button>
+                        </div>
+
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead>
+                                    <tr>
+                                        <th style="width: 40px"></th>
+                                        <th style="width: 60px">No.</th>
+                                        <th style="width: 150px">Brand</th>
+                                        <th style="width: 180px">Category</th>
+                                        <th style="width: 100px">Type</th>
+                                        <th style="width: 120px">Item Code</th>
+                                        <th style="width: 200px">Description</th>
+                                        <th style="width: 130px">Price Group</th>
+                                        <th style="width: 100px">Disc. (%)</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr ng-repeat="row in discountItems | filter:{Deleted: 0}">
+                                        <td class="text-center">
+                                            <button class="btn-delete-row" ng-click="RemoveDiscountItem(row.recordNumber)">
+                                                <i class="fa fa-trash-o"></i>
+                                            </button>
+                                        </td>
+                                        <td class="text-center">{{$index + 1}}.</td>
+                                        <td><input type="text" ng-model="row.Brand" placeholder="Vinilon" /></td>
+                                        <td><input type="text" ng-model="row.Category" placeholder="Pipa PVC AW, Pipa" /></td>
+                                        <td><input type="text" ng-model="row.Type" placeholder="All" /></td>
+                                        <td><input type="text" ng-model="row.ItemCode" placeholder="All" /></td>
+                                        <td><input type="text" ng-model="row.Description" /></td>
+                                        <td><input type="text" ng-model="row.PriceGroup" placeholder="All" /></td>
+                                        <td><input type="text" class="text-right" ng-model="row.Discount" placeholder="15" /></td>
+                                    </tr>
+                                    <tr ng-if="!discountItems || discountItems.length == 0">
+                                        <td colspan="9" class="text-center">
+                                            <i>Tidak ada data..</i>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="dvOverview" role="tabpanel">ini bagian Overview</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<style>
+    .file-input-wrapper {
+        position: relative;
+        display: inline-block;
+        width: 100%;
+    }
+    .file-input-wrapper input[type='file'] {
+        position: absolute;
+        left: 0;
+        top: 0;
+        opacity: 0;
+        width: 100%;
+        height: 100%;
+        cursor: pointer;
+    }
+    .file-input-display {
+        display: flex;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        overflow: hidden;
+        background: white;
+    }
+    .file-input-display input {
+        flex: 1;
+        border: none;
+        padding: 6px 12px;
+        background: #f9f9f9;
+        font-size: 13px;
+        color: #666;
+    }
+    .file-input-display button {
+        background: #f5f5f5;
+        border: none;
+        border-left: 1px solid #ccc;
+        padding: 6px 15px;
+        cursor: pointer;
+        font-size: 13px;
+        color: #333;
+    }
+    .file-input-display button:hover {
+        background: #e8e8e8;
+    }
+    .date-input-wrapper {
+        display: flex;
+        align-items: center;
+    }
+    .date-input-wrapper input {
+        flex: 1;
+    }
+    .date-input-wrapper .btn-icon {
+        margin-left: 5px;
+        padding: 8px 12px;
+        background: #f5f5f5;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        cursor: pointer;
+    }
+    .date-input-wrapper .btn-icon:hover {
+        background: #e8e8e8;
+    }
+    .row-legal {
+        display: flex;
+        gap: 20px;
+        flex-wrap: wrap;
+    }
+    .col-legal {
+        flex: 1;
+        min-width: 450px;
+    }
+    @media (max-width: 1200px) {
+        .col-legal {
+            min-width: 100%;
+        }
+    }
+
+    .nav-tabs > li.active > a {
+        border: 1px solid #ddd;
+        border-bottom: 2px solid white;
+        color: #333;
+        background: white;
+        font-weight: 600;
+        margin-bottom: -2px;
+    }
+    .tab-content {
+        background: white;
+        padding: 25px;
+        border: 1px solid #ddd;
+        border-top: none;
+    }
+    .form-section {
+        margin-bottom: 25px;
+    }
+    .form-row {
+        display: flex;
+        gap: 20px;
+        margin-bottom: 15px;
+        flex-wrap: wrap;
+    }
+    .form-field {
+        flex: 1;
+        min-width: 180px;
+    }
+    .form-field.small {
+        flex: 0 0 80px;
+    }
+    .form-field.medium {
+        flex: 0 0 150px;
+    }
+    .form-field label {
+        display: block;
+        margin-bottom: 5px;
+        font-weight: 500;
+        color: #555;
+        font-size: 13px;
+    }
+    .form-control {
+        height: 36px;
+        padding: 6px 12px;
+        font-size: 14px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        width: 100%;
+    }
+    .input-group {
+        display: flex;
+        align-items: center;
+    }
+    .input-group-addon {
+        background: #f0f0f0;
+        border: 1px solid #ccc;
+        padding: 8px 12px;
+        white-space: nowrap;
+        font-size: 13px;
+    }
+    .input-group-addon.left {
+        border-right: none;
+        border-radius: 4px 0 0 4px;
+    }
+    .input-group-addon.right {
+        border-left: none;
+        border-radius: 0 4px 4px 0;
+    }
+    .input-group .form-control {
+        border-radius: 0;
+    }
+    .input-group .form-control.with-left {
+        border-left: none;
+    }
+    .input-group .form-control.with-right {
+        border-right: none;
+    }
+    .checkbox-field {
+        display: flex;
+        align-items: center;
+        height: 36px;
+        margin-top: 20px;
+    }
+    .checkbox-field input[type='checkbox'] {
+        width: 18px;
+        height: 18px;
+        margin: 0;
+        cursor: pointer;
+    }
+    .section-title {
+        font-size: 16px;
+        font-weight: 600;
+        margin: 30px 0 20px 0;
+        padding-bottom: 10px;
+        border-bottom: 2px solid #e0e0e0;
+        color: #333;
+    }
+    .discount-header {
+        display: flex;
+        gap: 10px;
+        align-items: flex-end;
+        margin-bottom: 15px;
+    }
+    .discount-input {
+        flex: 0 0 300px;
+    }
+    .btn-remove-discount {
+        background: white;
+        border: 1px solid #ccc;
+        padding: 8px 12px;
+        cursor: pointer;
+        border-radius: 4px;
+        height: 36px;
+    }
+    .btn-remove-discount:hover {
+        background: #f5f5f5;
+    }
+    .action-bar {
+        background: #e8f4f8;
+        border: 1px solid #b3d9e8;
+        padding: 12px;
+        margin-bottom: 15px;
+        border-radius: 4px;
+    }
+    .btn-new-item {
+        background: white;
+        border: 1px solid #ccc;
+        padding: 8px 16px;
+        cursor: pointer;
+        border-radius: 4px;
+        font-size: 14px;
+    }
+    .btn-new-item:hover {
+        background: #f5f5f5;
+    }
+    .btn-new-item i {
+        margin-right: 5px;
+    }
+    .table {
+        background: white;
+        border: 1px solid #ddd;
+        margin-bottom: 0;
+    }
+    .table thead {
+        background: #f5f5f5;
+    }
+    .table th {
+        padding: 12px 8px;
+        font-weight: 600;
+        border: 1px solid #ddd;
+        font-size: 13px;
+        color: #333;
+    }
+    .table td {
+        padding: 8px;
+        border: 1px solid #ddd;
+        vertical-align: middle;
+    }
+    .table td input {
+        border: none;
+        background: transparent;
+        width: 100%;
+        padding: 4px;
+    }
+    .table td input:focus {
+        outline: 1px solid #4a90e2;
+        background: #f0f8ff;
+    }
+    .btn-delete-row {
+        background: #ff4444;
+        border: none;
+        color: white;
+        padding: 6px 10px;
+        cursor: pointer;
+        border-radius: 4px;
+    }
+    .btn-delete-row:hover {
+        background: #cc0000;
+    }
+    .text-right {
+        text-align: right;
+    }
+    .text-center {
+        text-align: center;
+    }
+    select.form-control {
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%23333' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
+        background-repeat: no-repeat;
+        background-position: right 10px center;
+        padding-right: 30px;
+    }
+
+    .customer-header {
+        background: white;
+        padding: 25px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
+    .customer-info-grid {
+        display: grid;
+        grid-template-columns: 250px 1fr;
+        gap: 30px;
+    }
+    .customer-photo {
+        width: 100%;
+        aspect-ratio: 1;
+        background: #ecf0f1;
+        border-radius: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+    .customer-photo svg {
+        width: 60%;
+        height: 60%;
+        fill: #bdc3c7;
+    }
+    .customer-details {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 15px;
+    }
+    .detail-field {
+        display: flex;
+        flex-direction: column;
+    }
+    .detail-field label {
+        font-size: 11px;
+        color: #7f8c8d;
+        margin-bottom: 5px;
+        font-weight: 500;
+    }
+    .detail-field input,
+    .detail-field select {
+        padding: 8px 12px;
+        border: 1px solid #ddd;
+        border-radius: 4px;
+        font-size: 13px;
+    }
+    .detail-field.full {
+        grid-column: span 4;
+    }
+    .tag-group {
+        display: flex;
+        gap: 8px;
+    }
+    .tag {
+        padding: 6px 16px;
+        border-radius: 20px;
+        font-size: 12px;
+        font-weight: 500;
+    }
+    .tag-primary {
+        background: #3498db;
+        color: white;
+    }
+    .tag-warning {
+        background: #f39c12;
+        color: white;
+    }
+    .overview-section {
+        background: white;
+        padding: 25px;
+        border-radius: 8px;
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        margin-bottom: 20px;
+    }
+    .section-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+        padding-bottom: 15px;
+        border-bottom: 2px solid #ecf0f1;
+    }
+    .section-title {
+        font-size: 16px;
+        font-weight: 600;
+        color: #2c3e50;
+    }
+    .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+        gap: 15px;
+        margin-bottom: 30px;
+    }
+    .stat-card {
+        background: #f8f9fa;
+        border: 1px solid #e9ecef;
+        border-radius: 8px;
+        padding: 20px;
+        transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .stat-card:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    }
+    .stat-card.success {
+        border-left: 4px solid #27ae60;
+    }
+    .stat-card.warning {
+        border-left: 4px solid #f39c12;
+    }
+    .stat-card.danger {
+        border-left: 4px solid #e74c3c;
+    }
+    .stat-card.info {
+        border-left: 4px solid #3498db;
+    }
+    .stat-label {
+        font-size: 13px;
+        color: #7f8c8d;
+        margin-bottom: 8px;
+        font-weight: 500;
+    }
+    .stat-value {
+        font-size: 28px;
+        font-weight: 700;
+        color: #2c3e50;
+        margin-bottom: 5px;
+    }
+    .stat-value.green {
+        color: #27ae60;
+    }
+    .stat-value.red {
+        color: #e74c3c;
+    }
+    .stat-sublabel {
+        font-size: 12px;
+        color: #95a5a6;
+    }
+    .stat-icon {
+        position: absolute;
+        top: 15px;
+        right: 15px;
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        opacity: 0.2;
+    }
+    .tabs-nav {
+        display: flex;
+        gap: 5px;
+        border-bottom: 2px solid #e9ecef;
+        margin-bottom: 20px;
+    }
+    .tab-btn {
+        padding: 12px 20px;
+        background: none;
+        border: none;
+        border-bottom: 3px solid transparent;
+        cursor: pointer;
+        font-size: 14px;
+        font-weight: 500;
+        color: #7f8c8d;
+        transition: all 0.2s;
+    }
+    .tab-btn:hover {
+        color: #2c3e50;
+    }
+    .tab-btn.active {
+        color: #2c3e50;
+        border-bottom-color: #3498db;
+    }
+    @media (max-width: 1200px) {
+        .customer-details {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        .stats-grid {
+            grid-template-columns: repeat(2, 1fr);
+        }
+    }
+    @media (max-width: 768px) {
+        .sidebar {
+            display: none;
+        }
+        .customer-info-grid {
+            grid-template-columns: 1fr;
+        }
+        .customer-details {
+            grid-template-columns: 1fr;
+        }
+        .stats-grid {
+            grid-template-columns: 1fr;
+        }
+    }
+</style>

@@ -1,0 +1,90 @@
+name: Deploy ERP-NEW-FrontEnd (Auto Target)
+
+on:
+  push:
+    branches: [ main ]
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-erp-new-frontend
+  cancel-in-progress: false
+
+jobs:
+  deploy:
+    runs-on: self-hosted
+    
+    steps:
+    - uses: actions/checkout@v4
+      with:
+        clean: true
+
+    - name: Read deployment target
+      id: read-target
+      run: |
+        if [ ! -f "__Deploy/Target.txt" ]; then
+          echo "Error: __Deploy/Target.txt not found!"
+          exit 1
+        fi
+        
+        # Read first line only
+        TARGET=$(head -n 1 __Deploy/Target.txt | tr -d '[:space:]')
+        
+        if [ -z "$TARGET" ]; then
+          echo "Error: Target is empty!"
+          exit 1
+        fi
+        
+        echo "TARGET=$TARGET" >> $GITHUB_OUTPUT
+        echo "📍 Deployment target: $TARGET"
+    
+    - name: Set deployment variables
+      run: |
+        TARGET="${{ steps.read-target.outputs.TARGET }}"
+        
+        case "$TARGET" in
+          pas.andaru-apps.co.id)
+            echo "APP_VERSION=PAS" >> $GITHUB_ENV
+            echo "ENVIRONMENT=production" >> $GITHUB_ENV
+            echo "DEPLOY_PATH=/var/www-custom/Comp_Peksi-FrontEnd" >> $GITHUB_ENV
+            ;;
+          ti.andaru-apps.co.id)
+            echo "APP_VERSION=TI" >> $GITHUB_ENV
+            echo "ENVIRONMENT=production" >> $GITHUB_ENV
+            echo "DEPLOY_PATH=/var/www-custom/Comp_Trikaya-FrontEnd" >> $GITHUB_ENV
+            ;;
+          tip.andaru-apps.co.id)
+            echo "APP_VERSION=TIP" >> $GITHUB_ENV
+            echo "ENVIRONMENT=production" >> $GITHUB_ENV
+            echo "DEPLOY_PATH=/var/www-custom/Comp_Trikaya_Padjadjaran-FrontEnd" >> $GITHUB_ENV
+            ;;
+          jld.andaru-apps.co.id)
+            echo "APP_VERSION=JLD" >> $GITHUB_ENV
+            echo "ENVIRONMENT=production" >> $GITHUB_ENV
+            echo "DEPLOY_PATH=/var/www-custom/Comp_Jaladara-FrontEnd" >> $GITHUB_ENV
+            ;;
+          *)
+            echo "Error: Invalid target '$TARGET'"
+            echo "Valid targets: pas.andaru-apps.co.id, ti.andaru-apps.co.id, tip.andaru-apps.co.id, jld.andaru-apps.co.id"
+            exit 1
+            ;;
+        esac
+        
+        echo "✅ Variables set for: ${{ env.APP_VERSION }} - ${{ env.ENVIRONMENT }}"
+    
+    - name: Deploy application
+      run: |
+        echo "🚀 Deploying ${{ env.APP_VERSION }} to ${{ env.ENVIRONMENT }}"
+        
+        # Copy all files (excluding .git and __Deploy folder)
+        sudo rsync -av --exclude='.git' --exclude='__Deploy' ./ ${{ env.DEPLOY_PATH }}/
+        
+        # Fix ownership and permissions
+        sudo chown -R nginx:nginx ${{ env.DEPLOY_PATH }}
+        sudo chmod -R 755 ${{ env.DEPLOY_PATH }}
+        
+        # Fix workspace permissions for cleanup
+        sudo chown -R github-runner:github-runner ${{ github.workspace }}
+        
+        sleep 2
+        
+        echo "✅ Deployment completed successfully!"

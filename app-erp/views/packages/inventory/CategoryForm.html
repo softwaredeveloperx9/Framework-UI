@@ -1,0 +1,112 @@
+<div id="content" ng-app="app.erp" ng-controller="CategoryFormCtrl" ng-class="{'sedangSubmitForm': form.submitted}">
+    <div class="row">
+        <big-breadcrumbs items="['Setup', 'Category']" icon="table" class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></big-breadcrumbs>
+    </div>
+    <div class="jarviswidget">
+        <header>
+            <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+            <h2 ng-click="Toggle_debugScope()" style="cursor: help">Form: Category</h2>
+        </header>
+        <div class="widget-body">
+            <div class="alert alert-info">
+                <div class="toolBarTop toolbar transparent" style="height: 33px">
+                    <button class="pull-left btn btn-warning" ng-click="Set_Editable()" ng-show="!Is_Writeable" style="display: none"><i class="fa fa-save"></i> Edit</button>
+                    <button class="pull-left btn btn-primary" ng-click="saveData()" ng-show="Is_Writeable"><i class="fa fa-save"></i> Save</button>
+                    <div class="pull-left" style="width: 50px; text-align: center; padding-top: 5px"><i class="fa fa-spinner fa-spin" style="font-size: 24px; display: none" id="idLoading"></i>&nbsp;</div>
+                    <button style="float: right" type="button" class="btn btn-default" ng-click="sdr_GoBack()"><i class="fa fa-sign-out"></i> Back</button>
+                </div>
+            </div>
+            <div style="margin: -20px 0px 0px -10px">
+                <form class="smart-form">
+                    <fieldset style="padding-top: 20px">
+                        <div class="row">
+                            <section class="col col-1">
+                                <span class="help-block">Code</span>
+                                <label class="input">
+                                    <input type="text" class="form-control form-control-sm" ng-model="model.Code" ng-required="true" ng-readonly="!Is_Create" ng-class="{'sedangEditForm': !Is_Create}" />
+                                </label>
+                            </section>
+                            <section class="col col-5">
+                                <span class="help-block">Description</span>
+                                <label class="input">
+                                    <input type="text" class="form-control form-control-sm" ng-model="model.Description" ng-required="true" />
+                                </label>
+                            </section>
+                            <section class="col col-1">
+                                <span class="help-block">Active</span>
+                                <label class="checkbox">
+                                    <input type="checkbox" ng-model="model.Active" />
+                                    <i></i>
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-4">
+                                <span class="help-block">Parent</span>
+                                <label class="input">
+                                    <div style="display: flex; width: 350px">
+                                        <!--prettier-ignore-->
+                                        <input type="text" class="form-control form-control-sm" style="display: inline-block; width:100%;padding-left:10px;"
+                                                            ng-class="" ng-style=""
+                                                            placeholder="nama/kode Parent" autocomplete="off" 
+                                                            uib-typeahead="item as (item.Code + ' - ' + item.Description) for item in getData_Parent($viewValue)"
+                                                            ng-model="selectedParent" 
+                                                            ng-change="model.ParentCode = '';" 
+                                                            typeahead-on-select="model.ParentCode = $item.Code;"
+                                                            typeahead-loading="" typeahead-no-results="noResults" typeahead-editable="false" 
+                                                            ng-readonly="ValidString(model.ParentCode)" ng-disabled="false" ng-required="false"
+                                                            />
+                                        <i class="fa fa-refresh fa-spin search-icon" ng-show="false" style="cursor: pointer"></i>
+                                        <!--prettier-ignore-->
+                                        <i class="fa fa-close search-icon" style="cursor:pointer;margin-top:10px;margin-left: 5px !important;"
+                                                            ng-show="ValidString(model.ParentCode)"
+                                                            ng-click="model.ParentCode = '';selectedParent = '';"></i>
+                                        <span class="help-block" style="display: none">Informasi Parent</span>
+                                    </div>
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block">Level Type</span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.LevelType" ng-options="item.Value as item.Text for item in levelTypeOptions"></select>
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block">Item Type</span>
+                                <label class="input">
+                                    <input type="text" class="form-control form-control-sm" ng-model="model.ItemType" style="text-align: right; width: 100px" />
+                                </label>
+                            </section>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div ng-if="allData_toJson"><pre>{{ allData_toJson2 | json:4 }}</pre></div>
+</div>
+
+<style>
+    .small-checkbox {
+        transform: scale(1);
+        -webkit-transform: scale(1);
+        padding-left: 10px !important;
+    }
+
+    .typeahead_ReadOnly,
+    .form-control[disabled],
+    .form-control[readonly],
+    fieldset[disabled] .form-control {
+        background-color: #eee !important;
+    }
+
+    .sedangSubmitForm .ng-invalid {
+        border-color: #b94a48 !important;
+        border-width: 2px !important;
+    }
+
+    .sedangEditForm {
+        background-color: #eee !important;
+        cursor: not-allowed;
+    }
+</style>

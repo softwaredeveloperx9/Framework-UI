@@ -1,0 +1,26 @@
+{
+    "name": "erp-new-frontend",
+    "version": "2026.01.04.22.39",
+    "description": "ERP NEW - FrontEnd",
+    "main": "index.html",
+    "private": true,
+    "scripts": {
+        "dev": "gulp dev",
+        "prod": "gulp prod"
+    },
+    "author": "Software DevelopeR",
+    "license": "SDR ",
+    "devDependencies": {
+        "gulp": "^3.9.0",
+        "gulp-concat": "^2.6.0",
+        "gulp-angular-templatecache": "^1.7.0",
+        "gulp-connect": "^2.2.0",
+        "gulp-ng-annotate": "^1.0.0",
+        "gulp-uglify": "^1.2.0",
+        "event-stream": "~3.3.1",
+        "lodash": "^4.0.0"
+    },
+    "dependencies": {
+        "angular-jwt": "^0.1.10"
+    }
+}

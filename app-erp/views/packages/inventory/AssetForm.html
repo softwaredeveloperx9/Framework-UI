@@ -1,0 +1,258 @@
+<div id="content" ng-app="app.erp" ng-controller="AssetFormCtrl" ng-class="{'sedangSubmitForm': form.submitted}">
+    <div class="row">
+        <big-breadcrumbs items="['Assets', 'Asset Form']" icon="table" class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></big-breadcrumbs>
+    </div>
+    <div class="jarviswidget">
+        <header>
+            <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+            <h2 ng-click="Toggle_debugScope()" style="cursor: help">Form: Asset</h2>
+        </header>
+        <div class="widget-body">
+            <div class="alert alert-info">
+                <div class="toolBarTop toolbar transparent" style="height: 33px">
+                    <button class="pull-left btn btn-primary" ng-click="saveData()"><i class="fa fa-save"></i> Save</button>
+                    <div class="pull-left" style="width: 50px; text-align: center; padding-top: 5px"><i class="fa fa-spinner fa-spin" style="font-size: 24px; display: none" id="idLoading"></i>&nbsp;</div>
+                    <button style="float: right" type="button" class="btn btn-default" ng-click="sdr_GoBack()"><i class="fa fa-sign-out"></i> Back</button>
+                </div>
+            </div>
+            <div style="margin: -20px 0px 0px -10px">
+                <form class="smart-form">
+                    <fieldset style="padding-top: 20px">
+                        <div class="row">
+                            <section class="col col-3">
+                                <div style="cursor: pointer !important; width: 230px; margin-left: 20px">
+                                    <img src="app-erp/_assets/img/no-image.jpg" id="imgAsset" class="rounded" style="width: 100%; height: 100%; object-fit: cover; border: 1px solid !important" ng-click="changePicture()" />
+                                    <input type="file" class="custom-file-input" ng-change="fileUploadChanged(model.FileUpload)" accept="image/*" style="display: none" ng-model="model.FileUpload" />
+                                </div>
+                            </section>
+                            <section class="col col-9">
+                                <div class="row">
+                                    <section class="col col-4">
+                                        <span class="help-block"> Serial Number <span style="color: red">*</span></span>
+                                        <label class="input">
+                                            <input type="text" class="form-control form-control-sm" ng-model="model.SerialNumber" ng-readonly="true" />
+                                        </label>
+                                    </section>
+                                    <section class="col col-4">
+                                        <span class="help-block"> Type </span>
+                                        <label class="input">
+                                            <select class="form-control form-control-sm" ng-model="model.Type" ng-options="item.Code as item.Description for item in data_Type"></select>
+                                        </label>
+                                    </section>
+                                </div>
+                                <div class="row">
+                                    <section class="col col-4">
+                                        <span class="help-block"> Branch </span>
+                                        <label class="input">
+                                            <select class="form-control form-control-sm" ng-model="model.Branch" ng-options="item.Code as item.Name for item in data_Branch"></select>
+                                        </label>
+                                    </section>
+                                    <section class="col col-4">
+                                        <span class="help-block"> Project Nr. </span>
+                                        <label class="input">
+                                            <select class="form-control form-control-sm" ng-model="model.ProjectNr" ng-options="item.Code as item.Description for item in data_ProjectNr"></select>
+                                        </label>
+                                    </section>
+                                    <section class="col col-4">
+                                        <span class="help-block"> Status </span>
+                                        <label class="input">
+                                            <select class="form-control form-control-sm" ng-model="model.Status" ng-options="item.Code as item.Description for item in data_Status"></select>
+                                        </label>
+                                    </section>
+                                </div>
+                                <div class="row">
+                                    <section class="col col-12">
+                                        <span class="help-block"> Name </span>
+                                        <label class="input">
+                                            <input type="text" class="form-control form-control-sm" ng-model="model.Name" />
+                                        </label>
+                                    </section>
+                                </div>
+                                <div class="row">
+                                    <section class="col col-12">
+                                        <span class="help-block"> Notes </span>
+                                        <label class="textarea">
+                                            <textarea class="form-control form-control-sm" ng-model="model.Notes" rows="3"></textarea>
+                                        </label>
+                                    </section>
+                                </div>
+                            </section>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+
+            <div style="margin: 20px 0px 0px 0px">
+                <div class="alert alert-info">
+                    <h4 style="margin: 5px 0px">Acquisition Summary</h4>
+                </div>
+                <form class="smart-form">
+                    <fieldset>
+                        <div class="row">
+                            <section class="col col-3">
+                                <span class="help-block"> Supplier </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.Supplier" ng-options="item.Code as item.Name for item in data_Supplier"></select>
+                                </label>
+                            </section>
+                            <section class="col col-3">
+                                <span class="help-block"> PO Nr. </span>
+                                <label class="input">
+                                    <input type="text" class="form-control form-control-sm" ng-model="model.PONr" />
+                                </label>
+                            </section>
+                            <section class="col col-3">
+                                <span class="help-block"> PO Date </span>
+                                <label class="input" style="display: flex; align-items: center">
+                                    <input type="text" placeholder="dd/mm/yyyy" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="dd/mm/yy" style="margin-right: 10px" ng-model="date_Date" ng-required="true" />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text mb-1" style="font-size: 20px">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                    </div>
+                                    <i style="padding-left: 10px; cursor: pointer" ng-click="date_Date = '';" class="fa fa-refresh"></i>
+                                </label>
+                            </section>
+                            <section class="col col-3">
+                                <span class="help-block"> Receipt Nr. </span>
+                                <label class="input">
+                                    <input type="text" class="form-control form-control-sm" ng-model="model.ReceiptNr" />
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-3">
+                                <span class="help-block"> Acquisition Date <span style="color: red">*</span></span>
+                                <label class="input" style="display: flex; align-items: center">
+                                    <input type="text" placeholder="dd/mm/yyyy" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="dd/mm/yy" style="margin-right: 10px" ng-model="date_Date" ng-required="true" />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text mb-1" style="font-size: 20px">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                    </div>
+                                    <i style="padding-left: 10px; cursor: pointer" ng-click="date_Date = '';" class="fa fa-refresh"></i>
+                                </label>
+                            </section>
+                            <section class="col col-3">
+                                <span class="help-block"> Currency </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.Currency" ng-options="item.Code as item.Description for item in data_Currency"></select>
+                                </label>
+                            </section>
+                            <section class="col col-3">
+                                <span class="help-block"> Acquisition Cost <span style="color: red">*</span></span>
+                                <label class="input">
+                                    <input type="text" class="form-control form-control-sm" ng-model="model.AcquisitionCost" style="text-align: right" ng-required="true" />
+                                </label>
+                            </section>
+                            <section class="col col-3">
+                                <span class="help-block"> Salvage Value </span>
+                                <label class="input">
+                                    <input type="text" class="form-control form-control-sm" ng-model="model.SalvageValue" style="text-align: right" />
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-3">
+                                <span class="help-block"> Depreciation Method </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.DepreciationMethod" ng-options="item.Code as item.Description for item in data_DepreciationMethod"></select>
+                                </label>
+                            </section>
+                            <section class="col col-3">
+                                <span class="help-block"> Depreciation Start Date <span style="color: red">*</span></span>
+                                <label class="input" style="display: flex; align-items: center">
+                                    <input type="text" placeholder="dd/mm/yyyy" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="dd/mm/yy" style="margin-right: 10px" ng-model="date_Date" ng-required="true" />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text mb-1" style="font-size: 20px">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                    </div>
+                                    <i style="padding-left: 10px; cursor: pointer" ng-click="date_Date = '';" class="fa fa-refresh"></i>
+                                </label>
+                            </section>
+                            <section class="col col-3">
+                                <span class="help-block"> Estimated Life Time <span style="color: red">*</span> Year(s)</span>
+                                <label class="input">
+                                    <input type="text" class="form-control form-control-sm" ng-model="model.EstimatedLifeTime" style="text-align: right" ng-required="true" />
+                                </label>
+                            </section>
+                            <section class="col col-3">
+                                <span class="help-block"> Depreciated Value </span>
+                                <label class="input">
+                                    <input type="text" class="form-control form-control-sm" ng-model="model.DepreciatedValue" style="text-align: right" ng-readonly="true" />
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-3">
+                                <span class="help-block"> Warrantied </span>
+                                <label class="checkbox">
+                                    <input type="checkbox" ng-model="model.Warrantied" />
+                                    <i></i>
+                                </label>
+                            </section>
+                            <section class="col col-3">
+                                <span class="help-block"> Warranty Number </span>
+                                <label class="input">
+                                    <input type="text" class="form-control form-control-sm" ng-model="model.WarrantyNumber" />
+                                </label>
+                            </section>
+                            <section class="col col-3">
+                                <span class="help-block"> Warranty Expired Date </span>
+                                <label class="input" style="display: flex; align-items: center">
+                                    <input type="text" placeholder="dd/mm/yyyy" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="dd/mm/yy" style="margin-right: 10px" ng-model="date_Date" ng-required="true" />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text mb-1" style="font-size: 20px">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                    </div>
+                                    <i style="padding-left: 10px; cursor: pointer" ng-click="date_Date = '';" class="fa fa-refresh"></i>
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-4">
+                                <span class="help-block"> Fixed Asset Account </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.FixedAssetAccount" ng-options="item.AccountId as (item.AccountCode + ' - ' + item.Description) for item in data_Account">
+                                        <option value="">Select an Item</option>
+                                    </select>
+                                </label>
+                            </section>
+                            <section class="col col-4">
+                                <span class="help-block"> Depreciation Account </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.DepreciationAccount" ng-options="item.AccountId as (item.AccountCode + ' - ' + item.Description) for item in data_Account">
+                                        <option value="">Select an Item</option>
+                                    </select>
+                                </label>
+                            </section>
+                            <section class="col col-4">
+                                <span class="help-block"> Accumulated Depreciation Account </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.AccumulatedDepreciationAcc" ng-options="item.AccountId as (item.AccountCode + ' - ' + item.Description) for item in data_Account">
+                                        <option value="">Select an Item</option>
+                                    </select>
+                                </label>
+                            </section>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div ng-if="allData_toJson"><pre>{{ allData_toJson2 | json:4 }}</pre></div>
+</div>
+
+<style>
+    .sedangSubmitForm .ng-invalid {
+        border-color: #b94a48 !important;
+        border-width: 2px !important;
+    }
+
+    .sedangEditForm {
+        background-color: #eee !important;
+        cursor: not-allowed;
+    }
+</style>

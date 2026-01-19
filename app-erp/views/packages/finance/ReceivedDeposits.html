@@ -1,0 +1,187 @@
+<div id="content" ng-app="app.erp" ng-controller="ReceivedDepositsCtrl">
+    <div class="row">
+        <big-breadcrumbs items="['Finance', 'Received Deposits']" icon="home" class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></big-breadcrumbs>
+        <div smart-include="app-erp/views/sub-header.tpl.html"></div>
+    </div>
+    <div class="jarviswidget">
+        <header>
+            <span class="widget-icon"> <i class="fa fa-money"></i> </span>
+            <h2 ng-click="Toggle_debugScope()" style="cursor: help">Received Deposits</h2>
+        </header>
+        <div class="widget-body">
+            <div class="alert alert-info" style="margin-bottom: 10px">
+                <div class="toolBarTop toolbar transparent" style="min-height: 33px">
+                    <button class="btn btn-default" ng-click="showData()"><i class="fa fa-refresh"></i> Refresh</button>
+                    <button class="btn btn-default" data-ui-sref="app.erp.receivedDepositForm"><i class="fa fa-file"></i> New</button>
+                    <button class="btn btn-default" ng-click="printForm()"><i class="fa fa-print"></i> Print</button>
+                    <div class="btn-group">
+                        <button class="btn btn-default" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li style="padding: 5px">
+                                <button style="width: 100%" class="btn btn-default" ng-click="refundClick()"><i class="fa fa-undo"></i> Refund</button>
+                            </li>
+                            <li style="padding: 5px">
+                                <button style="width: 100%" class="btn btn-default" ng-click="disposeClick()"><i class="fa fa-times"></i> Dispose</button>
+                            </li>
+                            <li style="padding: 5px">
+                                <button style="width: 100%" class="btn btn-default" ng-click="voidClick()"><i class="fa fa-ban"></i> Void</button>
+                            </li>
+                            <li style="padding: 5px">
+                                <button style="width: 100%" class="btn btn-default" ng-click="deleteClick()"><i class="fa fa-trash"></i> Delete</button>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+            <div>
+                <table style="width: 100%; margin-bottom: 10px">
+                    <tbody>
+                        <tr style="height: 40px">
+                            <td style="width: 60px" title="Show/Hide: column(s)">
+                                <div ng-click="showHide_Columns=!showHide_Columns" style="cursor: pointer">Branch</div>
+                            </td>
+                            <td style="width: 210px">
+                                <select class="form-control form-control-sm" ng-model="selectedBranch" ng-change="Branch_Changed();" ng-options="item.Code as (item.Code + ' - ' + item.Name) for item in data_EmployeeLocationAccess">
+                                    <option value="">All</option>
+                                </select>
+                            </td>
+                            <td style="width: 60px; padding-left: 10px" title="Show/Hide: column LineNumber">
+                                <div>Customer</div>
+                            </td>
+                            <td style="width: 250px">
+                                <div style="display: flex">
+                                    <!--prettier-ignore-->
+                                    <input type="text" class="form-control form-control-sm" style="display: inline-block; width:100%;padding-left:10px;"
+                                                        ng-class="" ng-style=""
+                                                        placeholder="nama/kode Customer" autocomplete="off"
+                                                        uib-typeahead="item as (item.Code + ' - ' + item.Name) for item in getData_Customer($viewValue)" 
+                                                        ng-model="selectedCustomer"
+                                                        ng-change="filters.Customer.Value = '';" 
+                                                        typeahead-on-select="filters.Customer.Value = $item.Code;customerSelected();"
+                                                        typeahead-loading="" typeahead-no-results="noResults" typeahead-editable="false" 
+                                                        ng-readonly="ValidString(filters.Customer.Value)" ng-disabled="false" ng-required="false"
+                                                        />
+                                    <i class="fa fa-refresh fa-spin search-icon" ng-show="false" style="cursor: pointer"></i>
+                                    <!--prettier-ignore-->
+                                    <i class="fa fa-close search-icon" style="cursor:pointer;margin-top:10px;margin-left: 5px !important;"
+                                                        ng-show="ValidString(filters.Customer.Value)"
+                                                        ng-click="filters.Customer.Value = ''; selectedCustomer = '';customerSelected();"></i>
+                                    <span class="help-block" style="display: none">Informasi Customer</span>
+                                </div>
+                            </td>
+                            <td style="width: 70px; padding-left: 10px">Currency</td>
+                            <td style="width: 150px">
+                                <select class="form-control form-control-sm" ng-model="selectedCurrency" ng-change="showData()" ng-options="item.Code as item.Name for item in data_Currency">
+                                    <option value="">All</option>
+                                </select>
+                            </td>
+                            <td style="width: 80px; padding-left: 10px">Reason Type</td>
+                            <td style="width: 200px">
+                                <select class="form-control form-control-sm" ng-model="selectedReasonType" ng-change="showData()" ng-options="item.Code as item.Name for item in data_ReasonType">
+                                    <option value="">All</option>
+                                </select>
+                            </td>
+                            <td></td>
+                        </tr>
+                        <tr style="height: 40px">
+                            <td>
+                                <div>Date</div>
+                            </td>
+                            <td colspan="3">
+                                <div style="display: flex; align-items: center">
+                                    <input type="text" placeholder="dd/mm/yyyy" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="dd/mm/yy" style="width: 120px; margin-right: 10px" ng-model="selectedDateFrom" ng-change="showData()" />
+                                    -
+                                    <input type="text" placeholder="dd/mm/yyyy" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="dd/mm/yy" style="width: 120px; margin-left: 10px" ng-model="selectedDateTo" ng-change="showData()" />
+                                    <i style="padding-left: 10px; cursor: pointer" ng-click="selectedDateFrom = ''; selectedDateTo = ''; showData();" class="fa fa-refresh"></i>
+                                </div>
+                            </td>
+                            <td style="padding-left: 10px">Status</td>
+                            <td>
+                                <select class="form-control form-control-sm" ng-model="selectedStatus" ng-change="showData()" ng-options="item.StatusId as item.DisplayName for item in data_Status" style="width: 150px">
+                                    <option value="">All</option>
+                                </select>
+                            </td>
+                            <td colspan="2"></td>
+                            <td style="width: 100px; padding-left: 10px">
+                                <div class="custom-control custom-checkbox">
+                                    <input type="checkbox" class="custom-control-input" ng-model="selectedShowAll" ng-change="selectedShowAll_Change()" />
+                                    <label class="custom-control-label" for="cbShowAll">Show All</label>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="clearfix">
+                <div class="pull-left">
+                    <div class="pull-left">
+                        <select class="form-control form-control-sm" ng-model="dt.pageLength" ng-change="showData();" ng-options="item as item for item in pagesOptions"></select>
+                    </div>
+                    <div class="pull-left" style="width: 50px; text-align: center"><i class="fa fa-spinner fa-spin" style="font-size: 24px; display: none" id="idLoading"></i>&nbsp;</div>
+                    <div class="btn-group">
+                        <button class="btn btn-default" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li style="padding: 5px" ng-repeat="(index, col) in dt.columns">
+                                <div class="btn btn-default" style="width: 100%; text-align: left">
+                                    <input type="checkbox" class="custom-control-input" ng-model="col.Show" />
+                                    {{ col.Title }}
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="pull-right">
+                    <div class="form-group pull-left" style="display: flex">
+                        <i ng-show="dt.searchKeyword != ''" ng-click="dt.searchKeyword = '';showData();" class="fa fa-remove search-icon" style="cursor: pointer; position: relative !important; right: -240px; top: 10px; color: #707070"></i>
+                        <input type="text" class="form-control" ng-model="dt.searchKeyword" ng-change="showData();" placeholder="Search..." style="width: 250px" />
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" ng-model="selectAllRows" ng-change="selectAllRows_Change();" style="cursor: pointer" /></th>
+                            <th style="width: 50px !important">No.</th>
+                            <th ng-repeat="col in dt.columns" ng-if="col.Show">
+                                <a href="" ng-if="col.Title != ''" ng-click="dt.sort($event, col.SortField);"><span>{{ col.Title }}</span></a>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="row in dt.data" ng-if="!dt.loading">
+                            <td style="text-align: center"><input type="checkbox" ng-model="row['rowSelected']" ng-click="ProcessRow($index)" style="cursor: pointer" /></td>
+                            <td style="text-align: right">{{(dt.currentPage - 1) * dt.pageLength + $index + 1 | number : 0}}.</td>
+                            <td ng-repeat="col in dt.columns" ng-class="{view: col.DbField == 'DepositNr' }" ng-if="col.Show">
+                                <div ng-if="col.Format == 'Image'" class="img">
+                                    <img ng-src="data:image/png;base64, {{row[col.DbField]}}" class="img-small" />
+                                </div>
+                                <span ng-if="col.Format == 'Text' && col.DbField != 'DepositNr'">{{ row[col.DbField] }}</span>
+                                <span ng-if="col.Format == 'Text' && col.DbField == 'DepositNr'"><a data-ui-sref="app.erp.receivedDepositForm({code: '{{row[col.DbField]}}'})">{{ row[col.DbField] }}</a></span>
+                                <span ng-if="col.Format == 'Currency'" style="text-align: right; width: 100%; display: block">Rp. {{ row[col.DbField] | number : 2}}</span>
+                                <span ng-if="col.Format == 'Date'" style="text-align: center; width: 100%; display: block">{{ row[col.DbField] | date : 'dd/MM/yyyy'}}</span>
+                                <span ng-if="col.Format == 'Number'" style="text-align: right; width: 100%; display: block">{{ row[col.DbField] | number : 0}}</span>
+                                <span ng-if="col.Format == 'Boolean'" style="text-align: center; width: 100%; display: block"><input type="checkbox" ng-model="row[col.DbField]" /></span>
+                                <span ng-if="col.Format == 'BooleanX'" style="text-align: center; width: 100%; display: block"><input type="radio" ng-model="row[col.DbField]" name="BooleanXradio" /></span>
+                            </td>
+                        </tr>
+                        <tr ng-if="dt.data.length == 0 && !dt.loading">
+                            <td colspan="8" class="text-center"><i>Tidak ada data..</i></td>
+                        </tr>
+                        <tr ng-if="dt.loading">
+                            <td colspan="8" class="text-center"><i>Loading data..</i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!--dt paging-->
+            <div class="clearfix">
+                <div class="pull-left" style="margin-top: 22px">Showing {{(dt.currentPage - 1) * dt.pageLength + 1 | number : 0}} to {{(dt.currentPage - 1) * dt.pageLength + dt.pageLength > dt.totalRows ? dt.totalRows : (dt.currentPage - 1) * dt.pageLength + dt.pageLength | number : 0}} of {{ dt.totalRows | number : 0}} entries</div>
+                <div class="icon-box pull-right">
+                    <ul uib-pagination boundary-links="true" max-size="8" ng-change="showData()" total-items="dt.totalRows" ng-model="dt.currentPage" class="pagination" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" items-per-page="dt.pageLength"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-if="allData_toJson"><pre>{{ allData_toJson2 | json:4 }}</pre></div>
+</div>

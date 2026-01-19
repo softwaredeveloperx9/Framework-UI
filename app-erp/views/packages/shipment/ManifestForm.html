@@ -1,0 +1,204 @@
+<div id="content" ng-app="app.erp" ng-controller="ManifestFormCtrl" ng-class="{'sedangSubmitForm': form.submitted}">
+    <div class="row">
+        <big-breadcrumbs items="['Inventory', 'Manifest']" icon="table" class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></big-breadcrumbs>
+    </div>
+    <div class="jarviswidget">
+        <header>
+            <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+            <h2 ng-click="Toggle_debugScope()" style="cursor: help">Form: Manifest</h2>
+        </header>
+        <div class="widget-body">
+            <div class="alert alert-info">
+                <div class="toolBarTop toolbar transparent" style="height: 33px">
+                    <button class="pull-left btn btn-warning" ng-click="Set_Editable()" ng-show="!Is_Writeable" style="display: none"><i class="fa fa-save"></i> Edit</button>
+                    <button class="pull-left btn btn-primary" ng-click="saveData()" ng-show="Is_Writeable || (1<2)"><i class="fa fa-save"></i> Save</button>
+                    <button class="pull-left btn btn-info" ng-click="saveAndPrint()" ng-show="Is_Writeable || (1<2)" style="margin-left: 5px"><i class="fa fa-print"></i> Save & Print</button>
+                    <div class="pull-left" style="width: 50px; text-align: center; padding-top: 5px"><i class="fa fa-spinner fa-spin" style="font-size: 24px; display: none" id="idLoading"></i>&nbsp;</div>
+
+                    <button style="float: right" type="button" class="btn btn-default" data-ui-sref="app.erp.inventoryManifests"><i class="fa fa-sign-out"></i> Close (Esc)</button>
+                </div>
+            </div>
+            <div style="margin: -20px 0px 0px -10px">
+                <form class="smart-form">
+                    <fieldset style="padding-top: 20px">
+                        <div class="row">
+                            <section class="col col-2">
+                                <span class="help-block"> Branch <span style="color: red">*</span></span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.Branch" ng-options="item.Code as item.Name for item in data_Branch" ng-required="true"></select>
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Carrier Type <span style="color: red">*</span></span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.CarrierType" ng-options="item.Code as item.Name for item in data_CarrierType" ng-required="true"></select>
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Driver <span style="color: red">*</span></span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.Driver" ng-options="item.Code as item.Name for item in data_Driver" ng-required="true"></select>
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Date <span style="color: red">*</span></span>
+                                <label class="input" style="display: flex; align-items: center">
+                                    <input type="text" placeholder="dd/mm/yyyy" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="dd/mm/yy" style="margin-right: 10px" ng-model="date_Date" ng-required="true" />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text mb-1" style="font-size: 20px">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                    </div>
+                                    <i style="padding-left: 10px; cursor: pointer" ng-click="date_Date = '';" class="fa fa-refresh"></i>
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Status </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.Status" ng-options="item.Code as item.Name for item in data_Status"></select>
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-2">
+                                <span class="help-block"> Carrier </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.Carrier" ng-options="item.Code as item.Name for item in data_Carrier"></select>
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Helper </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.Helper" ng-options="item.Code as item.Name for item in data_Helper"></select>
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Promised Date </span>
+                                <label class="input" style="display: flex; align-items: center">
+                                    <input type="text" placeholder="dd/mm/yyyy" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="dd/mm/yy" style="margin-right: 10px" ng-model="date_PromisedDate" />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text mb-1" style="font-size: 20px">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                    </div>
+                                    <i style="padding-left: 10px; cursor: pointer" ng-click="date_PromisedDate = '';" class="fa fa-refresh"></i>
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Contact Information </span>
+                                <label class="input">
+                                    <input type="text" class="form-control form-control-sm" ng-model="model.ContactInformation" />
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-6">
+                                <span class="help-block"> Notes </span>
+                                <label class="textarea">
+                                    <textarea class="form-control" rows="3" ng-model="model.Notes"></textarea>
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Manifest Nr. <span style="color: red">*</span></span>
+                                <label class="input" style="display: flex; align-items: center">
+                                    <input type="text" class="form-control form-control-sm" ng-model="model.ManifestNr" ng-required="true" ng-readonly="true" style="margin-right: 10px" />
+                                    <i style="cursor: pointer" ng-click="generateManifestNr()" class="fa fa-refresh"></i>
+                                </label>
+                            </section>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+
+            <div style="margin: 20px 0px 0px 0px">
+                <div>Item Details</div>
+                <div class="alert alert-info" style="display: none">
+                    <div class="toolBarTop toolbar transparent fixed-top">
+                        <button class="btn btn-default" ng-disabled="!Is_Writeable"><i class="fa fa-file-o"></i> Add Item</button>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>No</th>
+                                <th style="width: 120px">Packing #</th>
+                                <th style="min-width: 200px">Consignee</th>
+                                <th style="min-width: 200px">Project</th>
+                                <th style="min-width: 250px">Address</th>
+                                <th style="width: 100px">Area</th>
+                                <th style="width: 100px; text-align: right">Qty</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="row in details.ItemDetails | filter:{Deleted: 0}">
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-default" ng-click="RemoveItemDetail(row['recordNumber'])" ng-show="Is_Writeable">
+                                        <i class="fa fa-trash-o" style="color: red"></i>
+                                    </button>
+                                </td>
+                                <td style="text-align: right">{{$index + 1 | number : 0}}.</td>
+                                <td>
+                                    <input ng-show="Is_Writeable" type="text" class="form-control form-control-sm" ng-model="row['PackingNumber']" />
+                                    <span ng-show="!Is_Writeable">{{ row['PackingNumber'] }}</span>
+                                </td>
+                                <td>
+                                    <input ng-show="Is_Writeable" type="text" class="form-control form-control-sm" ng-model="row['Consignee']" />
+                                    <span ng-show="!Is_Writeable">{{ row['Consignee'] }}</span>
+                                </td>
+                                <td>
+                                    <input ng-show="Is_Writeable" type="text" class="form-control form-control-sm" ng-model="row['Project']" />
+                                    <span ng-show="!Is_Writeable">{{ row['Project'] }}</span>
+                                </td>
+                                <td>
+                                    <input ng-show="Is_Writeable" type="text" class="form-control form-control-sm" ng-model="row['Address']" />
+                                    <span ng-show="!Is_Writeable">{{ row['Address'] }}</span>
+                                </td>
+                                <td>
+                                    <input ng-show="Is_Writeable" type="text" class="form-control form-control-sm" ng-model="row['Area']" />
+                                    <span ng-show="!Is_Writeable">{{ row['Area'] }}</span>
+                                </td>
+                                <td>
+                                    <input ng-show="Is_Writeable" type="text" class="form-control form-control-sm" ng-model="row['Qty']" style="text-align: right" />
+                                    <span ng-show="!Is_Writeable" style="display: block; text-align: right">{{ row['Qty'] | number : 0 }}</span>
+                                </td>
+                            </tr>
+                            <tr ng-if="!details || !details.ItemDetails || details.ItemDetails.length == 0">
+                                <td colspan="8" class="text-center"><i>Tidak ada data..</i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-if="allData_toJson"><pre>{{ allData_toJson2 | json:4 }}</pre></div>
+</div>
+
+<style>
+    .sedangSubmitForm .ng-invalid {
+        border-color: #b94a48 !important;
+        border-width: 2px !important;
+    }
+
+    .sedangEditForm {
+        background-color: #eee !important;
+        cursor: not-allowed;
+    }
+
+    table.table {
+        border-bottom: 1px solid #ddd;
+        margin-bottom: 0px;
+    }
+
+    table.table th:nth-child(1) {
+        text-align: center;
+        width: 50px !important;
+    }
+
+    table.table th:nth-child(2) {
+        text-align: center;
+        width: 50px !important;
+    }
+</style>

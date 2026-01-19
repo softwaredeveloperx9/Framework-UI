@@ -1,0 +1,261 @@
+<div id="content" ng-app="app.erp" ng-controller="AdvanceRequestFormCtrl" ng-class="{'sedangSubmitForm': form.submitted}">
+    <div class="row">
+        <big-breadcrumbs items="['Finance', 'Advance Request']" icon="table" class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></big-breadcrumbs>
+    </div>
+    <div class="jarviswidget">
+        <header>
+            <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+            <h2 ng-click="Toggle_debugScope()" style="cursor: help">Form: Advance Request</h2>
+        </header>
+        <div class="widget-body">
+            <div class="alert alert-info">
+                <div class="toolBarTop toolbar transparent" style="height: 33px">
+                    <button class="pull-left btn btn-primary" ng-click="saveAndClose()"><i class="fa fa-save"></i> Save & Close</button>
+                    <button class="pull-left btn btn-primary" ng-click="saveAndPrint()" style="margin-left: 5px"><i class="fa fa-print"></i> Save & Print</button>
+                    <div class="pull-left" style="width: 50px; text-align: center; padding-top: 5px"><i class="fa fa-spinner fa-spin" style="font-size: 24px; display: none" id="idLoading"></i>&nbsp;</div>
+
+                    <button style="float: right" type="button" class="btn btn-default" data-ui-sref="app.erp.financeAdvanceRequests"><i class="fa fa-sign-out"></i> Close (Esc)</button>
+                </div>
+            </div>
+            <div style="margin: -20px 0px 0px -10px">
+                <form class="smart-form">
+                    <fieldset style="padding-top: 20px">
+                        <div class="row">
+                            <section class="col col-2">
+                                <span class="help-block"> Paid To <span style="color: red">*</span></span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.PaidTo" ng-required="true"></select>
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Branch <span style="color: red">*</span></span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.Branch" ng-required="true"></select>
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Status <span style="color: red">*</span></span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.Status" ng-required="true"></select>
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Request Nr. <span style="color: red">*</span></span>
+                                <label class="input">
+                                    <input type="text" class="form-control form-control-sm" ng-model="model.RequestNr" ng-readonly="true" />
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-2">
+                                <span class="help-block"> Subject </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.Subject"></select>
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Asset </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.Asset"></select>
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Currency <span style="color: red">*</span></span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.Currency" ng-required="true"></select>
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Reason Type <span style="color: red">*</span></span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.ReasonType" ng-required="true"></select>
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-2">
+                                <span class="help-block"> Division </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.Division"></select>
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Payment Method </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.PaymentMethod"></select>
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Required Date <span style="color: red">*</span></span>
+                                <label class="input" style="display: flex; align-items: center">
+                                    <input type="text" placeholder="dd/mm/yyyy" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="dd/mm/yy" style="margin-right: 10px" ng-model="date_RequiredDate" ng-required="true" />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text mb-1" style="font-size: 20px">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                    </div>
+                                    <i style="padding-left: 10px; cursor: pointer" ng-click="date_RequiredDate = '';" class="fa fa-refresh"></i>
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Settlement Date <span style="color: red">*</span></span>
+                                <label class="input" style="display: flex; align-items: center">
+                                    <input type="text" placeholder="dd/mm/yyyy" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="dd/mm/yy" style="margin-right: 10px" ng-model="date_SettlementDate" ng-required="true" />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text mb-1" style="font-size: 20px">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                    </div>
+                                    <i style="padding-left: 10px; cursor: pointer" ng-click="date_SettlementDate = '';" class="fa fa-refresh"></i>
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-2">
+                                <span class="help-block"> Department </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.Department"></select>
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Date </span>
+                                <label class="input" style="display: flex; align-items: center">
+                                    <input type="text" placeholder="dd/mm/yyyy" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="dd/mm/yy" style="margin-right: 10px" ng-model="date_Date" />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text mb-1" style="font-size: 20px">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                    </div>
+                                    <i style="padding-left: 10px; cursor: pointer" ng-click="date_Date = '';" class="fa fa-refresh"></i>
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Project Nr. </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.ProjectNr"></select>
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-4">
+                                <span class="help-block"> Notes <span style="color: red">*</span></span>
+                                <label class="input">
+                                    <input type="text" class="form-control form-control-sm" ng-model="model.Notes" ng-required="true" />
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Doc. Reff. </span>
+                                <label class="input">
+                                    <input type="text" class="form-control form-control-sm" ng-model="model.DocReff" />
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Project CC </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.ProjectCC"></select>
+                                </label>
+                            </section>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div style="margin: 0px 0px 0px -13px">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item active">
+                        <a class="nav-link" data-toggle="tab" href="#dvItemDetails" role="tab"><i class="fa fa-list mr-1"></i> Item Details</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#dvGLDetails" role="tab"><i class="fa fa-book mr-1"></i> G/L Details</a>
+                    </li>
+                </ul>
+                <div class="tab-content border-top-0 p-3">
+                    <div class="tab-pane active" id="dvItemDetails" role="tabpanel">
+                        <div style="padding: 10px 0px">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead style="background-color: #333; color: white">
+                                        <tr>
+                                            <th style="width: 40px">No.</th>
+                                            <th style="width: 120px">Item Code</th>
+                                            <th>Description</th>
+                                            <th style="width: 120px">Amount</th>
+                                            <th style="width: 200px">Comments</th>
+                                            <th style="width: 100px">VAT Code</th>
+                                            <th style="width: 80px">VAT %</th>
+                                            <th style="width: 120px">VAT Amount</th>
+                                            <th style="width: 100px">W/H Code</th>
+                                            <th style="width: 80px">W/H %</th>
+                                            <th style="width: 120px">W/H Amount</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="item in model.Items">
+                                            <td style="text-align: right">{{$index + 1}}.</td>
+                                            <td><input type="text" class="form-control form-control-sm" ng-model="item.ItemCode" /></td>
+                                            <td><input type="text" class="form-control form-control-sm" ng-model="item.Description" /></td>
+                                            <td><input type="number" class="form-control form-control-sm" style="text-align: right" ng-model="item.Amount" /></td>
+                                            <td><input type="text" class="form-control form-control-sm" ng-model="item.Comments" /></td>
+                                            <td><input type="text" class="form-control form-control-sm" ng-model="item.VATCode" /></td>
+                                            <td><input type="number" class="form-control form-control-sm" style="text-align: right" ng-model="item.VATPct" /></td>
+                                            <td><input type="number" class="form-control form-control-sm" style="text-align: right" ng-model="item.VATAmount" /></td>
+                                            <td><input type="text" class="form-control form-control-sm" ng-model="item.WHCode" /></td>
+                                            <td><input type="number" class="form-control form-control-sm" style="text-align: right" ng-model="item.WHPct" /></td>
+                                            <td><input type="number" class="form-control form-control-sm" style="text-align: right" ng-model="item.WHAmount" /></td>
+                                        </tr>
+                                        <tr ng-if="!model.Items || model.Items.length == 0">
+                                            <td colspan="11" class="text-center"><i>Tidak ada data..</i></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                            <div style="padding: 20px 0px">
+                                <div class="row">
+                                    <div class="col col-8"></div>
+                                    <div class="col col-4">
+                                        <table class="table">
+                                            <tr>
+                                                <td style="text-align: right; font-weight: bold">Total Amount</td>
+                                                <td style="text-align: right; width: 150px">{{ model.TotalAmount | number:2 }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right; font-weight: bold">Requested Amount</td>
+                                                <td style="text-align: right">{{ model.RequestedAmount | number:2 }}</td>
+                                            </tr>
+                                            <tr>
+                                                <td style="text-align: right; font-weight: bold">Detail Amount</td>
+                                                <td style="text-align: right">{{ model.DetailAmount | number:0 }}</td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="dvGLDetails" role="tabpanel">
+                        <div style="padding: 25px 14px">
+                            <p><i>G/L Details content here...</i></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-if="allData_toJson"><pre>{{ allData_toJson2 | json:4 }}</pre></div>
+</div>
+
+<style>
+    table.table {
+        border-bottom: 1px solid #ddd;
+        margin-bottom: 0px;
+    }
+
+    .sedangSubmitForm .ng-invalid {
+        border-color: #b94a48 !important;
+        border-width: 2px !important;
+    }
+
+    .sedangEditForm {
+        background-color: #eee !important;
+        cursor: not-allowed;
+    }
+</style>

@@ -1,0 +1,180 @@
+<div id="content" ng-app="app.erp" ng-controller="DownPaymentFormCtrl" ng-class="{'sedangSubmitForm': form.submitted}">
+    <div class="row">
+        <big-breadcrumbs items="['Finance', 'Down Payment']" icon="table" class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></big-breadcrumbs>
+    </div>
+    <div class="jarviswidget">
+        <header>
+            <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+            <h2 ng-click="Toggle_debugScope()" style="cursor: help">Form: Down Payment</h2>
+        </header>
+        <div class="widget-body">
+            <div class="alert alert-info">
+                <div class="toolBarTop toolbar transparent" style="height: 33px">
+                    <button class="pull-left btn btn-primary" ng-click="saveData()"><i class="fa fa-save"></i> Save</button>
+                    <div class="pull-left" style="width: 50px; text-align: center; padding-top: 5px"><i class="fa fa-spinner fa-spin" style="font-size: 24px; display: none" id="idLoading"></i>&nbsp;</div>
+
+                    <button style="float: right" type="button" class="btn btn-default" data-ui-sref="app.erp.financeDownPayments"><i class="fa fa-sign-out"></i> Close (Esc)</button>
+                </div>
+            </div>
+            <div style="margin: -20px 0px 0px -10px">
+                <form class="smart-form">
+                    <fieldset style="padding-top: 20px">
+                        <div class="row">
+                            <section class="col col-2">
+                                <span class="help-block"> B/R Code <span style="color: red">*</span></span>
+                                <label class="input" style="display: flex">
+                                    <input type="text" class="form-control form-control-sm" ng-model="model.BRCode" ng-required="true" style="flex: 1" />
+                                    <button class="btn btn-default btn-sm" ng-click="lookupBR()" style="margin-left: 5px">...</button>
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Cash Account </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.CashAccount"></select>
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Branch </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.Branch"></select>
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Status <span style="color: red">*</span></span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.Status" ng-required="true"></select>
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Max Allocation </span>
+                                <label class="input" style="display: flex; align-items: center">
+                                    <input type="number" class="form-control form-control-sm" style="text-align: right; flex: 1; margin-right: 10px" ng-model="model.MaxAllocation" />
+                                    <span style="font-weight: bold">%</span>
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-2">
+                                <span class="help-block"> Deposit Type </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.DepositType"></select>
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Payment Method </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.PaymentMethod"></select>
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Currency <span style="color: red">*</span></span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.Currency" ng-required="true"></select>
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Payment Nr. <span style="color: red">*</span></span>
+                                <label class="input">
+                                    <input type="text" class="form-control form-control-sm" ng-model="model.PaymentNr" ng-readonly="true" ng-required="true" />
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> PO# </span>
+                                <label class="input">
+                                    <input type="text" class="form-control form-control-sm" ng-model="model.PO" />
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-2">
+                                <span class="help-block"> Tax Trans./Status Code </span>
+                                <label class="input" style="display: flex">
+                                    <select class="form-control form-control-sm" ng-model="model.TaxTransCode" style="flex: 1; margin-right: 5px"></select>
+                                    <select class="form-control form-control-sm" ng-model="model.StatusCode" style="flex: 1"></select>
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Tax Invoice Nr. </span>
+                                <label class="input">
+                                    <input type="text" class="form-control form-control-sm" ng-model="model.TaxInvoiceNr" />
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Date <span style="color: red">*</span></span>
+                                <label class="input" style="display: flex; align-items: center">
+                                    <input type="text" placeholder="dd/mm/yyyy" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="dd/mm/yy" style="margin-right: 10px" ng-model="date_Date" ng-required="true" />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text mb-1" style="font-size: 20px">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                    </div>
+                                    <i style="padding-left: 10px; cursor: pointer" ng-click="date_Date = '';" class="fa fa-refresh"></i>
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Deposit Nr. <span style="color: red">*</span></span>
+                                <label class="input">
+                                    <input type="text" class="form-control form-control-sm" ng-model="model.DepositNr" ng-readonly="true" ng-required="true" />
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Contract# </span>
+                                <label class="input">
+                                    <input type="text" class="form-control form-control-sm" ng-model="model.Contract" />
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-6">
+                                <span class="help-block"> Notes </span>
+                                <label class="textarea">
+                                    <textarea rows="3" class="form-control" ng-model="model.Notes"></textarea>
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Project Nr. </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.ProjectNr"></select>
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-3">
+                                <span class="help-block"> Exchange Rate: </span>
+                                <label class="input" style="display: flex">
+                                    <select class="form-control form-control-sm" ng-model="model.ExchangeRate" style="flex: 1; margin-right: 10px"></select>
+                                    <input type="number" class="form-control form-control-sm" style="width: 100px; text-align: right; margin-right: 10px" ng-model="model.ExchangeRateValue" />
+                                    <select class="form-control form-control-sm" ng-model="model.ExchangeRateCurrency" style="width: 100px"></select>
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Amount </span>
+                                <label class="input">
+                                    <input type="number" class="form-control form-control-sm" style="text-align: right" ng-model="model.Amount" />
+                                </label>
+                            </section>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div ng-if="allData_toJson"><pre>{{ allData_toJson2 | json:4 }}</pre></div>
+</div>
+
+<style>
+    table.table {
+        border-bottom: 1px solid #ddd;
+        margin-bottom: 0px;
+    }
+
+    .sedangSubmitForm .ng-invalid {
+        border-color: #b94a48 !important;
+        border-width: 2px !important;
+    }
+
+    .sedangEditForm {
+        background-color: #eee !important;
+        cursor: not-allowed;
+    }
+</style>

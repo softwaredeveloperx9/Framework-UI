@@ -1,0 +1,80 @@
+<div id="content" ng-app="app.erp" ng-controller="AdditionalTaskVerificationFormCtrl" ng-class="{'sedangSubmitForm': form.submitted}">
+    <div class="row">
+        <big-breadcrumbs items="['HRM', 'Additional Task Verification']" icon="table" class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></big-breadcrumbs>
+    </div>
+    <div class="jarviswidget">
+        <header>
+            <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+            <h2 ng-click="Toggle_debugScope()" style="cursor: help">Form: Additional Task Verification</h2>
+        </header>
+        <div class="widget-body">
+            <div class="alert alert-info">
+                <div class="toolBarTop toolbar transparent" style="height: 33px">
+                    <button class="pull-left btn btn-warning" ng-click="Set_Editable()" ng-show="!Is_Writeable" style="display: none"><i class="fa fa-save"></i> Edit</button>
+                    <button class="pull-left btn btn-primary" ng-click="saveData()" ng-show="Is_Writeable || (1<2)"><i class="fa fa-save"></i> Save</button>
+                    <div class="pull-left" style="width: 50px; text-align: center; padding-top: 5px"><i class="fa fa-spinner fa-spin" style="font-size: 24px; display: none" id="idLoading"></i>&nbsp;</div>
+
+                    <button style="float: right" type="button" class="btn btn-default" data-ui-sref="app.erp.hrmAdditionalTaskVerifications"><i class="fa fa-sign-out"></i> Close (Esc)</button>
+                </div>
+            </div>
+            <div style="margin: -20px 0px 0px -10px">
+                <form class="smart-form">
+                    <fieldset style="padding-top: 20px">
+                        <div class="row">
+                            <section class="col col-2">
+                                <span class="help-block"> Km </span>
+                                <label class="input">
+                                    <input type="number" class="form-control form-control-sm" ng-model="model.Km" style="text-align: right" />
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-3">
+                                <span class="help-block"> Time In/Out </span>
+                                <label class="input" style="display: flex; align-items: center">
+                                    <input type="time" class="form-control form-control-sm" ng-model="model.TimeIn" style="margin-right: 10px" />
+                                    <span style="margin: 0 10px">/</span>
+                                    <input type="time" class="form-control form-control-sm" ng-model="model.TimeOut" />
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-3">
+                                <span class="help-block"> Result </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.Result" ng-options="item.Code as item.Name for item in data_Result"></select>
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-6">
+                                <span class="help-block"> Notes </span>
+                                <label class="textarea">
+                                    <textarea class="form-control" rows="3" ng-model="model.Notes"></textarea>
+                                </label>
+                            </section>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div ng-if="allData_toJson"><pre>{{ allData_toJson2 | json:4 }}</pre></div>
+</div>
+
+<style>
+    .sedangSubmitForm .ng-invalid {
+        border-color: #b94a48 !important;
+        border-width: 2px !important;
+    }
+
+    .sedangEditForm {
+        background-color: #eee !important;
+        cursor: not-allowed;
+    }
+
+    table.table {
+        border-bottom: 1px solid #ddd;
+        margin-bottom: 0px;
+    }
+</style>

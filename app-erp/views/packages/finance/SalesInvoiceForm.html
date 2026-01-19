@@ -1,0 +1,310 @@
+<div id="content" ng-app="app.erp" ng-controller="SalesInvoiceFormCtrl" ng-class="{'sedangSubmitForm': form.submitted}">
+    <div class="row">
+        <big-breadcrumbs items="['Sales', 'Sales Invoice']" icon="table" class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></big-breadcrumbs>
+    </div>
+    <div class="jarviswidget">
+        <header>
+            <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+            <h2 ng-click="Toggle_debugScope()" style="cursor: help">Form: Sales Invoice</h2>
+        </header>
+        <div class="widget-body">
+            <div class="alert alert-info">
+                <div class="toolBarTop toolbar transparent" style="height: 33px">
+                    <button class="pull-left btn btn-primary" ng-click="saveAndClose()" ng-show="Is_Writeable"><i class="fa fa-save"></i> Save & Close</button>
+                    <button class="pull-left btn btn-primary" ng-click="saveAndPrint()" ng-show="Is_Writeable"><i class="fa fa-save"></i> Save & Print</button>
+                    <button class="pull-left btn btn-primary" ng-click="saveAndNew()" ng-show="Is_Writeable"><i class="fa fa-save"></i> Save & New</button>
+                    <button class="pull-left btn btn-primary" ng-click="saveData()" ng-show="Is_Writeable"><i class="fa fa-save"></i> Save</button>
+                    <button class="pull-left btn btn-default" ng-click="printData()"><i class="fa fa-print"></i> Print</button>
+                    <div class="pull-left" style="width: 50px; text-align: center; padding-top: 5px"><i class="fa fa-spinner fa-spin" style="font-size: 24px; display: none" id="idLoading"></i>&nbsp;</div>
+
+                    <button style="float: right" type="button" class="btn btn-default" data-ui-sref="app.erp.salesInvoices"><i class="fa fa-sign-out"></i> Close (Esc)</button>
+                </div>
+            </div>
+            <div style="margin: -20px 0px 0px -10px">
+                <form class="smart-form">
+                    <fieldset style="padding-top: 20px">
+                        <div class="row">
+                            <section class="col col-2">
+                                <span class="help-block"> B/R <span style="color: red">*</span></span>
+                                <label class="input">
+                                    <input type="text" class="form-control form-control-sm" ng-model="model.BR" ng-required="true" />
+                                    <i class="fa fa-search" style="cursor: pointer"></i>
+                                </label>
+                            </section>
+                            <section class="col col-3">
+                                <span class="help-block"> Branch <span style="color: red">*</span></span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.Branch" ng-options="item.Code as item.Name for item in data_Branch" ng-required="true"></select>
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Project Nr. </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.ProjectNr" ng-options="item.Code as item.Name for item in data_Project"></select>
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Status </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.Status" ng-options="item.Code as item.Name for item in data_Status"></select>
+                                </label>
+                            </section>
+                            <section class="col col-3">
+                                <span class="help-block"> Tax Trans./Status Code </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.TaxTransStatusCode" style="width: 80px; display: inline-block"></select>
+                                    <input type="text" class="form-control form-control-sm" ng-model="model.TaxTransStatusCode2" style="width: 80px; display: inline-block" />
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-2">
+                                <span class="help-block"> Attn. To </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.AttnTo" ng-options="item.Code as item.Name for item in data_Customer"></select>
+                                </label>
+                            </section>
+                            <section class="col col-3">
+                                <span class="help-block"> PO# </span>
+                                <label class="input">
+                                    <input type="text" class="form-control form-control-sm" ng-model="model.PO" />
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Currency <span style="color: red">*</span></span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.Currency" ng-options="item.Code as item.Name for item in data_Currency" ng-required="true"></select>
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Invoice Nr. <span style="color: red">*</span></span>
+                                <label class="input">
+                                    <input type="text" class="form-control form-control-sm" ng-model="model.InvoiceNr" ng-required="true" />
+                                    <i class="fa fa-refresh" style="cursor: pointer"></i>
+                                </label>
+                            </section>
+                            <section class="col col-3">
+                                <span class="help-block"> Tax Invoice Nr. <span style="color: red">*</span></span>
+                                <label class="input">
+                                    <input type="text" class="form-control form-control-sm" ng-model="model.TaxInvoiceNr" ng-required="true" />
+                                    <i class="fa fa-refresh" style="cursor: pointer"></i>
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-2">
+                                <span class="help-block"> Contract# </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.Contract" ng-options="item.Code as item.Name for item in data_Contract"></select>
+                                </label>
+                            </section>
+                            <section class="col col-3">
+                                <span class="help-block"> Payment Terms <span style="color: red">*</span></span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.PaymentTerms" ng-options="item.Code as item.Name for item in data_PaymentTerms" ng-required="true"></select>
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Date <span style="color: red">*</span></span>
+                                <label class="input" style="display: flex; align-items: center">
+                                    <input type="text" placeholder="dd/mm/yyyy" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="dd/mm/yy" style="margin-right: 10px" ng-model="date_Date" ng-required="true" />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text mb-1" style="font-size: 20px">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                    </div>
+                                    <i style="padding-left: 10px; cursor: pointer" ng-click="date_Date = '';" class="fa fa-refresh"></i>
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Reason Type </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.ReasonType" ng-options="item.Code as item.Name for item in data_ReasonType"></select>
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-2">
+                                <span class="help-block"> Pay To </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.PayTo" ng-options="item.Code as item.Name for item in data_PayTo"></select>
+                                </label>
+                            </section>
+                            <section class="col col-3">
+                                <span class="help-block"> Payment Method </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.PaymentMethod" ng-options="item.Code as item.Name for item in data_PaymentMethod"></select>
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Receipt Nr. </span>
+                                <label class="input">
+                                    <input type="text" class="form-control form-control-sm" ng-model="model.ReceiptNr" />
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Due Date <span style="color: red">*</span></span>
+                                <label class="input" style="display: flex; align-items: center">
+                                    <input type="text" placeholder="dd/mm/yyyy" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="dd/mm/yy" style="margin-right: 10px" ng-model="date_DueDate" ng-required="true" />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text mb-1" style="font-size: 20px">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                    </div>
+                                    <i style="padding-left: 10px; cursor: pointer" ng-click="date_DueDate = '';" class="fa fa-refresh"></i>
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-2">
+                                <span class="help-block"> Notes </span>
+                                <label class="input">
+                                    <input type="text" class="form-control form-control-sm" ng-model="model.Notes" />
+                                </label>
+                            </section>
+                            <section class="col col-3">
+                                <span class="help-block"> Due Date Terms </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.DueDateTerms" ng-options="item.Code as item.Name for item in data_DueDateTerms"></select>
+                                </label>
+                            </section>
+                            <section class="col col-2"></section>
+                            <section class="col col-2">
+                                <span class="help-block"> Submitted Date </span>
+                                <label class="input" style="display: flex; align-items: center">
+                                    <input type="text" placeholder="dd/mm/yyyy" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="dd/mm/yy" style="margin-right: 10px" ng-model="date_SubmittedDate" />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text mb-1" style="font-size: 20px">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                    </div>
+                                    <i style="padding-left: 10px; cursor: pointer" ng-click="date_SubmittedDate = '';" class="fa fa-refresh"></i>
+                                </label>
+                            </section>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div style="margin: 0px 0px 0px -13px">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item active">
+                        <a class="nav-link" data-toggle="tab" href="#dvItemDetails" role="tab"><i class="fa fa-list mr-1"></i> Item Details</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#dvRevenueAllocations" role="tab"><i class="fa fa-money mr-1"></i> Revenue Allocations</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#dvCreditNotes" role="tab"><i class="fa fa-file mr-1"></i> Credit Notes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#dvGLDetails" role="tab"><i class="fa fa-book mr-1"></i> G/L Details</a>
+                    </li>
+                </ul>
+                <div class="tab-content border-top-0 p-3">
+                    <div class="tab-pane active" id="dvItemDetails" role="tabpanel">
+                        <div class="alert alert-info" style="margin-bottom: 10px">
+                            <div class="toolBarTop toolbar transparent" style="height: 33px">
+                                <button class="pull-left btn btn-default" ng-click="browseCharges()"><i class="fa fa-folder-open"></i> Browse Charges</button>
+                                <button class="pull-left btn btn-default" ng-click="browseItems()"><i class="fa fa-folder-open"></i> Browse Items</button>
+                                <button class="pull-left btn btn-default" ng-click="browseRequests()"><i class="fa fa-folder-open"></i> Browse Requests</button>
+                                <button class="pull-left btn btn-default" ng-click="loadDP()"><i class="fa fa-download"></i> Load D/P</button>
+                            </div>
+                        </div>
+                        <div style="padding: 0px 14px">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 30px"></th>
+                                            <th style="width: 50px">No.</th>
+                                            <th style="width: 100px">Item Code</th>
+                                            <th style="width: 200px">Description</th>
+                                            <th style="width: 80px">Qty</th>
+                                            <th style="width: 80px">Uom</th>
+                                            <th style="width: 100px">Unit Amount</th>
+                                            <th style="width: 100px">Total Amount</th>
+                                            <th style="width: 100px">Disc. Code</th>
+                                            <th style="width: 80px">Disc.%</th>
+                                            <th style="width: 100px">Disc.Amount</th>
+                                            <th style="width: 100px">Sub Total</th>
+                                            <th style="width: 100px">VAT Code</th>
+                                            <th style="width: 80px">VAT %</th>
+                                            <th style="width: 100px">VAT Amount</th>
+                                            <th style="width: 100px">Total</th>
+                                            <th style="width: 150px">Source Doc.</th>
+                                            <th style="width: 100px">VAT</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="row in model.Items">
+                                            <td><input type="checkbox" ng-model="row.selected" /></td>
+                                            <td style="text-align: right">{{$index + 1}}.</td>
+                                            <td><input type="text" class="form-control form-control-sm" ng-model="row.ItemCode" /></td>
+                                            <td><input type="text" class="form-control form-control-sm" ng-model="row.Description" /></td>
+                                            <td><input type="number" class="form-control form-control-sm" ng-model="row.Qty" style="text-align: right" /></td>
+                                            <td><input type="text" class="form-control form-control-sm" ng-model="row.Uom" /></td>
+                                            <td><input type="number" class="form-control form-control-sm" ng-model="row.UnitAmount" style="text-align: right" /></td>
+                                            <td><input type="number" class="form-control form-control-sm" ng-model="row.TotalAmount" style="text-align: right" /></td>
+                                            <td><input type="text" class="form-control form-control-sm" ng-model="row.DiscCode" /></td>
+                                            <td><input type="number" class="form-control form-control-sm" ng-model="row.DiscPercent" style="text-align: right" /></td>
+                                            <td><input type="number" class="form-control form-control-sm" ng-model="row.DiscAmount" style="text-align: right" /></td>
+                                            <td><input type="number" class="form-control form-control-sm" ng-model="row.SubTotal" style="text-align: right" /></td>
+                                            <td><input type="text" class="form-control form-control-sm" ng-model="row.VATCode" /></td>
+                                            <td><input type="number" class="form-control form-control-sm" ng-model="row.VATPercent" style="text-align: right" /></td>
+                                            <td><input type="number" class="form-control form-control-sm" ng-model="row.VATAmount" style="text-align: right" /></td>
+                                            <td><input type="number" class="form-control form-control-sm" ng-model="row.Total" style="text-align: right" /></td>
+                                            <td><input type="text" class="form-control form-control-sm" ng-model="row.SourceDoc" /></td>
+                                            <td><input type="text" class="form-control form-control-sm" ng-model="row.VAT" /></td>
+                                        </tr>
+                                        <tr ng-if="!model.Items || model.Items.length == 0">
+                                            <td colspan="18" class="text-center"><i>Tidak ada data..</i></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="dvRevenueAllocations" role="tabpanel">
+                        <div style="padding: 25px 14px">
+                            <p><i>Revenue Allocations content here...</i></p>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="dvCreditNotes" role="tabpanel">
+                        <div style="padding: 25px 14px">
+                            <p><i>Credit Notes content here...</i></p>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="dvGLDetails" role="tabpanel">
+                        <div style="padding: 25px 14px">
+                            <p><i>G/L Details content here...</i></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-if="allData_toJson"><pre>{{ allData_toJson2 | json:4 }}</pre></div>
+</div>
+
+<style>
+    table.table {
+        border-bottom: 1px solid #ddd;
+        margin-bottom: 0px;
+    }
+
+    .small-checkbox {
+        transform: scale(1);
+        -webkit-transform: scale(1);
+        padding-left: 10px !important;
+    }
+
+    .sedangSubmitForm .ng-invalid {
+        border-color: #b94a48 !important;
+        border-width: 2px !important;
+    }
+
+    .sedangEditForm {
+        background-color: #eee !important;
+        cursor: not-allowed;
+    }
+</style>

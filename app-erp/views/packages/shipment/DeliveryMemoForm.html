@@ -1,0 +1,231 @@
+<div id="content" ng-app="app.erp" ng-controller="DeliveryMemoFormCtrl" ng-class="{'sedangSubmitForm': form.submitted}">
+    <div class="row">
+        <big-breadcrumbs items="['Inventory', 'Delivery Memo']" icon="table" class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></big-breadcrumbs>
+    </div>
+    <div class="jarviswidget">
+        <header>
+            <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+            <h2 ng-click="Toggle_debugScope()" style="cursor: help">Form: Delivery Memo</h2>
+        </header>
+        <div class="widget-body">
+            <div class="alert alert-info">
+                <div class="toolBarTop toolbar transparent" style="height: 33px">
+                    <button class="pull-left btn btn-warning" ng-click="Set_Editable()" ng-show="!Is_Writeable" style="display: none"><i class="fa fa-save"></i> Edit</button>
+                    <button class="pull-left btn btn-primary" ng-click="saveData()" ng-show="Is_Writeable"><i class="fa fa-save"></i> Save</button>
+                    <div class="pull-left" style="width: 50px; text-align: center; padding-top: 5px"><i class="fa fa-spinner fa-spin" style="font-size: 24px; display: none" id="idLoading"></i>&nbsp;</div>
+
+                    <button style="float: right" type="button" class="btn btn-default" data-ui-sref="app.erp.inventoryDeliveryMemos"><i class="fa fa-sign-out"></i> Close (Esc)</button>
+                </div>
+            </div>
+            <div style="margin: -20px 0px 0px -10px">
+                <form class="smart-form">
+                    <fieldset style="padding-top: 20px">
+                        <div class="row">
+                            <section class="col col-3">
+                                <span class="help-block"> Supplier <span style="color: red">*</span></span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.Supplier" ng-options="item.Code as item.Name for item in data_Supplier" ng-required="true"></select>
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Branch </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.Branch" ng-options="item.Code as item.Name for item in data_Branch"></select>
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Date <span style="color: red">*</span></span>
+                                <label class="input" style="display: flex; align-items: center">
+                                    <input type="text" placeholder="dd/mm/yyyy" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="dd/mm/yy" style="margin-right: 10px" ng-model="date_Date" ng-required="true" />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text mb-1" style="font-size: 20px">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                    </div>
+                                    <i style="padding-left: 10px; cursor: pointer" ng-click="date_Date = '';" class="fa fa-refresh"></i>
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Status </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.Status" ng-options="item.Code as item.Name for item in data_Status"></select>
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-3">
+                                <span class="help-block"> Pick From </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.PickFrom" ng-options="item.Code as item.Name for item in data_PickFrom"></select>
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Warehouse </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.Warehouse" ng-options="item.Code as item.Name for item in data_Warehouse"></select>
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Exp.Delivered Date <span style="color: red">*</span></span>
+                                <label class="input" style="display: flex; align-items: center">
+                                    <input type="text" placeholder="dd/mm/yyyy" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="dd/mm/yy" style="margin-right: 10px" ng-model="date_ExpDeliveredDate" ng-required="true" />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text mb-1" style="font-size: 20px">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                    </div>
+                                    <i style="padding-left: 10px; cursor: pointer" ng-click="date_ExpDeliveredDate = '';" class="fa fa-refresh"></i>
+                                </label>
+                            </section>
+                            <section class="col col-2">
+                                <span class="help-block"> Request Nr. </span>
+                                <label class="input" style="display: flex; align-items: center">
+                                    <input type="text" class="form-control form-control-sm" ng-model="model.RequestNr" ng-readonly="true" style="margin-right: 10px" />
+                                    <i style="cursor: pointer" ng-click="generateRequestNr()" class="fa fa-refresh"></i>
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-3">
+                                <span class="help-block"> Carrier Nr </span>
+                                <label class="input">
+                                    <input type="text" class="form-control form-control-sm" ng-model="model.CarrierNr" />
+                                </label>
+                            </section>
+                            <section class="col col-4">
+                                <span class="help-block"> Driver </span>
+                                <label class="input">
+                                    <input type="text" class="form-control form-control-sm" ng-model="model.Driver" />
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-7">
+                                <span class="help-block"> Notes </span>
+                                <label class="textarea">
+                                    <textarea class="form-control" rows="3" ng-model="model.Notes"></textarea>
+                                </label>
+                            </section>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div style="margin: 0px 0px 0px -13px">
+                <ul class="nav nav-tabs" role="tablist">
+                    <li class="nav-item active">
+                        <a class="nav-link" data-toggle="tab" href="#dvItemDetails" role="tab"><i class="fa fa-list mr-1"></i> Item Details</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" data-toggle="tab" href="#dvShippingCosts" role="tab"><i class="fa fa-truck mr-1"></i> Shipping Costs</a>
+                    </li>
+                </ul>
+                <div class="tab-content border-top-0 p-3">
+                    <div class="tab-pane active" id="dvItemDetails" role="tabpanel">
+                        <div style="padding: 25px 14px">
+                            <div class="table-responsive">
+                                <table class="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 50px">No.</th>
+                                            <th style="width: 120px">Item Code</th>
+                                            <th>Description</th>
+                                            <th style="width: 80px">Qty</th>
+                                            <th style="width: 80px">Uom</th>
+                                            <th style="width: 80px">Qty</th>
+                                            <th style="width: 80px">Uom</th>
+                                            <th style="width: 80px">Qty</th>
+                                            <th style="width: 80px">Uom</th>
+                                            <th style="width: 100px">Total Qty</th>
+                                            <th style="width: 80px">Uom</th>
+                                            <th style="width: 120px">Source Doc.</th>
+                                            <th style="width: 120px">Consignee</th>
+                                            <th style="width: 200px">Shipping Address</th>
+                                            <th style="width: 50px"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="row in model.ItemDetails">
+                                            <td style="text-align: right">{{$index + 1 | number : 0}}.</td>
+                                            <td>{{ row.ItemCode }}</td>
+                                            <td>{{ row.Description }}</td>
+                                            <td style="text-align: right">{{ row.Qty1 | number : 2 }}</td>
+                                            <td>{{ row.Uom1 }}</td>
+                                            <td style="text-align: right">{{ row.Qty2 | number : 2 }}</td>
+                                            <td>{{ row.Uom2 }}</td>
+                                            <td style="text-align: right">{{ row.Qty3 | number : 2 }}</td>
+                                            <td>{{ row.Uom3 }}</td>
+                                            <td style="text-align: right">{{ row.TotalQty | number : 2 }}</td>
+                                            <td>{{ row.TotalUom }}</td>
+                                            <td>{{ row.SourceDoc }}</td>
+                                            <td>{{ row.Consignee }}</td>
+                                            <td>{{ row.ShippingAddress }}</td>
+                                            <td>
+                                                <button class="btn btn-xs btn-danger" ng-click="removeItem($index)"><i class="fa fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr ng-if="!model.ItemDetails || model.ItemDetails.length == 0">
+                                            <td colspan="15" class="text-center"><i>Tidak ada data..</i></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="tab-pane" id="dvShippingCosts" role="tabpanel">
+                        <div style="padding: 25px 14px">
+                            <div class="table-responsive">
+                                <table class="table table-bordered" style="width: 600px">
+                                    <thead>
+                                        <tr>
+                                            <th style="width: 50px">No.</th>
+                                            <th>Description</th>
+                                            <th style="width: 150px">Amount</th>
+                                            <th style="width: 50px"></th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr ng-repeat="row in model.ShippingCosts">
+                                            <td style="text-align: right">{{$index + 1 | number : 0}}.</td>
+                                            <td>{{ row.Description }}</td>
+                                            <td style="text-align: right">{{ row.Amount | number : 2 }}</td>
+                                            <td>
+                                                <button class="btn btn-xs btn-danger" ng-click="removeShippingCost($index)"><i class="fa fa-trash"></i></button>
+                                            </td>
+                                        </tr>
+                                        <tr ng-if="!model.ShippingCosts || model.ShippingCosts.length == 0">
+                                            <td colspan="4" class="text-center"><i>Tidak ada data..</i></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-if="allData_toJson"><pre>{{ allData_toJson2 | json:4 }}</pre></div>
+</div>
+
+<style>
+    table.table {
+        border-bottom: 1px solid #ddd;
+        margin-bottom: 0px;
+    }
+
+    .small-checkbox {
+        transform: scale(1);
+        -webkit-transform: scale(1);
+        padding-left: 10px !important;
+    }
+
+    .sedangSubmitForm .ng-invalid {
+        border-color: #b94a48 !important;
+        border-width: 2px !important;
+    }
+
+    .sedangEditForm {
+        background-color: #eee !important;
+        cursor: not-allowed;
+    }
+</style>

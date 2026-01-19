@@ -1,0 +1,112 @@
+<div id="content" ng-app="app.erp" ng-controller="AbcCtrl" ng-class="{'sedangSubmitForm': form.submitted}">
+    <div class="row">
+        <big-breadcrumbs items="['Inventory', 'PR Closing Form']" icon="table" class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></big-breadcrumbs>
+    </div>
+    <div class="jarviswidget">
+        <header>
+            <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+            <h2 ng-click="Toggle_debugScope()" style="cursor: help">Form: PR Closing</h2>
+        </header>
+        <div class="widget-body">
+            <div class="alert alert-info">
+                <div class="toolBarTop toolbar transparent" style="height: 33px">
+                    <button class="pull-left btn btn-warning" ng-click="Set_Editable()" ng-show="!Is_Writeable" style="display: none"><i class="fa fa-save"></i> Edit</button>
+                    <button class="pull-left btn btn-primary" ng-click="saveData()" ng-show="Is_Writeable || (1<2)"><i class="fa fa-save"></i> Save</button>
+                    <div class="pull-left" style="width: 50px; text-align: center; padding-top: 5px"><i class="fa fa-spinner fa-spin" style="font-size: 24px; display: none" id="idLoading"></i>&nbsp;</div>
+
+                    <button style="float: right" type="button" class="btn btn-default" data-ui-sref="app.erp.inventoryPRList"><i class="fa fa-sign-out"></i> Close (Esc)</button>
+                </div>
+            </div>
+            <div style="margin: -20px 0px 0px -10px">
+                <form class="smart-form">
+                    <fieldset style="padding-top: 20px">
+                        <div class="row">
+                            <section class="col col-3">
+                                <span class="help-block"> Closing Reason </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.ClosingReason" ng-options="item.Code as item.Description for item in data_ClosingReason">
+                                        <option value="">Cancell</option>
+                                    </select>
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-12">
+                                <span class="help-block"> Closing Notes <span style="color: red">*</span></span>
+                                <label class="textarea">
+                                    <textarea class="form-control form-control-sm" ng-model="model.ClosingNotes" rows="3" ng-required="true"></textarea>
+                                </label>
+                            </section>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+
+            <div style="margin: 20px 0px 0px 0px">
+                <div class="alert alert-info">
+                    <h4 style="margin: 5px 0px">Detail Closed Item(s)</h4>
+                </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>No</th>
+                                <th>Item Code</th>
+                                <th>Description</th>
+                                <th style="width: 100px">Qty</th>
+                                <th style="width: 80px">Uom</th>
+                                <th style="width: 100px">Qty</th>
+                                <th style="width: 80px">Uom</th>
+                                <th style="width: 100px">Qty</th>
+                                <th style="width: 80px">Uom</th>
+                                <th style="width: 100px">Open Qty</th>
+                                <th style="width: 100px">New Qty</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="row in details.ClosedItems | filter:{Deleted: 0}">
+                                <td style="text-align: right">{{$index + 1 | number : 0}}.</td>
+                                <td>{{ row['ItemCode'] }}</td>
+                                <td>{{ row['Description'] }}</td>
+                                <td style="text-align: right">{{ row['Qty'] | number : 2 }}</td>
+                                <td>{{ row['Uom'] }}</td>
+                                <td style="text-align: right">{{ row['Qty2'] | number : 2 }}</td>
+                                <td>{{ row['Uom2'] }}</td>
+                                <td style="text-align: right">{{ row['Qty3'] | number : 2 }}</td>
+                                <td>{{ row['Uom3'] }}</td>
+                                <td style="text-align: right">{{ row['OpenQty'] | number : 2 }}</td>
+                                <td><input type="text" ng-model="row['NewQty']" class="form-control form-control-sm" style="text-align: right" /></td>
+                            </tr>
+                            <tr ng-if="!details || !details.ClosedItems || details.ClosedItems.length == 0">
+                                <td colspan="11" class="text-center"><i>Tidak ada data..</i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-if="allData_toJson"><pre>{{ allData_toJson2 | json:4 }}</pre></div>
+</div>
+
+<style>
+    .sedangSubmitForm .ng-invalid {
+        border-color: #b94a48 !important;
+        border-width: 2px !important;
+    }
+
+    .sedangEditForm {
+        background-color: #eee !important;
+        cursor: not-allowed;
+    }
+
+    table.table {
+        border-bottom: 1px solid #ddd;
+        margin-bottom: 0px;
+    }
+
+    table.table th:nth-child(1) {
+        text-align: center;
+        width: 50px !important;
+    }
+</style>

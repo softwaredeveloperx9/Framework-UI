@@ -1,0 +1,190 @@
+<div id="content" ng-app="app.erp" ng-controller="PickingOrderVerificationCtrl" ng-class="{'sedangSubmitForm': form.submitted}">
+    <div class="row">
+        <big-breadcrumbs items="['Warehouse', 'Picking Order Verification']" icon="table" class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></big-breadcrumbs>
+    </div>
+    <div class="jarviswidget">
+        <header>
+            <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+            <h2 ng-click="Toggle_debugScope()" style="cursor: help">Form: Picking Order Verification</h2>
+        </header>
+        <div class="widget-body">
+            <div class="alert alert-info">
+                <div class="toolBarTop toolbar transparent" style="height: 33px">
+                    <button class="pull-left btn btn-default" ng-click="refreshData()"><i class="fa fa-refresh"></i> Refresh</button>
+                    <label class="checkbox" style="display: inline-flex; align-items: center; margin-left: 10px; margin-right: 10px">
+                        <input type="checkbox" ng-model="model.VerifyChecked" />
+                        <i></i>
+                        <span style="margin-left: 5px">Verify</span>
+                    </label>
+                    <label class="checkbox" style="display: inline-flex; align-items: center; margin-right: 10px">
+                        <input type="checkbox" ng-model="model.PackingChecked" />
+                        <i></i>
+                        <span style="margin-left: 5px">Packing</span>
+                    </label>
+                    <div class="pull-left" style="width: 50px; text-align: center; padding-top: 5px"><i class="fa fa-spinner fa-spin" style="font-size: 24px; display: none" id="idLoading"></i>&nbsp;</div>
+
+                    <button style="float: right" type="button" class="btn btn-default" data-ui-sref="app.erp.pickingOrder"><i class="fa fa-sign-out"></i> Close (Esc)</button>
+                </div>
+            </div>
+            <div style="margin: -20px 0px 0px 0px">
+                <form class="smart-form">
+                    <fieldset>
+                        <div class="row">
+                            <section class="col col-3">
+                                <span class="help-block"> Picking Order # </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.PickingOrderNo" ng-options="item.Code as item.Description for item in data_PickingOrder" ng-change="PickingOrder_Changed()"></select>
+                                </label>
+                            </section>
+                            <section class="col col-3">
+                                <span class="help-block"> Tag Number </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.TagNumber" ng-options="item.Code as item.Name for item in data_TagNumber"></select>
+                                </label>
+                            </section>
+                            <section class="col col-3">
+                                <span class="help-block"> Verification Group </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.VerificationGroup" ng-options="item.Code as item.Name for item in data_VerificationGroup"></select>
+                                </label>
+                            </section>
+                            <section class="col col-3">
+                                <span class="help-block"> Status </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.Status" ng-options="item.Code as item.Name for item in data_Status"></select>
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-3">
+                                <span class="help-block"> Packer </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.Packer" ng-options="item.Code as item.Name for item in data_Packer"></select>
+                                </label>
+                            </section>
+                            <section class="col col-3">
+                                <span class="help-block"> Time Start </span>
+                                <label class="input">
+                                    <input type="time" class="form-control form-control-sm" ng-model="model.TimeStart" />
+                                </label>
+                            </section>
+                            <section class="col col-3">
+                                <span class="help-block"> Checker </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.Checker" ng-options="item.Code as item.Name for item in data_Checker"></select>
+                                </label>
+                            </section>
+                            <section class="col col-3">
+                                <span class="help-block"> Time End </span>
+                                <label class="input">
+                                    <input type="time" class="form-control form-control-sm" ng-model="model.TimeEnd" />
+                                </label>
+                            </section>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+            <div style="margin: 20px 0px 0px 0px">
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead style="background-color: #4a89dc; color: white">
+                            <tr>
+                                <th style="width: 50px; text-align: center"></th>
+                                <th style="width: 150px">Picking Order #</th>
+                                <th style="width: 150px">Item Code</th>
+                                <th style="min-width: 250px">Description</th>
+                                <th style="width: 100px; text-align: center">Qty</th>
+                                <th style="width: 80px; text-align: center">Uom</th>
+                                <th style="width: 100px; text-align: center">Qty</th>
+                                <th style="width: 80px; text-align: center">Uom</th>
+                                <th style="width: 100px; text-align: center">Qty</th>
+                                <th style="width: 80px; text-align: center">Uom</th>
+                                <th style="min-width: 150px">Notes</th>
+                                <th style="width: 100px; text-align: center">Status</th>
+                                <th style="width: 50px; text-align: center">!</th>
+                                <th style="min-width: 150px">Comments</th>
+                            </tr>
+                            <tr>
+                                <th colspan="14">
+                                    <button class="btn btn-primary btn-sm" ng-click="searchData()" style="width: 100%"><i class="fa fa-search"></i> Search</button>
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="row in details.PickingOrderDetails | filter:{Deleted: 0}">
+                                <td style="text-align: center">
+                                    <input type="checkbox" ng-model="row['Selected']" class="form-control form-control-sm" style="height: 20px" />
+                                </td>
+                                <td>{{ row['PickingOrderNo'] }}</td>
+                                <td>{{ row['ItemCode'] }}</td>
+                                <td>{{ row['Description'] }}</td>
+                                <td style="text-align: right">{{ row['Qty1'] | number : 2 }}</td>
+                                <td style="text-align: center">{{ row['Uom1'] }}</td>
+                                <td style="text-align: right">{{ row['Qty2'] | number : 2 }}</td>
+                                <td style="text-align: center">{{ row['Uom2'] }}</td>
+                                <td style="text-align: right">{{ row['Qty3'] | number : 2 }}</td>
+                                <td style="text-align: center">{{ row['Uom3'] }}</td>
+                                <td>{{ row['Notes'] }}</td>
+                                <td style="text-align: center">{{ row['Status'] }}</td>
+                                <td style="text-align: center">
+                                    <i class="fa fa-exclamation-triangle" style="color: orange" ng-show="row['HasAlert']"></i>
+                                </td>
+                                <td>{{ row['Comments'] }}</td>
+                            </tr>
+                            <tr ng-if="details.PickingOrderDetails.length == 0">
+                                <td colspan="14" class="text-center" style="padding: 20px"><i>No data available in table</i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-if="allData_toJson"><pre>{{ allData_toJson2 | json:4 }}</pre></div>
+</div>
+
+<style>
+    .small-checkbox {
+        transform: scale(1);
+        -webkit-transform: scale(1);
+        padding-left: 10px !important;
+    }
+
+    .typeahead_ReadOnly,
+    .form-control[disabled],
+    .form-control[readonly],
+    fieldset[disabled] .form-control {
+        background-color: #eee !important;
+    }
+
+    .sedangSubmitForm .ng-invalid {
+        border-color: #b94a48 !important;
+        border-width: 2px !important;
+    }
+
+    .sedangEditForm {
+        background-color: #eee !important;
+        cursor: not-allowed;
+    }
+
+    table.table {
+        border-bottom: 1px solid #ddd;
+        margin-bottom: 0px;
+    }
+
+    table.table th:nth-child(1) {
+        text-align: center;
+        width: 50px !important;
+    }
+
+    table.table th:nth-child(2) {
+        text-align: center;
+        width: 50px !important;
+    }
+
+    table.table thead {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+    }
+</style>

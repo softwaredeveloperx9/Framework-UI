@@ -1,0 +1,158 @@
+<div id="content" ng-app="app.erp" ng-controller="JobPositionCtrl">
+    <div class="row">
+        <big-breadcrumbs items="['Setup', 'Job Position']" icon="home" class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></big-breadcrumbs>
+        <div smart-include="app-erp/views/sub-header.tpl.html"></div>
+    </div>
+    <div class="jarviswidget">
+        <header>
+            <span class="widget-icon"> <i class="fa fa-briefcase"></i> </span>
+            <h2 ng-click="Toggle_debugScope()" style="cursor: help">Job Position</h2>
+        </header>
+        <div class="widget-body">
+            <div class="alert alert-info" style="margin-bottom: 10px">
+                <div class="toolBarTop toolbar transparent" style="min-height: 33px">
+                    <button class="btn btn-default" ng-click="showData()"><i class="fa fa-refresh"></i> Refresh</button>
+                    <button class="btn btn-default" ng-click="sdr_GoToForm()"><i class="fa fa-file"></i> New</button>
+                    <button class="btn btn-default" onclick="ExportToExcel(); return false;"><i class="fa fa-download"></i> D/L Schema</button>
+                    <button class="btn btn-default" onclick="upload(); return false;"><i class="fa fa-upload"></i> Upload</button>
+                </div>
+            </div>
+            <div>
+                <table style="width: 100%; margin-bottom: 10px">
+                    <tbody>
+                        <tr style="height: 40px">
+                            <td style="width: 50px">Active</td>
+                            <td>
+                                <select class="form-control form-control-sm" style="width: 130px" ng-model="filters.Active.Value" ng-change="showData();" ng-options="item.Value as item.Text for item in activeOptions"></select>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <div class="clearfix">
+                <div class="pull-left">
+                    <div class="pull-left">
+                        <select class="form-control form-control-sm" ng-model="dt.pageLength" ng-change="showData();" ng-options="item as item for item in pagesOptions"></select>
+                    </div>
+                    <div class="pull-left" style="width: 50px; text-align: center"><i class="fa fa-spinner fa-spin" style="font-size: 24px; display: none" id="idLoading"></i>&nbsp;</div>
+                    <div class="btn-group">
+                        <button class="btn btn-default" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></button>
+                        <ul class="dropdown-menu" role="menu">
+                            <li style="padding: 5px" ng-repeat="(index, col) in dt.columns">
+                                <div class="btn btn-default" style="width: 100%; text-align: left">
+                                    <input type="checkbox" class="custom-control-input" ng-model="col.Show" />
+                                    {{ col.Title }}
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="pull-right">
+                    <div class="form-group pull-left" style="display: flex">
+                        <i ng-show="dt.searchKeyword != ''" ng-click="dt.searchKeyword = '';showData();" class="fa fa-remove search-icon" style="cursor: pointer; position: relative !important; right: -240px; top: 10px; color: #707070"></i>
+                        <input type="text" class="form-control" ng-model="dt.searchKeyword" ng-change="showData();" placeholder="Search..." style="width: 250px" />
+                    </div>
+                </div>
+            </div>
+            <div class="table-responsive">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th><input type="checkbox" ng-model="selectAllRows" ng-change="selectAllRows_Change();" style="cursor: pointer" /></th>
+                            <th style="width: 50px !important">No.</th>
+                            <th ng-repeat="col in dt.columns" ng-if="col.Show">
+                                <a href="" ng-if="col.Title != ''" ng-click="dt.sort($event, col.SortField);"><span>{{ col.Title }}</span></a>
+                            </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr ng-repeat="row in dt.data" ng-if="!dt.loading">
+                            <td style="text-align: center"><input type="checkbox" ng-model="row['rowSelected']" ng-click="ProcessRow($index)" style="cursor: pointer" /></td>
+                            <td style="text-align: right">{{(dt.currentPage - 1) * dt.pageLength + $index + 1 | number : 0}}.</td>
+                            <td ng-repeat="col in dt.columns" ng-class="{view: col.DbField == 'Code' }" ng-if="col.Show">
+                                <span ng-if="col.Format == 'Text' && col.DbField != 'Code'">{{ row[col.DbField] }}</span>
+                                <span ng-if="col.Format == 'Text' && col.DbField == 'Code'"><a ng-click="sdr_GoToForm({code: row[col.DbField]})">{{ row[col.DbField] }}</a></span>
+                                <span ng-if="col.Format == 'Status'" style="text-align: center; width: 100%; display: block">
+                                    <span ng-if="row[col.DbField]" class="badge badge-success">Active</span>
+                                    <span ng-if="!row[col.DbField]" class="badge badge-default">Inactive</span>
+                                </span>
+                            </td>
+                        </tr>
+                        <tr ng-if="dt.data.length == 0 && !dt.loading">
+                            <td colspan="7" class="text-center"><i>Tidak ada data..</i></td>
+                        </tr>
+                        <tr ng-if="dt.loading">
+                            <td colspan="7" class="text-center"><i>Loading data..</i></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+            <!--dt paging-->
+            <div class="clearfix">
+                <div class="pull-left" style="margin-top: 22px">Showing {{(dt.currentPage - 1) * dt.pageLength + 1 | number : 0}} to {{(dt.currentPage - 1) * dt.pageLength + dt.pageLength > dt.totalRows ? dt.totalRows : (dt.currentPage - 1) * dt.pageLength + dt.pageLength | number : 0}} of {{ dt.totalRows | number : 0}} entries</div>
+                <div class="icon-box pull-right">
+                    <ul uib-pagination boundary-links="true" max-size="8" ng-change="showData()" total-items="dt.totalRows" ng-model="dt.currentPage" class="pagination" previous-text="&lsaquo;" next-text="&rsaquo;" first-text="&laquo;" last-text="&raquo;" items-per-page="dt.pageLength"></ul>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-if="allData_toJson"><pre>{{ allData_toJson2 | json:4 }}</pre></div>
+</div>
+
+<style>
+    td.view {
+        cursor: pointer;
+        color: #886ab5;
+        text-decoration: underline;
+    }
+
+    table.table {
+        border-bottom: 1px solid #ddd;
+        margin-bottom: 0px;
+    }
+
+    table.table th:nth-child(1) {
+        text-align: center;
+        width: 20px !important;
+    }
+
+    table.table th:nth-child(2) {
+        text-align: center;
+        width: 50px !important;
+    }
+
+    table.table th:nth-child(3) {
+        width: 150px !important;
+    }
+
+    table.table th:nth-child(4) {
+        width: 250px !important;
+    }
+
+    table.table th:nth-child(5) {
+        width: 180px !important;
+    }
+
+    table.table th:nth-child(6) {
+        width: 120px !important;
+    }
+
+    table.table th:nth-child(7) {
+        width: 100px !important;
+        text-align: center;
+    }
+
+    .badge-success {
+        background-color: #5cb85c;
+        color: white;
+        padding: 4px 8px;
+        border-radius: 3px;
+    }
+
+    .badge-default {
+        background-color: #999;
+        color: white;
+        padding: 4px 8px;
+        border-radius: 3px;
+    }
+</style>

@@ -1,0 +1,220 @@
+<div id="content" ng-app="app.erp" ng-controller="RoleAccessFormCtrl" ng-class="{'sedangSubmitForm': form.submitted}">
+    <div class="row">
+        <big-breadcrumbs items="['Master Data', 'Role Access Form']" icon="lock" class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></big-breadcrumbs>
+    </div>
+    <div class="jarviswidget">
+        <header>
+            <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+            <h2 ng-click="Toggle_debugScope()" style="cursor: help">Role Access Form</h2>
+        </header>
+        <div class="widget-body">
+            <div class="alert alert-info">
+                <div class="toolBarTop toolbar transparent" style="height: 33px">
+                    <button class="btn btn-primary" ng-click="saveData()" ng-show="Is_Writeable"><i class="fa fa-save"></i> Save</button>
+                    <button class="btn btn-danger" ng-click="sdr_GoBack()"><i class="fa fa-times"></i> Cancel</button>
+                    <div style="width: 50px; text-align: center; padding-top: 5px"><i class="fa fa-spinner fa-spin" style="font-size: 24px; display: none" id="idLoading"></i>&nbsp;</div>
+                </div>
+            </div>
+            <div style="margin: -20px 0px 0px -10px">
+                <form class="smart-form">
+                    <fieldset style="padding-top: 20px">
+                        <div class="row">
+                            <section class="col col-12">
+                                <h4 style="margin-left: 15px; margin-bottom: 20px">Create New Role Access</h4>
+                            </section>
+                        </div>
+
+                        <div class="row">
+                            <section class="col col-6">
+                                <span class="help-block"> Role Name <span style="color: red">*</span></span>
+                                <label class="input">
+                                    <i class="icon-prepend fa fa-tag"></i>
+                                    <input type="text" class="form-control form-control-sm" ng-model="model.RoleName" placeholder="e.g. Sales Manager" ng-required="true" />
+                                </label>
+                            </section>
+                            <section class="col col-6">
+                                <span class="help-block"> Role Status</span>
+                                <label class="toggle" style="margin-top: 10px">
+                                    <input type="checkbox" ng-model="model.RoleStatus" ng-true-value="'Active'" ng-false-value="'Inactive'" checked>
+                                    <i data-swchon-text="Active" data-swchoff-text="Inactive"></i>
+                                    <span style="margin-left: 10px">{{ model.RoleStatus }}</span>
+                                </label>
+                            </section>
+                        </div>
+
+                        <div class="row">
+                            <section class="col col-12">
+                                <span class="help-block"> Description</span>
+                                <label class="textarea">
+                                    <i class="icon-prepend fa fa-pencil"></i>
+                                    <textarea rows="4" class="form-control form-control-sm" ng-model="model.Description" placeholder="e.g. Manage and Approve Sales Order"></textarea>
+                                </label>
+                            </section>
+                        </div>
+
+                        <div class="row" style="margin-top: 30px">
+                            <section class="col col-12">
+                                <h4 style="margin-left: 15px; margin-bottom: 20px">ERP Menu Access</h4>
+                            </section>
+                        </div>
+
+                        <div class="row">
+                            <section class="col col-12">
+                                <div class="table-responsive">
+                                    <table class="table table-bordered table-hover">
+                                        <thead>
+                                            <tr style="background-color: #f5f5f5">
+                                                <th style="width: 40%; padding: 12px">ERP MODULE</th>
+                                                <th style="width: 12%; text-align: center; padding: 12px">READ</th>
+                                                <th style="width: 12%; text-align: center; padding: 12px">CREATE</th>
+                                                <th style="width: 12%; text-align: center; padding: 12px">EDIT</th>
+                                                <th style="width: 12%; text-align: center; padding: 12px">DELETE</th>
+                                                <th style="width: 12%; text-align: center; padding: 12px">APPROVAL</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr ng-repeat="module in data_Modules">
+                                                <td style="padding: 12px">
+                                                    <i class="fa" ng-class="module.expanded ? 'fa-chevron-down' : 'fa-chevron-right'" 
+                                                       ng-click="toggleModule(module)" 
+                                                       style="cursor: pointer; margin-right: 8px"
+                                                       ng-if="module.hasChildren"></i>
+                                                    <span ng-if="!module.hasChildren" style="margin-left: 20px"></span>
+                                                    <strong>{{ module.name }}</strong>
+                                                </td>
+                                                <td style="text-align: center; padding: 12px">
+                                                    <label class="checkbox">
+                                                        <input type="checkbox" ng-model="module.permissions.read" ng-change="updatePermissions(module)">
+                                                        <i></i>
+                                                    </label>
+                                                </td>
+                                                <td style="text-align: center; padding: 12px">
+                                                    <label class="checkbox">
+                                                        <input type="checkbox" ng-model="module.permissions.create" ng-change="updatePermissions(module)">
+                                                        <i></i>
+                                                    </label>
+                                                </td>
+                                                <td style="text-align: center; padding: 12px">
+                                                    <label class="checkbox">
+                                                        <input type="checkbox" ng-model="module.permissions.edit" ng-change="updatePermissions(module)">
+                                                        <i></i>
+                                                    </label>
+                                                </td>
+                                                <td style="text-align: center; padding: 12px">
+                                                    <label class="checkbox">
+                                                        <input type="checkbox" ng-model="module.permissions.delete" ng-change="updatePermissions(module)">
+                                                        <i></i>
+                                                    </label>
+                                                </td>
+                                                <td style="text-align: center; padding: 12px">
+                                                    <label class="checkbox">
+                                                        <input type="checkbox" ng-model="module.permissions.approval" ng-change="updatePermissions(module)">
+                                                        <i></i>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                            <!-- Sub modules -->
+                                            <tr ng-repeat-start="submodule in module.children" ng-if="module.expanded" ng-repeat-end>
+                                                <td style="padding: 12px; padding-left: 40px">
+                                                    <i class="fa fa-angle-right" style="margin-right: 8px; color: #999"></i>
+                                                    {{ submodule.name }}
+                                                </td>
+                                                <td style="text-align: center; padding: 12px">
+                                                    <label class="checkbox">
+                                                        <input type="checkbox" ng-model="submodule.permissions.read">
+                                                        <i></i>
+                                                    </label>
+                                                </td>
+                                                <td style="text-align: center; padding: 12px">
+                                                    <label class="checkbox">
+                                                        <input type="checkbox" ng-model="submodule.permissions.create">
+                                                        <i></i>
+                                                    </label>
+                                                </td>
+                                                <td style="text-align: center; padding: 12px">
+                                                    <label class="checkbox">
+                                                        <input type="checkbox" ng-model="submodule.permissions.edit">
+                                                        <i></i>
+                                                    </label>
+                                                </td>
+                                                <td style="text-align: center; padding: 12px">
+                                                    <label class="checkbox">
+                                                        <input type="checkbox" ng-model="submodule.permissions.delete">
+                                                        <i></i>
+                                                    </label>
+                                                </td>
+                                                <td style="text-align: center; padding: 12px">
+                                                    <label class="checkbox">
+                                                        <input type="checkbox" ng-model="submodule.permissions.approval">
+                                                        <i></i>
+                                                    </label>
+                                                </td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </section>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div ng-if="allData_toJson"><pre>{{ allData_toJson2 | json:4 }}</pre></div>
+</div>
+
+<style>
+    table.table {
+        border-bottom: 1px solid #ddd;
+        margin-bottom: 0px;
+    }
+
+    .small-checkbox {
+        transform: scale(1);
+        -webkit-transform: scale(1);
+        padding-left: 10px !important;
+    }
+
+    .sedangSubmitForm .ng-invalid {
+        border-color: #b94a48 !important;
+        border-width: 2px !important;
+    }
+
+    .sedangEditForm {
+        background-color: #eee !important;
+        cursor: not-allowed;
+    }
+
+    .state-error input {
+        border-color: #b94a48 !important;
+        border-width: 2px !important;
+    }
+
+    .note {
+        margin-top: 5px;
+        font-size: 11px;
+    }
+
+    .table-bordered > thead > tr > th,
+    .table-bordered > tbody > tr > td {
+        border: 1px solid #ddd;
+    }
+
+    .checkbox {
+        margin: 0;
+    }
+
+    .checkbox input[type="checkbox"] {
+        margin: 0;
+    }
+
+    .toggle {
+        display: inline-block;
+    }
+
+    .fa-chevron-down,
+    .fa-chevron-right {
+        color: #666;
+        font-size: 12px;
+    }
+</style>

@@ -1,0 +1,97 @@
+<div id="content" ng-app="app.erp" ng-controller="DeliveryZoneFormCtrl" ng-class="{'sedangSubmitForm': form.submitted}">
+    <div class="row">
+        <big-breadcrumbs items="['Setup', 'Delivery Zone']" icon="table" class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></big-breadcrumbs>
+    </div>
+    <div class="jarviswidget">
+        <header>
+            <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+            <h2 ng-click="Toggle_debugScope()" style="cursor: help">Delivery Zone Form</h2>
+        </header>
+        <div class="widget-body">
+            <div class="alert alert-info">
+                <div class="toolBarTop toolbar transparent" style="height: 33px">
+                    <button class="pull-left btn btn-primary" ng-click="saveData()" ng-show="Is_Writeable"><i class="fa fa-save"></i> Save</button>
+                    <button style="float: right" type="button" class="btn btn-default" ng-click="sdr_GoBack()">Cancel</button>
+                    <div class="pull-left" style="width: 50px; text-align: center; padding-top: 5px"><i class="fa fa-spinner fa-spin" style="font-size: 24px; display: none" id="idLoading"></i>&nbsp;</div>
+                </div>
+            </div>
+            <div style="margin: -20px 0px 0px -10px">
+                <form class="smart-form">
+                    <fieldset style="padding-top: 20px">
+                        <div class="row">
+                            <section class="col col-3">
+                                <span class="help-block">Delivery Zone Code <span style="color: red">*</span></span>
+                                <label class="input">
+                                    <input type="text" class="form-control form-control-sm" ng-model="model.Code" ng-required="true" ng-readonly="!Is_Create" ng-class="{'sedangEditForm': !Is_Create}" placeholder="JKT" />
+                                </label>
+                            </section>
+                            <section class="col col-5">
+                                <span class="help-block">Delivery Zone Name <span style="color: red">*</span></span>
+                                <label class="input">
+                                    <input type="text" class="form-control form-control-sm" ng-model="model.Name" ng-required="true" placeholder="e.g. Jakarta" />
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-3">
+                                <span class="help-block">Status</span>
+                                <label class="checkbox">
+                                    <input type="checkbox" ng-model="model.Active" class="small-checkbox" />
+                                    <i></i> Active
+                                </label>
+                            </section>
+                            <section class="col col-5">
+                                <span class="help-block"> PIC </span>
+                                <div style="display: flex">
+                                    <!--prettier-ignore-->
+                                    <input type="text" class="form-control form-control-sm" style="display: inline-block; width:100%;padding-left:10px;"
+                                        ng-class="" ng-style=""
+                                        placeholder="nama/kode PIC" autocomplete="off"
+                                        uib-typeahead="item as (item.PersonelCode + ' - ' + item.Name) for item in getData_Personels($viewValue)"
+                                        ng-model="selectedSales"
+                                        ng-change="model.SalesPersonCode = '';" 
+                                        typeahead-on-select="model.SalesPersonCode = $item.PersonelCode; model.SalesPersonName = $item.Name"
+                                        typeahead-loading="" typeahead-no-results="noResults" typeahead-editable="false" 
+                                        ng-readonly="ValidString(model.SalesPersonCode)" ng-disabled="false" ng-required="false"
+                                        />
+                                    <i class="fa fa-refresh fa-spin search-icon" ng-show="false" style="cursor: pointer"></i>
+                                    <!--prettier-ignore-->
+                                    <i class="fa fa-close search-icon" style="cursor:pointer;margin-top:10px;margin-left: 5px !important;"
+                                        ng-show="Is_Writeable && ValidString(model.SalesPersonCode)"
+                                        ng-click="model.SalesPersonCode = ''; selectedSales = ''"></i>
+                                    <span class="help-block" style="display: none">Informasi Sales</span>
+                                </div>
+                            </section>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div ng-if="allData_toJson"><pre>{{ allData_toJson2 | json:4 }}</pre></div>
+</div>
+
+<style>
+    .small-checkbox {
+        transform: scale(1);
+        -webkit-transform: scale(1);
+        padding-left: 10px !important;
+    }
+
+    .typeahead_ReadOnly,
+    .form-control[disabled],
+    .form-control[readonly],
+    fieldset[disabled] .form-control {
+        background-color: #eee !important;
+    }
+
+    .sedangSubmitForm .ng-invalid {
+        border-color: #b94a48 !important;
+        border-width: 2px !important;
+    }
+
+    .sedangEditForm {
+        background-color: #eee !important;
+        cursor: not-allowed;
+    }
+</style>

@@ -1,0 +1,183 @@
+<div id="content" ng-app="app.erp" ng-controller="AbcCtrl" ng-class="{'sedangSubmitForm': form.submitted}">
+    <div class="row">
+        <big-breadcrumbs items="['Purchase', 'Purchase Contract Form']" icon="table" class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></big-breadcrumbs>
+    </div>
+    <div class="jarviswidget">
+        <header>
+            <span class="widget-icon"> <i class="fa fa-edit"></i> </span>
+            <h2 ng-click="Toggle_debugScope()" style="cursor: help">Form: Purchase Contract</h2>
+        </header>
+        <div class="widget-body">
+            <div class="alert alert-info">
+                <div class="toolBarTop toolbar transparent" style="height: 33px">
+                    <button class="pull-left btn btn-warning" ng-click="Set_Editable()" ng-show="!Is_Writeable" style="display: none"><i class="fa fa-save"></i> Edit</button>
+                    <button class="pull-left btn btn-primary" ng-click="saveData()" ng-show="Is_Writeable || (1<2)"><i class="fa fa-save"></i> Save</button>
+                    <div class="pull-left" style="width: 50px; text-align: center; padding-top: 5px"><i class="fa fa-spinner fa-spin" style="font-size: 24px; display: none" id="idLoading"></i>&nbsp;</div>
+
+                    <button style="float: right" type="button" class="btn btn-default" data-ui-sref="app.erp.purchaseContracts"><i class="fa fa-sign-out"></i> Close (Esc)</button>
+                </div>
+            </div>
+            <div style="margin: -20px 0px 0px -10px">
+                <form class="smart-form">
+                    <fieldset style="padding-top: 20px">
+                        <div class="row">
+                            <section class="col col-6">
+                                <span class="help-block"> Subject <span style="color: red">*</span></span>
+                                <label class="input">
+                                    <input type="text" class="form-control form-control-sm" ng-model="model.Subject" ng-required="true" />
+                                </label>
+                            </section>
+                            <section class="col col-3">
+                                <span class="help-block"> Branch </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.Branch" ng-options="item.Code as item.Description for item in data_Branch"></select>
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-3">
+                                <span class="help-block"> Start Date <span style="color: red">*</span></span>
+                                <label class="input" style="display: flex; align-items: center">
+                                    <input type="text" placeholder="dd/mm/yyyy" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="dd/mm/yy" style="margin-right: 10px" ng-model="date_Date" ng-required="true" />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text mb-1" style="font-size: 20px">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                    </div>
+                                    <i style="padding-left: 10px; cursor: pointer" ng-click="date_Date = '';" class="fa fa-refresh"></i>
+                                </label>
+                            </section>
+                            <section class="col col-3">
+                                <span class="help-block"> Supplier ID <span style="color: red">*</span></span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.SupplierId" ng-options="item.Code as item.Name for item in data_Supplier" ng-required="true">
+                                        <option value="">Select an Item</option>
+                                    </select>
+                                </label>
+                            </section>
+                            <section class="col col-3">
+                                <span class="help-block"> Currency </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.Currency" ng-options="item.Code as item.Name for item in data_Currency"></select>
+                                </label>
+                            </section>
+                            <section class="col col-3">
+                                <span class="help-block"> Status </span>
+                                <label class="input">
+                                    <select class="form-control form-control-sm" ng-model="model.Status" ng-options="item.Code as item.Name for item in data_Status"></select>
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-3">
+                                <span class="help-block"> Completion Date <span style="color: red">*</span></span>
+                                <label class="input" style="display: flex; align-items: center">
+                                    <input type="text" placeholder="dd/mm/yyyy" class="form-control datepicker" data-smart-datepicker options="datepickerOptions" data-date-format="dd/mm/yy" style="margin-right: 10px" ng-model="date_Date" ng-required="true" />
+                                    <div class="input-group-append">
+                                        <span class="input-group-text mb-1" style="font-size: 20px">
+                                            <i class="fa fa-calendar"></i>
+                                        </span>
+                                    </div>
+                                    <i style="padding-left: 10px; cursor: pointer" ng-click="date_Date = '';" class="fa fa-refresh"></i>
+                                </label>
+                            </section>
+                            <section class="col col-3">
+                                <span class="help-block"> Contract Nr. <span style="color: red">*</span></span>
+                                <label class="input">
+                                    <input type="text" class="form-control form-control-sm" ng-model="model.ContractNr" ng-required="true" ng-readonly="!Is_Create" ng-class="{'sedangEditForm': !Is_Create}" />
+                                </label>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section class="col col-12">
+                                <span class="help-block"> Notes </span>
+                                <label class="textarea">
+                                    <textarea class="form-control form-control-sm" ng-model="model.Notes" rows="3"></textarea>
+                                </label>
+                            </section>
+                        </div>
+                    </fieldset>
+                </form>
+            </div>
+
+            <div style="margin: 20px 0px 0px 0px">
+                <div class="alert alert-info">
+                    <div class="toolBarTop toolbar transparent fixed-top">
+                        <button class="btn btn-default" ng-click="EvaluatePrice()" ng-disabled="!Is_Writeable"><i class="fa fa-calculator"></i> Evaluate Price</button>
+                    </div>
+                </div>
+                <div class="table-responsive">
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th></th>
+                                <th>No</th>
+                                <th style="width: 120px">Brand</th>
+                                <th style="width: 120px">Category</th>
+                                <th style="width: 120px">Type</th>
+                                <th style="width: 150px">Item Code</th>
+                                <th style="min-width: 200px">Description</th>
+                                <th style="width: 150px">Unit Price</th>
+                                <th style="width: 120px">Discount</th>
+                                <th style="width: 100px; text-align: center">Tax Inc.</th>
+                                <th style="width: 120px">Qty</th>
+                                <th style="width: 150px">Total Amount</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr ng-repeat="row in details.Items | filter:{Deleted: 0}">
+                                <td>
+                                    <button type="button" class="btn btn-sm btn-default" ng-click="RemoveItem(row['recordNumber'])" ng-show="Is_Writeable">
+                                        <i class="fa fa-trash-o" style="color: red"></i>
+                                    </button>
+                                </td>
+                                <td style="text-align: right">{{$index + 1 | number : 0}}.</td>
+                                <td>{{ row['Brand'] }}</td>
+                                <td>{{ row['Category'] }}</td>
+                                <td>{{ row['Type'] }}</td>
+                                <td>{{ row['ItemCode'] }}</td>
+                                <td>{{ row['Description'] }}</td>
+                                <td><input type="text" ng-model="row['UnitPrice']" class="form-control form-control-sm" style="text-align: right" /></td>
+                                <td><input type="text" ng-model="row['Discount']" class="form-control form-control-sm" style="text-align: right" /></td>
+                                <td style="text-align: center"><input type="checkbox" ng-model="row['TaxInc']" class="form-control form-control-sm" style="height: 20px" /></td>
+                                <td><input type="text" ng-model="row['Qty']" class="form-control form-control-sm" style="text-align: right" /></td>
+                                <td style="text-align: right">{{ row['TotalAmount'] | number : 2 }}</td>
+                            </tr>
+                            <tr ng-if="!details || details.Items || details.Items.length == 0">
+                                <td colspan="12" class="text-center"><i>Tidak ada data..</i></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div ng-if="allData_toJson"><pre>{{ allData_toJson2 | json:4 }}</pre></div>
+</div>
+
+<style>
+    .sedangSubmitForm .ng-invalid {
+        border-color: #b94a48 !important;
+        border-width: 2px !important;
+    }
+
+    .sedangEditForm {
+        background-color: #eee !important;
+        cursor: not-allowed;
+    }
+
+    table.table {
+        border-bottom: 1px solid #ddd;
+        margin-bottom: 0px;
+    }
+
+    table.table th:nth-child(1) {
+        text-align: center;
+        width: 50px !important;
+    }
+
+    table.table th:nth-child(2) {
+        text-align: center;
+        width: 50px !important;
+    }
+</style>
