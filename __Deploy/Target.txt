@@ -4,4 +4,4 @@ pas.andaru-apps.co.id
 ti.andaru-apps.co.id
 tip.andaru-apps.co.id
 jld.andaru-apps.co.id
-no_deployment 
+no_deployment

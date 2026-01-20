@@ -1,5 +1,5 @@
 angular.module('app.erpUtils').controller('LoginXCtrl', function ($scope, $rootScope, $location, AuthenticationService) {
-    $scope.inputLogin = 'Dian@Trikaya';
+    $scope.inputLogin = '';
     $scope.inputPassword = '';
     $rootScope.GlobalMessage = '';
 
@@ -12,7 +12,9 @@ angular.module('app.erpUtils').controller('LoginXCtrl', function ($scope, $rootS
 
         AuthenticationService.ClearSessions();
 
-        const [userName, domain] = $scope.inputLogin.split('@');
+        var [userName, domain] = $scope.inputLogin.split('@');
+
+        domain = 'Company_Domain';
 
         let response = await AuthenticationService.Check_UserDomain(userName, domain);
 

@@ -40,18 +40,18 @@
                         <header>Sign In</header>
                         <fieldset>
                             <section>
-                                <label class="label">E-mail</label>
+                                <label class="label">User Name</label>
                                 <label class="input">
                                     <i class="icon-append fa fa-user"></i>
-                                    <input type="email" name="email" data-smart-validate-input data-required data-email data-message-required="Please enter your email address" data-message-email="Please enter a VALID email address" ng-model="inputLogin" />
-                                    <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> Please enter username@Domain</b></label
+                                    <input type="text" name="username" data-smart-validate-input data-required data-minlength="0" data-maxnlength="100" data-message="Please enter your UserName" ng-model="inputLogin" />
+                                    <b class="tooltip tooltip-top-right"><i class="fa fa-user txt-color-teal"></i> Please enter username</b></label
                                 >
                             </section>
                             <section>
                                 <label class="label">Password</label>
                                 <label class="input">
                                     <i class="icon-append fa fa-lock"></i>
-                                    <input type="password" name="password" data-smart-validate-input data-required data-minlength="0" data-maxnlength="20" data-message="Please enter your email password" ng-model="inputPassword" />
+                                    <input type="password" name="password" data-smart-validate-input data-required data-minlength="0" data-maxnlength="20" data-message="Please enter your password" ng-model="inputPassword" />
                                     <b class="tooltip tooltip-top-right"><i class="fa fa-lock txt-color-teal"></i> Enter your password</b>
                                 </label>
                             </section>
