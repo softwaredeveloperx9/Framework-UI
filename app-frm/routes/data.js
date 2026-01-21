@@ -12,7 +12,7 @@ angular.module('app.frm').config(function ($stateProvider) {
                     templateUrl: 'app-frm/_menu/data.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-frm/views/packages/sales/_WebPage.html',
+                    templateUrl: 'app-frm/views/packages/data/_WebPage.html',
                 },
             },
         })
@@ -27,7 +27,7 @@ angular.module('app.frm').config(function ($stateProvider) {
                     templateUrl: 'app-frm/_menu/data.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-frm/views/packages/sales/Organization.html',
+                    templateUrl: 'app-frm/views/packages/data/Organization.html',
                 },
             },
         })
@@ -42,7 +42,7 @@ angular.module('app.frm').config(function ($stateProvider) {
                     templateUrl: 'app-frm/_menu/data.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-frm/views/packages/sales/Organization.html',
+                    templateUrl: 'app-frm/views/packages/data/Application.html',
                 },
             },
         })
@@ -57,7 +57,7 @@ angular.module('app.frm').config(function ($stateProvider) {
                     templateUrl: 'app-frm/_menu/data.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-frm/views/packages/sales/Organization.html',
+                    templateUrl: 'app-frm/views/packages/data/Workspace.html',
                 },
             },
         })
@@ -72,7 +72,7 @@ angular.module('app.frm').config(function ($stateProvider) {
                     templateUrl: 'app-frm/_menu/data.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-frm/views/packages/sales/Organization.html',
+                    templateUrl: 'app-frm/views/packages/data/Scope.html',
                 },
             },
         })
@@ -87,7 +87,7 @@ angular.module('app.frm').config(function ($stateProvider) {
                     templateUrl: 'app-frm/_menu/data.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-frm/views/packages/sales/Organization.html',
+                    templateUrl: 'app-frm/views/packages/data/User.html',
                 },
             },
         })
@@ -102,7 +102,7 @@ angular.module('app.frm').config(function ($stateProvider) {
                     templateUrl: 'app-frm/_menu/data.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-frm/views/packages/sales/Organization.html',
+                    templateUrl: 'app-frm/views/packages/data/Session.html',
                 },
             },
         })
@@ -117,7 +117,7 @@ angular.module('app.frm').config(function ($stateProvider) {
                     templateUrl: 'app-frm/_menu/data.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-frm/views/packages/sales/Organization.html',
+                    templateUrl: 'app-frm/views/packages/data/SessionDetail.html',
                 },
             },
         })

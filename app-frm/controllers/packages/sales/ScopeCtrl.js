@@ -1,4 +1,4 @@
-angular.module('app.frm').controller('OrganizationCtrl', function ($rootScope, $scope, Utility_ERP, Organization_Service) {
+angular.module('app.frm').controller('ScopeCtrl', function ($rootScope, $scope, Utility_ERP, Scope_Service) {
     // Dummy data, just for "Table: paging and searching"
     $scope.dt = {};
     $scope.dt.pageLength = 20;
@@ -21,7 +21,7 @@ angular.module('app.frm').controller('OrganizationCtrl', function ($rootScope, $
 
     // some Functions
     $scope.CreateTable = function () {
-        $scope.dt = Organization_Service.Table($scope);
+        $scope.dt = Scope_Service.Table($scope);
 
         // format: Title, DbField, SortField, Format, Show
         let columns = [
@@ -42,7 +42,7 @@ angular.module('app.frm').controller('OrganizationCtrl', function ($rootScope, $
         await $scope.dt.loadData();
         Utility_ERP.Still_Processing($scope, false);
 
-        $rootScope.SaveFilterState('Organization', $scope);
+        $rootScope.SaveFilterState('Scope', $scope);
     };
 
 
@@ -52,7 +52,7 @@ angular.module('app.frm').controller('OrganizationCtrl', function ($rootScope, $
     $scope.initialize_Page = async function () {
         Utility_ERP.Still_Processing($scope, true);
 
-        $rootScope.LoadFilterState('Organization', $scope);
+        $rootScope.LoadFilterState('Scope', $scope);
 
         await Override_some_Filters();
 

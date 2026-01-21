@@ -1,4 +1,4 @@
-angular.module('app.frm').controller('OrganizationCtrl', function ($rootScope, $scope, Utility_ERP, Organization_Service) {
+angular.module('app.frm').controller('ApplicationCtrl', function ($rootScope, $scope, Utility_ERP, Application_Service) {
     // Dummy data, just for "Table: paging and searching"
     $scope.dt = {};
     $scope.dt.pageLength = 20;
@@ -21,12 +21,13 @@ angular.module('app.frm').controller('OrganizationCtrl', function ($rootScope, $
 
     // some Functions
     $scope.CreateTable = function () {
-        $scope.dt = Organization_Service.Table($scope);
+        $scope.dt = Application_Service.Table($scope);
 
         // format: Title, DbField, SortField, Format, Show
         let columns = [
+            ['Code', 'Id', 'Id', 'Text', true],
             ['Name', 'Name', 'Name', 'Text', true],
-            ['Domain Name', 'DomainName', 'DomainName', 'Text', true],
+            ['Assembly', 'ActionAssembly', 'ActionAssembly', 'Text', true],
             ['Insert Stamp', 'InsertStamp', 'InsertStamp', 'Date', true],
             ['Inserted By', 'InsertedBy', 'InsertedBy', 'Text', true],
             ['Update Stamp', 'UpdateStamp', 'UpdateStamp', 'Date', true],
@@ -42,7 +43,7 @@ angular.module('app.frm').controller('OrganizationCtrl', function ($rootScope, $
         await $scope.dt.loadData();
         Utility_ERP.Still_Processing($scope, false);
 
-        $rootScope.SaveFilterState('Organization', $scope);
+        $rootScope.SaveFilterState('Application', $scope);
     };
 
 
@@ -52,7 +53,7 @@ angular.module('app.frm').controller('OrganizationCtrl', function ($rootScope, $
     $scope.initialize_Page = async function () {
         Utility_ERP.Still_Processing($scope, true);
 
-        $rootScope.LoadFilterState('Organization', $scope);
+        $rootScope.LoadFilterState('Application', $scope);
 
         await Override_some_Filters();
 

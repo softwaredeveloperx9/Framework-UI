@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('app.frmUtils').factory('SalesOrders_Service', [
+angular.module('app.frmUtils').factory('Scope_Service', [
     'BackEndService',
     'DTService',
     function (BackEndService, DTService) {
@@ -12,17 +12,17 @@ angular.module('app.frmUtils').factory('SalesOrders_Service', [
             let afterRequestData = scope.afterRequestData;
             let searchKeyword = scope.searchKeyword;
 
-            return DTService.GenerateDTInstance('XSalesOrder', 'InsertStamp', 'desc', filterObject, 'Code, PONumber, ContractName, ProjectName', pageLength, afterRequestData, searchKeyword);
+            return DTService.GenerateDTInstance('XFRM_SC', 'Name', 'asc', filterObject, 'Name', pageLength, afterRequestData, searchKeyword);
         };
 
         service.List = async function () {
             let request = {
-                modelName: 'XSalesOrder',
+                modelName: 'XFRM_SC',
                 fieldNames: ['*'],
                 maximumResult: 100,
                 pageNumber: 1,
                 criteriaList: [],
-                sortList: ['Code desc'],
+                sortList: ['Code asc'],
             };
 
             let response = await BackEndService.RequestDataList(request);
@@ -32,12 +32,12 @@ angular.module('app.frmUtils').factory('SalesOrders_Service', [
 
         service.Dropdown = async function () {
             let request = {
-                modelName: 'XSalesOrder',
-                fieldNames: ['Code'],
+                modelName: 'XFRM_SC',
+                fieldNames: ['Code', 'Description', 'ShortName'],
                 maximumResult: 100,
                 pageNumber: 1,
-                criteriaList: [],
-                sortList: ['Code desc'],
+                criteriaList: [{ PropertyName: 'Active', Operator: '=', Value: 'true' }],
+                sortList: ['Code asc'],
             };
 
             let response = await BackEndService.RequestDataList(request);
@@ -47,7 +47,7 @@ angular.module('app.frmUtils').factory('SalesOrders_Service', [
 
         service.DataSingle = async function (code) {
             let request = {
-                modelName: 'XSalesOrder',
+                modelName: 'XFRM_SC',
                 criteriaList: [{ PropertyName: 'Code', Operator: '=', Value: code }],
             };
 
@@ -56,8 +56,28 @@ angular.module('app.frmUtils').factory('SalesOrders_Service', [
 
         service.Save = async function (data, Is_Create) {
             let request = {
-                actionController: 'SalesOrderController',
+                actionController: 'UnitOfMeasurementController',
                 actionName: Is_Create ? 'Create' : 'Update',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        service.Activate = async function (data) {
+            let request = {
+                actionController: 'UnitOfMeasurementController',
+                actionName: 'Activate',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        service.DeActivate = async function (data) {
+            let request = {
+                actionController: 'UnitOfMeasurementController',
+                actionName: 'DeActivate',
                 actionParam: data,
             };
 
