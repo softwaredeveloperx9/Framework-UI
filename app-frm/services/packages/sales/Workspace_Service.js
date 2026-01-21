@@ -12,7 +12,7 @@ angular.module('app.frmUtils').factory('Workspace_Service', [
             let afterRequestData = scope.afterRequestData;
             let searchKeyword = scope.searchKeyword;
 
-            return DTService.GenerateDTInstance('XFRM_W', 'Name', 'asc', filterObject, 'Name', pageLength, afterRequestData, searchKeyword);
+            return DTService.GenerateDTInstance('XFRM_W', 'Label', 'asc', filterObject, 'Label', pageLength, afterRequestData, searchKeyword);
         };
 
         service.List = async function () {

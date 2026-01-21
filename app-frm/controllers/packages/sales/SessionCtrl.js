@@ -8,8 +8,8 @@ angular.module('app.frm').controller('SessionCtrl', function ($rootScope, $scope
     $scope.pagesOptions = [10, 20, 50, 100];
     $scope.activeOptions = [
         { Value: null, Text: 'All' },
-        { Value: true, Text: 'Yes' },
-        { Value: false, Text: 'No' },
+        { Value: 'Active', Text: 'Yes' },
+        { Value: 'InActive', Text: 'No' },
     ];
 
     $scope.still_processing = false;

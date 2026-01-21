@@ -8,8 +8,8 @@ angular.module('app.frm').controller('UserCtrl', function ($rootScope, $scope, U
     $scope.pagesOptions = [10, 20, 50, 100];
     $scope.activeOptions = [
         { Value: null, Text: 'All' },
-        { Value: true, Text: 'Yes' },
-        { Value: false, Text: 'No' },
+        { Value: 'Active', Text: 'Yes' },
+        { Value: 'InActive', Text: 'No' },
     ];
 
     $scope.still_processing = false;
@@ -25,12 +25,13 @@ angular.module('app.frm').controller('UserCtrl', function ($rootScope, $scope, U
 
         // format: Title, DbField, SortField, Format, Show
         let columns = [
+            ['Organization', 'Organization', 'Organization', 'Text', true],
+            ['Login', 'UserName', 'UserName', 'Text', true],
             ['Name', 'Name', 'Name', 'Text', true],
-            ['Domain Name', 'DomainName', 'DomainName', 'Text', true],
-            ['Insert Stamp', 'InsertStamp', 'InsertStamp', 'Date', true],
-            ['Inserted By', 'InsertedBy', 'InsertedBy', 'Text', true],
-            ['Update Stamp', 'UpdateStamp', 'UpdateStamp', 'Date', true],
-            ['Updated By', 'UpdatedBy', 'UpdatedBy', 'Text', true],
+            ['Email Address', 'EmailAddress', 'EmailAddress', 'Text', true],
+            ['Mobile Number', 'MobileNumber', 'MobileNumber', 'Text', true],
+            ['Profile Picture', 'ProfilePicture', 'ProfilePicture', 'Image', false],
+            ['Code', 'Id', 'Id', 'Text', false],
             ['Status', 'Status', 'Status', 'Text', true],
         ];
 
