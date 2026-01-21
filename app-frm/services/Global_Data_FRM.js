@@ -1,13 +1,13 @@
 'use strict';
 
-angular.module('app.frmUtils').factory('Global_Data_ERP', [
+angular.module('app.frmUtils').factory('Global_Data_FRM', [
     '$location',
     '$state',
     'FRM_Signature',
-    'Utility_ERP',
+    'Utility_Frm',
     'OurStorage',
     'AuthenticationService',
-    function ($location, $state, FRM_Signature, Utility_ERP, OurStorage, AuthenticationService) {
+    function ($location, $state, FRM_Signature, Utility_Frm, OurStorage, AuthenticationService) {
         var global_Functions = {};
 
         global_Functions.Generate = function (parameter_rootScope) {
@@ -32,43 +32,43 @@ angular.module('app.frmUtils').factory('Global_Data_ERP', [
             } catch (e) { }
 
             parameter_rootScope.ValidString = function (str) {
-                return Utility_ERP.ValidString(str);
+                return Utility_Frm.ValidString(str);
             };
 
             parameter_rootScope.Not_ValidString = function (str) {
-                return Utility_ERP.Not_ValidString(str);
+                return Utility_Frm.Not_ValidString(str);
             };
 
             parameter_rootScope.EmployeeSiteAccess = async function (parameter_scope) {
-                await Utility_ERP.EmployeeSiteAccess(parameter_scope);
+                await Utility_Frm.EmployeeSiteAccess(parameter_scope);
             };
 
             parameter_rootScope.EmployeeLocationAccess = async function (parameter_scope, selectedBranch = null) {
-                await Utility_ERP.EmployeeLocationAccess(parameter_rootScope, parameter_scope, selectedBranch);
+                await Utility_Frm.EmployeeLocationAccess(parameter_rootScope, parameter_scope, selectedBranch);
             };
 
             parameter_rootScope.EmployeeWarehouseAccess = async function (parameter_scope, selectedWarehouse = null) {
-                await Utility_ERP.EmployeeWarehouseAccess(parameter_rootScope, parameter_scope, selectedWarehouse);
+                await Utility_Frm.EmployeeWarehouseAccess(parameter_rootScope, parameter_scope, selectedWarehouse);
             };
 
             parameter_rootScope.getData_Personel = async function (val) {
-                return await Utility_ERP.Personel_Dropdown(val);
+                return await Utility_Frm.Personel_Dropdown(val);
             };
 
             parameter_rootScope.getData_User = async function (val) {
-                return await Utility_ERP.Dropdown_User(val);
+                return await Utility_Frm.Dropdown_User(val);
             };
 
             parameter_rootScope.getData_Customer = async function (val, parameter_scope) {
-                return await Utility_ERP.Dropdown_Customer2(val, parameter_scope);
+                return await Utility_Frm.Dropdown_Customer2(val, parameter_scope);
             };
 
             parameter_rootScope.getData_Supplier = async function (val) {
-                return await Utility_ERP.Dropdown_Supplier(val);
+                return await Utility_Frm.Dropdown_Supplier(val);
             };
 
             parameter_rootScope.getData_InventoryItem = async function (val) {
-                return await Utility_ERP.Dropdown_InventoryItem(val);
+                return await Utility_Frm.Dropdown_InventoryItem(val);
             };
 
             parameter_rootScope.getData_InventoryItemCOA = async function (val) {
@@ -76,7 +76,7 @@ angular.module('app.frmUtils').factory('Global_Data_ERP', [
             };
 
             parameter_rootScope.Proces_CheckBox_Kiri = function (parameter_scope) {
-                return Utility_ERP.Proces_CheckBox_Kiri(parameter_scope);
+                return Utility_Frm.Proces_CheckBox_Kiri(parameter_scope);
             };
 
             parameter_rootScope.console_log = function (str) {
@@ -207,7 +207,7 @@ angular.module('app.frmUtils').factory('Global_Data_ERP', [
             };
 
             parameter_rootScope.setCriteriaList = function (request, filters) {
-                Utility_ERP.setCriteriaList(request, filters);
+                Utility_Frm.setCriteriaList(request, filters);
             };
 
             parameter_rootScope.functionDelay = function (ms) {
@@ -374,7 +374,7 @@ angular.module('app.frmUtils').factory('Global_Data_ERP', [
             parameter_rootScope.Date_to_UI = function (val) {
                 let result = '';
 
-                if (Utility_ERP.ValidString(val)) result = moment(new Date(val)).format('DD/MM/YYYY');
+                if (Utility_Frm.ValidString(val)) result = moment(new Date(val)).format('DD/MM/YYYY');
                 return result;
             };
 
@@ -484,12 +484,12 @@ angular.module('app.frmUtils').factory('Global_Data_ERP', [
                 parameter_rootScope.allData_toJson2 = parameter_rootScope.debugScope(scope);
             };
 
-            window.ERP_BackEnd_Version = async function () {
-                return await Utility_ERP.BackEnd_Version();
+            window.SDR_BackEnd_Version = async function () {
+                return await Utility_Frm.BackEnd_Version();
             };
 
             parameter_rootScope.LandingPage_for_User = function () {
-                return Utility_ERP.LandingPage_for_User();
+                return Utility_Frm.LandingPage_for_User();
             };
 
             parameter_rootScope.sdr_GoBack = function (toState = '') {

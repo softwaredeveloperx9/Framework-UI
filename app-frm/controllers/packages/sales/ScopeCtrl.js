@@ -1,4 +1,4 @@
-angular.module('app.frm').controller('ScopeCtrl', function ($rootScope, $scope, Utility_ERP, Scope_Service) {
+angular.module('app.frm').controller('ScopeCtrl', function ($rootScope, $scope, Utility_Frm, Scope_Service) {
     // Dummy data, just for "Table: paging and searching"
     $scope.dt = {};
     $scope.dt.pageLength = 20;
@@ -31,13 +31,13 @@ angular.module('app.frm').controller('ScopeCtrl', function ($rootScope, $scope, 
             ['Code', 'Id', 'Id', 'Text', true],
         ];
 
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+        Utility_Frm.ProcessColumnsY($scope.dt, columns);
     };
 
     $scope.showData = async function () {
-        Utility_ERP.Still_Processing($scope, true);
+        Utility_Frm.Still_Processing($scope, true);
         await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
+        Utility_Frm.Still_Processing($scope, false);
 
         $rootScope.SaveFilterState('Scope', $scope);
     };
@@ -47,7 +47,7 @@ angular.module('app.frm').controller('ScopeCtrl', function ($rootScope, $scope, 
     async function Override_some_Filters() { }
 
     $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
+        Utility_Frm.Still_Processing($scope, true);
 
         $rootScope.LoadFilterState('Scope', $scope);
 

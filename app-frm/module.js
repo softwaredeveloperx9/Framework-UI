@@ -8,7 +8,7 @@ angular.module('app.frm').config(function ($stateProvider) {
         .state('app.frm', {
             abstract: true,
             data: {
-                title: 'ERP',
+                title: 'Framework',
             },
         })
         .state('app.frm.utama', {

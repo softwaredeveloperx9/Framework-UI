@@ -193,13 +193,13 @@ angular
         '$stateParams',
         '$location',
         '$http',
-        'Global_Data_ERP',
-        function ($rootScope, $state, $stateParams, $location, $http, Global_Data_ERP) {
+        'Global_Data_FRM',
+        function ($rootScope, $state, $stateParams, $location, $http, Global_Data_FRM) {
             $rootScope.$state = $state;
             $rootScope.$stateParams = $stateParams;
             // editableOptions.theme = 'bs3';
 
-            Global_Data_ERP.Generate($rootScope);
+            Global_Data_FRM.Generate($rootScope);
 
             // keep user logged in after page refresh
             if ($rootScope.ERP.currentUser) {

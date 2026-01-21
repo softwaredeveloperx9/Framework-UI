@@ -1,4 +1,4 @@
-angular.module('app.frm').controller('SessionDetailCtrl', function ($rootScope, $scope, Utility_ERP, SessionDetail_Service) {
+angular.module('app.frm').controller('SessionDetailCtrl', function ($rootScope, $scope, Utility_Frm, SessionDetail_Service) {
     // Dummy data, just for "Table: paging and searching"
     $scope.dt = {};
     $scope.dt.pageLength = 20;
@@ -31,13 +31,13 @@ angular.module('app.frm').controller('SessionDetailCtrl', function ($rootScope, 
             ['ID', 'ID', 'ID', 'Text', true],
         ];
 
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+        Utility_Frm.ProcessColumnsY($scope.dt, columns);
     };
 
     $scope.showData = async function () {
-        Utility_ERP.Still_Processing($scope, true);
+        Utility_Frm.Still_Processing($scope, true);
         await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
+        Utility_Frm.Still_Processing($scope, false);
 
         $rootScope.SaveFilterState('SessionDetail', $scope);
     };
@@ -47,7 +47,7 @@ angular.module('app.frm').controller('SessionDetailCtrl', function ($rootScope, 
     async function Override_some_Filters() { }
 
     $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
+        Utility_Frm.Still_Processing($scope, true);
 
         $rootScope.LoadFilterState('SessionDetail', $scope);
 

@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-angular.module('app.frmUtils').factory('Utility_ERP', [
+angular.module('app.frmUtils').factory('Utility_Frm', [
     'OurStorage',
     'BackEndService',
     'Employee_Service',

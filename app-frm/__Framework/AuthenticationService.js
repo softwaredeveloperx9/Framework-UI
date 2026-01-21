@@ -180,7 +180,7 @@ angular.module('app.frmUtils').factory('AuthenticationService', [
             let apiUrl = '';
 
             try {
-                if (!$rootScope.ERP.currentUser.token) return;
+                if (!$rootScope.FRM.currentUser.token) return;
             } catch (error) {
                 return;
             }
@@ -238,17 +238,17 @@ angular.module('app.frmUtils').factory('AuthenticationService', [
 
             let userInfo = jwtHelper.decodeToken(token);
 
-            $rootScope.ERP = {
+            $rootScope.FRM = {
                 currentUser: userInfo,
                 currentScopes: userInfo.Scope.split(','),
             };
 
-            $rootScope.ERP.currentUser.token = token;
+            $rootScope.FRM.currentUser.token = token;
 
             $http.defaults.headers.common['Authorization'] = 'Bearer ' + token;
 
             OurStorage.setItem('appSettings', JSON.stringify($rootScope.appSettings));
-            OurStorage.setItem('', JSON.stringify($rootScope.ERP));
+            OurStorage.setItem('', JSON.stringify($rootScope.FRM));
 
             var response = { success: true };
 
@@ -256,63 +256,12 @@ angular.module('app.frmUtils').factory('AuthenticationService', [
 
             // promise is returned
             return deferred.promise;
-
-            let apiUrl = $rootScope.appSettings.Endpoint + '/Main' + '/GetSingle';
-
-            let config = {
-                method: 'POST',
-                url: apiUrl,
-                timeout: 3600 * 1000,
-                data: JSON.stringify({
-                    modelName: 'XSmUsers',
-                    criteriaList: [
-                        {
-                            PropertyName: 'UserName',
-                            Operator: '=',
-                            Value: $rootScope.ERP.currentUser.UserName,
-                        },
-                    ],
-                }),
-                headers: {
-                    'Content-Type': 'application/json',
-                },
-            };
-
-            return $http(config).then(
-                function (response) {
-                    response.success = true;
-
-                    $rootScope.ERP.userERP = response.data;
-
-                    OurStorage.setItem('', JSON.stringify($rootScope.ERP));
-
-                    // promise is fulfilled
-                    deferred.resolve(response);
-
-                    // promise is returned
-                    return deferred.promise;
-                },
-                function (response) {
-                    response.success = false;
-
-                    // rejects the promise
-                    //deferred.reject(response);
-
-                    // di sini gunakan resolve() dan bukan reject()
-                    // karena indikator Gagal proses Check_User() sudah ditaruh pada response.success = false
-                    // --> tidak usah catch pada Promise ini
-                    deferred.resolve(response);
-
-                    // promise is returned
-                    return deferred.promise;
-                }
-            );
         };
 
         service.ValidateCurrentAccessScope = function (accessScopes) {
             let found = false;
             angular.forEach(accessScopes, function (permission, index) {
-                if ($rootScope.ERP.currentScopes.indexOf(permission) >= 0) {
+                if ($rootScope.FRM.currentScopes.indexOf(permission) >= 0) {
                     found = true;
                     return;
                 }
@@ -324,7 +273,7 @@ angular.module('app.frmUtils').factory('AuthenticationService', [
         service.ClearSessions = function () {
             service.Logout();
 
-            $rootScope.ERP = {};
+            $rootScope.FRM = {};
             OurStorage.clear();
 
             // reset
