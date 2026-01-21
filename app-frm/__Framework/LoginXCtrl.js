@@ -1,4 +1,4 @@
-angular.module('app.erpUtils').controller('LoginXCtrl', function ($scope, $rootScope, $location, AuthenticationService) {
+angular.module('app.frmUtils').controller('LoginXCtrl', function ($scope, $rootScope, $location, AuthenticationService) {
     $scope.inputLogin = '';
     $scope.inputPassword = '';
     $rootScope.GlobalMessage = '';

@@ -1,6 +1,6 @@
 "use strict";
 
-angular.module('app.erpUtils').factory('SalesOrders_Service', [
+angular.module('app.frmUtils').factory('SalesOrders_Service', [
     'BackEndService',
     'DTService',
     function (BackEndService, DTService) {

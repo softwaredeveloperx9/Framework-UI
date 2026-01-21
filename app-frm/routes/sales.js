@@ -1,8 +1,8 @@
 'use strict';
 
-angular.module('app.erp').config(function ($stateProvider) {
+angular.module('app.frm').config(function ($stateProvider) {
     $stateProvider
-        .state('app.erp.sales', {
+        .state('app.frm.sales', {
             url: '/erp/sales',
             data: {
                 title: 'Sales',
@@ -17,7 +17,7 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
         })
 
-        .state('app.erp.salesSalesOrders', {
+        .state('app.frm.salesSalesOrders', {
             url: '/erp/sales/SalesOrders',
             data: {
                 title: 'Sales Orders',

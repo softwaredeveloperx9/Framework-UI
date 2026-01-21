@@ -26,7 +26,7 @@ angular
         'app.layout',
 
         'cur.$mask',
-        'app.erp',
+        'app.frm',
     ])
     .config(function ($provide, $httpProvider, RestangularProvider) {
         // Intercept http calls.

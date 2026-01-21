@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-angular.module('app.erpUtils').factory('Inventory_Service', [
+angular.module('app.frmUtils').factory('Inventory_Service', [
     'BackEndService',
     function (BackEndService) {
         var service = {};

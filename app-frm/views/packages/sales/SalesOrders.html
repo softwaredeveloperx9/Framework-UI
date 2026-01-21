@@ -1,4 +1,4 @@
-<div id="content" ng-app="app.erp" ng-controller="SalesOrdersCtrl">
+<div id="content" ng-app="app.frm" ng-controller="SalesOrdersCtrl">
     <div class="row">
         <big-breadcrumbs items="['Sales', 'Sales Order']" icon="home" class="col-xs-12 col-sm-7 col-md-7 col-lg-4"></big-breadcrumbs>
         <div smart-include="app-erp/views/sub-header.tpl.html"></div>
@@ -12,7 +12,7 @@
             <div class="alert alert-info" style="margin-bottom: 10px">
                 <div class="toolBarTop toolbar transparent" style="min-height: 33px">
                     <button class="btn btn-default" ng-click="showData()"><i class="fa fa-refresh"></i> Refresh</button>
-                    <button class="btn btn-default" data-ui-sref="app.erp.salesSalesOrdersForm"><i class="fa fa-file"></i> New</button>
+                    <button class="btn btn-default" data-ui-sref="app.frm.salesSalesOrdersForm"><i class="fa fa-file"></i> New</button>
                     <button class="btn btn-default" ng-click="printForm()"><i class="fa fa-print"></i> Print</button>
                     <button class="btn btn-default" ng-click="exportList()"><i class="fa fa-file-excel-o"></i> Export To Excel</button>
                     <button class="btn btn-default" ng-click="shipmentClick()"><i class="fa fa-truck"></i> Shipment</button>
@@ -20,16 +20,16 @@
                         <button class="btn btn-default" data-toggle="dropdown"><i class="fa fa-ellipsis-h"></i></button>
                         <ul class="dropdown-menu" role="menu">
                             <li style="padding: 5px">
-                                <button style="width: 100%" class="btn btn-default" data-ui-sref="app.erp.salesDeliveryOrderForm"><i class="fa fa-file-o"></i> Create D/O</button>
+                                <button style="width: 100%" class="btn btn-default" data-ui-sref="app.frm.salesDeliveryOrderForm"><i class="fa fa-file-o"></i> Create D/O</button>
                             </li>
                             <li style="padding: 5px">
                                 <button style="width: 100%" class="btn btn-default" ng-click="showCloseOrderForm()"><i class="fa fa-file-o"></i> Close</button>
                             </li>
                             <li style="padding: 5px">
-                                <button style="width: 100%" class="btn btn-default" data-ui-sref="app.erp.salesReopenForm"><i class="fa fa-undo"></i> Reopen</button>
+                                <button style="width: 100%" class="btn btn-default" data-ui-sref="app.frm.salesReopenForm"><i class="fa fa-undo"></i> Reopen</button>
                             </li>
                             <li style="padding: 5px">
-                                <button style="width: 100%" class="btn btn-default" data-ui-sref="app.erp.salesCancelShipmentForm"><i class="fa fa-shopping-cart"></i> Cancel Shipment</button>
+                                <button style="width: 100%" class="btn btn-default" data-ui-sref="app.frm.salesCancelShipmentForm"><i class="fa fa-shopping-cart"></i> Cancel Shipment</button>
                             </li>
                             <li style="padding: 5px">
                                 <button style="width: 100%" class="btn btn-default" ng-click="showCancelPurchasingForm()"><i class="fa fa-clipboard"></i> Cancel Dropship</button>
@@ -231,7 +231,7 @@
                                     <img ng-src="data:image/png;base64, {{row[col.DbField]}}" class="img-small" />
                                 </div>
                                 <span ng-if="col.Format == 'Text' && col.DbField != 'Code'">{{ row[col.DbField] }}</span>
-                                <span ng-if="col.Format == 'Text' && col.DbField == 'Code'"><a data-ui-sref="app.erp.uomForm({code: '{{row[col.DbField]}}'})">{{ row[col.DbField] }}</a></span>
+                                <span ng-if="col.Format == 'Text' && col.DbField == 'Code'"><a data-ui-sref="app.frm.uomForm({code: '{{row[col.DbField]}}'})">{{ row[col.DbField] }}</a></span>
                                 <span ng-if="col.Format == 'Currency'" style="text-align: right; width: 100%; display: block">Rp. {{ row[col.DbField] | number : 2}}</span>
                                 <span ng-if="col.Format == 'Date'" style="text-align: center; width: 100%; display: block">{{ row[col.DbField] | date : 'dd/MM/yyyy'}}</span>
                                 <span ng-if="col.Format == 'Number'" style="text-align: right; width: 100%; display: block">{{ row[col.DbField] | number : 0}}</span>

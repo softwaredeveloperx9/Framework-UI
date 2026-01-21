@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.erpUtils').factory('Global_Data_ERP', [
+angular.module('app.frmUtils').factory('Global_Data_ERP', [
     '$location',
     '$state',
     'ERP_Signature',

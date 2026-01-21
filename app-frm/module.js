@@ -1,17 +1,17 @@
 'use strict';
 
-angular.module('app.erpUtils', ['angular-jwt']);
-angular.module('app.erp', ['ui.router', 'ui.bootstrap', 'angular-jwt', 'app.erpUtils']);
+angular.module('app.frmUtils', ['angular-jwt']);
+angular.module('app.frm', ['ui.router', 'ui.bootstrap', 'angular-jwt', 'app.frmUtils']);
 
-angular.module('app.erp').config(function ($stateProvider) {
+angular.module('app.frm').config(function ($stateProvider) {
     $stateProvider
-        .state('app.erp', {
+        .state('app.frm', {
             abstract: true,
             data: {
                 title: 'ERP',
             },
         })
-        .state('app.erp.utama', {
+        .state('app.frm.utama', {
             url: '/erp',
             data: {
                 title: 'Halaman Utama',

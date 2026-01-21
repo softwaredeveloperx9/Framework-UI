@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('app.erpUtils').factory('OurStorage', [
+angular.module('app.frmUtils').factory('OurStorage', [
     '$location',
     function ($location) {
         var ourStorage = {};

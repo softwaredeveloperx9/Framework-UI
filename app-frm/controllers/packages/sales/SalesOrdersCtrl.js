@@ -1,4 +1,4 @@
-angular.module('app.erp').controller('SalesOrdersCtrl', function ($rootScope, $scope, Utility_ERP, SalesOrders_Service, BusinessRelation_Service) {
+angular.module('app.frm').controller('SalesOrdersCtrl', function ($rootScope, $scope, Utility_ERP, SalesOrders_Service, BusinessRelation_Service) {
     // Dummy data, just for "Table: paging and searching"
     $scope.dt = {};
     $scope.dt.pageLength = 20;

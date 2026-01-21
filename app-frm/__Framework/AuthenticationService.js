@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-angular.module('app.erpUtils').factory('AuthenticationService', [
+angular.module('app.frmUtils').factory('AuthenticationService', [
     '$http',
     '$q',
     '$rootScope',

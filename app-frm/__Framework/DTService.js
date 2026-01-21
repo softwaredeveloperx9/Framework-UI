@@ -1,5 +1,5 @@
 ﻿'use strict';
-angular.module('app.erpUtils').factory('DTService', [
+angular.module('app.frmUtils').factory('DTService', [
     'BackEndService',
     function (BackEndService) {
         var service = {};

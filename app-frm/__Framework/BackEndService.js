@@ -1,6 +1,6 @@
 ﻿'use strict';
 
-angular.module('app.erpUtils').factory('BackEndService', [
+angular.module('app.frmUtils').factory('BackEndService', [
     '$http',
     '$q',
     '$rootScope',
