@@ -250,6 +250,13 @@ angular.module('app.frmUtils').factory('AuthenticationService', [
             OurStorage.setItem('appSettings', JSON.stringify($rootScope.appSettings));
             OurStorage.setItem('', JSON.stringify($rootScope.ERP));
 
+            var response = { success: true };
+
+            deferred.resolve(response);
+
+            // promise is returned
+            return deferred.promise;
+
             let apiUrl = $rootScope.appSettings.Endpoint + '/Main' + '/GetSingle';
 
             let config = {

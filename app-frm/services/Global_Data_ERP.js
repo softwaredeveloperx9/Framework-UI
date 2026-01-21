@@ -3,15 +3,15 @@
 angular.module('app.frmUtils').factory('Global_Data_ERP', [
     '$location',
     '$state',
-    'ERP_Signature',
+    'FRM_Signature',
     'Utility_ERP',
     'OurStorage',
     'AuthenticationService',
-    function ($location, $state, ERP_Signature, Utility_ERP, OurStorage, AuthenticationService) {
+    function ($location, $state, FRM_Signature, Utility_ERP, OurStorage, AuthenticationService) {
         var global_Functions = {};
 
         global_Functions.Generate = function (parameter_rootScope) {
-            parameter_rootScope.ERP_Signature = ERP_Signature.Signature;
+            parameter_rootScope.FRM_Signature = FRM_Signature.Signature;
             parameter_rootScope.GlobalMessage = '';
 
             // sebagai tempat untuk "Passsing Data" antara PopUp dan "Parent Caller"

@@ -442,20 +442,6 @@ angular.module('app.frmUtils').factory('Utility_ERP', [
             };
         };
 
-        utility.getData_Bank = async function () {
-            var request = {
-                modelName: 'XERPBank',
-                fieldNames: ['Code', 'Name'],
-                maximumResult: 100,
-                pageNumber: 1,
-                sortList: ['Number asc'],
-            };
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
         utility.setCriteriaList = function (request, filters) {
             let criteriaList = [];
 
@@ -600,7 +586,7 @@ angular.module('app.frmUtils').factory('Utility_ERP', [
         };
 
         utility.LandingPage_for_User = function () {
-            return "/erp/sales/SalesOrders";
+            return "/frm/sales/SalesOrders";
         };
 
         utility.sdr_BuildFlatTreeData = function (param_scope, kolom_id, kolom_parent_id, kolom_code, kolom_desc) {

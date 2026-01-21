@@ -3,12 +3,12 @@
 angular.module('app.frm').config(function ($stateProvider) {
     $stateProvider
         .state('app.frm.sales', {
-            url: '/erp/sales',
+            url: '/frm/sales',
             data: {
                 title: 'Sales',
             },
             views: {
-                'erpMenu@app': {
+                'frmMenu@app': {
                     templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
@@ -18,12 +18,12 @@ angular.module('app.frm').config(function ($stateProvider) {
         })
 
         .state('app.frm.salesSalesOrders', {
-            url: '/erp/sales/SalesOrders',
+            url: '/frm/sales/SalesOrders',
             data: {
                 title: 'Sales Orders',
             },
             views: {
-                'erpMenu@app': {
+                'frmMenu@app': {
                     templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {

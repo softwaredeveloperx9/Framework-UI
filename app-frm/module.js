@@ -12,12 +12,12 @@ angular.module('app.frm').config(function ($stateProvider) {
             },
         })
         .state('app.frm.utama', {
-            url: '/erp',
+            url: '/frm',
             data: {
                 title: 'Halaman Utama',
             },
             views: {
-                'erpMenu@app': {
+                'frmMenu@app': {
                     templateUrl: 'app-frm/_menu/utama.html',
                 },
                 'content@app': {
