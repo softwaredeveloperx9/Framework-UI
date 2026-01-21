@@ -586,7 +586,7 @@ angular.module('app.frmUtils').factory('Utility_ERP', [
         };
 
         utility.LandingPage_for_User = function () {
-            return "/frm/sales/SalesOrders";
+            return "/frm/data/Organization";
         };
 
         utility.sdr_BuildFlatTreeData = function (param_scope, kolom_id, kolom_parent_id, kolom_code, kolom_desc) {
