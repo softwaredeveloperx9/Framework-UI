@@ -12,9 +12,13 @@ angular.module('app.erpUtils').factory('AuthenticationService', [
         var authAPIUrl = '';
 
         service.app_settings = function () {
-            $http.get('app-settings.json').then(function (response) {
-                $rootScope.appSettings = response.data;
+            let pathSegments = window.location.pathname.split('/');
+            let appPath = pathSegments[1];
 
+            let configPath = appPath ? `/${appPath}/app-settings.json` : '/app-settings.json';
+
+            $http.get(configPath).then(function (response) {
+                $rootScope.appSettings = response.data;
                 authAPIUrl = $rootScope.appSettings.Endpoint + '/Auth';
             });
         }
