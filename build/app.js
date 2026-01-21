@@ -973,43 +973,6 @@ angular.module('app.auth').directive('googleSignin', function ($rootScope, Googl
     };
 });
 
-
-"use strict";
-
-angular.module('SmartAdmin.UI').directive('smartPopoverHtml', function () {
-    return {
-        restrict: "A",
-        link: function(scope, element, attributes){
-            var options = {};
-            options.content = attributes.smartPopoverHtml;
-            options.placement = attributes.popoverPlacement || 'top';
-            options.html = true;
-            options.trigger =  attributes.popoverTrigger || 'click';
-            options.title =  attributes.popoverTitle || attributes.title;
-            element.popover(options)
-
-        }
-
-    };
-});
-
-
-"use strict";
-
-angular.module('SmartAdmin.UI').directive('smartTooltipHtml', function () {
-        return {
-            restrict: 'A',
-            link: function(scope, element, attributes){
-                element.tooltip({
-                    placement: attributes.tooltipPlacement || 'top',
-                    html: true,
-                    title: attributes.smartTooltipHtml
-                })
-            }
-        };
-    }
-);
-
 "use strict";
 
 angular.module('SmartAdmin.Layout').directive('fullScreen', function(){
@@ -2370,6 +2333,43 @@ angular.module('SmartAdmin.Layout').factory('SmartCss', function ($rootScope, $t
 
 
 
+
+"use strict";
+
+angular.module('SmartAdmin.UI').directive('smartPopoverHtml', function () {
+    return {
+        restrict: "A",
+        link: function(scope, element, attributes){
+            var options = {};
+            options.content = attributes.smartPopoverHtml;
+            options.placement = attributes.popoverPlacement || 'top';
+            options.html = true;
+            options.trigger =  attributes.popoverTrigger || 'click';
+            options.title =  attributes.popoverTitle || attributes.title;
+            element.popover(options)
+
+        }
+
+    };
+});
+
+
+"use strict";
+
+angular.module('SmartAdmin.UI').directive('smartTooltipHtml', function () {
+        return {
+            restrict: 'A',
+            link: function(scope, element, attributes){
+                element.tooltip({
+                    placement: attributes.tooltipPlacement || 'top',
+                    html: true,
+                    title: attributes.smartTooltipHtml
+                })
+            }
+        };
+    }
+);
+
 "use strict";
 
 
@@ -2810,97 +2810,6 @@ angular.module('SmartAdmin.Forms').directive('bootstrapTogglingForm', function()
 });
 'use strict';
 
-angular.module('SmartAdmin.Forms').directive('smartCkEditor', function () {
-    return {
-        restrict: 'A',
-        compile: function ( tElement) {
-            tElement.removeAttr('smart-ck-editor data-smart-ck-editor');
-            //CKEDITOR.basePath = 'bower_components/ckeditor/';
-
-            CKEDITOR.replace( tElement.attr('name'), { height: '380px', startupFocus : true} );
-        }
-    }
-});
-'use strict';
-
-angular.module('SmartAdmin.Forms').directive('smartDestroySummernote', function () {
-    return {
-        restrict: 'A',
-        compile: function (tElement, tAttributes) {
-            tElement.removeAttr('smart-destroy-summernote data-smart-destroy-summernote')
-            tElement.on('click', function() {
-                angular.element(tAttributes.smartDestroySummernote).destroy();
-            })
-        }
-    }
-});
-
-'use strict';
-
-angular.module('SmartAdmin.Forms').directive('smartEditSummernote', function () {
-    return {
-        restrict: 'A',
-        compile: function (tElement, tAttributes) {
-            tElement.removeAttr('smart-edit-summernote data-smart-edit-summernote');
-            tElement.on('click', function(){
-                angular.element(tAttributes.smartEditSummernote).summernote({
-                    focus : true
-                });  
-            });
-        }
-    }
-});
-
-'use strict';
-
-angular.module('SmartAdmin.Forms').directive('smartMarkdownEditor', function () {
-    return {
-        restrict: 'A',
-        compile: function (element, attributes) {
-            element.removeAttr('smart-markdown-editor data-smart-markdown-editor')
-
-            var options = {
-                autofocus:false,
-                savable:true,
-                fullscreen: {
-                    enable: false
-                }
-            };
-
-            if(attributes.height){
-                options.height = parseInt(attributes.height);
-            }
-
-            element.markdown(options);
-        }
-    }
-});
-
-'use strict';
-
-angular.module('SmartAdmin.Forms').directive('smartSummernoteEditor', function (lazyScript) {
-    return {
-        restrict: 'A',
-        compile: function (tElement, tAttributes) {
-            tElement.removeAttr('smart-summernote-editor data-smart-summernote-editor');
-
-            var options = {
-                focus : true,
-                tabsize : 2
-            };
-
-            if(tAttributes.height){
-                options.height = tAttributes.height;
-            }
-
-            lazyScript.register('build/vendor.ui.js').then(function(){
-                tElement.summernote(options);                
-            });
-        }
-    }
-});
-'use strict';
-
 angular.module('SmartAdmin.Forms').directive('smartCheckoutForm', function (formsCommon, lazyScript) {
     return {
         restrict: 'A',
@@ -3312,6 +3221,97 @@ angular.module('SmartAdmin.Forms').directive('smartReviewForm', function (formsC
 });
 'use strict';
 
+angular.module('SmartAdmin.Forms').directive('smartCkEditor', function () {
+    return {
+        restrict: 'A',
+        compile: function ( tElement) {
+            tElement.removeAttr('smart-ck-editor data-smart-ck-editor');
+            //CKEDITOR.basePath = 'bower_components/ckeditor/';
+
+            CKEDITOR.replace( tElement.attr('name'), { height: '380px', startupFocus : true} );
+        }
+    }
+});
+'use strict';
+
+angular.module('SmartAdmin.Forms').directive('smartDestroySummernote', function () {
+    return {
+        restrict: 'A',
+        compile: function (tElement, tAttributes) {
+            tElement.removeAttr('smart-destroy-summernote data-smart-destroy-summernote')
+            tElement.on('click', function() {
+                angular.element(tAttributes.smartDestroySummernote).destroy();
+            })
+        }
+    }
+});
+
+'use strict';
+
+angular.module('SmartAdmin.Forms').directive('smartEditSummernote', function () {
+    return {
+        restrict: 'A',
+        compile: function (tElement, tAttributes) {
+            tElement.removeAttr('smart-edit-summernote data-smart-edit-summernote');
+            tElement.on('click', function(){
+                angular.element(tAttributes.smartEditSummernote).summernote({
+                    focus : true
+                });  
+            });
+        }
+    }
+});
+
+'use strict';
+
+angular.module('SmartAdmin.Forms').directive('smartMarkdownEditor', function () {
+    return {
+        restrict: 'A',
+        compile: function (element, attributes) {
+            element.removeAttr('smart-markdown-editor data-smart-markdown-editor')
+
+            var options = {
+                autofocus:false,
+                savable:true,
+                fullscreen: {
+                    enable: false
+                }
+            };
+
+            if(attributes.height){
+                options.height = parseInt(attributes.height);
+            }
+
+            element.markdown(options);
+        }
+    }
+});
+
+'use strict';
+
+angular.module('SmartAdmin.Forms').directive('smartSummernoteEditor', function (lazyScript) {
+    return {
+        restrict: 'A',
+        compile: function (tElement, tAttributes) {
+            tElement.removeAttr('smart-summernote-editor data-smart-summernote-editor');
+
+            var options = {
+                focus : true,
+                tabsize : 2
+            };
+
+            if(tAttributes.height){
+                options.height = tAttributes.height;
+            }
+
+            lazyScript.register('build/vendor.ui.js').then(function(){
+                tElement.summernote(options);                
+            });
+        }
+    }
+});
+'use strict';
+
 angular.module('SmartAdmin.Forms').directive('smartJcrop', function ($q) {
     return {
         restrict: 'A',
@@ -3500,6 +3500,24 @@ angular.module('SmartAdmin.Forms').directive('smartJcrop', function ($q) {
         }
     }
 });
+'use strict';
+
+angular.module('SmartAdmin.Forms').directive('smartDropzone', function () {
+    return function (scope, element, attrs) {
+        var config, dropzone;
+
+        config = scope[attrs.smartDropzone];
+
+        // create a Dropzone for the element with the given options
+        dropzone = new Dropzone(element[0], config.options);
+
+        // bind the given event handlers
+        angular.forEach(config.eventHandlers, function (handler, event) {
+            dropzone.on(event, handler);
+        });
+    };
+});
+
 'use strict';
 
 angular.module('SmartAdmin.Forms').directive('smartClockpicker', function () {
@@ -3826,20 +3844,70 @@ angular.module('SmartAdmin.Forms').directive('smartXeditable', function($timeout
 });
 'use strict';
 
-angular.module('SmartAdmin.Forms').directive('smartDropzone', function () {
-    return function (scope, element, attrs) {
-        var config, dropzone;
+angular.module('SmartAdmin.Forms').directive('smartValidateForm', function (formsCommon) {
+    return {
+        restrict: 'A',
+        link: function (scope, form, attributes) {
 
-        config = scope[attrs.smartDropzone];
+            var validateOptions = {
+                rules: {},
+                messages: {},
+                highlight: function (element) {
+                    $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
+                },
+                unhighlight: function (element) {
+                    $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
+                },
+                errorElement: 'span',
+                errorClass: 'help-block',
+                errorPlacement: function (error, element) {
+                    if (element.parent('.input-group').length) {
+                        error.insertAfter(element.parent());
+                    } else {
+                        error.insertAfter(element);
+                    }
+                }
+            };
+            form.find('[data-smart-validate-input], [smart-validate-input]').each(function () {
+                var $input = $(this), fieldName = $input.attr('name');
 
-        // create a Dropzone for the element with the given options
-        dropzone = new Dropzone(element[0], config.options);
+                validateOptions.rules[fieldName] = {};
 
-        // bind the given event handlers
-        angular.forEach(config.eventHandlers, function (handler, event) {
-            dropzone.on(event, handler);
-        });
-    };
+                if ($input.data('required') != undefined) {
+                    validateOptions.rules[fieldName].required = true;
+                }
+                if ($input.data('email') != undefined) {
+                    validateOptions.rules[fieldName].email = true;
+                }
+
+                if ($input.data('maxlength') != undefined) {
+                    validateOptions.rules[fieldName].maxlength = $input.data('maxlength');
+                }
+
+                if ($input.data('minlength') != undefined) {
+                    validateOptions.rules[fieldName].minlength = $input.data('minlength');
+                }
+
+                if($input.data('message')){
+                    validateOptions.messages[fieldName] = $input.data('message');
+                } else {
+                    angular.forEach($input.data(), function(value, key){
+                        if(key.search(/message/)== 0){
+                            if(!validateOptions.messages[fieldName])
+                                validateOptions.messages[fieldName] = {};
+
+                            var messageKey = key.toLowerCase().replace(/^message/,'')
+                            validateOptions.messages[fieldName][messageKey] = value;
+                        }
+                    });
+                }
+            });
+
+
+            form.validate(validateOptions);
+
+        }
+    }
 });
 
 'use strict';
@@ -3968,74 +4036,6 @@ angular.module('SmartAdmin.Forms').directive('smartWizard', function () {
         }
     }
 });
-'use strict';
-
-angular.module('SmartAdmin.Forms').directive('smartValidateForm', function (formsCommon) {
-    return {
-        restrict: 'A',
-        link: function (scope, form, attributes) {
-
-            var validateOptions = {
-                rules: {},
-                messages: {},
-                highlight: function (element) {
-                    $(element).closest('.form-group').removeClass('has-success').addClass('has-error');
-                },
-                unhighlight: function (element) {
-                    $(element).closest('.form-group').removeClass('has-error').addClass('has-success');
-                },
-                errorElement: 'span',
-                errorClass: 'help-block',
-                errorPlacement: function (error, element) {
-                    if (element.parent('.input-group').length) {
-                        error.insertAfter(element.parent());
-                    } else {
-                        error.insertAfter(element);
-                    }
-                }
-            };
-            form.find('[data-smart-validate-input], [smart-validate-input]').each(function () {
-                var $input = $(this), fieldName = $input.attr('name');
-
-                validateOptions.rules[fieldName] = {};
-
-                if ($input.data('required') != undefined) {
-                    validateOptions.rules[fieldName].required = true;
-                }
-                if ($input.data('email') != undefined) {
-                    validateOptions.rules[fieldName].email = true;
-                }
-
-                if ($input.data('maxlength') != undefined) {
-                    validateOptions.rules[fieldName].maxlength = $input.data('maxlength');
-                }
-
-                if ($input.data('minlength') != undefined) {
-                    validateOptions.rules[fieldName].minlength = $input.data('minlength');
-                }
-
-                if($input.data('message')){
-                    validateOptions.messages[fieldName] = $input.data('message');
-                } else {
-                    angular.forEach($input.data(), function(value, key){
-                        if(key.search(/message/)== 0){
-                            if(!validateOptions.messages[fieldName])
-                                validateOptions.messages[fieldName] = {};
-
-                            var messageKey = key.toLowerCase().replace(/^message/,'')
-                            validateOptions.messages[fieldName][messageKey] = value;
-                        }
-                    });
-                }
-            });
-
-
-            form.validate(validateOptions);
-
-        }
-    }
-});
-
 'use strict';
 
 angular.module('SmartAdmin.Layout').directive('demoStates', function ($rootScope) {
@@ -12352,8 +12352,8 @@ angular.module('app.erpUtils').factory('ERP_Signature', [
     function ($location) {
         var data = {};
 
-        //data.Signature = '2026.01.21_18.10 Framework - PAS';
-        data.Signature = '2026.01.21_18.29 Framework - TI';
+        data.Signature = '2026.01.21_18.35 Framework - PAS';
+        //data.Signature = '2026.01.21_18.29 Framework - TI';
         //data.Signature = '2026.01.21_17.04 Framework - TIP';
         //data.Signature = '2026.01.21_17.05 Framework - JLD';
 
@@ -15034,6 +15034,8296 @@ angular.module('app.erp').controller('YearCalendarCtrl', function ($rootScope, $
     $scope.initialize_Page();
 });
 
+angular.module('app.erp').controller('BranchCtrl', function ($rootScope, $scope, Utility_ERP, Branch_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+    $scope.activeOptions = [
+        { Value: null, Text: 'All' },
+        { Value: true, Text: 'Active' },
+        { Value: false, Text: 'Inactive' },
+    ];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Active: { PropertyName: 'Status', Operator: '=', Value: null },
+    };
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = Branch_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Branch Code', 'Code', 'Code', 'Text', true],
+            ['Branch Name', 'Name', 'Name', 'Text', true],
+            ['Sub Account', 'SubAccount', 'SubAccount', 'Text', true],
+            ['Status', 'Status', 'Status', 'Status', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.SaveFilterState('Branch', $scope);
+
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+    };
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.LoadFilterState('Branch', $scope);
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.showData();
+    };
+
+    $scope.initialize_Page();
+});
+angular.module('app.erp').controller('BranchFormCtrl', function ($rootScope, $scope, Utility_ERP, Branch_Service, Personels_Service) {
+    $scope.getData_Personels = async function (val) {
+        return await Personels_Service.Dropdown(val, 'SO');
+    };
+});
+
+
+
+
+angular.module('app.erp').controller('BrandsMDCtrl', function ($rootScope, $scope, Utility_ERP, Brands_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+    $scope.activeOptions = [
+        { Value: null, Text: 'All' },
+        { Value: true, Text: 'Yes' },
+        { Value: false, Text: 'No' },
+    ];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Active: { PropertyName: 'Active', Operator: '=', Value: null },
+    };
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = Brands_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Code', 'Code', 'Code', 'Text', true],
+            ['Description', 'Description', 'Description', 'Text', true],
+            ['', 'Active', 'Active', 'Boolean', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+
+        $rootScope.SaveFilterState('Brand', $scope);
+    };
+
+    
+
+    async function Override_some_Filters() { }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.LoadFilterState('Brand', $scope);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.showData();
+    };
+
+    $scope.initialize_Page();
+});
+
+// ini file Controller.js
+
+// ini file Controller.js
+
+angular.module('app.erp').controller('CategoriesMDCtrl', function ($rootScope, $scope, Utility_ERP, Categories_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+    $scope.activeOptions = [
+        { Value: null, Text: 'All' },
+        { Value: true, Text: 'Yes' },
+        { Value: false, Text: 'No' },
+    ];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Active: { PropertyName: 'Active', Operator: '=', Value: null },
+        Parent: { PropertyName: 'ParentCode', Operator: '=', Value: null },
+    };
+
+    $scope.selectedParent = '';
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = Categories_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Code', 'Code', 'Code', 'Text', true],
+            ['Description', 'Description', 'Description', 'Text', true],
+            ['Parent', 'ParentCode', 'ParentCode', 'ParentName', true],
+            ['Level Type', 'LevelType', 'LevelType', 'Text', true],
+            ['Item Type', 'ItemType', 'ItemType', 'Number', true],
+            ['', 'Active', 'Active', 'Boolean', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $scope.filters['selectedParent'] = $scope.selectedParent;
+
+        $rootScope.SaveFilterState('Category', $scope);
+
+        delete $scope.filters['selectedParent'];
+
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+    };
+
+    
+
+    $scope.getData_Parent = function (val) {
+        return Categories_Service.Dropdown_Category2(val);
+    };
+
+    async function Override_some_Filters() {
+        if ($scope.LoadFilterState_) {
+            $scope.selectedParent = $scope.filters['selectedParent'];
+            delete $scope.filters['selectedParent'];
+        }
+    }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.LoadFilterState('Category', $scope);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.showData();
+    };
+
+    $scope.initialize_Page();
+});
+
+
+
+// ini file Controller.js
+
+// ini file Controller.js
+
+angular.module('app.erp').controller('CollectZoneCtrl', function ($rootScope, $scope, Utility_ERP, CollectZone_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+    $scope.statusOptions = [
+        { Value: null, Text: 'All' },
+        { Value: true, Text: 'Active' },
+        { Value: false, Text: 'Inactive' },
+    ];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Status: { PropertyName: 'Status', Operator: '=', Value: null },
+    };
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = CollectZone_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Collect Zone Code', 'Code', 'Code', 'Text', true],
+            ['Collect Zone Name', 'Name', 'Name', 'Text', true],
+            ['Status', 'Status', 'Status', 'Status', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.SaveFilterState('CollectZone', $scope);
+
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+    };
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.LoadFilterState('CollectZone', $scope);
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.showData();
+    };
+
+    $scope.initialize_Page();
+});
+angular.module('app.erp').controller('CollectZoneFormCtrl', function ($rootScope, $scope, Utility_ERP, CollectZone_Service, Personels_Service) {
+    $scope.getData_Personels = async function (val) {
+        return await Personels_Service.Dropdown(val, 'SO');
+    };
+});
+
+
+// ini file Controller.js
+
+// ini file Controller.js
+
+angular.module('app.erp').controller('CustomerGradeListCtrl', function ($rootScope, $scope, Utility_ERP, CustomerGrade_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 10;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+    $scope.statusOptions = [
+        { Value: null, Text: 'All' },
+        { Value: 'Active', Text: 'Active' },
+        { Value: 'Inactive', Text: 'Inactive' },
+    ];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        CodeName: { PropertyName: 'CustomerGradeCode', Operator: 'contains', Value: '' },
+        Status: { PropertyName: 'Status', Operator: '=', Value: null },
+    };
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = CustomerGrade_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Customer Grade Code', 'CustomerGradeCode', 'CustomerGradeCode', 'Text', true],
+            ['Customer Grade Name', 'CustomerGradeName', 'CustomerGradeName', 'Text', true],
+            ['Description', 'Description', 'Description', 'Text', true],
+            ['Status', 'Status', 'Status', 'Status', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.SaveFilterState('CustomerGradeList', $scope);
+
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+    };
+
+    async function Override_some_Filters() { }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.LoadFilterState('CustomerGradeList', $scope);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.showData();
+    };
+
+    $scope.initialize_Page();
+});
+angular.module('app.erp').controller('CustomerGradeFormCtrl', function ($rootScope, $scope, $state, Utility_ERP, CustomerGradeForm_Service) {
+    
+    // Initialize variables
+    $scope.Is_Writeable = true;
+    $scope.Is_Create = true;
+    $scope.form = { submitted: false };
+    $scope.allData_toJson = false;
+    
+    // Initialize model
+    $scope.model = {
+        Code: '',
+        Name: '',
+        Description: '',
+        Active: true
+    };
+
+    // Initialize function
+    $scope.init = function() {
+        var params = $state.params;
+        
+        if (params && params.id) {
+            $scope.Is_Create = false;
+            $scope.loadData(params.id);
+        }
+    };
+
+    // Load existing data
+    $scope.loadData = function(id) {
+        $('#idLoading').show();
+        
+        CustomerGradeForm_Service.getById(id).then(function(response) {
+            if (response.data.success) {
+                $scope.model = response.data.data;
+            } else {
+                Utility_ERP.showAlert('Error', response.data.message, 'error');
+            }
+            $('#idLoading').hide();
+        }, function(error) {
+            Utility_ERP.showAlert('Error', 'Failed to load data', 'error');
+            $('#idLoading').hide();
+        });
+    };
+
+    // Save data
+    $scope.saveData = function() {
+        $scope.form.submitted = true;
+
+        // Validation
+        if (!$scope.model.Name || $scope.model.Name.trim() === '') {
+            Utility_ERP.showAlert('Validation Error', 'Name is required', 'warning');
+            return;
+        }
+
+        if ($scope.Is_Create && (!$scope.model.Code || $scope.model.Code.trim() === '')) {
+            Utility_ERP.showAlert('Validation Error', 'Code is required', 'warning');
+            return;
+        }
+
+        $('#idLoading').show();
+
+        var savePromise = $scope.Is_Create ? 
+            CustomerGradeForm_Service.create($scope.model) : 
+            CustomerGradeForm_Service.update($scope.model);
+
+        savePromise.then(function(response) {
+            if (response.data.success) {
+                Utility_ERP.showAlert('Success', 'Customer Grade saved successfully', 'success');
+                $scope.sdr_GoBack();
+            } else {
+                Utility_ERP.showAlert('Error', response.data.message, 'error');
+            }
+            $('#idLoading').hide();
+        }, function(error) {
+            Utility_ERP.showAlert('Error', 'Failed to save Customer Grade', 'error');
+            $('#idLoading').hide();
+        });
+    };
+
+    // Cancel form
+    $scope.cancelForm = function() {
+        $scope.sdr_GoBack();
+    };
+
+    // Go back
+    $scope.sdr_GoBack = function() {
+        $state.go('app.erp.masterdata.customergradelist');
+    };
+
+    // Toggle debug scope
+    $scope.Toggle_debugScope = function() {
+        $scope.allData_toJson = !$scope.allData_toJson;
+        if ($scope.allData_toJson) {
+            $scope.allData_toJson2 = {
+                model: $scope.model,
+                Is_Create: $scope.Is_Create,
+                Is_Writeable: $scope.Is_Writeable
+            };
+        }
+    };
+
+    // Initialize on load
+    $scope.init();
+});
+angular.module('app.erp').controller('DeliveryZoneCtrl', function ($rootScope, $scope, Utility_ERP, DeliveryZone_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+    $scope.statusOptions = [
+        { Value: null, Text: 'All' },
+        { Value: true, Text: 'Active' },
+        { Value: false, Text: 'Inactive' },
+    ];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Status: { PropertyName: 'Status', Operator: '=', Value: null },
+    };
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = DeliveryZone_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Delivery Zone Code', 'Code', 'Code', 'Text', true],
+            ['Delivery Zone Name', 'Name', 'Name', 'Text', true],
+            ['Status', 'Status', 'Status', 'Status', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.SaveFilterState('DeliveryZone', $scope);
+
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+    };
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.LoadFilterState('DeliveryZone', $scope);
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.showData();
+    };
+
+    $scope.initialize_Page();
+});
+angular.module('app.erp').controller('DeliveryZoneFormCtrl', function ($rootScope, $scope, Utility_ERP, CollectZone_Service, Personels_Service) {
+    $scope.getData_Personels = async function (val) {
+        return await Personels_Service.Dropdown(val, 'SO');
+    };
+});
+
+
+angular.module('app.erp').controller('DepartmentCtrl', function ($rootScope, $scope, Utility_ERP, Department_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+    $scope.activeOptions = [
+        { Value: null, Text: 'All' },
+        { Value: true, Text: 'Active' },
+        { Value: false, Text: 'Inactive' },
+    ];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Active: { PropertyName: 'Status', Operator: '=', Value: null },
+    };
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = Department_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Department Code', 'Code', 'Code', 'Text', true],
+            ['Department Name', 'Name', 'Name', 'Text', true],
+            ['Sub Account', 'SubAccount', 'SubAccount', 'Text', true],
+            ['Status', 'Status', 'Status', 'Status', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.SaveFilterState('Department', $scope);
+
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+    };
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.LoadFilterState('Department', $scope);
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.showData();
+    };
+
+    $scope.initialize_Page();
+});
+angular.module('app.erp').controller('DepartmentFormCtrl', function ($rootScope, $scope, Utility_ERP, Department_Service, Personels_Service) {
+    $scope.getData_Personels = async function (val) {
+        return await Personels_Service.Dropdown(val, 'SO');
+    };
+});
+
+
+// ini file Controller.js
+
+// ini file Controller.js
+
+// ini file Controller.js
+
+// ini file Controller.js
+
+angular.module('app.erp').controller('OwnershipListCtrl', function ($rootScope, $scope, Utility_ERP, Ownership_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 10;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+    $scope.statusOptions = [
+        { Value: null, Text: 'All' },
+        { Value: 'Active', Text: 'Active' },
+        { Value: 'Inactive', Text: 'Inactive' },
+    ];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        IdName: { PropertyName: 'OwnershipID', Operator: 'contains', Value: '' },
+        Status: { PropertyName: 'Status', Operator: '=', Value: null },
+    };
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = Ownership_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Ownership ID', 'OwnershipID', 'OwnershipID', 'Text', true],
+            ['Ownership Name', 'OwnershipName', 'OwnershipName', 'Text', true],
+            ['Description', 'Description', 'Description', 'Text', true],
+            ['Status', 'Status', 'Status', 'Status', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.SaveFilterState('OwnershipList', $scope);
+
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+    };
+
+    async function Override_some_Filters() { }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.LoadFilterState('OwnershipList', $scope);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.showData();
+    };
+
+    $scope.initialize_Page();
+});
+angular.module('app.erp').controller('OwnershipProjectFormCtrl', function ($rootScope, $scope, Utility_ERP, Uoms_Service) {
+
+
+});
+angular.module('app.erp').controller('JobPositionCtrl', function ($rootScope, $scope, Utility_ERP, JobPosition_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+    $scope.activeOptions = [
+        { Value: null, Text: 'All' },
+        { Value: true, Text: 'Active' },
+        { Value: false, Text: 'Inactive' },
+    ];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Active: { PropertyName: 'Status', Operator: '=', Value: null },
+    };
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = JobPosition_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Job Position Code', 'Code', 'Code', 'Text', true],
+            ['Job Position Name', 'Name', 'Name', 'Text', true],
+            ['Position Level', 'PositionLevel', 'PositionLevel', 'Text', true],
+            ['Sub Account', 'SubAccount', 'SubAccount', 'Text', true],
+            ['Status', 'Status', 'Status', 'Status', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.SaveFilterState('JobPosition', $scope);
+
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+    };
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.LoadFilterState('JobPosition', $scope);
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.showData();
+    };
+
+    $scope.initialize_Page();
+});
+angular.module('app.erp').controller('JobPositionFormCtrl', function ($rootScope, $scope, Utility_ERP, Position_Service, Personels_Service) {
+    $scope.getData_Personels = async function (val) {
+        return await Personels_Service.Dropdown(val, 'SO');
+    };
+});
+
+
+
+
+angular.module('app.erp').controller('ProfilesMDCtrl', function ($rootScope, $scope, Utility_ERP, Profiles_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+    $scope.activeOptions = [
+        { Value: null, Text: 'All' },
+        { Value: true, Text: 'Yes' },
+        { Value: false, Text: 'No' },
+    ];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Active: { PropertyName: 'Active', Operator: '=', Value: null },
+    };
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = Profiles_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Code', 'Code', 'Code', 'Text', true],
+            ['Description', 'Name', 'Name', 'Text', true],
+            ['', 'Active', 'Active', 'Boolean', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+
+        $rootScope.SaveFilterState('Profile', $scope);
+    };
+
+    
+
+    async function Override_some_Filters() { }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.LoadFilterState('Profile', $scope);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.showData();
+    };
+
+    $scope.initialize_Page();
+});
+
+angular.module('app.erp').controller('RoleListCtrl', function ($rootScope, $scope, Utility_ERP, RoleList_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 10;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+    $scope.statusOptions = [
+        { Value: null, Text: 'All' },
+        { Value: 'Active', Text: 'Active' },
+        { Value: 'Inactive', Text: 'Inactive' },
+    ];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        RoleName: { PropertyName: 'RoleName', Operator: 'contains', Value: '' },
+        Status: { PropertyName: 'Status', Operator: '=', Value: null },
+    };
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = RoleList_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Role Name', 'RoleName', 'RoleName', 'Text', true],
+            ['Description', 'Description', 'Description', 'Text', true],
+            ['Menu Access', 'MenuAccess', 'MenuAccess', 'Text', true],
+            ['Function', 'Function', 'Function', 'Text', true],
+            ['Status', 'Status', 'Status', 'Status', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.SaveFilterState('RoleList', $scope);
+
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+    };
+
+    async function Override_some_Filters() { }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.LoadFilterState('RoleList', $scope);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.showData();
+    };
+
+    $scope.initialize_Page();
+});
+angular.module('app.erp').controller('RoleAccessFormCtrl', function ($rootScope, $scope, $state, Utility_ERP, RoleAccessForm_Service) {
+
+    // Initialize variables
+    $scope.Is_Writeable = true;
+    $scope.Is_Create = true;
+    $scope.form = { submitted: false };
+    $scope.allData_toJson = false;
+
+    // Initialize model
+    $scope.model = {
+        RoleName: '',
+        RoleStatus: 'Active',
+        Description: '',
+        Permissions: []
+    };
+
+    // Data for modules
+    $scope.data_Modules = [
+        {
+            id: 'sales',
+            name: 'Sales',
+            hasChildren: true,
+            expanded: false,
+            permissions: {
+                read: false,
+                create: false,
+                edit: false,
+                delete: false,
+                approval: false
+            },
+            children: [
+                {
+                    id: 'sales-order',
+                    name: 'Sales Order',
+                    permissions: {
+                        read: false,
+                        create: false,
+                        edit: false,
+                        delete: false,
+                        approval: false
+                    }
+                },
+                {
+                    id: 'sales-invoice',
+                    name: 'Sales Invoice',
+                    permissions: {
+                        read: false,
+                        create: false,
+                        edit: false,
+                        delete: false,
+                        approval: false
+                    }
+                },
+                {
+                    id: 'sales-quotation',
+                    name: 'Sales Quotation',
+                    permissions: {
+                        read: false,
+                        create: false,
+                        edit: false,
+                        delete: false,
+                        approval: false
+                    }
+                }
+            ]
+        },
+        {
+            id: 'purchase',
+            name: 'Purchase',
+            hasChildren: true,
+            expanded: false,
+            permissions: {
+                read: false,
+                create: false,
+                edit: false,
+                delete: false,
+                approval: false
+            },
+            children: [
+                {
+                    id: 'purchase-order',
+                    name: 'Purchase Order',
+                    permissions: {
+                        read: false,
+                        create: false,
+                        edit: false,
+                        delete: false,
+                        approval: false
+                    }
+                },
+                {
+                    id: 'purchase-request',
+                    name: 'Purchase Request',
+                    permissions: {
+                        read: false,
+                        create: false,
+                        edit: false,
+                        delete: false,
+                        approval: false
+                    }
+                }
+            ]
+        },
+        {
+            id: 'inventory',
+            name: 'Inventory',
+            hasChildren: true,
+            expanded: false,
+            permissions: {
+                read: false,
+                create: false,
+                edit: false,
+                delete: false,
+                approval: false
+            },
+            children: [
+                {
+                    id: 'stock-movement',
+                    name: 'Stock Movement',
+                    permissions: {
+                        read: false,
+                        create: false,
+                        edit: false,
+                        delete: false,
+                        approval: false
+                    }
+                },
+                {
+                    id: 'stock-adjustment',
+                    name: 'Stock Adjustment',
+                    permissions: {
+                        read: false,
+                        create: false,
+                        edit: false,
+                        delete: false,
+                        approval: false
+                    }
+                }
+            ]
+        },
+        {
+            id: 'finance',
+            name: 'Finance',
+            hasChildren: true,
+            expanded: false,
+            permissions: {
+                read: false,
+                create: false,
+                edit: false,
+                delete: false,
+                approval: false
+            },
+            children: [
+                {
+                    id: 'payment',
+                    name: 'Payment',
+                    permissions: {
+                        read: false,
+                        create: false,
+                        edit: false,
+                        delete: false,
+                        approval: false
+                    }
+                },
+                {
+                    id: 'receipt',
+                    name: 'Receipt',
+                    permissions: {
+                        read: false,
+                        create: false,
+                        edit: false,
+                        delete: false,
+                        approval: false
+                    }
+                }
+            ]
+        },
+        {
+            id: 'masterdata',
+            name: 'Master Data',
+            hasChildren: true,
+            expanded: false,
+            permissions: {
+                read: false,
+                create: false,
+                edit: false,
+                delete: false,
+                approval: false
+            },
+            children: [
+                {
+                    id: 'customer',
+                    name: 'Customer',
+                    permissions: {
+                        read: false,
+                        create: false,
+                        edit: false,
+                        delete: false,
+                        approval: false
+                    }
+                },
+                {
+                    id: 'supplier',
+                    name: 'Supplier',
+                    permissions: {
+                        read: false,
+                        create: false,
+                        edit: false,
+                        delete: false,
+                        approval: false
+                    }
+                },
+                {
+                    id: 'product',
+                    name: 'Product',
+                    permissions: {
+                        read: false,
+                        create: false,
+                        edit: false,
+                        delete: false,
+                        approval: false
+                    }
+                }
+            ]
+        }
+    ];
+
+    // Toggle module expansion
+    $scope.toggleModule = function(module) {
+        module.expanded = !module.expanded;
+    };
+
+    // Update permissions when parent module is changed
+    $scope.updatePermissions = function(module) {
+        if (module.hasChildren && module.children) {
+            // Apply parent permissions to all children
+            angular.forEach(module.children, function(child) {
+                angular.forEach(['read', 'create', 'edit', 'delete', 'approval'], function(permission) {
+                    child.permissions[permission] = module.permissions[permission];
+                });
+            });
+        }
+    };
+
+    // Initialize function
+    $scope.init = function () {
+        var params = $state.params;
+
+        if (params && params.id) {
+            $scope.Is_Create = false;
+            $scope.loadData(params.id);
+        }
+    };
+
+    // Load existing data
+    $scope.loadData = function (id) {
+        $('#idLoading').show();
+
+        RoleAccessForm_Service.getById(id).then(function (response) {
+            if (response.data.success) {
+                $scope.model = response.data.data;
+                
+                // Apply loaded permissions to modules
+                if ($scope.model.Permissions && $scope.model.Permissions.length > 0) {
+                    $scope.applyPermissionsToModules($scope.model.Permissions);
+                }
+            } else {
+                Utility_ERP.showAlert('Error', response.data.message, 'error');
+            }
+            $('#idLoading').hide();
+        }, function (error) {
+            Utility_ERP.showAlert('Error', 'Failed to load data', 'error');
+            $('#idLoading').hide();
+        });
+    };
+
+    // Apply permissions to modules from loaded data
+    $scope.applyPermissionsToModules = function(permissions) {
+        angular.forEach(permissions, function(perm) {
+            // Find module
+            var module = $scope.data_Modules.find(function(m) {
+                return m.id === perm.moduleId;
+            });
+            
+            if (module) {
+                module.permissions = {
+                    read: perm.read,
+                    create: perm.create,
+                    edit: perm.edit,
+                    delete: perm.delete,
+                    approval: perm.approval
+                };
+                
+                // Apply to children if exists
+                if (perm.submodules && module.children) {
+                    angular.forEach(perm.submodules, function(subPerm) {
+                        var submodule = module.children.find(function(sm) {
+                            return sm.id === subPerm.moduleId;
+                        });
+                        if (submodule) {
+                            submodule.permissions = {
+                                read: subPerm.read,
+                                create: subPerm.create,
+                                edit: subPerm.edit,
+                                delete: subPerm.delete,
+                                approval: subPerm.approval
+                            };
+                        }
+                    });
+                }
+            }
+        });
+    };
+
+    // Collect permissions from modules
+    $scope.collectPermissions = function() {
+        var permissions = [];
+        
+        angular.forEach($scope.data_Modules, function(module) {
+            var modulePermission = {
+                moduleId: module.id,
+                moduleName: module.name,
+                read: module.permissions.read,
+                create: module.permissions.create,
+                edit: module.permissions.edit,
+                delete: module.permissions.delete,
+                approval: module.permissions.approval,
+                submodules: []
+            };
+            
+            // Add submodules
+            if (module.children && module.children.length > 0) {
+                angular.forEach(module.children, function(child) {
+                    modulePermission.submodules.push({
+                        moduleId: child.id,
+                        moduleName: child.name,
+                        read: child.permissions.read,
+                        create: child.permissions.create,
+                        edit: child.permissions.edit,
+                        delete: child.permissions.delete,
+                        approval: child.permissions.approval
+                    });
+                });
+            }
+            
+            permissions.push(modulePermission);
+        });
+        
+        return permissions;
+    };
+
+    // Save data
+    $scope.saveData = function () {
+        $scope.form.submitted = true;
+
+        // Validation
+        if (!$scope.model.RoleName || $scope.model.RoleName.trim() === '') {
+            Utility_ERP.showAlert('Validation Error', 'Role Name is required', 'warning');
+            return;
+        }
+
+        // Collect permissions
+        $scope.model.Permissions = $scope.collectPermissions();
+
+        $('#idLoading').show();
+
+        var savePromise = $scope.Is_Create ?
+            RoleAccessForm_Service.create($scope.model) :
+            RoleAccessForm_Service.update($scope.model);
+
+        savePromise.then(function (response) {
+            if (response.data.success) {
+                Utility_ERP.showAlert('Success', 'Role Access saved successfully', 'success');
+                $scope.sdr_GoBack();
+            } else {
+                Utility_ERP.showAlert('Error', response.data.message, 'error');
+            }
+            $('#idLoading').hide();
+        }, function (error) {
+            Utility_ERP.showAlert('Error', 'Failed to save role access', 'error');
+            $('#idLoading').hide();
+        });
+    };
+
+    // Toggle debug scope
+    $scope.Toggle_debugScope = function () {
+        $scope.allData_toJson = !$scope.allData_toJson;
+        if ($scope.allData_toJson) {
+            $scope.allData_toJson2 = {
+                model: $scope.model,
+                data_Modules: $scope.data_Modules,
+                permissions: $scope.collectPermissions()
+            };
+        }
+    };
+
+    // Initialize on load
+    $scope.init();
+});
+// ini file Controller.js
+
+// ini file Controller.js
+
+angular.module('app.erp').controller('SalesZoneCtrl', function ($rootScope, $scope, Utility_ERP, SalesZone_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+    $scope.statusOptions = [
+        { Value: null, Text: 'All' },
+        { Value: true, Text: 'Active' },
+        { Value: false, Text: 'Inactive' },
+    ];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Status: { PropertyName: 'Status', Operator: '=', Value: null },
+    };
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = SalesZone_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Sales Zone Code', 'Code', 'Code', 'Text', true],
+            ['Sales Zone Name', 'Name', 'Name', 'Text', true],
+            ['Status', 'Status', 'Status', 'Status', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.SaveFilterState('SalesZone', $scope);
+
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+    };
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.LoadFilterState('SalesZone', $scope);
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.showData();
+    };
+
+    $scope.initialize_Page();
+});
+angular.module('app.erp').controller('SalesZoneFormCtrl', function ($rootScope, $scope, Utility_ERP, SalesZone_Service, Personels_Service) {
+    $scope.getData_Personels = async function (val) {
+        return await Personels_Service.Dropdown(val, 'SO');
+    };
+});
+
+
+angular.module('app.erp').controller('SettingsCtrl', function ($rootScope, $scope, $stateParams, $window, Utility_ERP, Uoms_Service) {
+    // Data to View
+    $scope.form = {};
+    $scope.form.submitted = false;
+
+    // CRUD: Create, Read, Update, Delete
+    $scope.Is_Read = false;
+    $scope.Is_Create = false;
+    $scope.Is_Update = false;
+    $scope.Is_Writeable = false;
+
+    $scope.still_processing = false;
+
+    let model_Data_Inside = {
+        Code: '',
+        Name: '',
+        LegalName: '',
+        Active: true,
+        Address: '',
+        AddressLine2: '',
+        AddressLine3: '',
+        AddressLine4: '',
+        City: '',
+        Province: '',
+        CountryCode: '',
+        PostalCode: '',
+        PhoneNumber: '',
+        Email: '',
+        Website: '',
+        TaxId: '',
+        KppName: '',
+        TaxStatus: '',
+        PpnStatus: false,
+        PpnTariff: '',
+        TaxType: '',
+        CompanyLogo: null,
+        CompanyLogoFile: null
+    };
+
+    let model_Template = {
+        Kunci: 'Setting_Company',
+        Data: { ...model_Data_Inside },
+    };
+
+    $scope.model = { ...model_Template };
+
+    // some Functions
+    $scope.showData = async function () {
+        //if (!$scope.Is_Read) return;
+
+        Utility_ERP.Still_Processing($scope, true);
+        let response = await Utility_ERP.GeDataStore($scope.model.Kunci);
+        if (!response.success) {
+            Utility_ERP.Still_Processing($scope, false);
+            return;
+        }
+
+        if (!response.data) {
+            // let code = $scope.model.Kunci;
+
+            // // reset
+            // $scope.model = { ...model_Template };
+
+            // messageValidasi(`Data dengan code '${code}', tidak ditemukan`);
+            // Utility_ERP.Still_Processing($scope, false);
+            return;
+        }
+        $scope.model.Data = JSON.parse(response.data.Data);
+
+        Utility_ERP.Still_Processing($scope, false);
+    };
+
+    $scope.saveData = async function (skipConfirmation = false) {
+        //if ($scope.still_processing) return;
+
+        $scope.form.submitted = true;
+        Utility_ERP.Still_Processing($scope, true);
+
+        if (!(await $scope.Valid_toSave(skipConfirmation))) {
+            Utility_ERP.Still_Processing($scope, false);
+
+            return;
+        }
+
+        let data = {
+            dataInput: {
+                Kunci: $scope.model.Kunci,
+                Data: JSON.stringify($scope.model.Data),
+            }
+        };
+
+        $rootScope.SanitizeInput(data, model_Template);
+
+        let resultSave = await Utility_ERP.SaveDataStore(data.dataInput);
+
+        if (!resultSave.success) {
+            Utility_ERP.Still_Processing($scope, false);
+            $scope.form.submitted = false;
+
+            return;
+        }
+
+        messageInfo('Data berhasil disimpan');
+    };
+
+    $scope.Valid_toSave = async function (skipConfirmation) {
+        // if ($rootScope.Not_ValidString($scope.model.Code)) {
+        //     messageValidasi('Code must not be empty');
+        //     return false;
+        // }
+
+        // if ($rootScope.Not_ValidString($scope.model.ShortName)) {
+        //     messageValidasi('ShortName must not be empty');
+        //     return false;
+        // }
+
+        // if ($rootScope.Not_ValidString($scope.model.Description)) {
+        //     messageValidasi('Description must not be empty');
+        //     return false;
+        // }
+
+        return true;
+    };
+
+    function messageValidasi(content) {
+        $.bigBox({
+            title: 'Error: Message',
+            content: content,
+            color: '#C46A69',
+            icon: 'fa fa-warning shake animated',
+            number: '',
+            timeout: 5000,
+        });
+    }
+
+    function messageInfo(content) {
+        let alreadyBack = false;
+
+        $.bigBox(
+            {
+                title: 'Informasi',
+                content: content,
+                color: '#739E73',
+                timeout: $rootScope.Timeout_Save(),
+                icon: 'fa fa-check',
+                number: '',
+            },
+            function () {
+                Utility_ERP.Still_Processing($scope, false);
+                $scope.form.submitted = false;
+            }
+        );
+
+        setTimeout(() => {
+            Utility_ERP.Still_Processing($scope, false);
+            $scope.form.submitted = false;
+        }, $rootScope.Timeout_Save());
+    }
+
+    async function Data_References() { }
+
+    $scope.Set_Editable = async function () {
+        if ($scope.still_processing) return;
+
+        $scope.Is_Read = false;
+        $scope.Is_Create = false;
+        $scope.Is_Update = true;
+
+        $scope.Is_Writeable = $scope.Is_Create || $scope.Is_Update;
+
+        Data_References();
+    }
+
+    $scope.initialize_Page = async function () {
+
+        await Data_References();
+
+        await $scope.showData();
+
+        // Langsung Mode Edit, jika sedang dalam kondisi Mode - Read
+        if ($scope.Is_Read) {
+            $scope.Set_Editable();
+        }
+    };
+
+    $scope.initialize_Page();
+
+});
+angular.module('app.erp').controller('SubAccountCtrl', function ($rootScope, $scope, Utility_ERP, SubAccount_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+    $scope.statusOptions = [
+        { Value: null, Text: 'All' },
+        { Value: true, Text: 'Active' },
+        { Value: false, Text: 'Inactive' },
+    ];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Status: { PropertyName: 'Status', Operator: '=', Value: null },
+    };
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = SubAccount_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Sub Account Code', 'SubAccountCode', 'SubAccountCode', 'Text', true],
+            ['Sub Account Name', 'SubAccountName', 'SubAccountName', 'Text', true],
+            ['COA Code', 'COACode', 'COACode', 'Text', true],
+            ['COA Name', 'COAName', 'COAName', 'Text', true],
+            ['Status', 'Status', 'Status', 'Status', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.SaveFilterState('SubAccount', $scope);
+
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+    };
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.LoadFilterState('SubAccount', $scope);
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.showData();
+    };
+
+    $scope.initialize_Page();
+});
+angular.module('app.erp').controller('SubAccountFormCtrl', function ($rootScope, $scope, Utility_ERP, SubAccount_Service, Personels_Service) {
+    $scope.getData_Personels = async function (val) {
+        return await Personels_Service.Dropdown(val, 'SO');
+    };
+});
+
+
+// ini file Controller.js
+
+// ini file Controller.js
+
+angular.module('app.erp').controller('TaxListCtrl', function ($rootScope, $scope, Utility_ERP, TaxList_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 10;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+    $scope.statusOptions = [
+        { Value: null, Text: 'All' },
+        { Value: true, Text: 'Active' },
+        { Value: false, Text: 'Inactive' },
+    ];
+    $scope.taxTypeOptions = [
+        { Value: null, Text: 'All' },
+        { Value: 'VAT', Text: 'VAT' },
+        { Value: 'PPH', Text: 'PPH' },
+        { Value: 'PPN', Text: 'PPN' },
+    ];
+    $scope.taxCategoryOptions = [
+        { Value: null, Text: 'All' },
+        { Value: 'Sales', Text: 'Sales' },
+        { Value: 'Purchase', Text: 'Purchase' },
+    ];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        TaxType: { PropertyName: 'TaxType', Operator: '=', Value: null },
+        TaxCategory: { PropertyName: 'TaxCategory', Operator: '=', Value: null },
+        Status: { PropertyName: 'Status', Operator: '=', Value: null },
+    };
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = TaxList_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Tax Code', 'TaxCode', 'TaxCode', 'Text', true],
+            ['Tax Name', 'TaxName', 'TaxName', 'Text', true],
+            ['Tax Type', 'TaxType', 'TaxType', 'Text', true],
+            ['Tax Category', 'TaxCategory', 'TaxCategory', 'Text', true],
+            ['Tax Rate (%)', 'TaxRate', 'TaxRate', 'Number', true],
+            ['Status', 'Status', 'Status', 'Status', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.SaveFilterState('TaxList', $scope);
+
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+    };
+
+    async function Override_some_Filters() { }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.LoadFilterState('TaxList', $scope);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.showData();
+    };
+
+    $scope.initialize_Page();
+});
+// ini file Controller.js
+
+// ini file Controller.js
+
+// ini file Controller.js
+
+// ini file Controller.js
+
+// ini file Controller.js
+
+
+
+angular.module('app.erp').controller('UomsMDCtrl', function ($rootScope, $scope, Utility_ERP, Uoms_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+    $scope.activeOptions = [
+        { Value: null, Text: 'All' },
+        { Value: true, Text: 'Yes' },
+        { Value: false, Text: 'No' },
+    ];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Active: { PropertyName: 'Active', Operator: '=', Value: null },
+    };
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = Uoms_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Code', 'Code', 'Code', 'Text', true],
+            ['Short Name', 'ShortName', 'ShortName', 'Text', true],
+            ['Description', 'Description', 'Description', 'Text', true],
+            ['', 'Active', 'Active', 'Boolean', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+
+        $rootScope.SaveFilterState('UOM', $scope);
+    };
+
+    
+
+    async function Override_some_Filters() { }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.LoadFilterState('UOM', $scope);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.showData();
+    };
+
+    $scope.initialize_Page();
+});
+
+angular.module('app.erp').controller('UseBRCtrl', function ($rootScope, $scope, Utility_ERP, UseBR_Service, BackEndService) {
+    // Dummy data, just for "Paging"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+
+    // filter
+    $scope.filters = {
+        IsPersonnel: { PropertyName: 'IsPersonnel', Operator: '=', Value: true },
+    };
+
+    $scope.selectedBranch = '';
+    $scope.selectedStatus = '';
+    $scope.showAllStatus = false;
+
+    // References of data
+    $scope.data_EmployeeLocationAccess = [];
+    $scope.data_DocumentStatus_All = [];
+    $scope.data_DocumentStatus = [];
+    $scope.data_CustomerType = [];
+    $scope.data_BusinessLine = [];
+    $scope.data_BusinessRelationGroup = [];
+    $scope.data_BusinessRelationTitle = [];
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = UseBR_Service.Table($scope.filters, $scope.dt.pageLength, $scope.afterRequestData);
+
+        // format: Title, DbField, SortField, Format
+        let columns = [
+            ['Code', 'Code', 'Code', 'Text'],
+            ['Name', 'Name', 'Name', 'Text'],
+            ['Status', 'StatusName', 'StatusName', 'Text'],
+        ];
+
+        Utility_ERP.ProcessColumns($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        await $scope.dt.loadData();
+    };
+
+    $scope.initialize_Page = async function () {
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        // prettier-ignore
+        await Promise.allSettled([
+            $rootScope.EmployeeLocationAccess($scope)
+            , $scope.getData_DocumentStatus()
+            , $scope.getData_CustomerType()
+            , $scope.getData_BusinessLine()
+            , $scope.getData_BusinessRelationGroup()
+            , $scope.getData_BusinessRelationTitle()
+        ]);
+
+        $scope.showData();
+    };
+
+    $scope.afterRequestData = function () {
+        $scope.dt.data.forEach(function (row) {
+            row['rowSelected'] = false;
+        });
+    };
+
+    $scope.Branch_Changed = async function () {
+        await $scope.showData();
+    };
+
+    $scope.getData_DocumentStatus = async function () {
+        $scope.data_DocumentStatus_All = await Utility_ERP.getData_DocumentStatus('BusinessRelation');
+
+        // prettier-ignore
+        $scope.data_DocumentStatus = ($scope.showAllStatus ? $scope.data_DocumentStatus_All : $scope.data_DocumentStatus_All.filter(function (e) { return e.IsArchive == false; }));
+
+        // Default untuk DropdownList
+        if ($scope.data_DocumentStatus.length > 0) {
+            $scope.selectedStatus = $scope.data_DocumentStatus[0].StatusId;
+        }
+    };
+
+    $scope.selectedStatus_Change = async function () {
+        // prettier-ignore
+        $scope.data_DocumentStatus = ($scope.showAllStatus ? $scope.data_DocumentStatus_All : $scope.data_DocumentStatus_All.filter(function (e) { return e.IsArchive == false; }));
+
+        // just to make UX consistent
+        if ($scope.showAllStatus) $scope.selectedStatus = '';
+
+        await $scope.showData();
+    };
+
+    $scope.getData_CustomerType = async function () {
+        $scope.data_CustomerType = await UseBR_Service.getData_CustomerType();
+    };
+
+    $scope.getData_BusinessLine = async function () {
+        $scope.data_BusinessLine = await UseBR_Service.getData_BusinessLine();
+    };
+
+    $scope.getData_BusinessRelationGroup = async function () {
+        $scope.data_BusinessRelationGroup = await UseBR_Service.getData_BusinessRelationGroup();
+    };
+
+    $scope.getData_BusinessRelationTitle = async function () {
+        $scope.data_BusinessRelationTitle = await UseBR_Service.getData_BusinessRelationTitle();
+    };
+
+    $scope.voidDocument = function () { };
+
+    $scope.Block = async function () {
+        await $scope.ProcessBlock_UnBlock('Blocked');
+    };
+
+    $scope.UnBlock = async function () {
+        await $scope.ProcessBlock_UnBlock('UnBlocked');
+    };
+
+    $scope.ProcessBlock_UnBlock = async function (action) {
+        let selectedData = [];
+
+        for (let i = 0; i < $scope.dt.data.length; i++) {
+            if ($scope.dt.data[i]['rowSelected']) {
+                selectedData.push($scope.dt.data[i]['Code']);
+            }
+        }
+
+        if (selectedData.length <= 0) {
+            $.bigBox({
+                title: 'Pesan Error',
+                content: 'No data is selected!',
+                color: '#C46A69',
+                icon: 'fa fa-warning shake animated',
+                number: '',
+                timeout: 2000,
+            });
+
+            return;
+        }
+
+        var request = {
+            actionController: 'CustomerController',
+            actionName: action,
+            actionParam: selectedData,
+        };
+
+        await BackEndService.RequestAction(request);
+
+        $scope.selectAllRows = false;
+        $scope.showData();
+
+        $.bigBox(
+            {
+                title: 'Informasi',
+                content: 'Data berhasil disimpan',
+                color: '#739E73',
+                timeout: $rootScope.Timeout_Save(),
+                icon: 'fa fa-check',
+                number: '',
+            },
+            function () { }
+        );
+    };
+
+    $scope.initialize_Page();
+});
+
+'use strict';
+
+angular.module('app.erpUtils').factory('UseBR_Service', [
+    'BackEndService',
+    'DTService',
+    function (BackEndService, DTService) {
+        var service = {};
+
+        service.Table = function (filterObject, pageLength = 5, afterRequestData = null) {
+            let modelName = 'XSmBusinessRelation';
+            let defaultSortField = 'Name';
+            let defaultSortDirection = 'asc';
+            let defaultSearchKeyword = 'Code, Name';
+
+            return DTService.GenerateDTInstance(modelName, defaultSortField, defaultSortDirection, filterObject, defaultSearchKeyword, pageLength, afterRequestData);
+        };
+
+        service.List = async function () {
+            let request = {
+                modelName: 'XSmBusinessRelation',
+                fieldNames: ['*'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [],
+                sortList: ['Code asc'],
+            };
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.Dropdown = async function () {
+            let request = {
+                modelName: 'XSmBusinessRelation',
+                fieldNames: ['Code', 'Description', 'ShortName'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [{ PropertyName: 'Active', Operator: '=', Value: 'true' }],
+                sortList: ['Code asc'],
+            };
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.DataSingle = async function (code) {
+            let request = {
+                modelName: 'XSmBusinessRelationR',
+                criteriaList: [{ PropertyName: 'Code', Operator: '=', Value: code }],
+            };
+
+            let response = await BackEndService.RequestDataSingle(request);
+
+            return response.data;
+        };
+
+        service.Save = async function (data) {
+            let request = {
+                actionController: 'CustomerController',
+                actionName: 'Save',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        service.getData_AddressItem = async function (code) {
+            let request = {
+                modelName: 'XSmAddress',
+                fieldNames: ['*'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [{ PropertyName: 'BusinessRelationCode', Operator: '=', Value: code }],
+                sortList: ['AddressTypeCode asc'],
+            };
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.getData_ContactItem = async function () {
+            let ContactMapping = [
+                {
+                    TypeCode: 'BLG',
+                    Name: 'Jowo Wirawan',
+                    Gender: 'M',
+                    Position: 'Direktur',
+                    PhoneNumber: '021-8990 2828',
+                    FaxNumber: '021-8990 9999',
+                    EmailAddress: 'harmonijayasejahtera@gmail.com',
+                    Number: 1,
+
+                    XCode: '',
+                    ExistingItem: false,
+                    Deleted: false,
+                    recordNumber: 0,
+                    processRecord: false,
+                    selectedData: '',
+                    XContactCode: '',
+                },
+            ];
+
+            let response = {
+                data: {
+                    Data: ContactMapping,
+                },
+            };
+
+            return response.data.Data;
+        };
+
+        service.getData_Gender = async function () {
+            var request = {
+                modelName: 'XGender',
+                fieldNames: ['Code', 'Name'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [],
+                sortList: ['Code asc'],
+            };
+
+            let response = {
+                data: {
+                    Data: [
+                        {
+                            Code: 'M',
+                            Name: 'Male',
+                        },
+                        {
+                            Code: 'F',
+                            Name: 'Female',
+                        },
+                    ],
+                },
+            };
+
+            // TODO
+            // successCallBack(response);
+
+            //let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.getData_BankItem = async function (code) {
+            let BankMapping = [
+                {
+                    BRCode: 'H/0052',
+                    BankAccountNumber: '0001',
+                    InfoLine1: 'HARMONI JAYA SEJAHTERA',
+                    InfoLine2: 'BRI',
+                    XCode: '',
+                    ExistingItem: false,
+                    Deleted: false,
+                    recordNumber: 0,
+                    processRecord: false,
+                    selectedData: '',
+                    XBankCode: '',
+                },
+            ];
+
+            try {
+                let filteredData = BankMapping.filter((item) => item.BRCode === code);
+
+                if (filteredData.length === 0) {
+                    throw new Error('Data not found for the given code: ' + code);
+                }
+
+                let response = {
+                    data: {
+                        Data: filteredData,
+                    },
+                };
+
+                return response.data.Data;
+            } catch (error) { }
+        };
+
+        service.getData_TaxZone = async function (code) {
+            var request = {
+                modelName: 'XTaxZone',
+                fieldNames: ['Code', 'Description'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [],
+                sortList: ['Code asc'],
+            };
+
+            let response = {
+                data: {
+                    Data: [
+                        {
+                            Code: '01',
+                            Description: 'Non Ppn',
+                        },
+                        {
+                            Code: '02',
+                            Description: 'Ppn',
+                        },
+                    ],
+                },
+            };
+
+            // TODO
+            // successCallBack(response);
+
+            //let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.getData_WarehouseItem = async function (code) {
+            let WarehouseMapping = [
+                {
+                    BRCode: 'H/0052',
+                    WarehouseCode: 'JTGL',
+                    WarehouseName: 'J Tegal',
+                    XCode: '',
+                    ExistingItem: false,
+                    Deleted: false,
+                    recordNumber: 0,
+                    processRecord: false,
+                    selectedData: '',
+                    XWarehouseCode: '',
+                },
+                {
+                    BRCode: 'H/0052',
+                    WarehouseCode: 'PBGR',
+                    WarehouseName: 'P Bogor',
+                    XCode: '',
+                    ExistingItem: false,
+                    Deleted: false,
+                    recordNumber: 0,
+                    processRecord: false,
+                    selectedData: '',
+                    XWarehouseCode: '',
+                },
+                {
+                    BRCode: 'H/0052',
+                    WarehouseCode: 'DS',
+                    WarehouseName: 'DS (Obsolete)',
+                    XCode: '',
+                    ExistingItem: false,
+                    Deleted: false,
+                    recordNumber: 0,
+                    processRecord: false,
+                    selectedData: '',
+                    XWarehouseCode: '',
+                },
+            ];
+
+            try {
+                let filteredData = WarehouseMapping.filter((item) => item.BRCode === code);
+
+                if (filteredData.length === 0) {
+                    throw new Error('Data not found for the given code: ' + code);
+                }
+
+                let response = {
+                    data: {
+                        Data: filteredData,
+                    },
+                };
+
+                return response.data.Data;
+            } catch (error) { }
+        };
+
+        service.getData_CustomerType = async function () {
+            var request = {
+                modelName: 'XCustomerType',
+                fieldNames: ['Code', 'Name'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [],
+                sortList: ['Code asc'],
+            };
+
+            let response = {
+                data: {
+                    Data: [
+                        {
+                            Code: '01',
+                            Name: 'Toko',
+                        },
+                        {
+                            Code: 'CM',
+                            Name: 'Construction Management',
+                        },
+                        {
+                            Code: 'CS',
+                            Name: 'Consultant',
+                        },
+                        {
+                            Code: 'DS',
+                            Name: 'Distributor',
+                        },
+                        {
+                            Code: 'DV',
+                            Name: 'Developer',
+                        },
+                        {
+                            Code: 'MC',
+                            Name: 'Main Contractor',
+                        },
+                    ],
+                },
+            };
+
+            // TODO
+            // successCallBack(response);
+
+            //let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.getData_BusinessLine = async function () {
+            var request = {
+                modelName: 'XBusinessLine',
+                fieldNames: ['Code', 'Description'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [],
+                sortList: ['Code asc'],
+            };
+
+            let response = {
+                data: {
+                    Data: [
+                        {
+                            Code: 'HR',
+                            Description: 'High Rise Building',
+                        },
+                        {
+                            Code: 'IF',
+                            Description: 'Infrastructure',
+                        },
+                        {
+                            Code: 'IN',
+                            Description: 'Industrial',
+                        },
+                        {
+                            Code: 'MN',
+                            Description: 'Mining',
+                        },
+                        {
+                            Code: 'OG',
+                            Description: 'Oil and Gas',
+                        },
+                        {
+                            Code: 'PN',
+                            Description: 'Plantation',
+                        },
+                        {
+                            Code: 'RS',
+                            Description: 'Residential',
+                        },
+                    ],
+                },
+            };
+
+            // TODO
+            // successCallBack(response);
+
+            //let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.getData_BusinessRelationGroup = async function () {
+            var request = {
+                modelName: 'XBusinessRelationGroup',
+                fieldNames: ['Code', 'Description'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [],
+                sortList: ['Code asc'],
+            };
+
+            let response = {
+                data: {
+                    Data: [
+                        {
+                            Code: 'Group 1',
+                            Description: 'keterangan Group 1',
+                        },
+                    ],
+                },
+            };
+
+            // TODO
+            // successCallBack(response);
+
+            //let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.getData_BusinessRelationTitle = async function () {
+            var request = {
+                modelName: 'XBusinessRelationTitle',
+                fieldNames: ['Code', 'Description'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [],
+                sortList: ['Code asc'],
+            };
+
+            let response = {
+                data: {
+                    Data: [
+                        {
+                            Code: '01',
+                            Description: 'PD',
+                        },
+                        {
+                            Code: '02',
+                            Description: 'TB',
+                        },
+                        {
+                            Code: '03',
+                            Description: 'Toko',
+                        },
+                        {
+                            Code: '04',
+                            Description: 'UD',
+                        },
+                        {
+                            Code: '05',
+                            Description: 'PT',
+                        },
+                        {
+                            Code: '06',
+                            Description: 'PB',
+                        },
+                        {
+                            Code: '07',
+                            Description: 'CV',
+                        },
+                    ],
+                },
+            };
+
+            // TODO
+            // successCallBack(response);
+
+            //let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.getData_CorporateSize = async function () {
+            var request = {
+                modelName: 'XCorporateSize',
+                fieldNames: ['Code', 'Description'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [],
+                sortList: ['Code asc'],
+            };
+
+            let response = {
+                data: {
+                    Data: [
+                        {
+                            Code: 'small',
+                            Description: 'Small',
+                        },
+                        {
+                            Code: 'medium',
+                            Description: 'Medium',
+                        },
+                        {
+                            Code: 'enterprise',
+                            Description: 'Enterprise',
+                        },
+                    ],
+                },
+            };
+
+            // TODO
+            // successCallBack(response);
+
+            //let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.List_Privacy = async function (code) {
+            let request = {
+                modelName: 'XSmBusinessRelationLocationR',
+                fieldNames: ['*'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [{ PropertyName: 'BRCode', Operator: '=', Value: code }],
+                sortList: ['Name asc'],
+            };
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        return service;
+    },
+]);
+
+angular.module('app.erp').controller('UserListCtrl', function ($rootScope, $scope, Utility_ERP, UserList_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 10;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+    $scope.statusOptions = [
+        { Value: null, Text: 'All' },
+        { Value: true, Text: 'Active' },
+        { Value: false, Text: 'Inactive' },
+    ];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Employee: { PropertyName: 'LinkedEmployee', Operator: 'contains', Value: '' },
+        Status: { PropertyName: 'UserStatus', Operator: '=', Value: null },
+    };
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = UserList_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['User Name', 'UserName', 'UserName', 'Text', true],
+            ['Linked Employee', 'LinkedEmployee', 'LinkedEmployee', 'Text', true],
+            ['Role', 'Role', 'Role', 'Text', true],
+            ['Last Login', 'LastLogin', 'LastLogin', 'DateTime', true],
+            ['User Status', 'UserStatus', 'UserStatus', 'UserStatus', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.SaveFilterState('UserList', $scope);
+
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+    };
+
+    async function Override_some_Filters() { }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.LoadFilterState('UserList', $scope);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.showData();
+    };
+
+    $scope.initialize_Page();
+});
+angular.module('app.erp').controller('UserFormCtrl', function ($rootScope, $scope, $state, Utility_ERP, UserForm_Service) {
+
+    // Initialize variables
+    $scope.Is_Writeable = true;
+    $scope.Is_Create = true;
+    $scope.form = { submitted: false };
+    $scope.allData_toJson = false;
+
+    // Initialize model
+    $scope.model = {
+        Employee: '',
+        FullName: '',
+        EmailAddress: '',
+        Password: '',
+        ConfirmPassword: '',
+        AssignRole: ''
+    };
+
+    // Data for dropdowns
+    $scope.data_Roles = [
+        { Code: 'ADMIN', Name: 'Admin' },
+        { Code: 'SUPERVISOR', Name: 'Supervisor' },
+        { Code: 'MANAGER', Name: 'Manager' },
+        { Code: 'APPROVER', Name: 'Approver' }
+    ];
+
+    // Initialize function
+    $scope.init = function () {
+        var params = $state.params;
+
+        if (params && params.id) {
+            $scope.Is_Create = false;
+            $scope.loadData(params.id);
+        }
+    };
+
+    // Load existing data
+    $scope.loadData = function (id) {
+        $('#idLoading').show();
+
+        UserForm_Service.getById(id).then(function (response) {
+            if (response.data.success) {
+                $scope.model = response.data.data;
+            } else {
+                Utility_ERP.showAlert('Error', response.data.message, 'error');
+            }
+            $('#idLoading').hide();
+        }, function (error) {
+            Utility_ERP.showAlert('Error', 'Failed to load data', 'error');
+            $('#idLoading').hide();
+        });
+    };
+
+    // Save data
+    $scope.saveData = function () {
+        $scope.form.submitted = true;
+
+        // Validation
+        if (!$scope.model.Employee || !$scope.model.FullName || !$scope.model.EmailAddress ||
+            !$scope.model.Password || !$scope.model.ConfirmPassword || !$scope.model.AssignRole) {
+            Utility_ERP.showAlert('Validation Error', 'Please fill all required fields', 'warning');
+            return;
+        }
+
+        // Check password match
+        if ($scope.model.Password !== $scope.model.ConfirmPassword) {
+            Utility_ERP.showAlert('Validation Error', 'Passwords do not match', 'warning');
+            return;
+        }
+
+        // Check password length
+        if ($scope.model.Password.length < 8) {
+            Utility_ERP.showAlert('Validation Error', 'Password must be at least 8 characters', 'warning');
+            return;
+        }
+
+        $('#idLoading').show();
+
+        var savePromise = $scope.Is_Create ?
+            UserForm_Service.create($scope.model) :
+            UserForm_Service.update($scope.model);
+
+        savePromise.then(function (response) {
+            if (response.data.success) {
+                Utility_ERP.showAlert('Success', 'User saved successfully', 'success');
+                $scope.sdr_GoBack();
+            } else {
+                Utility_ERP.showAlert('Error', response.data.message, 'error');
+            }
+            $('#idLoading').hide();
+        }, function (error) {
+            Utility_ERP.showAlert('Error', 'Failed to save user', 'error');
+            $('#idLoading').hide();
+        });
+    };
+
+    // Toggle debug scope
+    $scope.Toggle_debugScope = function () {
+        $scope.allData_toJson = !$scope.allData_toJson;
+        if ($scope.allData_toJson) {
+            $scope.allData_toJson2 = {
+                model: $scope.model,
+                data_Roles: $scope.data_Roles
+            };
+        }
+    };
+
+    // Initialize on load
+    $scope.init();
+});
+angular.module('app.erp').controller('WarehouseCtrl', function ($rootScope, $scope, Utility_ERP, Warehouse_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+    $scope.statusOptions = [
+        { Value: null, Text: 'All' },
+        { Value: true, Text: 'Active' },
+        { Value: false, Text: 'Inactive' },
+    ];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Status: { PropertyName: 'Status', Operator: '=', Value: null },
+    };
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = Warehouse_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Warehouse Code', 'Code', 'Code', 'Text', true],
+            ['Warehouse Name', 'Name', 'Name', 'Text', true],
+            ['Sub Account', 'SubAccount', 'SubAccount', 'Text', true],
+            ['Status', 'Status', 'Status', 'Status', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.SaveFilterState('Warehouse', $scope);
+
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+    };
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.LoadFilterState('Warehouse', $scope);
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.showData();
+    };
+
+    $scope.initialize_Page();
+});
+angular.module('app.erp').controller('WarehouseFormCtrl', function ($rootScope, $scope, Utility_ERP, Warehouse_Service, Personels_Service) {
+    $scope.getData_Personels = async function (val) {
+        return await Personels_Service.Dropdown(val, 'SO');
+    };
+});
+
+
+
+
+
+
+angular.module('app.erp').controller('AssemblyOrdersCtrl', function ($rootScope, $scope, Utility_ERP, AssemblyOrders_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Branch: { PropertyName: 'LocationCode', Operator: 'in', Value: '' },
+        Warehouse: { PropertyName: 'WarehouseCode', Operator: 'in', Value: '' },
+        Reason: { PropertyName: 'ReasonCode', Operator: 'in', Value: '' },
+        DueDateFrom_date: { PropertyName: 'DueDate', Operator: '>=', Value: '' },
+        DueDateTo_date: { PropertyName: 'DueDate', Operator: '<=', Value: '' },
+        Status: { PropertyName: 'StatusId', Operator: 'in', Value: '' },
+    };
+
+    $scope.selectedBranch = '';
+    $scope.selectedWarehouse = '';
+    $scope.selectedReason = '';
+    $scope.selectedDueDateFrom = '';
+    $scope.selectedDueDateTo = '';
+    $scope.selectedStatus = '';
+    $scope.selectedShowAll = false;
+
+    $scope.data_EmployeeLocationAccess = [];
+    $scope.data_EmployeeWarehouseAccess = [];
+    $scope.data_Warehouse_perBranch = [];
+    $scope.data_Reason = [];
+    $scope.data_Status = [];
+    $scope.data_Status_All = [];
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = AssemblyOrders_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Order Nr.', 'OrderNr', 'OrderNr', 'Text', true],
+            ['Date', 'Date', 'Date', 'Date', true],
+            ['Branch', 'Branch', 'Branch', 'Text', true],
+            ['Warehouse', 'Warehouse', 'Warehouse', 'Text', true],
+            ['Reason', 'Reason', 'Reason', 'Text', true],
+            ['Item', 'Item', 'Item', 'Text', true],
+            ['Qty', 'Qty', 'Qty', 'Number', true],
+            ['Issued By', 'IssuedBy', 'IssuedBy', 'Text', true],
+            ['Status', 'Status', 'Status', 'Text', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        if (!$scope.selectedBranch) {
+            $scope.filters.Branch.Operator = 'in';
+            $scope.filters.Branch.Value = Utility_ERP.Value_OperatorIN_($scope.data_EmployeeLocationAccess, 'Code');
+        } else {
+            $scope.filters.Branch.Operator = '=';
+            $scope.filters.Branch.Value = $scope.selectedBranch;
+        }
+
+        if (!$scope.selectedWarehouse) {
+            $scope.filters.Warehouse.Operator = 'in';
+            $scope.filters.Warehouse.Value = Utility_ERP.Value_OperatorIN_($scope.data_Warehouse_perBranch, 'Code');
+        } else {
+            $scope.filters.Warehouse.Operator = '=';
+            $scope.filters.Warehouse.Value = $scope.selectedWarehouse;
+        }
+
+        if (!$scope.selectedReason) {
+            $scope.filters.Reason.Operator = 'in';
+            $scope.filters.Reason.Value = Utility_ERP.Value_OperatorIN_($scope.data_Reason, 'Code');
+        } else {
+            $scope.filters.Reason.Operator = '=';
+            $scope.filters.Reason.Value = $scope.selectedReason;
+        }
+
+        if ($rootScope.ValidString($scope.selectedStatus)) {
+            $scope.filters.Status.Operator = '=';
+            $scope.filters.Status.Value = $scope.selectedStatus;
+        } else {
+            $scope.filters.Status.Operator = 'in';
+            $scope.filters.Status.Value = Utility_ERP.Value_OperatorIN($scope.data_Status, 'StatusId', '');
+        }
+
+        $scope.filters.DueDateFrom_date.Value = $rootScope.Date_to_DB($scope.selectedDueDateFrom);
+        $scope.filters.DueDateTo_date.Value = $rootScope.Date_to_DB($scope.selectedDueDateTo);
+
+        Utility_ERP.Still_Processing($scope, true);
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+
+        $scope.filters['selectedShowAll'] = $scope.selectedShowAll;
+
+        $rootScope.SaveFilterState('AssemblyOrders', $scope);
+
+        delete $scope.filters['selectedShowAll'];
+    };
+
+    $scope.Branch_Changed = async function () {
+        // --  untuk Page ini, setiap kali Branch berubah --> maka Warehouse ke posisi "All"
+        // reset
+        $scope.selectedWarehouse = '';
+
+        $scope.Reorganize_Warehouse();
+
+        await $scope.showData();
+    };
+
+    $scope.Reorganize_Warehouse = function () {
+        var data = [];
+
+        if (!$scope.selectedBranch) {
+            // tanpa Filter Branch
+            data = $scope.data_EmployeeWarehouseAccess;
+        } else {
+            // filter berdasarkan Branch
+            data = $scope.data_EmployeeWarehouseAccess.filter(function (e) {
+                return e.LocationCode == $scope.selectedBranch;
+            });
+        }
+
+        $scope.data_Warehouse_perBranch = [...new Map(data.map((item) => [item['Code'], item])).values()].sort((x, y) => x.Code.localeCompare(y.Code));
+    };
+
+    $scope.getData_Reason = async function () {
+        $scope.data_Reason = await AssemblyOrders_Service.Dropdown_Reason();
+    };
+
+    $scope.getData_Status = async function () {
+        $scope.data_Status_All = await Utility_ERP.getData_DocumentStatus('AssemblyOrder');
+
+        // prettier-ignore
+        $scope.data_Status = ($scope.selectedShowAll ? $scope.data_Status_All : $scope.data_Status_All.filter(function (e) { return e.IsArchive == false; }));
+
+        $rootScope.SetDefaultDropdownList($scope.data_Status, 'StatusId', $scope, 'selectedStatus');
+    };
+
+    $scope.selectedShowAll_Change = async function (flag = true, flag2 = true) {
+        // prettier-ignore
+        $scope.data_Status = ($scope.selectedShowAll ? $scope.data_Status_All : $scope.data_Status_All.filter(function (e) { return e.IsArchive == false; }));
+
+        // just to make UX consistent
+        if (flag2) $scope.selectedStatus = '';
+
+        if (flag) {
+            await $scope.showData();
+        }
+    };
+
+    ;
+
+    async function Override_some_Filters() {
+        let branch = $scope.filters.Branch.Value;
+        if (branch && typeof branch === 'string' && branch.indexOf('(') >= 0) branch = '';
+
+        let warehouse = $scope.filters.Warehouse.Value;
+        if (warehouse && typeof warehouse === 'string' && warehouse.indexOf('(') >= 0) warehouse = '';
+        $scope.selectedWarehouse = warehouse;
+
+        let reason = $scope.filters.Reason.Value;
+        if (reason && typeof reason === 'string' && reason.indexOf('(') >= 0) reason = '';
+        $scope.selectedReason = reason;
+
+        let status = $scope.filters.Status.Value;
+        if (status && typeof status === 'string' && status.indexOf('(') >= 0) status = '';
+        $scope.selectedStatus = status;
+
+        if ($scope.LoadFilterState_) {
+            $scope.selectedBranch = branch;
+
+            $scope.selectedShowAll = $scope.filters['selectedShowAll'];
+            $scope.selectedShowAll_Change(false, false);
+
+            delete $scope.filters['selectedShowAll'];
+        }
+    }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        await Promise.allSettled([
+            $rootScope.EmployeeLocationAccess($scope, ''),
+            $rootScope.EmployeeWarehouseAccess($scope, ''),
+            $scope.getData_Reason(),
+            $scope.getData_Status()
+        ]);
+
+        $rootScope.LoadFilterState('AssemblyOrders', $scope);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.Reorganize_Warehouse();
+
+        $scope.showData();
+    };
+
+    $scope.verifyAssemblyClick = async function () {
+        // Implement verify assembly functionality
+    };
+
+    $scope.printForm = async function () {
+        // Implement print functionality
+    };
+
+    $scope.voidClick = async function () {
+        // Implement void functionality
+    };
+
+    $scope.initialize_Page();
+});
+
+
+angular.module('app.erp').controller('AssetDisposalsCtrl', function ($rootScope, $scope, Utility_ERP, AssetDisposals_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+    $scope.activeOptions = [
+        { Value: null, Text: 'All' },
+        { Value: true, Text: 'Yes' },
+        { Value: false, Text: 'No' },
+    ];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Active: { PropertyName: 'Active', Operator: '=', Value: null },
+    };
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = AssetDisposals_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Code', 'Code', 'Code', 'Text', true],
+            ['Short Name', 'ShortName', 'ShortName', 'Text', true],
+            ['Description', 'Description', 'Description', 'Text', true],
+            ['Active', 'Active', 'Active', 'Boolean', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+
+        $rootScope.SaveFilterState('AssetDisposals', $scope);
+    };
+
+    ;
+
+    async function Override_some_Filters() {
+        // No additional filter overrides needed for this page
+    }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.LoadFilterState('AssetDisposals', $scope);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.showData();
+    };
+
+    $scope.downloadSchema = async function () {
+        // TODO: Implement download schema functionality
+    };
+
+    $scope.uploadFile = async function () {
+        // TODO: Implement upload functionality
+    };
+
+    $scope.initialize_Page();
+});
+
+
+angular.module('app.erp').controller('AssetsCtrl', function ($rootScope, $scope, Utility_ERP, Assets_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Branch: { PropertyName: 'LocationCode', Operator: 'in', Value: '' },
+        Type: { PropertyName: 'TypeCode', Operator: 'in', Value: '' },
+        AcquisitionDateFrom_date: { PropertyName: 'AcquisitionDate', Operator: '>=', Value: '' },
+        AcquisitionDateTo_date: { PropertyName: 'AcquisitionDate', Operator: '<=', Value: '' },
+        DisposalDateFrom_date: { PropertyName: 'DisposalDate', Operator: '>=', Value: '' },
+        DisposalDateTo_date: { PropertyName: 'DisposalDate', Operator: '<=', Value: '' },
+        Status: { PropertyName: 'StatusId', Operator: 'in', Value: '' },
+    };
+
+    $scope.selectedBranch = '';
+    $scope.selectedType = '';
+    $scope.selectedAcquisitionDateFrom = '';
+    $scope.selectedAcquisitionDateTo = '';
+    $scope.selectedDisposalDateFrom = '';
+    $scope.selectedDisposalDateTo = '';
+    $scope.selectedStatus = '';
+    $scope.selectedShowAll = false;
+
+    $scope.data_EmployeeLocationAccess = [];
+    $scope.data_Type = [];
+    $scope.data_Status = [];
+    $scope.data_Status_All = [];
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = Assets_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Serial Number', 'SerialNumber', 'SerialNumber', 'Text', true],
+            ['Type', 'Type', 'Type', 'Text', true],
+            ['Branch', 'Branch', 'Branch', 'Text', true],
+            ['Name', 'Name', 'Name', 'Text', true],
+            ['Acquisition Date', 'AcquisitionDate', 'AcquisitionDate', 'Date', true],
+            ['Expected Disposal Date', 'ExpectedDisposalDate', 'ExpectedDisposalDate', 'Date', true],
+            ['Salvage Value', 'SalvageValue', 'SalvageValue', 'Currency', true],
+            ['Acq. Cost', 'AcqCost', 'AcqCost', 'Currency', true],
+            ['Depreciated', 'Depreciated', 'Depreciated', 'Currency', true],
+            ['Warrantied', 'Warrantied', 'Warrantied', 'Boolean', true],
+            ['Warranty Exp. Date', 'WarrantyExpDate', 'WarrantyExpDate', 'Date', true],
+            ['Status', 'Status', 'Status', 'Text', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        if (!$scope.selectedBranch) {
+            $scope.filters.Branch.Operator = 'in';
+            $scope.filters.Branch.Value = Utility_ERP.Value_OperatorIN_($scope.data_EmployeeLocationAccess, 'Code');
+        } else {
+            $scope.filters.Branch.Operator = '=';
+            $scope.filters.Branch.Value = $scope.selectedBranch;
+        }
+
+        if (!$scope.selectedType) {
+            $scope.filters.Type.Operator = 'in';
+            $scope.filters.Type.Value = Utility_ERP.Value_OperatorIN_($scope.data_Type, 'Code');
+        } else {
+            $scope.filters.Type.Operator = '=';
+            $scope.filters.Type.Value = $scope.selectedType;
+        }
+
+        if ($rootScope.ValidString($scope.selectedStatus)) {
+            $scope.filters.Status.Operator = '=';
+            $scope.filters.Status.Value = $scope.selectedStatus;
+        } else {
+            $scope.filters.Status.Operator = 'in';
+            $scope.filters.Status.Value = Utility_ERP.Value_OperatorIN($scope.data_Status, 'StatusId', '');
+        }
+
+        $scope.filters.AcquisitionDateFrom_date.Value = $rootScope.Date_to_DB($scope.selectedAcquisitionDateFrom);
+        $scope.filters.AcquisitionDateTo_date.Value = $rootScope.Date_to_DB($scope.selectedAcquisitionDateTo);
+
+        $scope.filters.DisposalDateFrom_date.Value = $rootScope.Date_to_DB($scope.selectedDisposalDateFrom);
+        $scope.filters.DisposalDateTo_date.Value = $rootScope.Date_to_DB($scope.selectedDisposalDateTo);
+
+        Utility_ERP.Still_Processing($scope, true);
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+
+        $scope.filters['selectedShowAll'] = $scope.selectedShowAll;
+
+        $rootScope.SaveFilterState('Assets', $scope);
+
+        delete $scope.filters['selectedShowAll'];
+    };
+
+    $scope.getData_Type = async function () {
+        $scope.data_Type = await Assets_Service.Dropdown_Type();
+    };
+
+    $scope.getData_Status = async function () {
+        $scope.data_Status_All = await Utility_ERP.getData_DocumentStatus('Asset');
+
+        // prettier-ignore
+        $scope.data_Status = ($scope.selectedShowAll ? $scope.data_Status_All : $scope.data_Status_All.filter(function (e) { return e.IsArchive == false; }));
+
+        $rootScope.SetDefaultDropdownList($scope.data_Status, 'StatusId', $scope, 'selectedStatus');
+    };
+
+    $scope.selectedShowAll_Change = async function (flag = true, flag2 = true) {
+        // prettier-ignore
+        $scope.data_Status = ($scope.selectedShowAll ? $scope.data_Status_All : $scope.data_Status_All.filter(function (e) { return e.IsArchive == false; }));
+
+        // just to make UX consistent
+        if (flag2) $scope.selectedStatus = '';
+
+        if (flag) {
+            await $scope.showData();
+        }
+    };
+
+    ;
+
+    async function Override_some_Filters() {
+        let branch = $scope.filters.Branch.Value;
+        if (branch && typeof branch === 'string' && branch.indexOf('(') >= 0) branch = '';
+        $scope.selectedBranch = branch;
+
+        let type = $scope.filters.Type.Value;
+        if (type && typeof type === 'string' && type.indexOf('(') >= 0) type = '';
+        $scope.selectedType = type;
+
+        let status = $scope.filters.Status.Value;
+        if (status && typeof status === 'string' && status.indexOf('(') >= 0) status = '';
+        $scope.selectedStatus = status;
+
+        if ($scope.LoadFilterState_) {
+            $scope.selectedShowAll = $scope.filters['selectedShowAll'];
+            $scope.selectedShowAll_Change(false, false);
+
+            delete $scope.filters['selectedShowAll'];
+        }
+    }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        await Promise.allSettled([
+            $rootScope.EmployeeLocationAccess($scope, ''),
+            $scope.getData_Type(),
+            $scope.getData_Status()
+        ]);
+
+        $rootScope.LoadFilterState('Assets', $scope);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.showData();
+    };
+
+    $scope.disposeClick = async function () {
+        // Implement dispose functionality
+    };
+
+    $scope.downloadSchemaClick = async function () {
+        // Implement download schema functionality
+    };
+
+    $scope.uploadClick = async function () {
+        // Implement upload functionality
+    };
+
+    $scope.initialize_Page();
+});
+// ini file Controller.js
+
+angular.module('app.erp').controller('AssetTypesCtrl', function ($rootScope, $scope, Utility_ERP, AssetTypes_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+    $scope.activeOptions = [
+        { Value: null, Text: 'All' },
+        { Value: true, Text: 'Yes' },
+        { Value: false, Text: 'No' },
+    ];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Active: { PropertyName: 'Active', Operator: '=', Value: null },
+    };
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = AssetTypes_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Code', 'Code', 'Code', 'Text', true],
+            ['Description', 'Description', 'Description', 'Text', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+
+        $rootScope.SaveFilterState('AssetTypes', $scope);
+    };
+
+    ;
+
+    async function Override_some_Filters() {
+        // No special overrides needed for this simple page
+    }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.LoadFilterState('AssetTypes', $scope);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.showData();
+    };
+
+    $scope.initialize_Page();
+});
+angular.module('app.erp').controller('BranchAllocationCtrl', function ($rootScope, $scope, Utility_ERP, BranchAllocation_Service, Inventory_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Branch: { PropertyName: 'LocationCode', Operator: 'in', Value: '' },
+        Warehouse: { PropertyName: 'WarehouseCode', Operator: 'in', Value: '' },
+        Brand: { PropertyName: 'Brand', Operator: 'in', Value: '' },
+        Profile: { PropertyName: 'Profile', Operator: 'in', Value: '' },
+        Category: { PropertyName: 'CategoryCode', Operator: 'in', Value: '' },
+    };
+
+    $scope.selectedBranch = '';
+    $scope.selectedWarehouse = '';
+    $scope.selectedBrand = '';
+    $scope.selectedProfile = '';
+    $scope.selectedCategory = '';
+
+    $scope.data_EmployeeLocationAccess = [];
+    $scope.data_EmployeeWarehouseAccess = [];
+    $scope.data_Warehouse_perBranch = [];
+    $scope.data_Brand = [];
+    $scope.data_Profile = [];
+    $scope.data_Category = [];
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = BranchAllocation_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Item Code', 'ItemCode', 'ItemCode', 'Text', true],
+            ['Item Name', 'ItemName', 'ItemName', 'Text', true],
+            ['Brand', 'Brand', 'Brand', 'Text', true],
+            ['Category', 'Category', 'Category', 'Text', true],
+            ['Uom', 'Uom', 'Uom', 'Text', true],
+            ['Physical', 'Physical', 'Physical', 'Number', true],
+            ['Available', 'Available', 'Available', 'Number', true],
+            ['Peksi %', 'PeksiPercent', 'PeksiPercent', 'Number', true],
+            ['Trikaya %', 'TrikayaPercent', 'TrikayaPercent', 'Number', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        if (!$scope.selectedBranch) {
+            $scope.filters.Branch.Operator = 'in';
+            $scope.filters.Branch.Value = Utility_ERP.Value_OperatorIN_($scope.data_EmployeeLocationAccess, 'Code');
+        } else {
+            $scope.filters.Branch.Operator = '=';
+            $scope.filters.Branch.Value = $scope.selectedBranch;
+        }
+
+        if (!$scope.selectedWarehouse) {
+            $scope.filters.Warehouse.Operator = 'in';
+            $scope.filters.Warehouse.Value = Utility_ERP.Value_OperatorIN_($scope.data_Warehouse_perBranch, 'Code');
+        } else {
+            $scope.filters.Warehouse.Operator = '=';
+            $scope.filters.Warehouse.Value = $scope.selectedWarehouse;
+        }
+
+        if (!$scope.selectedBrand) {
+            $scope.filters.Brand.Operator = 'in';
+            $scope.filters.Brand.Value = Utility_ERP.Value_OperatorIN_($scope.data_Brand, 'Code');
+        } else {
+            $scope.filters.Brand.Operator = '=';
+            $scope.filters.Brand.Value = $scope.selectedBrand;
+        }
+
+        if (!$scope.selectedProfile) {
+            $scope.filters.Profile.Operator = 'in';
+            $scope.filters.Profile.Value = Utility_ERP.Value_OperatorIN_($scope.data_Profile, 'Code');
+        } else {
+            $scope.filters.Profile.Operator = '=';
+            $scope.filters.Profile.Value = $scope.selectedProfile;
+        }
+
+        if (!$scope.selectedCategory) {
+            $scope.filters.Category.Operator = 'in';
+            $scope.filters.Category.Value = Utility_ERP.Value_OperatorIN_($scope.data_Category, 'Code');
+        } else {
+            $scope.filters.Category.Operator = '=';
+            $scope.filters.Category.Value = $scope.selectedCategory;
+        }
+
+        Utility_ERP.Still_Processing($scope, true);
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+
+        $rootScope.SaveFilterState('BranchAllocation', $scope);
+    };
+
+    $scope.Branch_Changed = async function () {
+        // reset
+        $scope.selectedWarehouse = '';
+
+        $scope.Reorganize_Warehouse();
+
+        await $scope.showData();
+    };
+
+    $scope.Reorganize_Warehouse = function () {
+        var data = [];
+
+        if (!$scope.selectedBranch) {
+            // tanpa Filter Branch
+            data = $scope.data_EmployeeWarehouseAccess;
+        } else {
+            // filter berdasarkan Branch
+            data = $scope.data_EmployeeWarehouseAccess.filter(function (e) {
+                return e.LocationCode == $scope.selectedBranch;
+            });
+        }
+
+        $scope.data_Warehouse_perBranch = [...new Map(data.map((item) => [item['Code'], item])).values()].sort((x, y) => x.Code.localeCompare(y.Code));
+    };
+
+    $scope.getData_Brand = async function () {
+        $scope.data_Brand = await Inventory_Service.Dropdown_Brand();
+    };
+
+    $scope.getData_Profile = async function () {
+        $scope.data_Profile = await Inventory_Service.Dropdown_Profile();
+    };
+
+    $scope.getData_Category = async function () {
+        $scope.data_Category = await Inventory_Service.Dropdown_Category();
+    };
+
+    
+
+    async function Override_some_Filters() {
+        let branch = $scope.filters.Branch.Value;
+        if (branch && typeof branch === 'string' && branch.indexOf('(') >= 0) branch = '';
+
+        let warehouse = $scope.filters.Warehouse.Value;
+        if (warehouse && typeof warehouse === 'string' && warehouse.indexOf('(') >= 0) warehouse = '';
+        $scope.selectedWarehouse = warehouse;
+
+        let brand = $scope.filters.Brand.Value;
+        if (brand && typeof brand === 'string' && brand.indexOf('(') >= 0) brand = '';
+        $scope.selectedBrand = brand;
+
+        let profile = $scope.filters.Profile.Value;
+        if (profile && typeof profile === 'string' && profile.indexOf('(') >= 0) profile = '';
+        $scope.selectedProfile = profile;
+
+        let category = $scope.filters.Category.Value;
+        if (category && typeof category === 'string' && category.indexOf('(') >= 0) category = '';
+        $scope.selectedCategory = category;
+
+        if ($scope.LoadFilterState_) {
+            $scope.selectedBranch = branch;
+        }
+    }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        await Promise.allSettled([
+            $rootScope.EmployeeLocationAccess($scope, ''),
+            $rootScope.EmployeeWarehouseAccess($scope, ''),
+            $scope.getData_Brand(),
+            $scope.getData_Profile(),
+            $scope.getData_Category()
+        ]);
+
+        $rootScope.LoadFilterState('BranchAllocation', $scope);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.Reorganize_Warehouse();
+
+        $scope.showData();
+    };
+
+    $scope.saveData = async function () {
+        // Implementation for save functionality
+    }
+
+    $scope.initialize_Page();
+});
+angular.module('app.erp').controller('BrandFormCtrl', function ($rootScope, $scope, Utility_ERP, Brands_Service) {
+
+});
+
+angular.module('app.erp').controller('BrandsCtrl', function ($rootScope, $scope, Utility_ERP, Brands_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+    $scope.activeOptions = [
+        { Value: null, Text: 'All' },
+        { Value: true, Text: 'Yes' },
+        { Value: false, Text: 'No' },
+    ];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Active: { PropertyName: 'Active', Operator: '=', Value: null },
+    };
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = Brands_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Code', 'Code', 'Code', 'Text', true],
+            ['Description', 'Description', 'Description', 'Text', true],
+            ['', 'Active', 'Active', 'Boolean', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+
+        $rootScope.SaveFilterState('Brand', $scope);
+    };
+
+    
+
+    async function Override_some_Filters() { }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.LoadFilterState('Brand', $scope);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.showData();
+    };
+
+    $scope.initialize_Page();
+});
+
+angular.module('app.erp').controller('CategoriesCtrl', function ($rootScope, $scope, BackEndService, Utility_ERP, Categories_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 10000;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10000];
+    $scope.activeOptions = [
+        { Value: null, Text: 'All' },
+        { Value: true, Text: 'Yes' },
+        { Value: false, Text: 'No' },
+    ];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Active: { PropertyName: 'Active', Operator: '=', Value: null },
+        Parent: { PropertyName: 'ParentCode', Operator: '=', Value: null },
+    };
+
+    $scope.selectedParent = '';
+
+    // some Functions
+    var loadData_Custom = async function () {
+        var request = {
+            modelName: $scope.dt.dataModel,
+            maximumResult: ($scope.dt.pageLength <= 100) ? $scope.dt.pageLength : 100,
+            fieldNames: ['*'],
+
+            sortList: [$scope.dt.activeSortField + ' ' + $scope.dt.activeSortDirection],
+            pageNumber: $scope.dt.currentPage,
+        };
+
+        $scope.dt.applyFilters(request);
+
+        $scope.dt.loading = true;
+
+        // reset
+        $scope.dt.data = [];
+        //dt.totalRows = 0;
+        //dt.totalPages = 0;
+
+        let response = await BackEndService.RequestDataList_X(request);
+        $scope.dt.loading = false;
+
+        if (response.success) {
+            // request data success
+            $scope.dt.data = response.data.Data;
+            $scope.dt.totalRows = response.data.TotalRows;
+            if ($scope.dt.totalRows < $scope.dt.pageLength) $scope.dt.totalPages = 1;
+            else $scope.dt.totalPages = Math.ceil($scope.dt.totalRows / $scope.dt.pageLength);
+
+            var kolom_id = 'Code';
+            var kolom_parent_id = 'ParentCode';
+            var kolom_code = 'Code';
+            var kolom_desc = 'Description';
+
+            $scope.dt.treeData = Utility_ERP.sdr_BuildFlatTreeData($scope, kolom_id, kolom_parent_id, kolom_code, kolom_desc);
+        } else {
+            // request data failed
+            // show Error: sudah dihandle oleh SmartAdmin - function notifyError() menggunakan $.bigBox()
+        }
+
+        BackEndService.Log_Activity();
+    };
+
+
+    $scope.CreateTable = function () {
+        $scope.dt = Categories_Service.Table($scope);
+
+        $scope.dt.loadData = loadData_Custom;
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Code', 'Code', 'Code', 'Text', true],
+            //['Description', 'Description', 'Description', 'Text', true],
+            // ['Parent', 'ParentCode', 'ParentCode', 'ParentName', true],
+            // ['Level Type', 'LevelType', 'LevelType', 'Text', true],
+            // ['Item Type', 'ItemType', 'ItemType', 'Number', true],
+            ['', 'Active', 'Active', 'Boolean', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $scope.filters['selectedParent'] = $scope.selectedParent;
+
+        $rootScope.SaveFilterState('Category', $scope);
+
+        delete $scope.filters['selectedParent'];
+
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+    };
+
+
+
+    $scope.getData_Parent = function (val) {
+        return Categories_Service.Dropdown_Category2(val);
+    };
+
+    async function Override_some_Filters() {
+        if ($scope.LoadFilterState_) {
+            $scope.selectedParent = $scope.filters['selectedParent'];
+            delete $scope.filters['selectedParent'];
+        }
+    }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.LoadFilterState('Category', $scope);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.showData();
+    };
+
+    $scope.initialize_Page();
+});
+
+angular.module('app.erp').controller('CategoriesXCtrl', function ($rootScope, $scope, BackEndService, Utility_ERP, Categories_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 10000;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10000];
+    $scope.activeOptions = [
+        { Value: null, Text: 'All' },
+        { Value: true, Text: 'Yes' },
+        { Value: false, Text: 'No' },
+    ];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Active: { PropertyName: 'Active', Operator: '=', Value: null },
+        Parent: { PropertyName: 'ParentCode', Operator: '=', Value: null },
+    };
+
+    $scope.selectedParent = '';
+
+    // some Functions
+    var loadData_Custom = async function () {
+        var request = {
+            modelName: $scope.dt.dataModel,
+            maximumResult: ($scope.dt.pageLength <= 100) ? $scope.dt.pageLength : 100,
+            fieldNames: ['*'],
+
+            sortList: [$scope.dt.activeSortField + ' ' + $scope.dt.activeSortDirection],
+            pageNumber: $scope.dt.currentPage,
+        };
+
+        $scope.dt.applyFilters(request);
+
+        $scope.dt.loading = true;
+
+        // reset
+        $scope.dt.data = [];
+        //dt.totalRows = 0;
+        //dt.totalPages = 0;
+
+        let response = await BackEndService.RequestDataList_X(request);
+        $scope.dt.loading = false;
+
+        if (response.success) {
+            // request data success
+            $scope.dt.data = response.data.Data;
+            $scope.dt.totalRows = response.data.TotalRows;
+            if ($scope.dt.totalRows < $scope.dt.pageLength) $scope.dt.totalPages = 1;
+            else $scope.dt.totalPages = Math.ceil($scope.dt.totalRows / $scope.dt.pageLength);
+
+            var kolom_id = 'AccountId';
+            var kolom_parent_id = 'ParentId';
+            var kolom_code = 'AccountCode';
+            var kolom_desc = 'Description';
+
+            $scope.dt.treeData = Utility_ERP.sdr_BuildFlatTreeData($scope, kolom_id, kolom_parent_id, kolom_code, kolom_desc);
+        } else {
+            // request data failed
+            // show Error: sudah dihandle oleh SmartAdmin - function notifyError() menggunakan $.bigBox()
+        }
+
+        BackEndService.Log_Activity();
+    };
+
+
+    $scope.CreateTable = function () {
+        $scope.dt = Categories_Service.Table($scope);
+
+        $scope.dt.loadData = loadData_Custom;
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Code', 'Code', 'Code', 'Text', true],
+            ['Description', 'Description', 'Description', 'Text', true],
+            ['Parent', 'ParentCode', 'ParentCode', 'ParentName', true],
+            ['Level Type', 'LevelType', 'LevelType', 'Text', true],
+            ['Item Type', 'ItemType', 'ItemType', 'Number', true],
+            ['', 'Active', 'Active', 'Boolean', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $scope.filters['selectedParent'] = $scope.selectedParent;
+
+        $rootScope.SaveFilterState('Category', $scope);
+
+        delete $scope.filters['selectedParent'];
+
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+    };
+
+
+
+    $scope.getData_Parent = function (val) {
+        return Categories_Service.Dropdown_Category2(val);
+    };
+
+    async function Override_some_Filters() {
+        if ($scope.LoadFilterState_) {
+            $scope.selectedParent = $scope.filters['selectedParent'];
+            delete $scope.filters['selectedParent'];
+        }
+    }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.LoadFilterState('Category', $scope);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.showData();
+    };
+
+    $scope.initialize_Page();
+});
+
+angular.module('app.erp').controller('CategoryFormCtrl', function ($rootScope, $scope, Utility_ERP, Categories_Service) {
+});
+
+angular.module('app.erp').controller('ComparisonPanelCtrl', function ($rootScope, $scope, Utility_ERP, ComparisonPanel_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+    $scope.activeOptions = [
+        { Value: null, Text: 'All' },
+        { Value: true, Text: 'Yes' },
+        { Value: false, Text: 'No' },
+    ];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Active: { PropertyName: 'Active', Operator: '=', Value: null },
+    };
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = ComparisonPanel_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Code', 'Code', 'Code', 'Text', true],
+            ['Short Name', 'ShortName', 'ShortName', 'Text', true],
+            ['Description', 'Description', 'Description', 'Text', true],
+            ['Active', 'Active', 'Active', 'Boolean', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+
+        $rootScope.SaveFilterState('ComparisonPanel', $scope);
+    };
+
+    ;
+
+    async function Override_some_Filters() {
+        // No additional filter overrides needed for this page
+    }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.LoadFilterState('ComparisonPanel', $scope);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.showData();
+    };
+
+    $scope.downloadSchema = async function () {
+        // TODO: Implement download schema functionality
+    };
+
+    $scope.uploadFile = async function () {
+        // TODO: Implement upload functionality
+    };
+
+    $scope.initialize_Page();
+});
+angular.module('app.erp').controller('ContractPositionCtrl', function ($rootScope, $scope, Utility_ERP, ContractPosition_Service, Inventory_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Contract: { PropertyName: 'ContractCode', Operator: 'in', Value: '' },
+        Profile: { PropertyName: 'Profile', Operator: 'in', Value: '' },
+        Brand: { PropertyName: 'Brand', Operator: 'in', Value: '' },
+        Category: { PropertyName: 'CategoryCode', Operator: 'in', Value: '' },
+    };
+
+    $scope.selectedContract = '';
+    $scope.selectedProfile = '';
+    $scope.selectedBrand = '';
+    $scope.selectedCategory = '';
+
+    $scope.data_Contract = [];
+    $scope.data_Profile = [];
+    $scope.data_Brand = [];
+    $scope.data_Category = [];
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = ContractPosition_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Item Code', 'ItemCode', 'ItemCode', 'Text', true],
+            ['Item Name', 'ItemName', 'ItemName', 'Text', true],
+            ['Brand', 'Brand', 'Brand', 'Text', true],
+            ['Category', 'Category', 'Category', 'Text', true],
+            ['Uom', 'Uom', 'Uom', 'Text', true],
+            ['Ordered', 'Ordered', 'Ordered', 'Number', true],
+            ['Open', 'Open', 'Open', 'Number', true],
+            ['On P/R', 'OnPR', 'OnPR', 'Number', true],
+            ['On P/O', 'OnPO', 'OnPO', 'Number', true],
+            ['Reserved', 'Reserved', 'Reserved', 'Number', true],
+            ['Demand', 'Demand', 'Demand', 'Number', true],
+            ['Shipment', 'Shipment', 'Shipment', 'Number', true],
+            ['Picking', 'Picking', 'Picking', 'Number', true],
+            ['Routing', 'Routing', 'Routing', 'Number', true],
+            ['Manifest', 'Manifest', 'Manifest', 'Number', true],
+            ['Delivery', 'Delivery', 'Delivery', 'Number', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        if (!$scope.selectedContract) {
+            $scope.filters.Contract.Operator = 'in';
+            $scope.filters.Contract.Value = Utility_ERP.Value_OperatorIN_($scope.data_Contract, 'Code');
+        } else {
+            $scope.filters.Contract.Operator = '=';
+            $scope.filters.Contract.Value = $scope.selectedContract;
+        }
+
+        if (!$scope.selectedProfile) {
+            $scope.filters.Profile.Operator = 'in';
+            $scope.filters.Profile.Value = Utility_ERP.Value_OperatorIN_($scope.data_Profile, 'Code');
+        } else {
+            $scope.filters.Profile.Operator = '=';
+            $scope.filters.Profile.Value = $scope.selectedProfile;
+        }
+
+        if (!$scope.selectedBrand) {
+            $scope.filters.Brand.Operator = 'in';
+            $scope.filters.Brand.Value = Utility_ERP.Value_OperatorIN_($scope.data_Brand, 'Code');
+        } else {
+            $scope.filters.Brand.Operator = '=';
+            $scope.filters.Brand.Value = $scope.selectedBrand;
+        }
+
+        if (!$scope.selectedCategory) {
+            $scope.filters.Category.Operator = 'in';
+            $scope.filters.Category.Value = Utility_ERP.Value_OperatorIN_($scope.data_Category, 'Code');
+        } else {
+            $scope.filters.Category.Operator = '=';
+            $scope.filters.Category.Value = $scope.selectedCategory;
+        }
+
+        Utility_ERP.Still_Processing($scope, true);
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+
+        $rootScope.SaveFilterState('ContractPosition', $scope);
+    };
+
+    $scope.getData_Contract = async function () {
+        $scope.data_Contract = await Inventory_Service.Dropdown_Contract();
+    };
+
+    $scope.getData_Profile = async function () {
+        $scope.data_Profile = await Inventory_Service.Dropdown_Profile();
+    };
+
+    $scope.getData_Brand = async function () {
+        $scope.data_Brand = await Inventory_Service.Dropdown_Brand();
+    };
+
+    $scope.getData_Category = async function () {
+        $scope.data_Category = await Inventory_Service.Dropdown_Category();
+    };
+
+    
+
+    async function Override_some_Filters() {
+        let contract = $scope.filters.Contract.Value;
+        if (contract && typeof contract === 'string' && contract.indexOf('(') >= 0) contract = '';
+        $scope.selectedContract = contract;
+
+        let profile = $scope.filters.Profile.Value;
+        if (profile && typeof profile === 'string' && profile.indexOf('(') >= 0) profile = '';
+        $scope.selectedProfile = profile;
+
+        let brand = $scope.filters.Brand.Value;
+        if (brand && typeof brand === 'string' && brand.indexOf('(') >= 0) brand = '';
+        $scope.selectedBrand = brand;
+
+        let category = $scope.filters.Category.Value;
+        if (category && typeof category === 'string' && category.indexOf('(') >= 0) category = '';
+        $scope.selectedCategory = category;
+    }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        await Promise.allSettled([
+            $scope.getData_Contract(),
+            $scope.getData_Profile(),
+            $scope.getData_Brand(),
+            $scope.getData_Category()
+        ]);
+
+        $rootScope.LoadFilterState('ContractPosition', $scope);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.showData();
+    };
+
+    $scope.initialize_Page();
+});
+angular.module('app.erp').controller('CostGroupFormCtrl', function ($rootScope, $scope, Utility_ERP, CostGroups_Service) {
+});
+angular.module('app.erp').controller('CostGroupsCtrl', function ($rootScope, $scope, Utility_ERP, CostGroups_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+    $scope.activeOptions = [
+        { Value: null, Text: 'All' },
+        { Value: true, Text: 'Yes' },
+        { Value: false, Text: 'No' },
+    ];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Active: { PropertyName: 'Active', Operator: '=', Value: null },
+    };
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = CostGroups_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Code', 'Code', 'Code', 'Text', true],
+            ['Description', 'Name', 'Name', 'Text', true],
+            ['', 'Active', 'Active', 'Boolean', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+
+        $rootScope.SaveFilterState('CostGroup', $scope);
+    };
+
+    
+
+    async function Override_some_Filters() { }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.LoadFilterState('CostGroup', $scope);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.showData();
+    };
+
+    $scope.initialize_Page();
+});
+
+
+
+// ini file Controller.js
+
+angular.module('app.erp').controller('CountVerificationCtrl', function ($rootScope, $scope, Utility_ERP, CountVerification_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+    $scope.activeOptions = [
+        { Value: null, Text: 'All' },
+        { Value: true, Text: 'Yes' },
+        { Value: false, Text: 'No' },
+    ];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Active: { PropertyName: 'Active', Operator: '=', Value: null },
+    };
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = CountVerification_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Sheet #', 'SheetNo', 'SheetNo', 'Text', true],
+            ['Sheet Name', 'SheetName', 'SheetName', 'Text', true],
+            ['Date', 'Date', 'Date', 'Date', true],
+            ['Counter', 'Counter', 'Counter', 'Text', true],
+            ['Noter', 'Noter', 'Noter', 'Text', true],
+            ['Diff %', 'DiffPct', 'DiffPct', 'Number', true],
+            ['Status', 'Status', 'Status', 'Text', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+
+        $rootScope.SaveFilterState('CountVerification', $scope);
+    };
+
+    ;
+
+    async function Override_some_Filters() {
+        // No additional filters to override for this page
+    }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.LoadFilterState('CountVerification', $scope);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.showData();
+    };
+
+    $scope.applySheet = async function () {
+        // Implementation for Apply Sheet action
+    };
+
+    $scope.initialize_Page();
+});
+angular.module('app.erp').controller('DeliveredClosedDoSelectionCtrl', function ($rootScope, $scope, Utility_ERP, DeliveredClosedDoSelection_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+    $scope.activeOptions = [
+        { Value: null, Text: 'All' },
+        { Value: true, Text: 'Yes' },
+        { Value: false, Text: 'No' },
+    ];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Active: { PropertyName: 'Active', Operator: '=', Value: null },
+    };
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = DeliveredClosedDoSelection_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Shipment #', 'ShipmentNo', 'ShipmentNo', 'Text', true],
+            ['Branch', 'Branch', 'Branch', 'Text', true],
+            ['Warehouse', 'Warehouse', 'Warehouse', 'Text', true],
+            ['Date', 'Date', 'Date', 'Date', true],
+            ['Source Type', 'SourceType', 'SourceType', 'Text', true],
+            ['Source Nr.', 'SourceNr', 'SourceNr', 'Text', true],
+            ['Consignee', 'Consignee', 'Consignee', 'Text', true],
+            ['Delivered Date', 'DeliveredDate', 'DeliveredDate', 'Date', true],
+            ['Status', 'Status', 'Status', 'Text', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+
+        $rootScope.SaveFilterState('DeliveredClosedDoSelection', $scope);
+    };
+
+    ;
+
+    async function Override_some_Filters() {
+        // No additional filters to override for this page
+    }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.LoadFilterState('DeliveredClosedDoSelection', $scope);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.showData();
+    };
+
+    $scope.addSelection = async function () {
+        // Implementation for Add action
+    };
+
+    $scope.initialize_Page();
+});
+// ini file Controller.js
+
+angular.module('app.erp').controller('DisassemblyOrdersCtrl', function ($rootScope, $scope, Utility_ERP, DisassemblyOrders_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+    $scope.activeOptions = [
+        { Value: null, Text: 'All' },
+        { Value: true, Text: 'Yes' },
+        { Value: false, Text: 'No' },
+    ];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Active: { PropertyName: 'Active', Operator: '=', Value: null },
+    };
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = DisassemblyOrders_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Code', 'Code', 'Code', 'Text', true],
+            ['Short Name', 'ShortName', 'ShortName', 'Text', true],
+            ['Description', 'Description', 'Description', 'Text', true],
+            ['Active', 'Active', 'Active', 'Boolean', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+
+        $rootScope.SaveFilterState('DisassemblyOrders', $scope);
+    };
+
+    ;
+
+    async function Override_some_Filters() {
+        // No additional filter overrides needed for this page
+    }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.LoadFilterState('DisassemblyOrders', $scope);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.showData();
+    };
+
+    $scope.downloadSchema = async function () {
+        // TODO: Implement download schema functionality
+    };
+
+    $scope.uploadFile = async function () {
+        // TODO: Implement upload functionality
+    };
+
+    $scope.initialize_Page();
+});
+angular.module('app.erp').controller('DisposalMethodsCtrl', function ($rootScope, $scope, Utility_ERP, DisposalMethods_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+    $scope.activeOptions = [
+        { Value: null, Text: 'All' },
+        { Value: true, Text: 'Yes' },
+        { Value: false, Text: 'No' },
+    ];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Active: { PropertyName: 'Active', Operator: '=', Value: null },
+    };
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = DisposalMethods_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Code', 'Code', 'Code', 'Text', true],
+            ['Description', 'Description', 'Description', 'Text', true],
+            ['', 'Active', 'Active', 'Boolean', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+
+        $rootScope.SaveFilterState('DisposalMethod', $scope);
+    };
+
+    
+
+    async function Override_some_Filters() { }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.LoadFilterState('DisposalMethod', $scope);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.showData();
+    };
+
+    $scope.initialize_Page();
+});
+
+angular.module('app.erp').controller('DisposalMethodsFormCtrl', function ($rootScope, $scope, Utility_ERP, DisposalMethods_Service) {
+});
+angular.module('app.erp').controller('DropshipPositionsCtrl', function ($rootScope, $scope, Utility_ERP, DropshipPositions_Service, Inventory_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Branch: { PropertyName: 'LocationCode', Operator: 'in', Value: '' },
+        Warehouse: { PropertyName: 'WarehouseCode', Operator: 'in', Value: '' },
+        Brand: { PropertyName: 'Brand', Operator: 'in', Value: '' },
+        Profile: { PropertyName: 'Profile', Operator: 'in', Value: '' },
+        Location: { PropertyName: 'LocationCode', Operator: 'in', Value: '' },
+        Category: { PropertyName: 'CategoryCode', Operator: 'in', Value: '' },
+        DateFrom_date: { PropertyName: 'Date', Operator: '>=', Value: '' },
+        DateTo_date: { PropertyName: 'Date', Operator: '<=', Value: '' },
+        HideEmptyStock: { PropertyName: 'Outstanding', Operator: '>', Value: null },
+    };
+
+    $scope.selectedBranch = '';
+    $scope.selectedWarehouse = '';
+    $scope.selectedBrand = '';
+    $scope.selectedProfile = '';
+    $scope.selectedLocation = '';
+    $scope.selectedCategory = '';
+    $scope.selectedDateFrom = '';
+    $scope.selectedDateTo = '';
+    $scope.selectedHideEmptyStock = false;
+
+    $scope.data_EmployeeLocationAccess = [];
+    $scope.data_EmployeeWarehouseAccess = [];
+    $scope.data_Warehouse_perBranch = [];
+    $scope.data_Brand = [];
+    $scope.data_Profile = [];
+    $scope.data_Location = [];
+    $scope.data_Category = [];
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = DropshipPositions_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Item Code', 'ItemCode', 'ItemCode', 'Text', true],
+            ['Item Name', 'ItemName', 'ItemName', 'Text', true],
+            ['Brand', 'Brand', 'Brand', 'Text', true],
+            ['Uom', 'Uom', 'Uom', 'Text', true],
+            ['On P/R', 'OnPR', 'OnPR', 'Number', true],
+            ['Outstanding', 'Outstanding', 'Outstanding', 'Number', true],
+            ['Drafted', 'Drafted', 'Drafted', 'Number', true],
+            ['Submitted', 'Submitted', 'Submitted', 'Number', true],
+            ['Delivery', 'Delivery', 'Delivery', 'Number', true],
+            ['Received', 'Received', 'Received', 'Number', true],
+            ['Delivered', 'Delivered', 'Delivered', 'Number', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        if (!$scope.selectedBranch) {
+            $scope.filters.Branch.Operator = 'in';
+            $scope.filters.Branch.Value = Utility_ERP.Value_OperatorIN_($scope.data_EmployeeLocationAccess, 'Code');
+        } else {
+            $scope.filters.Branch.Operator = '=';
+            $scope.filters.Branch.Value = $scope.selectedBranch;
+        }
+
+        if (!$scope.selectedWarehouse) {
+            $scope.filters.Warehouse.Operator = 'in';
+            $scope.filters.Warehouse.Value = Utility_ERP.Value_OperatorIN_($scope.data_Warehouse_perBranch, 'Code');
+        } else {
+            $scope.filters.Warehouse.Operator = '=';
+            $scope.filters.Warehouse.Value = $scope.selectedWarehouse;
+        }
+
+        if (!$scope.selectedBrand) {
+            $scope.filters.Brand.Operator = 'in';
+            $scope.filters.Brand.Value = Utility_ERP.Value_OperatorIN_($scope.data_Brand, 'Code');
+        } else {
+            $scope.filters.Brand.Operator = '=';
+            $scope.filters.Brand.Value = $scope.selectedBrand;
+        }
+
+        if (!$scope.selectedProfile) {
+            $scope.filters.Profile.Operator = 'in';
+            $scope.filters.Profile.Value = Utility_ERP.Value_OperatorIN_($scope.data_Profile, 'Code');
+        } else {
+            $scope.filters.Profile.Operator = '=';
+            $scope.filters.Profile.Value = $scope.selectedProfile;
+        }
+
+        if (!$scope.selectedLocation) {
+            $scope.filters.Location.Operator = 'in';
+            $scope.filters.Location.Value = Utility_ERP.Value_OperatorIN_($scope.data_Location, 'Code');
+        } else {
+            $scope.filters.Location.Operator = '=';
+            $scope.filters.Location.Value = $scope.selectedLocation;
+        }
+
+        if (!$scope.selectedCategory) {
+            $scope.filters.Category.Operator = 'in';
+            $scope.filters.Category.Value = Utility_ERP.Value_OperatorIN_($scope.data_Category, 'Code');
+        } else {
+            $scope.filters.Category.Operator = '=';
+            $scope.filters.Category.Value = $scope.selectedCategory;
+        }
+
+        $scope.filters.DateFrom_date.Value = $rootScope.Date_to_DB($scope.selectedDateFrom);
+        $scope.filters.DateTo_date.Value = $rootScope.Date_to_DB($scope.selectedDateTo);
+
+        $scope.filters.HideEmptyStock.Value = null;
+        if ($scope.selectedHideEmptyStock) {
+            $scope.filters.HideEmptyStock.Value = 0;
+        }
+
+        Utility_ERP.Still_Processing($scope, true);
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+
+        $scope.filters['selectedHideEmptyStock'] = $scope.selectedHideEmptyStock;
+
+        $rootScope.SaveFilterState('DropshipPositions', $scope);
+
+        delete $scope.filters['selectedHideEmptyStock'];
+    };
+
+    $scope.Branch_Changed = async function () {
+        // reset
+        $scope.selectedWarehouse = '';
+
+        $scope.Reorganize_Warehouse();
+
+        await $scope.showData();
+    };
+
+    $scope.Reorganize_Warehouse = function () {
+        var data = [];
+
+        if (!$scope.selectedBranch) {
+            // tanpa Filter Branch
+            data = $scope.data_EmployeeWarehouseAccess;
+        } else {
+            // filter berdasarkan Branch
+            data = $scope.data_EmployeeWarehouseAccess.filter(function (e) {
+                return e.LocationCode == $scope.selectedBranch;
+            });
+        }
+
+        $scope.data_Warehouse_perBranch = [...new Map(data.map((item) => [item['Code'], item])).values()].sort((x, y) => x.Code.localeCompare(y.Code));
+    };
+
+    $scope.getData_Brand = async function () {
+        $scope.data_Brand = await Inventory_Service.Dropdown_Brand();
+    };
+
+    $scope.getData_Profile = async function () {
+        $scope.data_Profile = await Inventory_Service.Dropdown_Profile();
+    };
+
+    $scope.getData_Location = async function () {
+        $scope.data_Location = await Inventory_Service.Dropdown_Location();
+    };
+
+    $scope.getData_Category = async function () {
+        $scope.data_Category = await Inventory_Service.Dropdown_Category();
+    };
+
+    
+
+    async function Override_some_Filters() {
+        let branch = $scope.filters.Branch.Value;
+        if (branch && typeof branch === 'string' && branch.indexOf('(') >= 0) branch = '';
+
+        let warehouse = $scope.filters.Warehouse.Value;
+        if (warehouse && typeof warehouse === 'string' && warehouse.indexOf('(') >= 0) warehouse = '';
+        $scope.selectedWarehouse = warehouse;
+
+        let brand = $scope.filters.Brand.Value;
+        if (brand && typeof brand === 'string' && brand.indexOf('(') >= 0) brand = '';
+        $scope.selectedBrand = brand;
+
+        let profile = $scope.filters.Profile.Value;
+        if (profile && typeof profile === 'string' && profile.indexOf('(') >= 0) profile = '';
+        $scope.selectedProfile = profile;
+
+        let location = $scope.filters.Location.Value;
+        if (location && typeof location === 'string' && location.indexOf('(') >= 0) location = '';
+        $scope.selectedLocation = location;
+
+        let category = $scope.filters.Category.Value;
+        if (category && typeof category === 'string' && category.indexOf('(') >= 0) category = '';
+        $scope.selectedCategory = category;
+
+        if ($scope.LoadFilterState_) {
+            $scope.selectedBranch = branch;
+
+            $scope.selectedHideEmptyStock = $scope.filters['selectedHideEmptyStock'];
+            delete $scope.filters['selectedHideEmptyStock'];
+        }
+    }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        await Promise.allSettled([
+            $rootScope.EmployeeLocationAccess($scope, ''),
+            $rootScope.EmployeeWarehouseAccess($scope, ''),
+            $scope.getData_Brand(),
+            $scope.getData_Profile(),
+            $scope.getData_Location(),
+            $scope.getData_Category()
+        ]);
+
+        $rootScope.LoadFilterState('DropshipPositions', $scope);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.Reorganize_Warehouse();
+
+        $scope.showData();
+    };
+
+    $scope.printList = async function () {
+        // Implementation for print list functionality
+    }
+
+    $scope.initialize_Page();
+});
+angular.module('app.erp').controller('InventoryAdjustmentsCtrl', function ($rootScope, $scope, Utility_ERP, InventoryAdjustments_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Branch: { PropertyName: 'LocationCode', Operator: 'in', Value: '' },
+        Warehouse: { PropertyName: 'WarehouseCode', Operator: 'in', Value: '' },
+        DateFrom_date: { PropertyName: 'Date', Operator: '>=', Value: '' },
+        DateTo_date: { PropertyName: 'Date', Operator: '<=', Value: '' },
+        Status: { PropertyName: 'StatusId', Operator: 'in', Value: '' },
+    };
+
+    $scope.selectedBranch = '';
+    $scope.selectedWarehouse = '';
+    $scope.selectedDateFrom = '';
+    $scope.selectedDateTo = '';
+    $scope.selectedStatus = '';
+    $scope.selectedShowAll = false;
+
+    $scope.data_EmployeeLocationAccess = [];
+    $scope.data_EmployeeWarehouseAccess = [];
+    $scope.data_Warehouse_perBranch = [];
+    $scope.data_Status = [];
+    $scope.data_Status_All = [];
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = InventoryAdjustments_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Doc Nr.', 'DocNr', 'DocNr', 'Text', true],
+            ['Date', 'Date', 'Date', 'Date', true],
+            ['Branch', 'Branch', 'Branch', 'Text', true],
+            ['Warehouse', 'Warehouse', 'Warehouse', 'Text', true],
+            ['Adj Qty', 'AdjQty', 'AdjQty', 'Number', true],
+            ['Issued By', 'IssuedBy', 'IssuedBy', 'Text', true],
+            ['Status', 'Status', 'Status', 'Text', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        if (!$scope.selectedBranch) {
+            $scope.filters.Branch.Operator = 'in';
+            $scope.filters.Branch.Value = Utility_ERP.Value_OperatorIN_($scope.data_EmployeeLocationAccess, 'Code');
+        } else {
+            $scope.filters.Branch.Operator = '=';
+            $scope.filters.Branch.Value = $scope.selectedBranch;
+        }
+
+        if (!$scope.selectedWarehouse) {
+            $scope.filters.Warehouse.Operator = 'in';
+            $scope.filters.Warehouse.Value = Utility_ERP.Value_OperatorIN_($scope.data_Warehouse_perBranch, 'Code');
+        } else {
+            $scope.filters.Warehouse.Operator = '=';
+            $scope.filters.Warehouse.Value = $scope.selectedWarehouse;
+        }
+
+        if ($rootScope.ValidString($scope.selectedStatus)) {
+            $scope.filters.Status.Operator = '=';
+            $scope.filters.Status.Value = $scope.selectedStatus;
+        } else {
+            $scope.filters.Status.Operator = 'in';
+            $scope.filters.Status.Value = Utility_ERP.Value_OperatorIN($scope.data_Status, 'StatusId', '');
+        }
+
+        $scope.filters.DateFrom_date.Value = $rootScope.Date_to_DB($scope.selectedDateFrom);
+        $scope.filters.DateTo_date.Value = $rootScope.Date_to_DB($scope.selectedDateTo);
+
+        Utility_ERP.Still_Processing($scope, true);
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+
+        $scope.filters['selectedShowAll'] = $scope.selectedShowAll;
+
+        $rootScope.SaveFilterState('InventoryAdjustments', $scope);
+
+        delete $scope.filters['selectedShowAll'];
+    };
+
+    $scope.Branch_Changed = async function () {
+        // --  untuk Page ini, setiap kali Branch berubah --> maka Warehouse ke posisi "All"
+        // reset
+        $scope.selectedWarehouse = '';
+
+        $scope.Reorganize_Warehouse();
+
+        await $scope.showData();
+    };
+
+    $scope.Reorganize_Warehouse = function () {
+        var data = [];
+
+        if (!$scope.selectedBranch) {
+            // tanpa Filter Branch
+            data = $scope.data_EmployeeWarehouseAccess;
+        } else {
+            // filter berdasarkan Branch
+            data = $scope.data_EmployeeWarehouseAccess.filter(function (e) {
+                return e.LocationCode == $scope.selectedBranch;
+            });
+        }
+
+        $scope.data_Warehouse_perBranch = [...new Map(data.map((item) => [item['Code'], item])).values()].sort((x, y) => x.Code.localeCompare(y.Code));
+    };
+
+    $scope.getData_Status = async function () {
+        $scope.data_Status_All = await Utility_ERP.getData_DocumentStatus('InventoryAdjustment');
+
+        // prettier-ignore
+        $scope.data_Status = ($scope.selectedShowAll ? $scope.data_Status_All : $scope.data_Status_All.filter(function (e) { return e.IsArchive == false; }));
+
+        $rootScope.SetDefaultDropdownList($scope.data_Status, 'StatusId', $scope, 'selectedStatus');
+    };
+
+    $scope.selectedShowAll_Change = async function (flag = true, flag2 = true) {
+        // prettier-ignore
+        $scope.data_Status = ($scope.selectedShowAll ? $scope.data_Status_All : $scope.data_Status_All.filter(function (e) { return e.IsArchive == false; }));
+
+        // just to make UX consistent
+        if (flag2) $scope.selectedStatus = '';
+
+        if (flag) {
+            await $scope.showData();
+        }
+    };
+
+    ;
+
+    async function Override_some_Filters() {
+        let branch = $scope.filters.Branch.Value;
+        if (branch && typeof branch === 'string' && branch.indexOf('(') >= 0) branch = '';
+
+        let warehouse = $scope.filters.Warehouse.Value;
+        if (warehouse && typeof warehouse === 'string' && warehouse.indexOf('(') >= 0) warehouse = '';
+        $scope.selectedWarehouse = warehouse;
+
+        let status = $scope.filters.Status.Value;
+        if (status && typeof status === 'string' && status.indexOf('(') >= 0) status = '';
+        $scope.selectedStatus = status;
+
+        if ($scope.LoadFilterState_) {
+            $scope.selectedBranch = branch;
+
+            $scope.selectedShowAll = $scope.filters['selectedShowAll'];
+            $scope.selectedShowAll_Change(false, false);
+
+            delete $scope.filters['selectedShowAll'];
+        }
+    }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        await Promise.allSettled([
+            $rootScope.EmployeeLocationAccess($scope, ''),
+            $rootScope.EmployeeWarehouseAccess($scope, ''),
+            $scope.getData_Status()
+        ]);
+
+        $rootScope.LoadFilterState('InventoryAdjustments', $scope);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.Reorganize_Warehouse();
+
+        $scope.showData();
+    };
+
+    $scope.verifyClick = async function () {
+        // Implement verify functionality
+    };
+
+    $scope.voidClick = async function () {
+        // Implement void functionality
+    };
+
+    $scope.initialize_Page();
+});
+angular.module('app.erp').controller('InventoryCountsCtrl', function ($rootScope, $scope, Utility_ERP, InventoryCounts_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Branch: { PropertyName: 'LocationCode', Operator: 'in', Value: '' },
+        Warehouse: { PropertyName: 'WarehouseCode', Operator: 'in', Value: '' },
+        DateFrom_date: { PropertyName: 'Date', Operator: '>=', Value: '' },
+        DateTo_date: { PropertyName: 'Date', Operator: '<=', Value: '' },
+        VerifiedDateFrom_date: { PropertyName: 'VerifiedDate', Operator: '>=', Value: '' },
+        VerifiedDateTo_date: { PropertyName: 'VerifiedDate', Operator: '<=', Value: '' },
+        Status: { PropertyName: 'StatusId', Operator: 'in', Value: '' },
+    };
+
+    $scope.selectedBranch = '';
+    $scope.selectedWarehouse = '';
+    $scope.selectedDateFrom = '';
+    $scope.selectedDateTo = '';
+    $scope.selectedVerifiedDateFrom = '';
+    $scope.selectedVerifiedDateTo = '';
+    $scope.selectedStatus = '';
+    $scope.selectedShowAll = false;
+
+    $scope.data_EmployeeLocationAccess = [];
+    $scope.data_EmployeeWarehouseAccess = [];
+    $scope.data_Warehouse_perBranch = [];
+    $scope.data_Status = [];
+    $scope.data_Status_All = [];
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = InventoryCounts_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Process Nr.', 'ProcessNr', 'ProcessNr', 'Text', true],
+            ['Date', 'Date', 'Date', 'Date', true],
+            ['Branch', 'Branch', 'Branch', 'Text', true],
+            ['Warehouse', 'Warehouse', 'Warehouse', 'Text', true],
+            ['Issued By', 'IssuedBy', 'IssuedBy', 'Text', true],
+            ['Notes', 'Notes', 'Notes', 'Text', true],
+            ['Verified Date', 'VerifiedDate', 'VerifiedDate', 'Date', true],
+            ['Status', 'Status', 'Status', 'Text', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        if (!$scope.selectedBranch) {
+            $scope.filters.Branch.Operator = 'in';
+            $scope.filters.Branch.Value = Utility_ERP.Value_OperatorIN_($scope.data_EmployeeLocationAccess, 'Code');
+        } else {
+            $scope.filters.Branch.Operator = '=';
+            $scope.filters.Branch.Value = $scope.selectedBranch;
+        }
+
+        if (!$scope.selectedWarehouse) {
+            $scope.filters.Warehouse.Operator = 'in';
+            $scope.filters.Warehouse.Value = Utility_ERP.Value_OperatorIN_($scope.data_Warehouse_perBranch, 'Code');
+        } else {
+            $scope.filters.Warehouse.Operator = '=';
+            $scope.filters.Warehouse.Value = $scope.selectedWarehouse;
+        }
+
+        if ($rootScope.ValidString($scope.selectedStatus)) {
+            $scope.filters.Status.Operator = '=';
+            $scope.filters.Status.Value = $scope.selectedStatus;
+        } else {
+            $scope.filters.Status.Operator = 'in';
+            $scope.filters.Status.Value = Utility_ERP.Value_OperatorIN($scope.data_Status, 'StatusId', '');
+        }
+
+        $scope.filters.DateFrom_date.Value = $rootScope.Date_to_DB($scope.selectedDateFrom);
+        $scope.filters.DateTo_date.Value = $rootScope.Date_to_DB($scope.selectedDateTo);
+
+        $scope.filters.VerifiedDateFrom_date.Value = $rootScope.Date_to_DB($scope.selectedVerifiedDateFrom);
+        $scope.filters.VerifiedDateTo_date.Value = $rootScope.Date_to_DB($scope.selectedVerifiedDateTo);
+
+        Utility_ERP.Still_Processing($scope, true);
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+
+        $scope.filters['selectedShowAll'] = $scope.selectedShowAll;
+
+        $rootScope.SaveFilterState('InventoryCounts', $scope);
+
+        delete $scope.filters['selectedShowAll'];
+    };
+
+    $scope.Branch_Changed = async function () {
+        // --  untuk Page ini, setiap kali Branch berubah --> maka Warehouse ke posisi "All"
+        // reset
+        $scope.selectedWarehouse = '';
+
+        $scope.Reorganize_Warehouse();
+
+        await $scope.showData();
+    };
+
+    $scope.Reorganize_Warehouse = function () {
+        var data = [];
+
+        if (!$scope.selectedBranch) {
+            // tanpa Filter Branch
+            data = $scope.data_EmployeeWarehouseAccess;
+        } else {
+            // filter berdasarkan Branch
+            data = $scope.data_EmployeeWarehouseAccess.filter(function (e) {
+                return e.LocationCode == $scope.selectedBranch;
+            });
+        }
+
+        $scope.data_Warehouse_perBranch = [...new Map(data.map((item) => [item['Code'], item])).values()].sort((x, y) => x.Code.localeCompare(y.Code));
+    };
+
+    $scope.getData_Status = async function () {
+        $scope.data_Status_All = await Utility_ERP.getData_DocumentStatus('InventoryCount');
+
+        // prettier-ignore
+        $scope.data_Status = ($scope.selectedShowAll ? $scope.data_Status_All : $scope.data_Status_All.filter(function (e) { return e.IsArchive == false; }));
+
+        $rootScope.SetDefaultDropdownList($scope.data_Status, 'StatusId', $scope, 'selectedStatus');
+    };
+
+    $scope.selectedShowAll_Change = async function (flag = true, flag2 = true) {
+        // prettier-ignore
+        $scope.data_Status = ($scope.selectedShowAll ? $scope.data_Status_All : $scope.data_Status_All.filter(function (e) { return e.IsArchive == false; }));
+
+        // just to make UX consistent
+        if (flag2) $scope.selectedStatus = '';
+
+        if (flag) {
+            await $scope.showData();
+        }
+    };
+
+    ;
+
+    async function Override_some_Filters() {
+        let branch = $scope.filters.Branch.Value;
+        if (branch && typeof branch === 'string' && branch.indexOf('(') >= 0) branch = '';
+
+        let warehouse = $scope.filters.Warehouse.Value;
+        if (warehouse && typeof warehouse === 'string' && warehouse.indexOf('(') >= 0) warehouse = '';
+        $scope.selectedWarehouse = warehouse;
+
+        let status = $scope.filters.Status.Value;
+        if (status && typeof status === 'string' && status.indexOf('(') >= 0) status = '';
+        $scope.selectedStatus = status;
+
+        if ($scope.LoadFilterState_) {
+            $scope.selectedBranch = branch;
+
+            $scope.selectedShowAll = $scope.filters['selectedShowAll'];
+            $scope.selectedShowAll_Change(false, false);
+
+            delete $scope.filters['selectedShowAll'];
+        }
+    }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        await Promise.allSettled([
+            $rootScope.EmployeeLocationAccess($scope, ''),
+            $rootScope.EmployeeWarehouseAccess($scope, ''),
+            $scope.getData_Status()
+        ]);
+
+        $rootScope.LoadFilterState('InventoryCounts', $scope);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.Reorganize_Warehouse();
+
+        $scope.showData();
+    };
+
+    $scope.addCountSheetClick = async function () {
+        // Implement add count sheet functionality
+    };
+
+    $scope.verifyClick = async function () {
+        // Implement verify functionality
+    };
+
+    $scope.deleteClick = async function () {
+        // Implement delete functionality
+    };
+
+    $scope.printCountSheetClick = async function () {
+        // Implement print count sheet functionality
+    };
+
+    $scope.printComparisonClick = async function () {
+        // Implement print comparison functionality
+    };
+
+    $scope.initialize_Page();
+});
+angular.module('app.erp').controller('InventoryIsolationsCtrl', function ($rootScope, $scope, Utility_ERP, InventoryIsolations_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Branch: { PropertyName: 'LocationCode', Operator: 'in', Value: '' },
+        Warehouse: { PropertyName: 'WarehouseCode', Operator: 'in', Value: '' },
+        DateFrom_date: { PropertyName: 'Date', Operator: '>=', Value: '' },
+        DateTo_date: { PropertyName: 'Date', Operator: '<=', Value: '' },
+        IsolationSourceType: { PropertyName: 'IsolationSourceTypeCode', Operator: 'in', Value: '' },
+        IsolationSourceNr: { PropertyName: 'IsolationSourceNr', Operator: 'like', Value: null },
+        Reason: { PropertyName: 'ReasonCode', Operator: 'in', Value: '' },
+        Status: { PropertyName: 'StatusId', Operator: 'in', Value: '' },
+    };
+
+    $scope.selectedBranch = '';
+    $scope.selectedWarehouse = '';
+    $scope.selectedDateFrom = '';
+    $scope.selectedDateTo = '';
+    $scope.selectedIsolationSourceType = '';
+    $scope.selectedReason = '';
+    $scope.selectedStatus = '';
+    $scope.selectedShowAll = false;
+
+    $scope.data_EmployeeLocationAccess = [];
+    $scope.data_EmployeeWarehouseAccess = [];
+    $scope.data_Warehouse_perBranch = [];
+    $scope.data_IsolationSourceType = [];
+    $scope.data_Reason = [];
+    $scope.data_Status = [];
+    $scope.data_Status_All = [];
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = InventoryIsolations_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Doc Nr.', 'DocNr', 'DocNr', 'Text', true],
+            ['Date', 'Date', 'Date', 'Date', true],
+            ['Branch', 'Branch', 'Branch', 'Text', true],
+            ['Warehouse', 'Warehouse', 'Warehouse', 'Text', true],
+            ['Reason', 'Reason', 'Reason', 'Text', true],
+            ['Doc. Type', 'DocType', 'DocType', 'Text', true],
+            ['Doc. Number', 'DocNumber', 'DocNumber', 'Text', true],
+            ['Open Qty', 'OpenQty', 'OpenQty', 'Number', true],
+            ['Total Qty', 'TotalQty', 'TotalQty', 'Number', true],
+            ['Issued By', 'IssuedBy', 'IssuedBy', 'Text', true],
+            ['Status', 'Status', 'Status', 'Text', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        if (!$scope.selectedBranch) {
+            $scope.filters.Branch.Operator = 'in';
+            $scope.filters.Branch.Value = Utility_ERP.Value_OperatorIN_($scope.data_EmployeeLocationAccess, 'Code');
+        } else {
+            $scope.filters.Branch.Operator = '=';
+            $scope.filters.Branch.Value = $scope.selectedBranch;
+        }
+
+        if (!$scope.selectedWarehouse) {
+            $scope.filters.Warehouse.Operator = 'in';
+            $scope.filters.Warehouse.Value = Utility_ERP.Value_OperatorIN_($scope.data_Warehouse_perBranch, 'Code');
+        } else {
+            $scope.filters.Warehouse.Operator = '=';
+            $scope.filters.Warehouse.Value = $scope.selectedWarehouse;
+        }
+
+        if (!$scope.selectedIsolationSourceType) {
+            $scope.filters.IsolationSourceType.Operator = 'in';
+            $scope.filters.IsolationSourceType.Value = Utility_ERP.Value_OperatorIN_($scope.data_IsolationSourceType, 'Code');
+        } else {
+            $scope.filters.IsolationSourceType.Operator = '=';
+            $scope.filters.IsolationSourceType.Value = $scope.selectedIsolationSourceType;
+        }
+
+        if (!$scope.selectedReason) {
+            $scope.filters.Reason.Operator = 'in';
+            $scope.filters.Reason.Value = Utility_ERP.Value_OperatorIN_($scope.data_Reason, 'Code');
+        } else {
+            $scope.filters.Reason.Operator = '=';
+            $scope.filters.Reason.Value = $scope.selectedReason;
+        }
+
+        if ($rootScope.ValidString($scope.selectedStatus)) {
+            $scope.filters.Status.Operator = '=';
+            $scope.filters.Status.Value = $scope.selectedStatus;
+        } else {
+            $scope.filters.Status.Operator = 'in';
+            $scope.filters.Status.Value = Utility_ERP.Value_OperatorIN($scope.data_Status, 'StatusId', '');
+        }
+
+        $scope.filters.DateFrom_date.Value = $rootScope.Date_to_DB($scope.selectedDateFrom);
+        $scope.filters.DateTo_date.Value = $rootScope.Date_to_DB($scope.selectedDateTo);
+
+        Utility_ERP.Still_Processing($scope, true);
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+
+        $scope.filters['selectedShowAll'] = $scope.selectedShowAll;
+
+        $rootScope.SaveFilterState('InventoryIsolations', $scope);
+
+        delete $scope.filters['selectedShowAll'];
+    };
+
+    $scope.Branch_Changed = async function () {
+        // --  untuk Page ini, setiap kali Branch berubah --> maka Warehouse ke posisi "All"
+        // reset
+        $scope.selectedWarehouse = '';
+
+        $scope.Reorganize_Warehouse();
+
+        await $scope.showData();
+    };
+
+    $scope.Reorganize_Warehouse = function () {
+        var data = [];
+
+        if (!$scope.selectedBranch) {
+            // tanpa Filter Branch
+            data = $scope.data_EmployeeWarehouseAccess;
+        } else {
+            // filter berdasarkan Branch
+            data = $scope.data_EmployeeWarehouseAccess.filter(function (e) {
+                return e.LocationCode == $scope.selectedBranch;
+            });
+        }
+
+        $scope.data_Warehouse_perBranch = [...new Map(data.map((item) => [item['Code'], item])).values()].sort((x, y) => x.Code.localeCompare(y.Code));
+    };
+
+    $scope.getData_IsolationSourceType = async function () {
+        $scope.data_IsolationSourceType = await InventoryIsolations_Service.Dropdown_IsolationSourceType();
+    };
+
+    $scope.getData_Reason = async function () {
+        $scope.data_Reason = await InventoryIsolations_Service.Dropdown_Reason();
+    };
+
+    $scope.getData_Status = async function () {
+        $scope.data_Status_All = await Utility_ERP.getData_DocumentStatus('InventoryIsolation');
+
+        // prettier-ignore
+        $scope.data_Status = ($scope.selectedShowAll ? $scope.data_Status_All : $scope.data_Status_All.filter(function (e) { return e.IsArchive == false; }));
+
+        $rootScope.SetDefaultDropdownList($scope.data_Status, 'StatusId', $scope, 'selectedStatus');
+    };
+
+    $scope.selectedShowAll_Change = async function (flag = true, flag2 = true) {
+        // prettier-ignore
+        $scope.data_Status = ($scope.selectedShowAll ? $scope.data_Status_All : $scope.data_Status_All.filter(function (e) { return e.IsArchive == false; }));
+
+        // just to make UX consistent
+        if (flag2) $scope.selectedStatus = '';
+
+        if (flag) {
+            await $scope.showData();
+        }
+    };
+
+    ;
+
+    async function Override_some_Filters() {
+        let branch = $scope.filters.Branch.Value;
+        if (branch && typeof branch === 'string' && branch.indexOf('(') >= 0) branch = '';
+
+        let warehouse = $scope.filters.Warehouse.Value;
+        if (warehouse && typeof warehouse === 'string' && warehouse.indexOf('(') >= 0) warehouse = '';
+        $scope.selectedWarehouse = warehouse;
+
+        let isolationSourceType = $scope.filters.IsolationSourceType.Value;
+        if (isolationSourceType && typeof isolationSourceType === 'string' && isolationSourceType.indexOf('(') >= 0) isolationSourceType = '';
+        $scope.selectedIsolationSourceType = isolationSourceType;
+
+        let reason = $scope.filters.Reason.Value;
+        if (reason && typeof reason === 'string' && reason.indexOf('(') >= 0) reason = '';
+        $scope.selectedReason = reason;
+
+        let status = $scope.filters.Status.Value;
+        if (status && typeof status === 'string' && status.indexOf('(') >= 0) status = '';
+        $scope.selectedStatus = status;
+
+        if ($scope.LoadFilterState_) {
+            $scope.selectedBranch = branch;
+
+            $scope.selectedShowAll = $scope.filters['selectedShowAll'];
+            $scope.selectedShowAll_Change(false, false);
+
+            delete $scope.filters['selectedShowAll'];
+        }
+    }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        await Promise.allSettled([
+            $rootScope.EmployeeLocationAccess($scope, ''),
+            $rootScope.EmployeeWarehouseAccess($scope, ''),
+            $scope.getData_IsolationSourceType(),
+            $scope.getData_Reason(),
+            $scope.getData_Status()
+        ]);
+
+        $rootScope.LoadFilterState('InventoryIsolations', $scope);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.Reorganize_Warehouse();
+
+        $scope.showData();
+    };
+
+    $scope.verifyClick = async function () {
+        // Implement verify functionality
+    };
+
+    $scope.printForm = async function () {
+        // Implement print functionality
+    };
+
+    $scope.initialize_Page();
+});
+angular.module('app.erp').controller('InventoryIssueVerificationCtrl', function ($rootScope, $scope, Utility_ERP, InventoryIssueVerification_Service, BusinessRelation_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        ReceivedDate_date: { PropertyName: 'ReceivedDate', Operator: '=', Value: '' },
+        Receiver: { PropertyName: 'ReceiverID', Operator: '=', Value: '' },
+    };
+
+    $scope.selectedReceivedDate = $rootScope.Date_to_UI(new Date());
+    $scope.selectedReceiver = '';
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = InventoryIssueVerification_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Item Code', 'ItemCode', 'ItemCode', 'Text', true],
+            ['Description', 'Description', 'Description', 'Text', true],
+            ['Qty', 'Qty', 'Qty', 'Number', true],
+            ['Uom', 'Uom', 'Uom', 'Text', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        $scope.filters.ReceivedDate_date.Value = $rootScope.Date_to_DB($scope.selectedReceivedDate);
+
+        Utility_ERP.Still_Processing($scope, true);
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+
+        $scope.filters['selectedReceiver'] = $scope.selectedReceiver;
+
+        $rootScope.SaveFilterState('InventoryIssueVerification', $scope);
+
+        delete $scope.filters['selectedReceiver'];
+    };
+
+    $scope.getData_Customer = async function (val) {
+        return await $rootScope.getData_Customer(val, $scope);
+    };
+
+    $scope.receiverSelected = async function (flag = true) {
+        if (flag) {
+            $scope.showData();
+        }
+    };
+
+    ;
+
+    async function Override_some_Filters() {
+        if ($scope.LoadFilterState_) {
+            $scope.selectedReceiver = $scope.filters['selectedReceiver'];
+            delete $scope.filters['selectedReceiver'];
+        }
+    }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.LoadFilterState('InventoryIssueVerification', $scope);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.showData();
+    };
+
+    $scope.verifyClick = async function () {
+        // Implement verify logic here
+    };
+
+    $scope.initialize_Page();
+});
+angular.module('app.erp').controller('InventoryItemFormCtrl', function ($rootScope, $scope, $stateParams, Utility_ERP, InventoryItems_Service, Inventory_Service) {
+});
+
+angular.module('app.erp').controller('InventoryItemsCtrl', function ($rootScope, $scope, $stateParams, Utility_ERP, InventoryItems_Service, Inventory_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Profile: { PropertyName: 'ItemTypeCode', Operator: '=', Value: null },
+        Category: { PropertyName: 'CategoryCode', Operator: '=', Value: null },
+        Manufacture: { PropertyName: 'ManufacturerCode', Operator: '=', Value: null },
+        Brand: { PropertyName: 'BrandCode', Operator: '=', Value: null },
+        StockingType: { PropertyName: 'StockingTypeCode', Operator: '=', Value: null },
+    };
+
+    $scope.selectedCategory = '';
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = InventoryItems_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Code', 'Code', 'Code', 'Text', true],
+            ['Name', 'ShortName', 'ShortName', 'Text', true],
+            ['Profile', 'TypeName', 'TypeName', 'Text', true],
+            ['Category', 'CategoryName', 'CategoryName', 'Text', true],
+            ['Brand', 'BrandName', 'BrandName', 'Text', true],
+            ['Manufacture', 'ManufactureName', 'ManufactureName', 'Text', true],
+            ['Stocking Name', 'StockingTypeName', 'StockingTypeName', 'Text', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $scope.filters['selectedCategory'] = $scope.selectedCategory;
+
+        $rootScope.SaveFilterState('InventoryItem', $scope);
+
+        delete $scope.filters['selectedCategory'];
+
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+    };
+
+    
+
+    // getData functions for Dropdown to Service filters
+    $scope.getData_Profile = async function () {
+        $scope.data_Profile = await Inventory_Service.Dropdown_Profile();
+
+        // Special case
+        $scope.data_Profile.unshift({ Code: '', Name: 'Select an Item' });
+
+        // Default untuk DropdownList
+        try {
+            $scope.filters.Profile.Value = '';
+        } catch (error) { }
+    };
+
+    $scope.getData_Manufacture = async function () {
+        $scope.data_Manufacture = await Inventory_Service.Dropdown_Manufacturer();
+
+        // Special case
+        $scope.data_Manufacture.unshift({ Code: '', Description: 'Select an Item' });
+
+        // Default untuk DropdownList
+        try {
+            $scope.filters.Manufacture.Value = '';
+        } catch (error) { }
+    };
+
+    $scope.getData_Brand = async function () {
+        $scope.data_Brand = await Inventory_Service.Dropdown_Brand();
+
+        // Special case
+        $scope.data_Brand.unshift({ Code: '', Description: 'Select an Item' });
+
+        // Default untuk DropdownList
+        try {
+            $scope.filters.Brand.Value = '';
+        } catch (error) { }
+    };
+
+    $scope.getData_StockingType = async function () {
+        $scope.data_StockingType = await Inventory_Service.Dropdown_StockingType();
+    };
+
+    // getData function for typeahead filter
+    $scope.getData_Category = function (val) {
+        return Inventory_Service.Dropdown_Category2(val);
+    };
+
+    async function Override_some_Filters() {
+        let profile = $rootScope.Simple_Decode($rootScope.getParamValue($stateParams, 'profile'));
+        if (profile) {
+            $scope.filters.Profile.Value = profile;
+        }
+
+        let manufacture = $rootScope.Simple_Decode($rootScope.getParamValue($stateParams, 'manufacture'));
+        if (manufacture) {
+            $scope.filters.Manufacture.Value = manufacture;
+        }
+
+        let brand = $rootScope.Simple_Decode($rootScope.getParamValue($stateParams, 'brand'));
+        if (brand) {
+            $scope.filters.Brand.Value = brand;
+        }
+
+        let stockingType = $rootScope.Simple_Decode($rootScope.getParamValue($stateParams, 'stockingType'));
+        if (stockingType) {
+            $scope.filters.StockingType.Value = stockingType;
+        }
+
+        if ($scope.LoadFilterState_) {
+            $scope.selectedCategory = $scope.filters['selectedCategory'];
+            delete $scope.filters['selectedCategory'];
+        }
+    }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.LoadFilterState('InventoryItem', $scope);
+
+        await Promise.allSettled([
+            $scope.getData_Profile(),
+            $scope.getData_Manufacture(),
+            $scope.getData_Brand(),
+            $scope.getData_StockingType(),
+        ]);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.showData();
+    };
+
+    $scope.initialize_Page();
+});
+
+angular.module('app.erp').controller('InventoryLeaseCtrl', function ($rootScope, $scope, Utility_ERP, InventoryLease_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Branch: { PropertyName: 'LocationCode', Operator: 'in', Value: '' },
+        Warehouse: { PropertyName: 'WarehouseCode', Operator: 'in', Value: '' },
+        DateFrom_date: { PropertyName: 'Date', Operator: '>=', Value: '' },
+        DateTo_date: { PropertyName: 'Date', Operator: '<=', Value: '' },
+        DueDateFrom_date: { PropertyName: 'DueDate', Operator: '>=', Value: '' },
+        DueDateTo_date: { PropertyName: 'DueDate', Operator: '<=', Value: '' },
+        Reason: { PropertyName: 'ReasonCode', Operator: 'in', Value: '' },
+        IssuedTo: { PropertyName: 'IssuedToID', Operator: '=', Value: '' },
+        Status: { PropertyName: 'StatusId', Operator: 'in', Value: '' },
+    };
+
+    $scope.selectedBranch = '';
+    $scope.selectedWarehouse = '';
+    $scope.selectedDateFrom = '';
+    $scope.selectedDateTo = '';
+    $scope.selectedDueDateFrom = '';
+    $scope.selectedDueDateTo = '';
+    $scope.selectedReason = '';
+    $scope.selectedIssuedTo = '';
+    $scope.selectedStatus = '';
+    $scope.selectedShowAll = false;
+
+    $scope.data_EmployeeLocationAccess = [];
+    $scope.data_EmployeeWarehouseAccess = [];
+    $scope.data_Warehouse_perBranch = [];
+    $scope.data_Reason = [];
+    $scope.data_Status = [];
+    $scope.data_Status_All = [];
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = InventoryLease_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Doc Nr.', 'DocNr', 'DocNr', 'Text', true],
+            ['Date', 'Date', 'Date', 'Date', true],
+            ['Branch', 'Branch', 'Branch', 'Text', true],
+            ['Warehouse', 'Warehouse', 'Warehouse', 'Text', true],
+            ['Requested By', 'RequestedBy', 'RequestedBy', 'Text', true],
+            ['Reason', 'Reason', 'Reason', 'Text', true],
+            ['Open Qty', 'OpenQty', 'OpenQty', 'Number', true],
+            ['Total Qty', 'TotalQty', 'TotalQty', 'Number', true],
+            ['Issued By', 'IssuedBy', 'IssuedBy', 'Text', true],
+            ['Status', 'Status', 'Status', 'Text', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        if (!$scope.selectedBranch) {
+            $scope.filters.Branch.Operator = 'in';
+            $scope.filters.Branch.Value = Utility_ERP.Value_OperatorIN_($scope.data_EmployeeLocationAccess, 'Code');
+        } else {
+            $scope.filters.Branch.Operator = '=';
+            $scope.filters.Branch.Value = $scope.selectedBranch;
+        }
+
+        if (!$scope.selectedWarehouse) {
+            $scope.filters.Warehouse.Operator = 'in';
+            $scope.filters.Warehouse.Value = Utility_ERP.Value_OperatorIN_($scope.data_Warehouse_perBranch, 'Code');
+        } else {
+            $scope.filters.Warehouse.Operator = '=';
+            $scope.filters.Warehouse.Value = $scope.selectedWarehouse;
+        }
+
+        if (!$scope.selectedReason) {
+            $scope.filters.Reason.Operator = 'in';
+            $scope.filters.Reason.Value = Utility_ERP.Value_OperatorIN_($scope.data_Reason, 'Code');
+        } else {
+            $scope.filters.Reason.Operator = '=';
+            $scope.filters.Reason.Value = $scope.selectedReason;
+        }
+
+        if ($rootScope.ValidString($scope.selectedStatus)) {
+            $scope.filters.Status.Operator = '=';
+            $scope.filters.Status.Value = $scope.selectedStatus;
+        } else {
+            $scope.filters.Status.Operator = 'in';
+            $scope.filters.Status.Value = Utility_ERP.Value_OperatorIN($scope.data_Status, 'StatusId', '');
+        }
+
+        $scope.filters.DateFrom_date.Value = $rootScope.Date_to_DB($scope.selectedDateFrom);
+        $scope.filters.DateTo_date.Value = $rootScope.Date_to_DB($scope.selectedDateTo);
+
+        $scope.filters.DueDateFrom_date.Value = $rootScope.Date_to_DB($scope.selectedDueDateFrom);
+        $scope.filters.DueDateTo_date.Value = $rootScope.Date_to_DB($scope.selectedDueDateTo);
+
+        Utility_ERP.Still_Processing($scope, true);
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+
+        $scope.filters['selectedIssuedTo'] = $scope.selectedIssuedTo;
+        $scope.filters['selectedShowAll'] = $scope.selectedShowAll;
+
+        $rootScope.SaveFilterState('InventoryLease', $scope);
+
+        delete $scope.filters['selectedIssuedTo'];
+        delete $scope.filters['selectedShowAll'];
+    };
+
+    $scope.Branch_Changed = async function () {
+        // --  untuk Page ini, setiap kali Branch berubah --> maka Warehouse ke posisi "All"
+        // reset
+        $scope.selectedWarehouse = '';
+
+        $scope.Reorganize_Warehouse();
+
+        await $scope.showData();
+    };
+
+    $scope.Reorganize_Warehouse = function () {
+        var data = [];
+
+        if (!$scope.selectedBranch) {
+            // tanpa Filter Branch
+            data = $scope.data_EmployeeWarehouseAccess;
+        } else {
+            // filter berdasarkan Branch
+            data = $scope.data_EmployeeWarehouseAccess.filter(function (e) {
+                return e.LocationCode == $scope.selectedBranch;
+            });
+        }
+
+        $scope.data_Warehouse_perBranch = [...new Map(data.map((item) => [item['Code'], item])).values()].sort((x, y) => x.Code.localeCompare(y.Code));
+    };
+
+    $scope.getData_Customer = async function (val) {
+        return await $rootScope.getData_Customer(val, $scope);
+    };
+
+    $scope.getData_Reason = async function () {
+        $scope.data_Reason = await InventoryLease_Service.Dropdown_Reason();
+    };
+
+    $scope.getData_Status = async function () {
+        $scope.data_Status_All = await Utility_ERP.getData_DocumentStatus('InventoryLease');
+
+        // prettier-ignore
+        $scope.data_Status = ($scope.selectedShowAll ? $scope.data_Status_All : $scope.data_Status_All.filter(function (e) { return e.IsArchive == false; }));
+
+        $rootScope.SetDefaultDropdownList($scope.data_Status, 'StatusId', $scope, 'selectedStatus');
+    };
+
+    $scope.selectedShowAll_Change = async function (flag = true, flag2 = true) {
+        // prettier-ignore
+        $scope.data_Status = ($scope.selectedShowAll ? $scope.data_Status_All : $scope.data_Status_All.filter(function (e) { return e.IsArchive == false; }));
+
+        // just to make UX consistent
+        if (flag2) $scope.selectedStatus = '';
+
+        if (flag) {
+            await $scope.showData();
+        }
+    };
+
+    ;
+
+    async function Override_some_Filters() {
+        let branch = $scope.filters.Branch.Value;
+        if (branch && typeof branch === 'string' && branch.indexOf('(') >= 0) branch = '';
+
+        let warehouse = $scope.filters.Warehouse.Value;
+        if (warehouse && typeof warehouse === 'string' && warehouse.indexOf('(') >= 0) warehouse = '';
+        $scope.selectedWarehouse = warehouse;
+
+        let reason = $scope.filters.Reason.Value;
+        if (reason && typeof reason === 'string' && reason.indexOf('(') >= 0) reason = '';
+        $scope.selectedReason = reason;
+
+        let status = $scope.filters.Status.Value;
+        if (status && typeof status === 'string' && status.indexOf('(') >= 0) status = '';
+        $scope.selectedStatus = status;
+
+        if ($scope.LoadFilterState_) {
+            $scope.selectedBranch = branch;
+
+            $scope.selectedIssuedTo = $scope.filters['selectedIssuedTo'];
+            delete $scope.filters['selectedIssuedTo'];
+
+            $scope.selectedShowAll = $scope.filters['selectedShowAll'];
+            $scope.selectedShowAll_Change(false, false);
+
+            delete $scope.filters['selectedShowAll'];
+        }
+    }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        await Promise.allSettled([
+            $rootScope.EmployeeLocationAccess($scope, ''),
+            $rootScope.EmployeeWarehouseAccess($scope, ''),
+            $scope.getData_Reason(),
+            $scope.getData_Status()
+        ]);
+
+        $rootScope.LoadFilterState('InventoryLease', $scope);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.Reorganize_Warehouse();
+
+        $scope.showData();
+    };
+
+    $scope.verifyIssueClick = async function () {
+        // Implement verify issue functionality
+    };
+
+    $scope.returnInventoryClick = async function () {
+        // Implement return inventory functionality
+    };
+
+    $scope.expenseClick = async function () {
+        // Implement expense functionality
+    };
+
+    $scope.billClick = async function () {
+        // Implement bill functionality
+    };
+
+    $scope.printForm = async function () {
+        // Implement print functionality
+    };
+
+    $scope.voidClick = async function () {
+        // Implement void functionality
+    };
+
+    $scope.initialize_Page();
+});
+// ini file Controller.js
+
+
+
+// ini file Controller.js
+
+angular.module('app.erp').controller('InventoryReceiptVerificationCtrl', function ($rootScope, $scope, Utility_ERP, InventoryReceiptVerification_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        ReceivedDate_date: { PropertyName: 'ReceivedDate', Operator: '=', Value: '' },
+        Receiver: { PropertyName: 'ReceiverCode', Operator: '=', Value: '' },
+    };
+
+    $scope.selectedReceivedDate = $rootScope.Date_to_UI(new Date());
+    $scope.selectedReceiver = '';
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = InventoryReceiptVerification_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Item Code', 'ItemCode', 'ItemCode', 'Text', true],
+            ['Description', 'Description', 'Description', 'Text', true],
+            ['Qty', 'Qty', 'Qty', 'Number', true],
+            ['Uom', 'Uom', 'Uom', 'Text', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        $scope.filters.ReceivedDate_date.Value = $rootScope.Date_to_DB($scope.selectedReceivedDate);
+
+        Utility_ERP.Still_Processing($scope, true);
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+
+        $scope.filters['selectedReceiver'] = $scope.selectedReceiver;
+
+        $rootScope.SaveFilterState('InventoryReceiptVerification', $scope);
+
+        delete $scope.filters['selectedReceiver'];
+    };
+
+    $scope.getData_Customer = async function (val) {
+        return await $rootScope.getData_Customer(val, $scope);
+    };
+
+    ;
+
+    async function Override_some_Filters() {
+        if ($scope.LoadFilterState_) {
+            $scope.selectedReceiver = $scope.filters['selectedReceiver'];
+            delete $scope.filters['selectedReceiver'];
+        }
+    }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.LoadFilterState('InventoryReceiptVerification', $scope);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.showData();
+    };
+
+    $scope.verifyReceipt = async function () {
+        // Implementation for Verify
+    };
+
+    $scope.initialize_Page();
+});
+angular.module('app.erp').controller('InventoryRequestsCtrl', function ($rootScope, $scope, Utility_ERP, InventoryRequests_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+    $scope.statusOptions = [
+        { Value: null, Text: 'All' },
+        { Value: 'Open', Text: 'Open' },
+        { Value: 'Closed', Text: 'Closed' },
+        { Value: 'Verified', Text: 'Verified' },
+    ];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Branch: { PropertyName: 'LocationCode', Operator: 'in', Value: '' },
+        Warehouse: { PropertyName: 'WarehouseCode', Operator: 'in', Value: '' },
+        RequestedBy: { PropertyName: 'RequestedByID', Operator: '=', Value: '' },
+        DateFrom_date: { PropertyName: 'Date', Operator: '>=', Value: '' },
+        DateTo_date: { PropertyName: 'Date', Operator: '<=', Value: '' },
+        Status: { PropertyName: 'Status', Operator: '=', Value: null },
+    };
+
+    $scope.selectedBranch = '';
+    $scope.selectedWarehouse = '';
+    $scope.selectedRequestedBy = '';
+    $scope.selectedDateFrom = '';
+    $scope.selectedDateTo = '';
+    $scope.selectedShowAll = false;
+
+    $scope.data_EmployeeLocationAccess = [];
+    $scope.data_EmployeeWarehouseAccess = [];
+    $scope.data_Warehouse_perBranch = [];
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = InventoryRequests_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Doc Nr.', 'DocNr', 'DocNr', 'Text', true],
+            ['Date', 'Date', 'Date', 'Date', true],
+            ['Branch', 'Branch', 'Branch', 'Text', true],
+            ['Warehouse', 'Warehouse', 'Warehouse', 'Text', true],
+            ['Requested By', 'RequestedBy', 'RequestedBy', 'Text', true],
+            ['Notes', 'Notes', 'Notes', 'Text', true],
+            ['Open Qty', 'OpenQty', 'OpenQty', 'Number', true],
+            ['Total Qty', 'TotalQty', 'TotalQty', 'Number', true],
+            ['R', 'R', 'R', 'Boolean', true],
+            ['Issued By', 'IssuedBy', 'IssuedBy', 'Text', true],
+            ['Status', 'Status', 'Status', 'Text', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        if (!$scope.selectedBranch) {
+            $scope.filters.Branch.Operator = 'in';
+            $scope.filters.Branch.Value = Utility_ERP.Value_OperatorIN_($scope.data_EmployeeLocationAccess, 'Code');
+        } else {
+            $scope.filters.Branch.Operator = '=';
+            $scope.filters.Branch.Value = $scope.selectedBranch;
+        }
+
+        if (!$scope.selectedWarehouse) {
+            $scope.filters.Warehouse.Operator = 'in';
+            $scope.filters.Warehouse.Value = Utility_ERP.Value_OperatorIN_($scope.data_Warehouse_perBranch, 'Code');
+        } else {
+            $scope.filters.Warehouse.Operator = '=';
+            $scope.filters.Warehouse.Value = $scope.selectedWarehouse;
+        }
+
+        $scope.filters.DateFrom_date.Value = $rootScope.Date_to_DB($scope.selectedDateFrom);
+        $scope.filters.DateTo_date.Value = $rootScope.Date_to_DB($scope.selectedDateTo);
+
+        Utility_ERP.Still_Processing($scope, true);
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+
+        $scope.filters['selectedRequestedBy'] = $scope.selectedRequestedBy;
+        $scope.filters['selectedShowAll'] = $scope.selectedShowAll;
+
+        $rootScope.SaveFilterState('InventoryRequests', $scope);
+
+        delete $scope.filters['selectedRequestedBy'];
+        delete $scope.filters['selectedShowAll'];
+    };
+
+    $scope.Branch_Changed = async function () {
+        // --  untuk Page ini, setiap kali Branch berubah --> maka Warehouse ke posisi "All"
+        // reset
+        $scope.selectedWarehouse = '';
+
+        $scope.Reorganize_Warehouse();
+
+        await $scope.showData();
+    };
+
+    $scope.Reorganize_Warehouse = function () {
+        var data = [];
+
+        if (!$scope.selectedBranch) {
+            // tanpa Filter Branch
+            data = $scope.data_EmployeeWarehouseAccess;
+        } else {
+            // filter berdasarkan Branch
+            data = $scope.data_EmployeeWarehouseAccess.filter(function (e) {
+                return e.LocationCode == $scope.selectedBranch;
+            });
+        }
+
+        $scope.data_Warehouse_perBranch = [...new Map(data.map((item) => [item['Code'], item])).values()].sort((x, y) => x.Code.localeCompare(y.Code));
+    };
+
+    $scope.getData_Customer = async function (val) {
+        return await $rootScope.getData_Customer(val, $scope);
+    };
+
+    $scope.selectedShowAll_Change = async function (flag = true, flag2 = true) {
+        // Implement logic if needed for Show All checkbox
+
+        if (flag) {
+            await $scope.showData();
+        }
+    };
+
+    ;
+
+    async function Override_some_Filters() {
+        let branch = $scope.filters.Branch.Value;
+        if (branch && typeof branch === 'string' && branch.indexOf('(') >= 0) branch = '';
+
+        let warehouse = $scope.filters.Warehouse.Value;
+        if (warehouse && typeof warehouse === 'string' && warehouse.indexOf('(') >= 0) warehouse = '';
+        $scope.selectedWarehouse = warehouse;
+
+        if ($scope.LoadFilterState_) {
+            $scope.selectedBranch = branch;
+
+            $scope.selectedRequestedBy = $scope.filters['selectedRequestedBy'];
+            delete $scope.filters['selectedRequestedBy'];
+
+            $scope.selectedShowAll = $scope.filters['selectedShowAll'];
+            $scope.selectedShowAll_Change(false, false);
+
+            delete $scope.filters['selectedShowAll'];
+        }
+    }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        await Promise.allSettled([
+            $rootScope.EmployeeLocationAccess($scope, ''),
+            $rootScope.EmployeeWarehouseAccess($scope, '')
+        ]);
+
+        $rootScope.LoadFilterState('InventoryRequests', $scope);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.Reorganize_Warehouse();
+
+        $scope.showData();
+    };
+
+    $scope.printForm = async function () {
+        // Implement print functionality
+    };
+
+    $scope.verifyClick = async function () {
+        // Implement verify functionality
+    };
+
+    $scope.closeClick = async function () {
+        // Implement close functionality
+    };
+
+    $scope.reserveClick = async function () {
+        // Implement reserve functionality
+    };
+
+    $scope.unReserveClick = async function () {
+        // Implement un reserve functionality
+    };
+
+    $scope.initialize_Page();
+});
+// ini file Controller.js
+
+angular.module('app.erp').controller('IsolationVerificationCtrl', function ($rootScope, $scope, Utility_ERP, IsolationVerification_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+    $scope.activeOptions = [
+        { Value: null, Text: 'All' },
+        { Value: true, Text: 'Yes' },
+        { Value: false, Text: 'No' },
+    ];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Active: { PropertyName: 'Active', Operator: '=', Value: null },
+    };
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = IsolationVerification_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Item Code', 'ItemCode', 'ItemCode', 'Text', true],
+            ['Description', 'Description', 'Description', 'Text', true],
+            ['Qty', 'Qty1', 'Qty1', 'Number', true],
+            ['Uom', 'Uom1', 'Uom1', 'Text', true],
+            ['Qty', 'Qty2', 'Qty2', 'Number', true],
+            ['Uom', 'Uom2', 'Uom2', 'Text', true],
+            ['Qty', 'Qty3', 'Qty3', 'Number', true],
+            ['Uom', 'Uom3', 'Uom3', 'Text', true],
+            ['Actions', 'Actions', 'Actions', 'Text', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+
+        $rootScope.SaveFilterState('IsolationVerification', $scope);
+    };
+
+    ;
+
+    async function Override_some_Filters() {
+        // No additional filters to override for this page
+    }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.LoadFilterState('IsolationVerification', $scope);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.showData();
+    };
+
+    $scope.verifyIsolation = async function () {
+        // Implementation for Verify Isolation action
+    };
+
+    $scope.initialize_Page();
+});
+
+
+angular.module('app.erp').controller('ItemCostsCtrl', function ($rootScope, $scope, Utility_ERP, ItemCosts_Service, Inventory_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        CostGroup: { PropertyName: 'CostGroupCode', Operator: 'in', Value: '' },
+        Currency: { PropertyName: 'CurrencyCode', Operator: 'in', Value: '' },
+        Brand: { PropertyName: 'BrandCode', Operator: 'in', Value: '' },
+        Category: { PropertyName: 'CategoryCode', Operator: 'in', Value: '' },
+        EffectiveDateFrom_date: { PropertyName: 'EffectiveDate', Operator: '>=', Value: '' },
+        EffectiveDateTo_date: { PropertyName: 'EffectiveDate', Operator: '<=', Value: '' },
+    };
+
+    $scope.selectedCostGroup = '';
+    $scope.selectedCurrency = '';
+    $scope.selectedBrand = '';
+    $scope.selectedCategory = '';
+    $scope.selectedEffectiveDateFrom = '';
+    $scope.selectedEffectiveDateTo = '';
+
+    $scope.data_CostGroup = [];
+    $scope.data_Currency = [];
+    $scope.data_Brand = [];
+    $scope.data_Category = [];
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = ItemCosts_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Item #', 'ItemNumber', 'ItemNumber', 'Text', true],
+            ['Category', 'Category', 'Category', 'Text', true],
+            ['Brand', 'Brand', 'Brand', 'Text', true],
+            ['Type', 'Type', 'Type', 'Text', true],
+            ['Name', 'Name', 'Name', 'Text', true],
+            ['Uom', 'Uom', 'Uom', 'Text', true],
+            ['Current Cost', 'CurrentCost', 'CurrentCost', 'Currency', true],
+            ['Valid From', 'ValidFrom', 'ValidFrom', 'Date', true],
+            ['New Cost', 'NewCost', 'NewCost', 'Currency', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        if (!$scope.selectedCostGroup) {
+            $scope.filters.CostGroup.Operator = 'in';
+            $scope.filters.CostGroup.Value = Utility_ERP.Value_OperatorIN_($scope.data_CostGroup, 'Code');
+        } else {
+            $scope.filters.CostGroup.Operator = '=';
+            $scope.filters.CostGroup.Value = $scope.selectedCostGroup;
+        }
+
+        if (!$scope.selectedCurrency) {
+            $scope.filters.Currency.Operator = 'in';
+            $scope.filters.Currency.Value = Utility_ERP.Value_OperatorIN_($scope.data_Currency, 'Code');
+        } else {
+            $scope.filters.Currency.Operator = '=';
+            $scope.filters.Currency.Value = $scope.selectedCurrency;
+        }
+
+        if (!$scope.selectedBrand) {
+            $scope.filters.Brand.Operator = 'in';
+            $scope.filters.Brand.Value = Utility_ERP.Value_OperatorIN_($scope.data_Brand, 'Code');
+        } else {
+            $scope.filters.Brand.Operator = '=';
+            $scope.filters.Brand.Value = $scope.selectedBrand;
+        }
+
+        if (!$scope.selectedCategory) {
+            $scope.filters.Category.Operator = 'in';
+            $scope.filters.Category.Value = Utility_ERP.Value_OperatorIN_($scope.data_Category, 'Code');
+        } else {
+            $scope.filters.Category.Operator = '=';
+            $scope.filters.Category.Value = $scope.selectedCategory;
+        }
+
+        $scope.filters.EffectiveDateFrom_date.Value = $rootScope.Date_to_DB($scope.selectedEffectiveDateFrom);
+        $scope.filters.EffectiveDateTo_date.Value = $rootScope.Date_to_DB($scope.selectedEffectiveDateTo);
+
+        Utility_ERP.Still_Processing($scope, true);
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+
+        $rootScope.SaveFilterState('ItemCosts', $scope);
+    };
+
+    $scope.getData_CostGroup = async function () {
+        $scope.data_CostGroup = await Inventory_Service.Dropdown_CostGroup();
+    };
+
+    $scope.getData_Currency = async function () {
+        $scope.data_Currency = await Inventory_Service.Dropdown_Currency();
+    };
+
+    $scope.getData_Brand = async function () {
+        $scope.data_Brand = await Inventory_Service.Dropdown_Brand();
+    };
+
+    $scope.getData_Category = async function () {
+        $scope.data_Category = await Inventory_Service.Dropdown_Category();
+    };
+
+    ;
+
+    async function Override_some_Filters() {
+        let costGroup = $scope.filters.CostGroup.Value;
+        if (costGroup && typeof costGroup === 'string' && costGroup.indexOf('(') >= 0) costGroup = '';
+        $scope.selectedCostGroup = costGroup;
+
+        let currency = $scope.filters.Currency.Value;
+        if (currency && typeof currency === 'string' && currency.indexOf('(') >= 0) currency = '';
+        $scope.selectedCurrency = currency;
+
+        let brand = $scope.filters.Brand.Value;
+        if (brand && typeof brand === 'string' && brand.indexOf('(') >= 0) brand = '';
+        $scope.selectedBrand = brand;
+
+        let category = $scope.filters.Category.Value;
+        if (category && typeof category === 'string' && category.indexOf('(') >= 0) category = '';
+        $scope.selectedCategory = category;
+    }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        await Promise.allSettled([
+            $scope.getData_CostGroup(),
+            $scope.getData_Currency(),
+            $scope.getData_Brand(),
+            $scope.getData_Category()
+        ]);
+
+        $rootScope.LoadFilterState('ItemCosts', $scope);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.showData();
+    };
+
+    $scope.recalculate = async function () {
+        // TODO: Implement recalculate functionality
+    };
+
+    $scope.printMovements = async function () {
+        // TODO: Implement print movements functionality
+    };
+
+    $scope.downloadSchema = async function () {
+        // TODO: Implement download schema functionality
+    };
+
+    $scope.uploadFile = async function () {
+        // TODO: Implement upload functionality
+    };
+
+    $scope.initialize_Page();
+});
+angular.module('app.erp').controller('ManufacturerFormCtrl', function ($rootScope, $scope, Utility_ERP, Manufacturers_Service) {
+});
+angular.module('app.erp').controller('ManufacturersCtrl', function ($rootScope, $scope, Utility_ERP, Manufacturers_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+    $scope.activeOptions = [
+        { Value: null, Text: 'All' },
+        { Value: true, Text: 'Yes' },
+        { Value: false, Text: 'No' },
+    ];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Active: { PropertyName: 'Active', Operator: '=', Value: null },
+    };
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = Manufacturers_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Code', 'Code', 'Code', 'Text', true],
+            ['Description', 'Description', 'Description', 'Text', true],
+            ['', 'Active', 'Active', 'Boolean', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+
+        $rootScope.SaveFilterState('Manufacturer', $scope);
+    };
+
+    
+
+    async function Override_some_Filters() { }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.LoadFilterState('Manufacturer', $scope);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.showData();
+    };
+
+    $scope.initialize_Page();
+});
+
+
+
+angular.module('app.erp').controller('OutgoingOrdersCtrl', function ($rootScope, $scope, Utility_ERP, OutgoingOrders_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Branch: { PropertyName: 'LocationCode', Operator: 'in', Value: '' },
+        RequestFrom: { PropertyName: 'RequestFromCode', Operator: 'in', Value: '' },
+        DateFrom_date: { PropertyName: 'Date', Operator: '>=', Value: '' },
+        DateTo_date: { PropertyName: 'Date', Operator: '<=', Value: '' },
+        DeliverTo: { PropertyName: 'DeliverToCode', Operator: 'in', Value: '' },
+        RequiredDateFrom_date: { PropertyName: 'RequiredDate', Operator: '>=', Value: '' },
+        RequiredDateTo_date: { PropertyName: 'RequiredDate', Operator: '<=', Value: '' },
+        Status: { PropertyName: 'StatusId', Operator: 'in', Value: '' },
+    };
+
+    $scope.selectedBranch = '';
+    $scope.selectedRequestFrom = '';
+    $scope.selectedDateFrom = '';
+    $scope.selectedDateTo = '';
+    $scope.selectedDeliverTo = '';
+    $scope.selectedRequiredDateFrom = '';
+    $scope.selectedRequiredDateTo = '';
+    $scope.selectedStatus = '';
+    $scope.selectedShowAll = false;
+
+    $scope.data_EmployeeLocationAccess = [];
+    $scope.data_RequestFrom = [];
+    $scope.data_DeliverTo = [];
+    $scope.data_Status = [];
+    $scope.data_Status_All = [];
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = OutgoingOrders_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Request Nr.', 'RequestNr', 'RequestNr', 'Text', true],
+            ['Date', 'Date', 'Date', 'Date', true],
+            ['Branch', 'Branch', 'Branch', 'Text', true],
+            ['Request To', 'RequestTo', 'RequestTo', 'Text', true],
+            ['Deliver To', 'DeliverTo', 'DeliverTo', 'Text', true],
+            ['Open Qty', 'OpenQty', 'OpenQty', 'Number', true],
+            ['Total Qty', 'TotalQty', 'TotalQty', 'Number', true],
+            ['Required Date', 'RequiredDate', 'RequiredDate', 'Date', true],
+            ['Issued By', 'IssuedBy', 'IssuedBy', 'Text', true],
+            ['Direct', 'Direct', 'Direct', 'Boolean', true],
+            ['Status', 'Status', 'Status', 'Text', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        if (!$scope.selectedBranch) {
+            $scope.filters.Branch.Operator = 'in';
+            $scope.filters.Branch.Value = Utility_ERP.Value_OperatorIN_($scope.data_EmployeeLocationAccess, 'Code');
+        } else {
+            $scope.filters.Branch.Operator = '=';
+            $scope.filters.Branch.Value = $scope.selectedBranch;
+        }
+
+        if (!$scope.selectedRequestFrom) {
+            $scope.filters.RequestFrom.Operator = 'in';
+            $scope.filters.RequestFrom.Value = Utility_ERP.Value_OperatorIN_($scope.data_RequestFrom, 'Code');
+        } else {
+            $scope.filters.RequestFrom.Operator = '=';
+            $scope.filters.RequestFrom.Value = $scope.selectedRequestFrom;
+        }
+
+        if (!$scope.selectedDeliverTo) {
+            $scope.filters.DeliverTo.Operator = 'in';
+            $scope.filters.DeliverTo.Value = Utility_ERP.Value_OperatorIN_($scope.data_DeliverTo, 'Code');
+        } else {
+            $scope.filters.DeliverTo.Operator = '=';
+            $scope.filters.DeliverTo.Value = $scope.selectedDeliverTo;
+        }
+
+        if ($rootScope.ValidString($scope.selectedStatus)) {
+            $scope.filters.Status.Operator = '=';
+            $scope.filters.Status.Value = $scope.selectedStatus;
+        } else {
+            $scope.filters.Status.Operator = 'in';
+            $scope.filters.Status.Value = Utility_ERP.Value_OperatorIN($scope.data_Status, 'StatusId', '');
+        }
+
+        $scope.filters.DateFrom_date.Value = $rootScope.Date_to_DB($scope.selectedDateFrom);
+        $scope.filters.DateTo_date.Value = $rootScope.Date_to_DB($scope.selectedDateTo);
+
+        $scope.filters.RequiredDateFrom_date.Value = $rootScope.Date_to_DB($scope.selectedRequiredDateFrom);
+        $scope.filters.RequiredDateTo_date.Value = $rootScope.Date_to_DB($scope.selectedRequiredDateTo);
+
+        Utility_ERP.Still_Processing($scope, true);
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+
+        $scope.filters['selectedShowAll'] = $scope.selectedShowAll;
+
+        $rootScope.SaveFilterState('OutgoingOrders', $scope);
+
+        delete $scope.filters['selectedShowAll'];
+    };
+
+    $scope.Branch_Changed = async function () {
+        // reset
+        await $scope.showData();
+    };
+
+    $scope.getData_RequestFrom = async function () {
+        // Implement service call to get RequestFrom dropdown data
+        // $scope.data_RequestFrom = await OutgoingOrders_Service.Dropdown_RequestFrom();
+    };
+
+    $scope.getData_DeliverTo = async function () {
+        // Implement service call to get DeliverTo dropdown data
+        // $scope.data_DeliverTo = await OutgoingOrders_Service.Dropdown_DeliverTo();
+    };
+
+    $scope.getData_Status = async function () {
+        $scope.data_Status_All = await Utility_ERP.getData_DocumentStatus('OutgoingOrder');
+
+        // prettier-ignore
+        $scope.data_Status = ($scope.selectedShowAll ? $scope.data_Status_All : $scope.data_Status_All.filter(function (e) { return e.IsArchive == false; }));
+
+        $rootScope.SetDefaultDropdownList($scope.data_Status, 'StatusId', $scope, 'selectedStatus');
+    };
+
+    $scope.selectedShowAll_Change = async function (flag = true, flag2 = true) {
+        // prettier-ignore
+        $scope.data_Status = ($scope.selectedShowAll ? $scope.data_Status_All : $scope.data_Status_All.filter(function (e) { return e.IsArchive == false; }));
+
+        // just to make UX consistent
+        if (flag2) $scope.selectedStatus = '';
+
+        if (flag) {
+            await $scope.showData();
+        }
+    };
+
+    ;
+
+    async function Override_some_Filters() {
+        let branch = $scope.filters.Branch.Value;
+        if (branch && typeof branch === 'string' && branch.indexOf('(') >= 0) branch = '';
+
+        let requestFrom = $scope.filters.RequestFrom.Value;
+        if (requestFrom && typeof requestFrom === 'string' && requestFrom.indexOf('(') >= 0) requestFrom = '';
+        $scope.selectedRequestFrom = requestFrom;
+
+        let deliverTo = $scope.filters.DeliverTo.Value;
+        if (deliverTo && typeof deliverTo === 'string' && deliverTo.indexOf('(') >= 0) deliverTo = '';
+        $scope.selectedDeliverTo = deliverTo;
+
+        let status = $scope.filters.Status.Value;
+        if (status && typeof status === 'string' && status.indexOf('(') >= 0) status = '';
+        $scope.selectedStatus = status;
+
+        if ($scope.LoadFilterState_) {
+            $scope.selectedBranch = branch;
+
+            $scope.selectedShowAll = $scope.filters['selectedShowAll'];
+            $scope.selectedShowAll_Change(false, false);
+
+            delete $scope.filters['selectedShowAll'];
+        }
+    }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        await Promise.allSettled([
+            $rootScope.EmployeeLocationAccess($scope, ''),
+            $scope.getData_RequestFrom(),
+            $scope.getData_DeliverTo(),
+            $scope.getData_Status()
+        ]);
+
+        $rootScope.LoadFilterState('OutgoingOrders', $scope);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.showData();
+    };
+
+    $scope.printForm = async function () {
+        // Implement print functionality
+    };
+
+    $scope.deliveryClick = async function () {
+        // Implement delivery functionality
+    };
+
+    $scope.voidClick = async function () {
+        // Implement void functionality
+    };
+
+    $scope.initialize_Page();
+});
+angular.module('app.erp').controller('ProfileFormCtrl', function ($rootScope, $scope, Utility_ERP, Profiles_Service) {
+
+});
+
+angular.module('app.erp').controller('ProfilesCtrl', function ($rootScope, $scope, Utility_ERP, Profiles_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+    $scope.activeOptions = [
+        { Value: null, Text: 'All' },
+        { Value: true, Text: 'Yes' },
+        { Value: false, Text: 'No' },
+    ];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Active: { PropertyName: 'Active', Operator: '=', Value: null },
+    };
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = Profiles_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Code', 'Code', 'Code', 'Text', true],
+            ['Description', 'Name', 'Name', 'Text', true],
+            ['', 'Active', 'Active', 'Boolean', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+
+        $rootScope.SaveFilterState('Profile', $scope);
+    };
+
+    
+
+    async function Override_some_Filters() { }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.LoadFilterState('Profile', $scope);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.showData();
+    };
+
+    $scope.initialize_Page();
+});
+
+angular.module('app.erp').controller('ReplenishmentCtrl', function ($rootScope, $scope, Utility_ERP, Replenishment_Service, Inventory_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Warehouse: { PropertyName: 'WarehouseCode', Operator: 'in', Value: '' },
+        Brand: { PropertyName: 'Brand', Operator: 'in', Value: '' },
+        Profile: { PropertyName: 'Profile', Operator: 'in', Value: '' },
+        Category: { PropertyName: 'CategoryCode', Operator: 'in', Value: '' },
+    };
+
+    $scope.selectedWarehouse = '';
+    $scope.selectedBrand = '';
+    $scope.selectedProfile = '';
+    $scope.selectedCategory = '';
+    $scope.selectedShowAll = false;
+
+    $scope.data_EmployeeWarehouseAccess = [];
+    $scope.data_Brand = [];
+    $scope.data_Brand_All = [];
+    $scope.data_Profile = [];
+    $scope.data_Profile_All = [];
+    $scope.data_Category = [];
+    $scope.data_Category_All = [];
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = Replenishment_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Item Code', 'ItemCode', 'ItemCode', 'Text', true],
+            ['Item Name', 'ItemName', 'ItemName', 'Text', true],
+            ['Brand', 'Brand', 'Brand', 'Text', true],
+            ['Uom', 'Uom', 'Uom', 'Text', true],
+            ['Lead Time', 'LeadTime', 'LeadTime', 'Number', true],
+            ['Reserved', 'Reserved', 'Reserved', 'Number', true],
+            ['Demand', 'Demand', 'Demand', 'Number', true],
+            ['Physical', 'Physical', 'Physical', 'Number', true],
+            ['Available', 'Available', 'Available', 'Number', true],
+            ['Reorder Point', 'ReorderPoint', 'ReorderPoint', 'Number', true],
+            ['EOQ', 'EOQ', 'EOQ', 'Number', true],
+            ['On PR', 'OnPR', 'OnPR', 'Number', true],
+            ['On PO', 'OnPO', 'OnPO', 'Number', true],
+            ['Rec. Order', 'RecOrder', 'RecOrder', 'Number', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        if (!$scope.selectedWarehouse) {
+            $scope.filters.Warehouse.Operator = 'in';
+            $scope.filters.Warehouse.Value = Utility_ERP.Value_OperatorIN_($scope.data_EmployeeWarehouseAccess, 'Code');
+        } else {
+            $scope.filters.Warehouse.Operator = '=';
+            $scope.filters.Warehouse.Value = $scope.selectedWarehouse;
+        }
+
+        if (!$scope.selectedBrand) {
+            $scope.filters.Brand.Operator = 'in';
+            $scope.filters.Brand.Value = Utility_ERP.Value_OperatorIN_($scope.data_Brand, 'Code');
+        } else {
+            $scope.filters.Brand.Operator = '=';
+            $scope.filters.Brand.Value = $scope.selectedBrand;
+        }
+
+        if (!$scope.selectedProfile) {
+            $scope.filters.Profile.Operator = 'in';
+            $scope.filters.Profile.Value = Utility_ERP.Value_OperatorIN_($scope.data_Profile, 'Code');
+        } else {
+            $scope.filters.Profile.Operator = '=';
+            $scope.filters.Profile.Value = $scope.selectedProfile;
+        }
+
+        if (!$scope.selectedCategory) {
+            $scope.filters.Category.Operator = 'in';
+            $scope.filters.Category.Value = Utility_ERP.Value_OperatorIN_($scope.data_Category, 'Code');
+        } else {
+            $scope.filters.Category.Operator = '=';
+            $scope.filters.Category.Value = $scope.selectedCategory;
+        }
+
+        Utility_ERP.Still_Processing($scope, true);
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+
+        $scope.filters['selectedShowAll'] = $scope.selectedShowAll;
+
+        $rootScope.SaveFilterState('Replenishment', $scope);
+
+        delete $scope.filters['selectedShowAll'];
+    };
+
+    $scope.getData_Brand = async function () {
+        $scope.data_Brand_All = await Inventory_Service.Dropdown_Brand();
+
+        // prettier-ignore
+        $scope.data_Brand = ($scope.selectedShowAll ? $scope.data_Brand_All : $scope.data_Brand_All.filter(function (e) { return e.IsArchive == false; }));
+    };
+
+    $scope.getData_Profile = async function () {
+        $scope.data_Profile_All = await Inventory_Service.Dropdown_Profile();
+
+        // prettier-ignore
+        $scope.data_Profile = ($scope.selectedShowAll ? $scope.data_Profile_All : $scope.data_Profile_All.filter(function (e) { return e.IsArchive == false; }));
+    };
+
+    $scope.getData_Category = async function () {
+        $scope.data_Category_All = await Inventory_Service.Dropdown_Category();
+
+        // prettier-ignore
+        $scope.data_Category = ($scope.selectedShowAll ? $scope.data_Category_All : $scope.data_Category_All.filter(function (e) { return e.IsArchive == false; }));
+    };
+
+    $scope.selectedShowAll_Change = async function (flag = true, flag2 = true) {
+        // prettier-ignore
+        $scope.data_Brand = ($scope.selectedShowAll ? $scope.data_Brand_All : $scope.data_Brand_All.filter(function (e) { return e.IsArchive == false; }));
+
+        // prettier-ignore
+        $scope.data_Profile = ($scope.selectedShowAll ? $scope.data_Profile_All : $scope.data_Profile_All.filter(function (e) { return e.IsArchive == false; }));
+
+        // prettier-ignore
+        $scope.data_Category = ($scope.selectedShowAll ? $scope.data_Category_All : $scope.data_Category_All.filter(function (e) { return e.IsArchive == false; }));
+
+        // just to make UX consistent
+        if (flag2) {
+            $scope.selectedBrand = '';
+            $scope.selectedProfile = '';
+            $scope.selectedCategory = '';
+        }
+
+        if (flag) {
+            await $scope.showData();
+        }
+    };
+
+    
+
+    async function Override_some_Filters() {
+        let warehouse = $scope.filters.Warehouse.Value;
+        if (warehouse && typeof warehouse === 'string' && warehouse.indexOf('(') >= 0) warehouse = '';
+        $scope.selectedWarehouse = warehouse;
+
+        let brand = $scope.filters.Brand.Value;
+        if (brand && typeof brand === 'string' && brand.indexOf('(') >= 0) brand = '';
+        $scope.selectedBrand = brand;
+
+        let profile = $scope.filters.Profile.Value;
+        if (profile && typeof profile === 'string' && profile.indexOf('(') >= 0) profile = '';
+        $scope.selectedProfile = profile;
+
+        let category = $scope.filters.Category.Value;
+        if (category && typeof category === 'string' && category.indexOf('(') >= 0) category = '';
+        $scope.selectedCategory = category;
+
+        if ($scope.LoadFilterState_) {
+            $scope.selectedShowAll = $scope.filters['selectedShowAll'];
+            $scope.selectedShowAll_Change(false, false);
+
+            delete $scope.filters['selectedShowAll'];
+        }
+    }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        await Promise.allSettled([
+            $rootScope.EmployeeWarehouseAccess($scope, ''),
+            $scope.getData_Brand(),
+            $scope.getData_Profile(),
+            $scope.getData_Category()
+        ]);
+
+        $rootScope.LoadFilterState('Replenishment', $scope);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.showData();
+    };
+
+    $scope.createPO = async function () {
+        // Implementation for create P/O functionality
+    }
+
+    $scope.exportList = async function () {
+        // Implementation for export to excel functionality
+    }
+
+    $scope.initialize_Page();
+});
+angular.module('app.erp').controller('ReservePositionsCtrl', function ($rootScope, $scope, Utility_ERP, ReservePositions_Service, Inventory_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Branch: { PropertyName: 'LocationCode', Operator: 'in', Value: '' },
+        Warehouse: { PropertyName: 'WarehouseCode', Operator: 'in', Value: '' },
+        Age: { PropertyName: 'Age', Operator: 'in', Value: '' },
+        Brand: { PropertyName: 'Brand', Operator: 'in', Value: '' },
+        Profile: { PropertyName: 'Profile', Operator: 'in', Value: '' },
+        Category: { PropertyName: 'CategoryCode', Operator: 'in', Value: '' },
+    };
+
+    $scope.selectedBranch = '';
+    $scope.selectedWarehouse = '';
+    $scope.selectedAge = '';
+    $scope.selectedBrand = '';
+    $scope.selectedProfile = '';
+    $scope.selectedCategory = '';
+
+    $scope.data_EmployeeLocationAccess = [];
+    $scope.data_EmployeeWarehouseAccess = [];
+    $scope.data_Warehouse_perBranch = [];
+    $scope.data_Age = [];
+    $scope.data_Brand = [];
+    $scope.data_Profile = [];
+    $scope.data_Category = [];
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = ReservePositions_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Item Code', 'ItemCode', 'ItemCode', 'Text', true],
+            ['Brand', 'Brand', 'Brand', 'Text', true],
+            ['Item Name', 'ItemName', 'ItemName', 'Text', true],
+            ['Current', 'Current', 'Current', 'Number', true],
+            ['1 - 7 Days', 'Days1to7', 'Days1to7', 'Number', true],
+            ['8 - 14 Days', 'Days8to14', 'Days8to14', 'Number', true],
+            ['15 - 30 Days', 'Days15to30', 'Days15to30', 'Number', true],
+            ['31 - 45 Days', 'Days31to45', 'Days31to45', 'Number', true],
+            ['> 45 Days', 'DaysOver45', 'DaysOver45', 'Number', true],
+            ['Total', 'Total', 'Total', 'Number', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        if (!$scope.selectedBranch) {
+            $scope.filters.Branch.Operator = 'in';
+            $scope.filters.Branch.Value = Utility_ERP.Value_OperatorIN_($scope.data_EmployeeLocationAccess, 'Code');
+        } else {
+            $scope.filters.Branch.Operator = '=';
+            $scope.filters.Branch.Value = $scope.selectedBranch;
+        }
+
+        if (!$scope.selectedWarehouse) {
+            $scope.filters.Warehouse.Operator = 'in';
+            $scope.filters.Warehouse.Value = Utility_ERP.Value_OperatorIN_($scope.data_Warehouse_perBranch, 'Code');
+        } else {
+            $scope.filters.Warehouse.Operator = '=';
+            $scope.filters.Warehouse.Value = $scope.selectedWarehouse;
+        }
+
+        if (!$scope.selectedAge) {
+            $scope.filters.Age.Operator = 'in';
+            $scope.filters.Age.Value = Utility_ERP.Value_OperatorIN_($scope.data_Age, 'Code');
+        } else {
+            $scope.filters.Age.Operator = '=';
+            $scope.filters.Age.Value = $scope.selectedAge;
+        }
+
+        if (!$scope.selectedBrand) {
+            $scope.filters.Brand.Operator = 'in';
+            $scope.filters.Brand.Value = Utility_ERP.Value_OperatorIN_($scope.data_Brand, 'Code');
+        } else {
+            $scope.filters.Brand.Operator = '=';
+            $scope.filters.Brand.Value = $scope.selectedBrand;
+        }
+
+        if (!$scope.selectedProfile) {
+            $scope.filters.Profile.Operator = 'in';
+            $scope.filters.Profile.Value = Utility_ERP.Value_OperatorIN_($scope.data_Profile, 'Code');
+        } else {
+            $scope.filters.Profile.Operator = '=';
+            $scope.filters.Profile.Value = $scope.selectedProfile;
+        }
+
+        if (!$scope.selectedCategory) {
+            $scope.filters.Category.Operator = 'in';
+            $scope.filters.Category.Value = Utility_ERP.Value_OperatorIN_($scope.data_Category, 'Code');
+        } else {
+            $scope.filters.Category.Operator = '=';
+            $scope.filters.Category.Value = $scope.selectedCategory;
+        }
+
+        Utility_ERP.Still_Processing($scope, true);
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+
+        $rootScope.SaveFilterState('ReservePositions', $scope);
+    };
+
+    $scope.Branch_Changed = async function () {
+        // reset
+        $scope.selectedWarehouse = '';
+
+        $scope.Reorganize_Warehouse();
+
+        await $scope.showData();
+    };
+
+    $scope.Reorganize_Warehouse = function () {
+        var data = [];
+
+        if (!$scope.selectedBranch) {
+            // tanpa Filter Branch
+            data = $scope.data_EmployeeWarehouseAccess;
+        } else {
+            // filter berdasarkan Branch
+            data = $scope.data_EmployeeWarehouseAccess.filter(function (e) {
+                return e.LocationCode == $scope.selectedBranch;
+            });
+        }
+
+        $scope.data_Warehouse_perBranch = [...new Map(data.map((item) => [item['Code'], item])).values()].sort((x, y) => x.Code.localeCompare(y.Code));
+    };
+
+    $scope.getData_Age = async function () {
+        $scope.data_Age = await Inventory_Service.Dropdown_Age();
+    };
+
+    $scope.getData_Brand = async function () {
+        $scope.data_Brand = await Inventory_Service.Dropdown_Brand();
+    };
+
+    $scope.getData_Profile = async function () {
+        $scope.data_Profile = await Inventory_Service.Dropdown_Profile();
+    };
+
+    $scope.getData_Category = async function () {
+        $scope.data_Category = await Inventory_Service.Dropdown_Category();
+    };
+
+    
+
+    async function Override_some_Filters() {
+        let branch = $scope.filters.Branch.Value;
+        if (branch && typeof branch === 'string' && branch.indexOf('(') >= 0) branch = '';
+
+        let warehouse = $scope.filters.Warehouse.Value;
+        if (warehouse && typeof warehouse === 'string' && warehouse.indexOf('(') >= 0) warehouse = '';
+        $scope.selectedWarehouse = warehouse;
+
+        let age = $scope.filters.Age.Value;
+        if (age && typeof age === 'string' && age.indexOf('(') >= 0) age = '';
+        $scope.selectedAge = age;
+
+        let brand = $scope.filters.Brand.Value;
+        if (brand && typeof brand === 'string' && brand.indexOf('(') >= 0) brand = '';
+        $scope.selectedBrand = brand;
+
+        let profile = $scope.filters.Profile.Value;
+        if (profile && typeof profile === 'string' && profile.indexOf('(') >= 0) profile = '';
+        $scope.selectedProfile = profile;
+
+        let category = $scope.filters.Category.Value;
+        if (category && typeof category === 'string' && category.indexOf('(') >= 0) category = '';
+        $scope.selectedCategory = category;
+
+        if ($scope.LoadFilterState_) {
+            $scope.selectedBranch = branch;
+        }
+    }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        await Promise.allSettled([
+            $rootScope.EmployeeLocationAccess($scope, ''),
+            $rootScope.EmployeeWarehouseAccess($scope, ''),
+            $scope.getData_Age(),
+            $scope.getData_Brand(),
+            $scope.getData_Profile(),
+            $scope.getData_Category()
+        ]);
+
+        $rootScope.LoadFilterState('ReservePositions', $scope);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.Reorganize_Warehouse();
+
+        $scope.showData();
+    };
+
+    $scope.initialize_Page();
+});
+angular.module('app.erp').controller('StockPositionsCtrl', function ($rootScope, $scope, Utility_ERP, StockPositions_Service, Inventory_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Branch: { PropertyName: 'LocationCode', Operator: 'in', Value: '' },
+        Warehouse: { PropertyName: 'WarehouseCode', Operator: 'in', Value: '' },
+        ShowAvailableOnly: { PropertyName: 'Available', Operator: '>', Value: null },
+        Brand: { PropertyName: 'Brand', Operator: 'in', Value: '' },
+        Profile: { PropertyName: 'Profile', Operator: 'in', Value: '' },
+        ShowDemandOnly: { PropertyName: 'Demand', Operator: '>', Value: null },
+        Category: { PropertyName: 'CategoryCode', Operator: 'in', Value: '' },
+    };
+
+    $scope.selectedBranch = '';
+    $scope.selectedWarehouse = '';
+    $scope.selectedShowAvailableOnly = false;
+    $scope.selectedBrand = '';
+    $scope.selectedProfile = '';
+    $scope.selectedShowDemandOnly = false;
+    $scope.selectedCategory = '';
+
+    $scope.data_EmployeeLocationAccess = [];
+    $scope.data_EmployeeWarehouseAccess = [];
+    $scope.data_Warehouse_perBranch = [];
+    $scope.data_Brand = [];
+    $scope.data_Profile = [];
+    $scope.data_Category = [];
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = StockPositions_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Item Code', 'ItemCode', 'ItemCode', 'Text', true],
+            ['Item Name', 'ItemName', 'ItemName', 'Text', true],
+            ['Brand', 'Brand', 'Brand', 'Text', true],
+            ['TR', 'TR', 'TR', 'Number', true],
+            ['PO', 'PO', 'PO', 'Number', true],
+            ['Reserved', 'Reserved', 'Reserved', 'Number', true],
+            ['Demand', 'Demand', 'Demand', 'Number', true],
+            ['Shipment', 'Shipment', 'Shipment', 'Number', true],
+            ['Picking', 'Picking', 'Picking', 'Number', true],
+            ['Routing', 'Routing', 'Routing', 'Number', true],
+            ['Manifest', 'Manifest', 'Manifest', 'Number', true],
+            ['Delivery', 'Delivery', 'Delivery', 'Number', true],
+            ['Isolation', 'Isolation', 'Isolation', 'Number', true],
+            ['Physical', 'Physical', 'Physical', 'Number', true],
+            ['Available', 'Available', 'Available', 'Number', true],
+            ['VAT', 'VAT', 'VAT', 'Number', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        if (!$scope.selectedBranch) {
+            $scope.filters.Branch.Operator = 'in';
+            $scope.filters.Branch.Value = Utility_ERP.Value_OperatorIN_($scope.data_EmployeeLocationAccess, 'Code');
+        } else {
+            $scope.filters.Branch.Operator = '=';
+            $scope.filters.Branch.Value = $scope.selectedBranch;
+        }
+
+        if (!$scope.selectedWarehouse) {
+            $scope.filters.Warehouse.Operator = 'in';
+            $scope.filters.Warehouse.Value = Utility_ERP.Value_OperatorIN_($scope.data_Warehouse_perBranch, 'Code');
+        } else {
+            $scope.filters.Warehouse.Operator = '=';
+            $scope.filters.Warehouse.Value = $scope.selectedWarehouse;
+        }
+
+        $scope.filters.ShowAvailableOnly.Value = null;
+        if ($scope.selectedShowAvailableOnly) {
+            $scope.filters.ShowAvailableOnly.Value = 0;
+        }
+
+        if (!$scope.selectedBrand) {
+            $scope.filters.Brand.Operator = 'in';
+            $scope.filters.Brand.Value = Utility_ERP.Value_OperatorIN_($scope.data_Brand, 'Code');
+        } else {
+            $scope.filters.Brand.Operator = '=';
+            $scope.filters.Brand.Value = $scope.selectedBrand;
+        }
+
+        if (!$scope.selectedProfile) {
+            $scope.filters.Profile.Operator = 'in';
+            $scope.filters.Profile.Value = Utility_ERP.Value_OperatorIN_($scope.data_Profile, 'Code');
+        } else {
+            $scope.filters.Profile.Operator = '=';
+            $scope.filters.Profile.Value = $scope.selectedProfile;
+        }
+
+        $scope.filters.ShowDemandOnly.Value = null;
+        if ($scope.selectedShowDemandOnly) {
+            $scope.filters.ShowDemandOnly.Value = 0;
+        }
+
+        if (!$scope.selectedCategory) {
+            $scope.filters.Category.Operator = 'in';
+            $scope.filters.Category.Value = Utility_ERP.Value_OperatorIN_($scope.data_Category, 'Code');
+        } else {
+            $scope.filters.Category.Operator = '=';
+            $scope.filters.Category.Value = $scope.selectedCategory;
+        }
+
+        Utility_ERP.Still_Processing($scope, true);
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+
+        $scope.filters['selectedShowAvailableOnly'] = $scope.selectedShowAvailableOnly;
+        $scope.filters['selectedShowDemandOnly'] = $scope.selectedShowDemandOnly;
+
+        $rootScope.SaveFilterState('StockPositions', $scope);
+
+        delete $scope.filters['selectedShowAvailableOnly'];
+        delete $scope.filters['selectedShowDemandOnly'];
+    };
+
+    $scope.Branch_Changed = async function () {
+        // reset
+        $scope.selectedWarehouse = '';
+
+        $scope.Reorganize_Warehouse();
+
+        await $scope.showData();
+    };
+
+    $scope.Reorganize_Warehouse = function () {
+        var data = [];
+
+        if (!$scope.selectedBranch) {
+            // tanpa Filter Branch
+            data = $scope.data_EmployeeWarehouseAccess;
+        } else {
+            // filter berdasarkan Branch
+            data = $scope.data_EmployeeWarehouseAccess.filter(function (e) {
+                return e.LocationCode == $scope.selectedBranch;
+            });
+        }
+
+        $scope.data_Warehouse_perBranch = [...new Map(data.map((item) => [item['Code'], item])).values()].sort((x, y) => x.Code.localeCompare(y.Code));
+    };
+
+    $scope.getData_Brand = async function () {
+        $scope.data_Brand = await Inventory_Service.Dropdown_Brand();
+    };
+
+    $scope.getData_Profile = async function () {
+        $scope.data_Profile = await Inventory_Service.Dropdown_Profile();
+    };
+
+    $scope.getData_Category = async function () {
+        $scope.data_Category = await Inventory_Service.Dropdown_Category();
+    };
+
+    
+
+    async function Override_some_Filters() {
+        let branch = $scope.filters.Branch.Value;
+        if (branch && typeof branch === 'string' && branch.indexOf('(') >= 0) branch = '';
+
+        let warehouse = $scope.filters.Warehouse.Value;
+        if (warehouse && typeof warehouse === 'string' && warehouse.indexOf('(') >= 0) warehouse = '';
+        $scope.selectedWarehouse = warehouse;
+
+        let brand = $scope.filters.Brand.Value;
+        if (brand && typeof brand === 'string' && brand.indexOf('(') >= 0) brand = '';
+        $scope.selectedBrand = brand;
+
+        let profile = $scope.filters.Profile.Value;
+        if (profile && typeof profile === 'string' && profile.indexOf('(') >= 0) profile = '';
+        $scope.selectedProfile = profile;
+
+        let category = $scope.filters.Category.Value;
+        if (category && typeof category === 'string' && category.indexOf('(') >= 0) category = '';
+        $scope.selectedCategory = category;
+
+        if ($scope.LoadFilterState_) {
+            $scope.selectedBranch = branch;
+
+            $scope.selectedShowAvailableOnly = $scope.filters['selectedShowAvailableOnly'];
+            delete $scope.filters['selectedShowAvailableOnly'];
+
+            $scope.selectedShowDemandOnly = $scope.filters['selectedShowDemandOnly'];
+            delete $scope.filters['selectedShowDemandOnly'];
+        }
+    }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        await Promise.allSettled([
+            $rootScope.EmployeeLocationAccess($scope, ''),
+            $rootScope.EmployeeWarehouseAccess($scope, ''),
+            $scope.getData_Brand(),
+            $scope.getData_Profile(),
+            $scope.getData_Category()
+        ]);
+
+        $rootScope.LoadFilterState('StockPositions', $scope);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.Reorganize_Warehouse();
+
+        $scope.showData();
+    };
+
+    $scope.exportList = async function () { }
+
+    $scope.downloadSchema = async function () { }
+
+    $scope.uploadData = async function () { }
+
+    $scope.initialize_Page();
+});
+angular.module('app.erp').controller('TaxPositionsCtrl', function ($rootScope, $scope, Utility_ERP, TaxPositions_Service, Inventory_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Branch: { PropertyName: 'LocationCode', Operator: 'in', Value: '' },
+        Warehouse: { PropertyName: 'WarehouseCode', Operator: 'in', Value: '' },
+        Brand: { PropertyName: 'Brand', Operator: 'in', Value: '' },
+        Profile: { PropertyName: 'Profile', Operator: 'in', Value: '' },
+        Category: { PropertyName: 'CategoryCode', Operator: 'in', Value: '' },
+    };
+
+    $scope.selectedBranch = '';
+    $scope.selectedWarehouse = '';
+    $scope.selectedBrand = '';
+    $scope.selectedProfile = '';
+    $scope.selectedCategory = '';
+
+    $scope.data_EmployeeLocationAccess = [];
+    $scope.data_EmployeeWarehouseAccess = [];
+    $scope.data_Warehouse_perBranch = [];
+    $scope.data_Brand = [];
+    $scope.data_Profile = [];
+    $scope.data_Category = [];
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = TaxPositions_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Item Code', 'ItemCode', 'ItemCode', 'Text', true],
+            ['Item Name', 'ItemName', 'ItemName', 'Text', true],
+            ['Brand', 'Brand', 'Brand', 'Text', true],
+            ['Category', 'Category', 'Category', 'Text', true],
+            ['PR', 'PR', 'PR', 'Number', true],
+            ['PO', 'PO', 'PO', 'Number', true],
+            ['Reserved', 'Reserved', 'Reserved', 'Number', true],
+            ['Demand', 'Demand', 'Demand', 'Number', true],
+            ['Physical', 'Physical', 'Physical', 'Number', true],
+            ['Available', 'Available', 'Available', 'Number', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        if (!$scope.selectedBranch) {
+            $scope.filters.Branch.Operator = 'in';
+            $scope.filters.Branch.Value = Utility_ERP.Value_OperatorIN_($scope.data_EmployeeLocationAccess, 'Code');
+        } else {
+            $scope.filters.Branch.Operator = '=';
+            $scope.filters.Branch.Value = $scope.selectedBranch;
+        }
+
+        if (!$scope.selectedWarehouse) {
+            $scope.filters.Warehouse.Operator = 'in';
+            $scope.filters.Warehouse.Value = Utility_ERP.Value_OperatorIN_($scope.data_Warehouse_perBranch, 'Code');
+        } else {
+            $scope.filters.Warehouse.Operator = '=';
+            $scope.filters.Warehouse.Value = $scope.selectedWarehouse;
+        }
+
+        if (!$scope.selectedBrand) {
+            $scope.filters.Brand.Operator = 'in';
+            $scope.filters.Brand.Value = Utility_ERP.Value_OperatorIN_($scope.data_Brand, 'Code');
+        } else {
+            $scope.filters.Brand.Operator = '=';
+            $scope.filters.Brand.Value = $scope.selectedBrand;
+        }
+
+        if (!$scope.selectedProfile) {
+            $scope.filters.Profile.Operator = 'in';
+            $scope.filters.Profile.Value = Utility_ERP.Value_OperatorIN_($scope.data_Profile, 'Code');
+        } else {
+            $scope.filters.Profile.Operator = '=';
+            $scope.filters.Profile.Value = $scope.selectedProfile;
+        }
+
+        if (!$scope.selectedCategory) {
+            $scope.filters.Category.Operator = 'in';
+            $scope.filters.Category.Value = Utility_ERP.Value_OperatorIN_($scope.data_Category, 'Code');
+        } else {
+            $scope.filters.Category.Operator = '=';
+            $scope.filters.Category.Value = $scope.selectedCategory;
+        }
+
+        Utility_ERP.Still_Processing($scope, true);
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+
+        $rootScope.SaveFilterState('TaxPositions', $scope);
+    };
+
+    $scope.Branch_Changed = async function () {
+        // reset
+        $scope.selectedWarehouse = '';
+
+        $scope.Reorganize_Warehouse();
+
+        await $scope.showData();
+    };
+
+    $scope.Reorganize_Warehouse = function () {
+        var data = [];
+
+        if (!$scope.selectedBranch) {
+            // tanpa Filter Branch
+            data = $scope.data_EmployeeWarehouseAccess;
+        } else {
+            // filter berdasarkan Branch
+            data = $scope.data_EmployeeWarehouseAccess.filter(function (e) {
+                return e.LocationCode == $scope.selectedBranch;
+            });
+        }
+
+        $scope.data_Warehouse_perBranch = [...new Map(data.map((item) => [item['Code'], item])).values()].sort((x, y) => x.Code.localeCompare(y.Code));
+    };
+
+    $scope.getData_Brand = async function () {
+        $scope.data_Brand = await Inventory_Service.Dropdown_Brand();
+    };
+
+    $scope.getData_Profile = async function () {
+        $scope.data_Profile = await Inventory_Service.Dropdown_Profile();
+    };
+
+    $scope.getData_Category = async function () {
+        $scope.data_Category = await Inventory_Service.Dropdown_Category();
+    };
+
+    
+
+    async function Override_some_Filters() {
+        let branch = $scope.filters.Branch.Value;
+        if (branch && typeof branch === 'string' && branch.indexOf('(') >= 0) branch = '';
+
+        let warehouse = $scope.filters.Warehouse.Value;
+        if (warehouse && typeof warehouse === 'string' && warehouse.indexOf('(') >= 0) warehouse = '';
+        $scope.selectedWarehouse = warehouse;
+
+        let brand = $scope.filters.Brand.Value;
+        if (brand && typeof brand === 'string' && brand.indexOf('(') >= 0) brand = '';
+        $scope.selectedBrand = brand;
+
+        let profile = $scope.filters.Profile.Value;
+        if (profile && typeof profile === 'string' && profile.indexOf('(') >= 0) profile = '';
+        $scope.selectedProfile = profile;
+
+        let category = $scope.filters.Category.Value;
+        if (category && typeof category === 'string' && category.indexOf('(') >= 0) category = '';
+        $scope.selectedCategory = category;
+
+        if ($scope.LoadFilterState_) {
+            $scope.selectedBranch = branch;
+        }
+    }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        await Promise.allSettled([
+            $rootScope.EmployeeLocationAccess($scope, ''),
+            $rootScope.EmployeeWarehouseAccess($scope, ''),
+            $scope.getData_Brand(),
+            $scope.getData_Profile(),
+            $scope.getData_Category()
+        ]);
+
+        $rootScope.LoadFilterState('TaxPositions', $scope);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.Reorganize_Warehouse();
+
+        $scope.showData();
+    };
+
+    $scope.exportToCsv = async function () {
+        // Implementation for export to csv functionality
+    }
+
+    $scope.downloadSchema = async function () {
+        // Implementation for download schema functionality
+    }
+
+    $scope.uploadData = async function () {
+        // Implementation for upload functionality
+    }
+
+    $scope.initialize_Page();
+});
+angular.module('app.erp').controller('TaxReplenishmentCtrl', function ($rootScope, $scope, Utility_ERP, TaxReplenishment_Service, Inventory_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Warehouse: { PropertyName: 'WarehouseCode', Operator: 'in', Value: '' },
+        Brand: { PropertyName: 'Brand', Operator: 'in', Value: '' },
+        Profile: { PropertyName: 'Profile', Operator: 'in', Value: '' },
+        Category: { PropertyName: 'CategoryCode', Operator: 'in', Value: '' },
+    };
+
+    $scope.selectedWarehouse = '';
+    $scope.selectedBrand = '';
+    $scope.selectedProfile = '';
+    $scope.selectedCategory = '';
+    $scope.selectedShowAll = false;
+
+    $scope.data_EmployeeWarehouseAccess = [];
+    $scope.data_Brand = [];
+    $scope.data_Brand_All = [];
+    $scope.data_Profile = [];
+    $scope.data_Profile_All = [];
+    $scope.data_Category = [];
+    $scope.data_Category_All = [];
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = TaxReplenishment_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Item Code', 'ItemCode', 'ItemCode', 'Text', true],
+            ['Item Name', 'ItemName', 'ItemName', 'Text', true],
+            ['Brand', 'Brand', 'Brand', 'Text', true],
+            ['Category', 'Category', 'Category', 'Text', true],
+            ['Uom', 'Uom', 'Uom', 'Text', true],
+            ['Lead Time', 'LeadTime', 'LeadTime', 'Number', true],
+            ['Reserved', 'Reserved', 'Reserved', 'Number', true],
+            ['Demand', 'Demand', 'Demand', 'Number', true],
+            ['Physical', 'Physical', 'Physical', 'Number', true],
+            ['Available', 'Available', 'Available', 'Number', true],
+            ['Reorder Point', 'ReorderPoint', 'ReorderPoint', 'Number', true],
+            ['EOQ', 'EOQ', 'EOQ', 'Number', true],
+            ['On PR', 'OnPR', 'OnPR', 'Number', true],
+            ['On PO', 'OnPO', 'OnPO', 'Number', true],
+            ['On Rec.', 'OnRec', 'OnRec', 'Number', true],
+            ['Rec. Order', 'RecOrder', 'RecOrder', 'Number', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        if (!$scope.selectedWarehouse) {
+            $scope.filters.Warehouse.Operator = 'in';
+            $scope.filters.Warehouse.Value = Utility_ERP.Value_OperatorIN_($scope.data_EmployeeWarehouseAccess, 'Code');
+        } else {
+            $scope.filters.Warehouse.Operator = '=';
+            $scope.filters.Warehouse.Value = $scope.selectedWarehouse;
+        }
+
+        if (!$scope.selectedBrand) {
+            $scope.filters.Brand.Operator = 'in';
+            $scope.filters.Brand.Value = Utility_ERP.Value_OperatorIN_($scope.data_Brand, 'Code');
+        } else {
+            $scope.filters.Brand.Operator = '=';
+            $scope.filters.Brand.Value = $scope.selectedBrand;
+        }
+
+        if (!$scope.selectedProfile) {
+            $scope.filters.Profile.Operator = 'in';
+            $scope.filters.Profile.Value = Utility_ERP.Value_OperatorIN_($scope.data_Profile, 'Code');
+        } else {
+            $scope.filters.Profile.Operator = '=';
+            $scope.filters.Profile.Value = $scope.selectedProfile;
+        }
+
+        if (!$scope.selectedCategory) {
+            $scope.filters.Category.Operator = 'in';
+            $scope.filters.Category.Value = Utility_ERP.Value_OperatorIN_($scope.data_Category, 'Code');
+        } else {
+            $scope.filters.Category.Operator = '=';
+            $scope.filters.Category.Value = $scope.selectedCategory;
+        }
+
+        Utility_ERP.Still_Processing($scope, true);
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+
+        $scope.filters['selectedShowAll'] = $scope.selectedShowAll;
+
+        $rootScope.SaveFilterState('TaxReplenishment', $scope);
+
+        delete $scope.filters['selectedShowAll'];
+    };
+
+    $scope.getData_Brand = async function () {
+        $scope.data_Brand_All = await Inventory_Service.Dropdown_Brand();
+
+        // prettier-ignore
+        $scope.data_Brand = ($scope.selectedShowAll ? $scope.data_Brand_All : $scope.data_Brand_All.filter(function (e) { return e.IsArchive == false; }));
+    };
+
+    $scope.getData_Profile = async function () {
+        $scope.data_Profile_All = await Inventory_Service.Dropdown_Profile();
+
+        // prettier-ignore
+        $scope.data_Profile = ($scope.selectedShowAll ? $scope.data_Profile_All : $scope.data_Profile_All.filter(function (e) { return e.IsArchive == false; }));
+    };
+
+    $scope.getData_Category = async function () {
+        $scope.data_Category_All = await Inventory_Service.Dropdown_Category();
+
+        // prettier-ignore
+        $scope.data_Category = ($scope.selectedShowAll ? $scope.data_Category_All : $scope.data_Category_All.filter(function (e) { return e.IsArchive == false; }));
+    };
+
+    $scope.selectedShowAll_Change = async function (flag = true, flag2 = true) {
+        // prettier-ignore
+        $scope.data_Brand = ($scope.selectedShowAll ? $scope.data_Brand_All : $scope.data_Brand_All.filter(function (e) { return e.IsArchive == false; }));
+
+        // prettier-ignore
+        $scope.data_Profile = ($scope.selectedShowAll ? $scope.data_Profile_All : $scope.data_Profile_All.filter(function (e) { return e.IsArchive == false; }));
+
+        // prettier-ignore
+        $scope.data_Category = ($scope.selectedShowAll ? $scope.data_Category_All : $scope.data_Category_All.filter(function (e) { return e.IsArchive == false; }));
+
+        // just to make UX consistent
+        if (flag2) {
+            $scope.selectedBrand = '';
+            $scope.selectedProfile = '';
+            $scope.selectedCategory = '';
+        }
+
+        if (flag) {
+            await $scope.showData();
+        }
+    };
+
+    
+
+    async function Override_some_Filters() {
+        let warehouse = $scope.filters.Warehouse.Value;
+        if (warehouse && typeof warehouse === 'string' && warehouse.indexOf('(') >= 0) warehouse = '';
+        $scope.selectedWarehouse = warehouse;
+
+        let brand = $scope.filters.Brand.Value;
+        if (brand && typeof brand === 'string' && brand.indexOf('(') >= 0) brand = '';
+        $scope.selectedBrand = brand;
+
+        let profile = $scope.filters.Profile.Value;
+        if (profile && typeof profile === 'string' && profile.indexOf('(') >= 0) profile = '';
+        $scope.selectedProfile = profile;
+
+        let category = $scope.filters.Category.Value;
+        if (category && typeof category === 'string' && category.indexOf('(') >= 0) category = '';
+        $scope.selectedCategory = category;
+
+        if ($scope.LoadFilterState_) {
+            $scope.selectedShowAll = $scope.filters['selectedShowAll'];
+            $scope.selectedShowAll_Change(false, false);
+
+            delete $scope.filters['selectedShowAll'];
+        }
+    }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        await Promise.allSettled([
+            $rootScope.EmployeeWarehouseAccess($scope, ''),
+            $scope.getData_Brand(),
+            $scope.getData_Profile(),
+            $scope.getData_Category()
+        ]);
+
+        $rootScope.LoadFilterState('TaxReplenishment', $scope);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.showData();
+    };
+
+    $scope.createPO = async function () {
+        // Implementation for create P/O functionality
+    }
+
+    $scope.initialize_Page();
+});
+// ini file Controller.js
+
+
+
+angular.module('app.erp').controller('TransferRequestsCtrl', function ($rootScope, $scope, Utility_ERP, TransferRequests_Service, Inventory_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Branch: { PropertyName: 'LocationCode', Operator: 'in', Value: '' },
+        RequestFrom: { PropertyName: 'RequestFromCode', Operator: 'in', Value: '' },
+        DateFrom_date: { PropertyName: 'Date', Operator: '>=', Value: '' },
+        DateTo_date: { PropertyName: 'Date', Operator: '<=', Value: '' },
+        DeliverTo: { PropertyName: 'DeliverToCode', Operator: 'in', Value: '' },
+        RequiredDateFrom_date: { PropertyName: 'RequiredDate', Operator: '>=', Value: '' },
+        RequiredDateTo_date: { PropertyName: 'RequiredDate', Operator: '<=', Value: '' },
+        Status: { PropertyName: 'StatusId', Operator: 'in', Value: '' },
+    };
+
+    $scope.selectedBranch = '';
+    $scope.selectedRequestFrom = '';
+    $scope.selectedDateFrom = '';
+    $scope.selectedDateTo = '';
+    $scope.selectedDeliverTo = '';
+    $scope.selectedRequiredDateFrom = '';
+    $scope.selectedRequiredDateTo = '';
+    $scope.selectedStatus = '';
+    $scope.selectedShowAll = false;
+
+    $scope.data_EmployeeLocationAccess = [];
+    $scope.data_RequestFrom = [];
+    $scope.data_DeliverTo = [];
+    $scope.data_Status = [];
+    $scope.data_Status_All = [];
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = TransferRequests_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Request Nr.', 'RequestNr', 'RequestNr', 'Text', true],
+            ['Date', 'Date', 'Date', 'Date', true],
+            ['Branch', 'Branch', 'Branch', 'Text', true],
+            ['From W/H', 'FromWH', 'FromWH', 'Text', true],
+            ['Dest. W/H', 'DestWH', 'DestWH', 'Text', true],
+            ['Open Qty', 'OpenQty', 'OpenQty', 'Number', true],
+            ['Total Qty', 'TotalQty', 'TotalQty', 'Number', true],
+            ['Required Date', 'RequiredDate', 'RequiredDate', 'Date', true],
+            ['Issued By', 'IssuedBy', 'IssuedBy', 'Text', true],
+            ['Status', 'Status', 'Status', 'Text', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        if (!$scope.selectedBranch) {
+            $scope.filters.Branch.Operator = 'in';
+            $scope.filters.Branch.Value = Utility_ERP.Value_OperatorIN_($scope.data_EmployeeLocationAccess, 'Code');
+        } else {
+            $scope.filters.Branch.Operator = '=';
+            $scope.filters.Branch.Value = $scope.selectedBranch;
+        }
+
+        if (!$scope.selectedRequestFrom) {
+            $scope.filters.RequestFrom.Operator = 'in';
+            $scope.filters.RequestFrom.Value = Utility_ERP.Value_OperatorIN_($scope.data_RequestFrom, 'Code');
+        } else {
+            $scope.filters.RequestFrom.Operator = '=';
+            $scope.filters.RequestFrom.Value = $scope.selectedRequestFrom;
+        }
+
+        $scope.filters.DateFrom_date.Value = $rootScope.Date_to_DB($scope.selectedDateFrom);
+        $scope.filters.DateTo_date.Value = $rootScope.Date_to_DB($scope.selectedDateTo);
+
+        if (!$scope.selectedDeliverTo) {
+            $scope.filters.DeliverTo.Operator = 'in';
+            $scope.filters.DeliverTo.Value = Utility_ERP.Value_OperatorIN_($scope.data_DeliverTo, 'Code');
+        } else {
+            $scope.filters.DeliverTo.Operator = '=';
+            $scope.filters.DeliverTo.Value = $scope.selectedDeliverTo;
+        }
+
+        $scope.filters.RequiredDateFrom_date.Value = $rootScope.Date_to_DB($scope.selectedRequiredDateFrom);
+        $scope.filters.RequiredDateTo_date.Value = $rootScope.Date_to_DB($scope.selectedRequiredDateTo);
+
+        if ($rootScope.ValidString($scope.selectedStatus)) {
+            $scope.filters.Status.Operator = '=';
+            $scope.filters.Status.Value = $scope.selectedStatus;
+        } else {
+            $scope.filters.Status.Operator = 'in';
+            $scope.filters.Status.Value = Utility_ERP.Value_OperatorIN($scope.data_Status, 'StatusId', '');
+        }
+
+        Utility_ERP.Still_Processing($scope, true);
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+
+        $scope.filters['selectedShowAll'] = $scope.selectedShowAll;
+
+        $rootScope.SaveFilterState('TransferRequests', $scope);
+
+        delete $scope.filters['selectedShowAll'];
+    };
+
+    $scope.getData_RequestFrom = async function () {
+        $scope.data_RequestFrom = await Inventory_Service.Dropdown_Warehouse();
+    };
+
+    $scope.getData_DeliverTo = async function () {
+        $scope.data_DeliverTo = await Inventory_Service.Dropdown_Warehouse();
+    };
+
+    $scope.getData_Status = async function () {
+        $scope.data_Status_All = await Utility_ERP.getData_DocumentStatus('TransferRequest');
+
+        // prettier-ignore
+        $scope.data_Status = ($scope.selectedShowAll ? $scope.data_Status_All : $scope.data_Status_All.filter(function (e) { return e.IsArchive == false; }));
+
+        $rootScope.SetDefaultDropdownList($scope.data_Status, 'StatusId', $scope, 'selectedStatus');
+    };
+
+    $scope.selectedShowAll_Change = async function (flag = true, flag2 = true) {
+        // prettier-ignore
+        $scope.data_Status = ($scope.selectedShowAll ? $scope.data_Status_All : $scope.data_Status_All.filter(function (e) { return e.IsArchive == false; }));
+
+        // just to make UX consistent
+        if (flag2) $scope.selectedStatus = '';
+
+        if (flag) {
+            await $scope.showData();
+        }
+    };
+
+    
+
+    async function Override_some_Filters() {
+        let branch = $scope.filters.Branch.Value;
+        if (branch && typeof branch === 'string' && branch.indexOf('(') >= 0) branch = '';
+        $scope.selectedBranch = branch;
+
+        let requestFrom = $scope.filters.RequestFrom.Value;
+        if (requestFrom && typeof requestFrom === 'string' && requestFrom.indexOf('(') >= 0) requestFrom = '';
+        $scope.selectedRequestFrom = requestFrom;
+
+        let deliverTo = $scope.filters.DeliverTo.Value;
+        if (deliverTo && typeof deliverTo === 'string' && deliverTo.indexOf('(') >= 0) deliverTo = '';
+        $scope.selectedDeliverTo = deliverTo;
+
+        let status = $scope.filters.Status.Value;
+        if (status && typeof status === 'string' && status.indexOf('(') >= 0) status = '';
+        $scope.selectedStatus = status;
+
+        if ($scope.LoadFilterState_) {
+            $scope.selectedShowAll = $scope.filters['selectedShowAll'];
+            $scope.selectedShowAll_Change(false, false);
+
+            delete $scope.filters['selectedShowAll'];
+        }
+    }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        await Promise.allSettled([
+            $rootScope.EmployeeLocationAccess($scope, ''),
+            $scope.getData_RequestFrom(),
+            $scope.getData_DeliverTo(),
+            $scope.getData_Status()
+        ]);
+
+        $rootScope.LoadFilterState('TransferRequests', $scope);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.showData();
+    };
+
+    $scope.newTransfer = async function () {
+        // Implementation for new transfer request
+    }
+
+    $scope.shipment = async function () {
+        // Implementation for shipment
+    }
+
+    $scope.closeTransfer = async function () {
+        // Implementation for close transfer
+    }
+
+    $scope.printForm = async function () {
+        // Implementation for print
+    }
+
+    $scope.exportList = async function () {
+        // Implementation for export to excel
+    }
+
+    $scope.voidTransfer = async function () {
+        // Implementation for void transfer
+    }
+
+    $scope.initialize_Page();
+});
+angular.module('app.erp').controller('UomFormCtrl', function ($rootScope, $scope, $stateParams, $window, Utility_ERP, Uoms_Service) {
+    // Data to View
+    $scope.form = {};
+    $scope.form.submitted = false;
+
+    // CRUD: Create, Read, Update, Delete
+    $scope.Is_Read = false;
+    $scope.Is_Create = false;
+    $scope.Is_Update = false;
+    $scope.Is_Writeable = false;
+
+    $scope.still_processing = false;
+
+    let model_Template = {
+        Code: '',
+        Description: '',
+        ShortName: '',
+        Active: true,
+        IsPackingUom: false,
+        PackingLevel: 0,
+    };
+
+    $scope.model = { ...model_Template };
+
+    // some Functions
+    $scope.showData = async function () {
+        if (!$scope.Is_Read) return;
+
+        Utility_ERP.Still_Processing($scope, true);
+        let response = await Uoms_Service.DataSingle($scope.model.Code);
+        if (!response.success) {
+            Utility_ERP.Still_Processing($scope, false);
+            return;
+        }
+
+        if (!response.data) {
+            let code = $scope.model.Code;
+
+            // reset
+            $scope.model = { ...model_Template };
+
+            messageValidasi(`Data dengan code '${code}', tidak ditemukan`);
+            Utility_ERP.Still_Processing($scope, false);
+            return;
+        }
+
+        $scope.model = response.data;
+
+        Utility_ERP.Still_Processing($scope, false);
+    };
+
+    $scope.saveData = async function (skipConfirmation = false) {
+        if ($scope.still_processing) return;
+
+        $scope.form.submitted = true;
+        Utility_ERP.Still_Processing($scope, true);
+
+        if (!(await $scope.Valid_toSave(skipConfirmation))) {
+            Utility_ERP.Still_Processing($scope, false);
+
+            return;
+        }
+
+        let data = {
+            dataInput: $scope.model,
+        };
+
+        $rootScope.SanitizeInput(data, model_Template);
+
+        let resultSave = await Uoms_Service.Save(data.dataInput, $scope.Is_Create);
+
+        if (!resultSave.success) {
+            Utility_ERP.Still_Processing($scope, false);
+            $scope.form.submitted = false;
+
+            return;
+        }
+
+        messageInfo('Data berhasil disimpan');
+    };
+
+    $scope.Valid_toSave = async function (skipConfirmation) {
+        if ($rootScope.Not_ValidString($scope.model.Code)) {
+            messageValidasi('Code must not be empty');
+            return false;
+        }
+
+        if ($rootScope.Not_ValidString($scope.model.ShortName)) {
+            messageValidasi('ShortName must not be empty');
+            return false;
+        }
+
+        if ($rootScope.Not_ValidString($scope.model.Description)) {
+            messageValidasi('Description must not be empty');
+            return false;
+        }
+
+        return true;
+    };
+
+    function messageValidasi(content) {
+        $.bigBox({
+            title: 'Error: Message',
+            content: content,
+            color: '#C46A69',
+            icon: 'fa fa-warning shake animated',
+            number: '',
+            timeout: 5000,
+        });
+    }
+
+    function messageInfo(content) {
+        let alreadyBack = false;
+
+        $.bigBox(
+            {
+                title: 'Informasi',
+                content: content,
+                color: '#739E73',
+                timeout: $rootScope.Timeout_Save(),
+                icon: 'fa fa-check',
+                number: '',
+            },
+            function () {
+                Utility_ERP.Still_Processing($scope, false);
+                $scope.form.submitted = false;
+
+                alreadyBack = true;
+                $window.history.back();
+            }
+        );
+
+        setTimeout(() => {
+            Utility_ERP.Still_Processing($scope, false);
+            $scope.form.submitted = false;
+
+            if (alreadyBack) return;
+            $window.history.back();
+        }, $rootScope.Timeout_Save());
+    }
+
+    $scope.Toggle_debugScope_ = function () {
+        $rootScope.Toggle_debugScope($scope);
+    }
+
+    async function Data_References() { }
+
+    $scope.Set_Editable = async function () {
+        if ($scope.still_processing) return;
+
+        $scope.Is_Read = false;
+        $scope.Is_Create = false;
+        $scope.Is_Update = true;
+
+        $scope.Is_Writeable = $scope.Is_Create || $scope.Is_Update;
+
+        Data_References();
+    }
+
+    $scope.handleParameters = function () {
+        $scope.model.Code = $rootScope.Simple_Decode($rootScope.getParamValue($stateParams, 'code'));
+
+        $scope.Is_Read = $rootScope.Not_Null($scope.model.Code);
+
+        $scope.Is_Create = !$scope.Is_Read;
+        $scope.Is_Update = false;
+
+        $scope.Is_Writeable = $scope.Is_Create || $scope.Is_Update;
+    }
+
+    $scope.initialize_Page = async function () {
+        $scope.handleParameters();
+
+        await Data_References();
+
+        await $scope.showData();
+
+        // Langsung Mode Edit, jika sedang dalam kondisi Mode - Read
+        if ($scope.Is_Read) {
+            $scope.Set_Editable();
+        }
+    };
+
+    $scope.initialize_Page();
+
+});
+angular.module('app.erp').controller('UomsCtrl', function ($rootScope, $scope, Utility_ERP, Uoms_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+    $scope.activeOptions = [
+        { Value: null, Text: 'All' },
+        { Value: true, Text: 'Yes' },
+        { Value: false, Text: 'No' },
+    ];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Active: { PropertyName: 'Active', Operator: '=', Value: null },
+    };
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = Uoms_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Code', 'Code', 'Code', 'Text', true],
+            ['Short Name', 'ShortName', 'ShortName', 'Text', true],
+            ['Description', 'Description', 'Description', 'Text', true],
+            ['', 'Active', 'Active', 'Boolean', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+
+        $rootScope.SaveFilterState('UOM', $scope);
+    };
+
+    
+
+    async function Override_some_Filters() { }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.LoadFilterState('UOM', $scope);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.showData();
+    };
+
+    $scope.initialize_Page();
+});
+
+angular.module('app.erp').controller('WarehouseFormCtrl', function ($rootScope, $scope, Utility_ERP, Warehouses_Service) {
+});
+
+angular.module('app.erp').controller('WarehousesCtrl', function ($rootScope, $scope, Utility_ERP, Warehouses_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Branch: { PropertyName: 'BranchCode', Operator: 'in', Value: '' },
+    };
+
+    $scope.selectedBranch = '';
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = Warehouses_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Code', 'Code', 'Code', 'Text', true],
+            ['Description', 'Description', 'Description', 'Text', true],
+            ['Branch', 'BranchName', 'BranchName', 'Text', true],
+            ['Business Name', 'BusinessName', 'BusinessName', 'Text', true],
+            ['Address', 'AddressLine', 'AddressLine', 'Text', true],
+            ['D/S', 'IsDropshipWarehouse', 'IsDropshipWarehouse', 'Boolean', true],
+            ['', 'Active', 'Active', 'Boolean', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        if (!$scope.selectedBranch) {
+            $scope.filters.Branch.Operator = 'in';
+            $scope.filters.Branch.Value = Utility_ERP.Value_OperatorIN_($scope.data_EmployeeLocationAccess, 'Code');
+        } else {
+            $scope.filters.Branch.Operator = '=';
+            $scope.filters.Branch.Value = $scope.selectedBranch;
+        }
+
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+
+        $rootScope.SaveFilterState('Warehouse', $scope);
+    };
+
+    $scope.Branch_Changed = function () {
+        $scope.showData();
+    };
+
+    
+
+    async function Override_some_Filters() {
+        let branch = $scope.filters.Branch.Value;
+        if (branch && typeof branch === 'string' && branch.indexOf('(') >= 0) branch = '';
+
+        if ($scope.LoadFilterState_) {
+            $scope.selectedBranch = branch;
+        }
+    }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        $rootScope.LoadFilterState('Warehouse', $scope);
+
+        await Promise.allSettled([
+            $rootScope.EmployeeLocationAccess($scope, '')
+        ]);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.showData();
+    };
+
+    $scope.initialize_Page();
+});
+
+angular.module('app.erp').controller('WarehouseSelectionCtrl', function ($rootScope, $scope, Utility_ERP, WarehouseSelection_Service) {
+    // Dummy data, just for "Table: paging and searching"
+    $scope.dt = {};
+    $scope.dt.pageLength = 20;
+    $scope.searchKeyword = '';
+
+    // Data to View
+    $scope.pagesOptions = [10, 20, 50, 100];
+
+    $scope.still_processing = false;
+
+    // filter
+    $scope.filters = {
+        Branch: { PropertyName: 'LocationCode', Operator: 'in', Value: '' },
+    };
+
+    $scope.selectedBranch = '';
+
+    $scope.data_EmployeeLocationAccess = [];
+
+    // some Functions
+    $scope.CreateTable = function () {
+        $scope.dt = WarehouseSelection_Service.Table($scope);
+
+        // format: Title, DbField, SortField, Format, Show
+        let columns = [
+            ['Code', 'Code', 'Code', 'Text', true],
+            ['Description', 'Description', 'Description', 'Text', true],
+            ['Branch', 'Branch', 'Branch', 'Text', true],
+        ];
+
+        Utility_ERP.ProcessColumnsY($scope.dt, columns);
+    };
+
+    $scope.showData = async function () {
+        if (!$scope.selectedBranch) {
+            $scope.filters.Branch.Operator = 'in';
+            $scope.filters.Branch.Value = Utility_ERP.Value_OperatorIN_($scope.data_EmployeeLocationAccess, 'Code');
+        } else {
+            $scope.filters.Branch.Operator = '=';
+            $scope.filters.Branch.Value = $scope.selectedBranch;
+        }
+
+        Utility_ERP.Still_Processing($scope, true);
+        await $scope.dt.loadData();
+        Utility_ERP.Still_Processing($scope, false);
+
+        $rootScope.SaveFilterState('WarehouseSelection', $scope);
+    };
+
+    $scope.Branch_Changed = async function () {
+        await $scope.showData();
+    };
+
+    ;
+
+    async function Override_some_Filters() {
+        let branch = $scope.filters.Branch.Value;
+        if (branch && typeof branch === 'string' && branch.indexOf('(') >= 0) branch = '';
+
+        if ($scope.LoadFilterState_) {
+            $scope.selectedBranch = branch;
+        }
+    }
+
+    $scope.initialize_Page = async function () {
+        Utility_ERP.Still_Processing($scope, true);
+
+        await Promise.allSettled([
+            $rootScope.EmployeeLocationAccess($scope, '')
+        ]);
+
+        $rootScope.LoadFilterState('WarehouseSelection', $scope);
+
+        await Override_some_Filters();
+
+        $scope.CreateTable();
+
+        $rootScope.Proces_CheckBox_Kiri($scope);
+
+        $scope.showData();
+    };
+
+    $scope.addSelectedWarehouse = async function () {
+        // Implement add selected warehouse logic here
+    };
+
+    $scope.initialize_Page();
+});
 // ini file Controller.js
 // ini file Controller.js
 
@@ -33910,8296 +42200,6 @@ angular.module('app.erp').controller('ReceiptRevisionCtrl', function ($rootScope
 
     $scope.initialize_Page();
 });
-angular.module('app.erp').controller('BranchCtrl', function ($rootScope, $scope, Utility_ERP, Branch_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-    $scope.activeOptions = [
-        { Value: null, Text: 'All' },
-        { Value: true, Text: 'Active' },
-        { Value: false, Text: 'Inactive' },
-    ];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Active: { PropertyName: 'Status', Operator: '=', Value: null },
-    };
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = Branch_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Branch Code', 'Code', 'Code', 'Text', true],
-            ['Branch Name', 'Name', 'Name', 'Text', true],
-            ['Sub Account', 'SubAccount', 'SubAccount', 'Text', true],
-            ['Status', 'Status', 'Status', 'Status', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.SaveFilterState('Branch', $scope);
-
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-    };
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.LoadFilterState('Branch', $scope);
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.showData();
-    };
-
-    $scope.initialize_Page();
-});
-angular.module('app.erp').controller('BranchFormCtrl', function ($rootScope, $scope, Utility_ERP, Branch_Service, Personels_Service) {
-    $scope.getData_Personels = async function (val) {
-        return await Personels_Service.Dropdown(val, 'SO');
-    };
-});
-
-
-
-
-angular.module('app.erp').controller('BrandsMDCtrl', function ($rootScope, $scope, Utility_ERP, Brands_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-    $scope.activeOptions = [
-        { Value: null, Text: 'All' },
-        { Value: true, Text: 'Yes' },
-        { Value: false, Text: 'No' },
-    ];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Active: { PropertyName: 'Active', Operator: '=', Value: null },
-    };
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = Brands_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Code', 'Code', 'Code', 'Text', true],
-            ['Description', 'Description', 'Description', 'Text', true],
-            ['', 'Active', 'Active', 'Boolean', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-
-        $rootScope.SaveFilterState('Brand', $scope);
-    };
-
-    
-
-    async function Override_some_Filters() { }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.LoadFilterState('Brand', $scope);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.showData();
-    };
-
-    $scope.initialize_Page();
-});
-
-// ini file Controller.js
-
-// ini file Controller.js
-
-angular.module('app.erp').controller('CategoriesMDCtrl', function ($rootScope, $scope, Utility_ERP, Categories_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-    $scope.activeOptions = [
-        { Value: null, Text: 'All' },
-        { Value: true, Text: 'Yes' },
-        { Value: false, Text: 'No' },
-    ];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Active: { PropertyName: 'Active', Operator: '=', Value: null },
-        Parent: { PropertyName: 'ParentCode', Operator: '=', Value: null },
-    };
-
-    $scope.selectedParent = '';
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = Categories_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Code', 'Code', 'Code', 'Text', true],
-            ['Description', 'Description', 'Description', 'Text', true],
-            ['Parent', 'ParentCode', 'ParentCode', 'ParentName', true],
-            ['Level Type', 'LevelType', 'LevelType', 'Text', true],
-            ['Item Type', 'ItemType', 'ItemType', 'Number', true],
-            ['', 'Active', 'Active', 'Boolean', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $scope.filters['selectedParent'] = $scope.selectedParent;
-
-        $rootScope.SaveFilterState('Category', $scope);
-
-        delete $scope.filters['selectedParent'];
-
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-    };
-
-    
-
-    $scope.getData_Parent = function (val) {
-        return Categories_Service.Dropdown_Category2(val);
-    };
-
-    async function Override_some_Filters() {
-        if ($scope.LoadFilterState_) {
-            $scope.selectedParent = $scope.filters['selectedParent'];
-            delete $scope.filters['selectedParent'];
-        }
-    }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.LoadFilterState('Category', $scope);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.showData();
-    };
-
-    $scope.initialize_Page();
-});
-
-
-
-// ini file Controller.js
-
-// ini file Controller.js
-
-angular.module('app.erp').controller('CollectZoneCtrl', function ($rootScope, $scope, Utility_ERP, CollectZone_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-    $scope.statusOptions = [
-        { Value: null, Text: 'All' },
-        { Value: true, Text: 'Active' },
-        { Value: false, Text: 'Inactive' },
-    ];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Status: { PropertyName: 'Status', Operator: '=', Value: null },
-    };
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = CollectZone_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Collect Zone Code', 'Code', 'Code', 'Text', true],
-            ['Collect Zone Name', 'Name', 'Name', 'Text', true],
-            ['Status', 'Status', 'Status', 'Status', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.SaveFilterState('CollectZone', $scope);
-
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-    };
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.LoadFilterState('CollectZone', $scope);
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.showData();
-    };
-
-    $scope.initialize_Page();
-});
-angular.module('app.erp').controller('CollectZoneFormCtrl', function ($rootScope, $scope, Utility_ERP, CollectZone_Service, Personels_Service) {
-    $scope.getData_Personels = async function (val) {
-        return await Personels_Service.Dropdown(val, 'SO');
-    };
-});
-
-
-// ini file Controller.js
-
-// ini file Controller.js
-
-angular.module('app.erp').controller('CustomerGradeListCtrl', function ($rootScope, $scope, Utility_ERP, CustomerGrade_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 10;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-    $scope.statusOptions = [
-        { Value: null, Text: 'All' },
-        { Value: 'Active', Text: 'Active' },
-        { Value: 'Inactive', Text: 'Inactive' },
-    ];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        CodeName: { PropertyName: 'CustomerGradeCode', Operator: 'contains', Value: '' },
-        Status: { PropertyName: 'Status', Operator: '=', Value: null },
-    };
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = CustomerGrade_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Customer Grade Code', 'CustomerGradeCode', 'CustomerGradeCode', 'Text', true],
-            ['Customer Grade Name', 'CustomerGradeName', 'CustomerGradeName', 'Text', true],
-            ['Description', 'Description', 'Description', 'Text', true],
-            ['Status', 'Status', 'Status', 'Status', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.SaveFilterState('CustomerGradeList', $scope);
-
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-    };
-
-    async function Override_some_Filters() { }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.LoadFilterState('CustomerGradeList', $scope);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.showData();
-    };
-
-    $scope.initialize_Page();
-});
-angular.module('app.erp').controller('CustomerGradeFormCtrl', function ($rootScope, $scope, $state, Utility_ERP, CustomerGradeForm_Service) {
-    
-    // Initialize variables
-    $scope.Is_Writeable = true;
-    $scope.Is_Create = true;
-    $scope.form = { submitted: false };
-    $scope.allData_toJson = false;
-    
-    // Initialize model
-    $scope.model = {
-        Code: '',
-        Name: '',
-        Description: '',
-        Active: true
-    };
-
-    // Initialize function
-    $scope.init = function() {
-        var params = $state.params;
-        
-        if (params && params.id) {
-            $scope.Is_Create = false;
-            $scope.loadData(params.id);
-        }
-    };
-
-    // Load existing data
-    $scope.loadData = function(id) {
-        $('#idLoading').show();
-        
-        CustomerGradeForm_Service.getById(id).then(function(response) {
-            if (response.data.success) {
-                $scope.model = response.data.data;
-            } else {
-                Utility_ERP.showAlert('Error', response.data.message, 'error');
-            }
-            $('#idLoading').hide();
-        }, function(error) {
-            Utility_ERP.showAlert('Error', 'Failed to load data', 'error');
-            $('#idLoading').hide();
-        });
-    };
-
-    // Save data
-    $scope.saveData = function() {
-        $scope.form.submitted = true;
-
-        // Validation
-        if (!$scope.model.Name || $scope.model.Name.trim() === '') {
-            Utility_ERP.showAlert('Validation Error', 'Name is required', 'warning');
-            return;
-        }
-
-        if ($scope.Is_Create && (!$scope.model.Code || $scope.model.Code.trim() === '')) {
-            Utility_ERP.showAlert('Validation Error', 'Code is required', 'warning');
-            return;
-        }
-
-        $('#idLoading').show();
-
-        var savePromise = $scope.Is_Create ? 
-            CustomerGradeForm_Service.create($scope.model) : 
-            CustomerGradeForm_Service.update($scope.model);
-
-        savePromise.then(function(response) {
-            if (response.data.success) {
-                Utility_ERP.showAlert('Success', 'Customer Grade saved successfully', 'success');
-                $scope.sdr_GoBack();
-            } else {
-                Utility_ERP.showAlert('Error', response.data.message, 'error');
-            }
-            $('#idLoading').hide();
-        }, function(error) {
-            Utility_ERP.showAlert('Error', 'Failed to save Customer Grade', 'error');
-            $('#idLoading').hide();
-        });
-    };
-
-    // Cancel form
-    $scope.cancelForm = function() {
-        $scope.sdr_GoBack();
-    };
-
-    // Go back
-    $scope.sdr_GoBack = function() {
-        $state.go('app.erp.masterdata.customergradelist');
-    };
-
-    // Toggle debug scope
-    $scope.Toggle_debugScope = function() {
-        $scope.allData_toJson = !$scope.allData_toJson;
-        if ($scope.allData_toJson) {
-            $scope.allData_toJson2 = {
-                model: $scope.model,
-                Is_Create: $scope.Is_Create,
-                Is_Writeable: $scope.Is_Writeable
-            };
-        }
-    };
-
-    // Initialize on load
-    $scope.init();
-});
-angular.module('app.erp').controller('DeliveryZoneCtrl', function ($rootScope, $scope, Utility_ERP, DeliveryZone_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-    $scope.statusOptions = [
-        { Value: null, Text: 'All' },
-        { Value: true, Text: 'Active' },
-        { Value: false, Text: 'Inactive' },
-    ];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Status: { PropertyName: 'Status', Operator: '=', Value: null },
-    };
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = DeliveryZone_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Delivery Zone Code', 'Code', 'Code', 'Text', true],
-            ['Delivery Zone Name', 'Name', 'Name', 'Text', true],
-            ['Status', 'Status', 'Status', 'Status', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.SaveFilterState('DeliveryZone', $scope);
-
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-    };
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.LoadFilterState('DeliveryZone', $scope);
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.showData();
-    };
-
-    $scope.initialize_Page();
-});
-angular.module('app.erp').controller('DeliveryZoneFormCtrl', function ($rootScope, $scope, Utility_ERP, CollectZone_Service, Personels_Service) {
-    $scope.getData_Personels = async function (val) {
-        return await Personels_Service.Dropdown(val, 'SO');
-    };
-});
-
-
-angular.module('app.erp').controller('DepartmentCtrl', function ($rootScope, $scope, Utility_ERP, Department_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-    $scope.activeOptions = [
-        { Value: null, Text: 'All' },
-        { Value: true, Text: 'Active' },
-        { Value: false, Text: 'Inactive' },
-    ];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Active: { PropertyName: 'Status', Operator: '=', Value: null },
-    };
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = Department_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Department Code', 'Code', 'Code', 'Text', true],
-            ['Department Name', 'Name', 'Name', 'Text', true],
-            ['Sub Account', 'SubAccount', 'SubAccount', 'Text', true],
-            ['Status', 'Status', 'Status', 'Status', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.SaveFilterState('Department', $scope);
-
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-    };
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.LoadFilterState('Department', $scope);
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.showData();
-    };
-
-    $scope.initialize_Page();
-});
-angular.module('app.erp').controller('DepartmentFormCtrl', function ($rootScope, $scope, Utility_ERP, Department_Service, Personels_Service) {
-    $scope.getData_Personels = async function (val) {
-        return await Personels_Service.Dropdown(val, 'SO');
-    };
-});
-
-
-// ini file Controller.js
-
-// ini file Controller.js
-
-// ini file Controller.js
-
-// ini file Controller.js
-
-angular.module('app.erp').controller('OwnershipListCtrl', function ($rootScope, $scope, Utility_ERP, Ownership_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 10;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-    $scope.statusOptions = [
-        { Value: null, Text: 'All' },
-        { Value: 'Active', Text: 'Active' },
-        { Value: 'Inactive', Text: 'Inactive' },
-    ];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        IdName: { PropertyName: 'OwnershipID', Operator: 'contains', Value: '' },
-        Status: { PropertyName: 'Status', Operator: '=', Value: null },
-    };
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = Ownership_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Ownership ID', 'OwnershipID', 'OwnershipID', 'Text', true],
-            ['Ownership Name', 'OwnershipName', 'OwnershipName', 'Text', true],
-            ['Description', 'Description', 'Description', 'Text', true],
-            ['Status', 'Status', 'Status', 'Status', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.SaveFilterState('OwnershipList', $scope);
-
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-    };
-
-    async function Override_some_Filters() { }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.LoadFilterState('OwnershipList', $scope);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.showData();
-    };
-
-    $scope.initialize_Page();
-});
-angular.module('app.erp').controller('OwnershipProjectFormCtrl', function ($rootScope, $scope, Utility_ERP, Uoms_Service) {
-
-
-});
-angular.module('app.erp').controller('JobPositionCtrl', function ($rootScope, $scope, Utility_ERP, JobPosition_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-    $scope.activeOptions = [
-        { Value: null, Text: 'All' },
-        { Value: true, Text: 'Active' },
-        { Value: false, Text: 'Inactive' },
-    ];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Active: { PropertyName: 'Status', Operator: '=', Value: null },
-    };
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = JobPosition_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Job Position Code', 'Code', 'Code', 'Text', true],
-            ['Job Position Name', 'Name', 'Name', 'Text', true],
-            ['Position Level', 'PositionLevel', 'PositionLevel', 'Text', true],
-            ['Sub Account', 'SubAccount', 'SubAccount', 'Text', true],
-            ['Status', 'Status', 'Status', 'Status', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.SaveFilterState('JobPosition', $scope);
-
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-    };
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.LoadFilterState('JobPosition', $scope);
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.showData();
-    };
-
-    $scope.initialize_Page();
-});
-angular.module('app.erp').controller('JobPositionFormCtrl', function ($rootScope, $scope, Utility_ERP, Position_Service, Personels_Service) {
-    $scope.getData_Personels = async function (val) {
-        return await Personels_Service.Dropdown(val, 'SO');
-    };
-});
-
-
-
-
-angular.module('app.erp').controller('ProfilesMDCtrl', function ($rootScope, $scope, Utility_ERP, Profiles_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-    $scope.activeOptions = [
-        { Value: null, Text: 'All' },
-        { Value: true, Text: 'Yes' },
-        { Value: false, Text: 'No' },
-    ];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Active: { PropertyName: 'Active', Operator: '=', Value: null },
-    };
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = Profiles_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Code', 'Code', 'Code', 'Text', true],
-            ['Description', 'Name', 'Name', 'Text', true],
-            ['', 'Active', 'Active', 'Boolean', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-
-        $rootScope.SaveFilterState('Profile', $scope);
-    };
-
-    
-
-    async function Override_some_Filters() { }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.LoadFilterState('Profile', $scope);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.showData();
-    };
-
-    $scope.initialize_Page();
-});
-
-angular.module('app.erp').controller('RoleListCtrl', function ($rootScope, $scope, Utility_ERP, RoleList_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 10;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-    $scope.statusOptions = [
-        { Value: null, Text: 'All' },
-        { Value: 'Active', Text: 'Active' },
-        { Value: 'Inactive', Text: 'Inactive' },
-    ];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        RoleName: { PropertyName: 'RoleName', Operator: 'contains', Value: '' },
-        Status: { PropertyName: 'Status', Operator: '=', Value: null },
-    };
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = RoleList_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Role Name', 'RoleName', 'RoleName', 'Text', true],
-            ['Description', 'Description', 'Description', 'Text', true],
-            ['Menu Access', 'MenuAccess', 'MenuAccess', 'Text', true],
-            ['Function', 'Function', 'Function', 'Text', true],
-            ['Status', 'Status', 'Status', 'Status', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.SaveFilterState('RoleList', $scope);
-
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-    };
-
-    async function Override_some_Filters() { }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.LoadFilterState('RoleList', $scope);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.showData();
-    };
-
-    $scope.initialize_Page();
-});
-angular.module('app.erp').controller('RoleAccessFormCtrl', function ($rootScope, $scope, $state, Utility_ERP, RoleAccessForm_Service) {
-
-    // Initialize variables
-    $scope.Is_Writeable = true;
-    $scope.Is_Create = true;
-    $scope.form = { submitted: false };
-    $scope.allData_toJson = false;
-
-    // Initialize model
-    $scope.model = {
-        RoleName: '',
-        RoleStatus: 'Active',
-        Description: '',
-        Permissions: []
-    };
-
-    // Data for modules
-    $scope.data_Modules = [
-        {
-            id: 'sales',
-            name: 'Sales',
-            hasChildren: true,
-            expanded: false,
-            permissions: {
-                read: false,
-                create: false,
-                edit: false,
-                delete: false,
-                approval: false
-            },
-            children: [
-                {
-                    id: 'sales-order',
-                    name: 'Sales Order',
-                    permissions: {
-                        read: false,
-                        create: false,
-                        edit: false,
-                        delete: false,
-                        approval: false
-                    }
-                },
-                {
-                    id: 'sales-invoice',
-                    name: 'Sales Invoice',
-                    permissions: {
-                        read: false,
-                        create: false,
-                        edit: false,
-                        delete: false,
-                        approval: false
-                    }
-                },
-                {
-                    id: 'sales-quotation',
-                    name: 'Sales Quotation',
-                    permissions: {
-                        read: false,
-                        create: false,
-                        edit: false,
-                        delete: false,
-                        approval: false
-                    }
-                }
-            ]
-        },
-        {
-            id: 'purchase',
-            name: 'Purchase',
-            hasChildren: true,
-            expanded: false,
-            permissions: {
-                read: false,
-                create: false,
-                edit: false,
-                delete: false,
-                approval: false
-            },
-            children: [
-                {
-                    id: 'purchase-order',
-                    name: 'Purchase Order',
-                    permissions: {
-                        read: false,
-                        create: false,
-                        edit: false,
-                        delete: false,
-                        approval: false
-                    }
-                },
-                {
-                    id: 'purchase-request',
-                    name: 'Purchase Request',
-                    permissions: {
-                        read: false,
-                        create: false,
-                        edit: false,
-                        delete: false,
-                        approval: false
-                    }
-                }
-            ]
-        },
-        {
-            id: 'inventory',
-            name: 'Inventory',
-            hasChildren: true,
-            expanded: false,
-            permissions: {
-                read: false,
-                create: false,
-                edit: false,
-                delete: false,
-                approval: false
-            },
-            children: [
-                {
-                    id: 'stock-movement',
-                    name: 'Stock Movement',
-                    permissions: {
-                        read: false,
-                        create: false,
-                        edit: false,
-                        delete: false,
-                        approval: false
-                    }
-                },
-                {
-                    id: 'stock-adjustment',
-                    name: 'Stock Adjustment',
-                    permissions: {
-                        read: false,
-                        create: false,
-                        edit: false,
-                        delete: false,
-                        approval: false
-                    }
-                }
-            ]
-        },
-        {
-            id: 'finance',
-            name: 'Finance',
-            hasChildren: true,
-            expanded: false,
-            permissions: {
-                read: false,
-                create: false,
-                edit: false,
-                delete: false,
-                approval: false
-            },
-            children: [
-                {
-                    id: 'payment',
-                    name: 'Payment',
-                    permissions: {
-                        read: false,
-                        create: false,
-                        edit: false,
-                        delete: false,
-                        approval: false
-                    }
-                },
-                {
-                    id: 'receipt',
-                    name: 'Receipt',
-                    permissions: {
-                        read: false,
-                        create: false,
-                        edit: false,
-                        delete: false,
-                        approval: false
-                    }
-                }
-            ]
-        },
-        {
-            id: 'masterdata',
-            name: 'Master Data',
-            hasChildren: true,
-            expanded: false,
-            permissions: {
-                read: false,
-                create: false,
-                edit: false,
-                delete: false,
-                approval: false
-            },
-            children: [
-                {
-                    id: 'customer',
-                    name: 'Customer',
-                    permissions: {
-                        read: false,
-                        create: false,
-                        edit: false,
-                        delete: false,
-                        approval: false
-                    }
-                },
-                {
-                    id: 'supplier',
-                    name: 'Supplier',
-                    permissions: {
-                        read: false,
-                        create: false,
-                        edit: false,
-                        delete: false,
-                        approval: false
-                    }
-                },
-                {
-                    id: 'product',
-                    name: 'Product',
-                    permissions: {
-                        read: false,
-                        create: false,
-                        edit: false,
-                        delete: false,
-                        approval: false
-                    }
-                }
-            ]
-        }
-    ];
-
-    // Toggle module expansion
-    $scope.toggleModule = function(module) {
-        module.expanded = !module.expanded;
-    };
-
-    // Update permissions when parent module is changed
-    $scope.updatePermissions = function(module) {
-        if (module.hasChildren && module.children) {
-            // Apply parent permissions to all children
-            angular.forEach(module.children, function(child) {
-                angular.forEach(['read', 'create', 'edit', 'delete', 'approval'], function(permission) {
-                    child.permissions[permission] = module.permissions[permission];
-                });
-            });
-        }
-    };
-
-    // Initialize function
-    $scope.init = function () {
-        var params = $state.params;
-
-        if (params && params.id) {
-            $scope.Is_Create = false;
-            $scope.loadData(params.id);
-        }
-    };
-
-    // Load existing data
-    $scope.loadData = function (id) {
-        $('#idLoading').show();
-
-        RoleAccessForm_Service.getById(id).then(function (response) {
-            if (response.data.success) {
-                $scope.model = response.data.data;
-                
-                // Apply loaded permissions to modules
-                if ($scope.model.Permissions && $scope.model.Permissions.length > 0) {
-                    $scope.applyPermissionsToModules($scope.model.Permissions);
-                }
-            } else {
-                Utility_ERP.showAlert('Error', response.data.message, 'error');
-            }
-            $('#idLoading').hide();
-        }, function (error) {
-            Utility_ERP.showAlert('Error', 'Failed to load data', 'error');
-            $('#idLoading').hide();
-        });
-    };
-
-    // Apply permissions to modules from loaded data
-    $scope.applyPermissionsToModules = function(permissions) {
-        angular.forEach(permissions, function(perm) {
-            // Find module
-            var module = $scope.data_Modules.find(function(m) {
-                return m.id === perm.moduleId;
-            });
-            
-            if (module) {
-                module.permissions = {
-                    read: perm.read,
-                    create: perm.create,
-                    edit: perm.edit,
-                    delete: perm.delete,
-                    approval: perm.approval
-                };
-                
-                // Apply to children if exists
-                if (perm.submodules && module.children) {
-                    angular.forEach(perm.submodules, function(subPerm) {
-                        var submodule = module.children.find(function(sm) {
-                            return sm.id === subPerm.moduleId;
-                        });
-                        if (submodule) {
-                            submodule.permissions = {
-                                read: subPerm.read,
-                                create: subPerm.create,
-                                edit: subPerm.edit,
-                                delete: subPerm.delete,
-                                approval: subPerm.approval
-                            };
-                        }
-                    });
-                }
-            }
-        });
-    };
-
-    // Collect permissions from modules
-    $scope.collectPermissions = function() {
-        var permissions = [];
-        
-        angular.forEach($scope.data_Modules, function(module) {
-            var modulePermission = {
-                moduleId: module.id,
-                moduleName: module.name,
-                read: module.permissions.read,
-                create: module.permissions.create,
-                edit: module.permissions.edit,
-                delete: module.permissions.delete,
-                approval: module.permissions.approval,
-                submodules: []
-            };
-            
-            // Add submodules
-            if (module.children && module.children.length > 0) {
-                angular.forEach(module.children, function(child) {
-                    modulePermission.submodules.push({
-                        moduleId: child.id,
-                        moduleName: child.name,
-                        read: child.permissions.read,
-                        create: child.permissions.create,
-                        edit: child.permissions.edit,
-                        delete: child.permissions.delete,
-                        approval: child.permissions.approval
-                    });
-                });
-            }
-            
-            permissions.push(modulePermission);
-        });
-        
-        return permissions;
-    };
-
-    // Save data
-    $scope.saveData = function () {
-        $scope.form.submitted = true;
-
-        // Validation
-        if (!$scope.model.RoleName || $scope.model.RoleName.trim() === '') {
-            Utility_ERP.showAlert('Validation Error', 'Role Name is required', 'warning');
-            return;
-        }
-
-        // Collect permissions
-        $scope.model.Permissions = $scope.collectPermissions();
-
-        $('#idLoading').show();
-
-        var savePromise = $scope.Is_Create ?
-            RoleAccessForm_Service.create($scope.model) :
-            RoleAccessForm_Service.update($scope.model);
-
-        savePromise.then(function (response) {
-            if (response.data.success) {
-                Utility_ERP.showAlert('Success', 'Role Access saved successfully', 'success');
-                $scope.sdr_GoBack();
-            } else {
-                Utility_ERP.showAlert('Error', response.data.message, 'error');
-            }
-            $('#idLoading').hide();
-        }, function (error) {
-            Utility_ERP.showAlert('Error', 'Failed to save role access', 'error');
-            $('#idLoading').hide();
-        });
-    };
-
-    // Toggle debug scope
-    $scope.Toggle_debugScope = function () {
-        $scope.allData_toJson = !$scope.allData_toJson;
-        if ($scope.allData_toJson) {
-            $scope.allData_toJson2 = {
-                model: $scope.model,
-                data_Modules: $scope.data_Modules,
-                permissions: $scope.collectPermissions()
-            };
-        }
-    };
-
-    // Initialize on load
-    $scope.init();
-});
-// ini file Controller.js
-
-// ini file Controller.js
-
-angular.module('app.erp').controller('SalesZoneCtrl', function ($rootScope, $scope, Utility_ERP, SalesZone_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-    $scope.statusOptions = [
-        { Value: null, Text: 'All' },
-        { Value: true, Text: 'Active' },
-        { Value: false, Text: 'Inactive' },
-    ];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Status: { PropertyName: 'Status', Operator: '=', Value: null },
-    };
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = SalesZone_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Sales Zone Code', 'Code', 'Code', 'Text', true],
-            ['Sales Zone Name', 'Name', 'Name', 'Text', true],
-            ['Status', 'Status', 'Status', 'Status', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.SaveFilterState('SalesZone', $scope);
-
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-    };
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.LoadFilterState('SalesZone', $scope);
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.showData();
-    };
-
-    $scope.initialize_Page();
-});
-angular.module('app.erp').controller('SalesZoneFormCtrl', function ($rootScope, $scope, Utility_ERP, SalesZone_Service, Personels_Service) {
-    $scope.getData_Personels = async function (val) {
-        return await Personels_Service.Dropdown(val, 'SO');
-    };
-});
-
-
-angular.module('app.erp').controller('SettingsCtrl', function ($rootScope, $scope, $stateParams, $window, Utility_ERP, Uoms_Service) {
-    // Data to View
-    $scope.form = {};
-    $scope.form.submitted = false;
-
-    // CRUD: Create, Read, Update, Delete
-    $scope.Is_Read = false;
-    $scope.Is_Create = false;
-    $scope.Is_Update = false;
-    $scope.Is_Writeable = false;
-
-    $scope.still_processing = false;
-
-    let model_Data_Inside = {
-        Code: '',
-        Name: '',
-        LegalName: '',
-        Active: true,
-        Address: '',
-        AddressLine2: '',
-        AddressLine3: '',
-        AddressLine4: '',
-        City: '',
-        Province: '',
-        CountryCode: '',
-        PostalCode: '',
-        PhoneNumber: '',
-        Email: '',
-        Website: '',
-        TaxId: '',
-        KppName: '',
-        TaxStatus: '',
-        PpnStatus: false,
-        PpnTariff: '',
-        TaxType: '',
-        CompanyLogo: null,
-        CompanyLogoFile: null
-    };
-
-    let model_Template = {
-        Kunci: 'Setting_Company',
-        Data: { ...model_Data_Inside },
-    };
-
-    $scope.model = { ...model_Template };
-
-    // some Functions
-    $scope.showData = async function () {
-        //if (!$scope.Is_Read) return;
-
-        Utility_ERP.Still_Processing($scope, true);
-        let response = await Utility_ERP.GeDataStore($scope.model.Kunci);
-        if (!response.success) {
-            Utility_ERP.Still_Processing($scope, false);
-            return;
-        }
-
-        if (!response.data) {
-            // let code = $scope.model.Kunci;
-
-            // // reset
-            // $scope.model = { ...model_Template };
-
-            // messageValidasi(`Data dengan code '${code}', tidak ditemukan`);
-            // Utility_ERP.Still_Processing($scope, false);
-            return;
-        }
-        $scope.model.Data = JSON.parse(response.data.Data);
-
-        Utility_ERP.Still_Processing($scope, false);
-    };
-
-    $scope.saveData = async function (skipConfirmation = false) {
-        //if ($scope.still_processing) return;
-
-        $scope.form.submitted = true;
-        Utility_ERP.Still_Processing($scope, true);
-
-        if (!(await $scope.Valid_toSave(skipConfirmation))) {
-            Utility_ERP.Still_Processing($scope, false);
-
-            return;
-        }
-
-        let data = {
-            dataInput: {
-                Kunci: $scope.model.Kunci,
-                Data: JSON.stringify($scope.model.Data),
-            }
-        };
-
-        $rootScope.SanitizeInput(data, model_Template);
-
-        let resultSave = await Utility_ERP.SaveDataStore(data.dataInput);
-
-        if (!resultSave.success) {
-            Utility_ERP.Still_Processing($scope, false);
-            $scope.form.submitted = false;
-
-            return;
-        }
-
-        messageInfo('Data berhasil disimpan');
-    };
-
-    $scope.Valid_toSave = async function (skipConfirmation) {
-        // if ($rootScope.Not_ValidString($scope.model.Code)) {
-        //     messageValidasi('Code must not be empty');
-        //     return false;
-        // }
-
-        // if ($rootScope.Not_ValidString($scope.model.ShortName)) {
-        //     messageValidasi('ShortName must not be empty');
-        //     return false;
-        // }
-
-        // if ($rootScope.Not_ValidString($scope.model.Description)) {
-        //     messageValidasi('Description must not be empty');
-        //     return false;
-        // }
-
-        return true;
-    };
-
-    function messageValidasi(content) {
-        $.bigBox({
-            title: 'Error: Message',
-            content: content,
-            color: '#C46A69',
-            icon: 'fa fa-warning shake animated',
-            number: '',
-            timeout: 5000,
-        });
-    }
-
-    function messageInfo(content) {
-        let alreadyBack = false;
-
-        $.bigBox(
-            {
-                title: 'Informasi',
-                content: content,
-                color: '#739E73',
-                timeout: $rootScope.Timeout_Save(),
-                icon: 'fa fa-check',
-                number: '',
-            },
-            function () {
-                Utility_ERP.Still_Processing($scope, false);
-                $scope.form.submitted = false;
-            }
-        );
-
-        setTimeout(() => {
-            Utility_ERP.Still_Processing($scope, false);
-            $scope.form.submitted = false;
-        }, $rootScope.Timeout_Save());
-    }
-
-    async function Data_References() { }
-
-    $scope.Set_Editable = async function () {
-        if ($scope.still_processing) return;
-
-        $scope.Is_Read = false;
-        $scope.Is_Create = false;
-        $scope.Is_Update = true;
-
-        $scope.Is_Writeable = $scope.Is_Create || $scope.Is_Update;
-
-        Data_References();
-    }
-
-    $scope.initialize_Page = async function () {
-
-        await Data_References();
-
-        await $scope.showData();
-
-        // Langsung Mode Edit, jika sedang dalam kondisi Mode - Read
-        if ($scope.Is_Read) {
-            $scope.Set_Editable();
-        }
-    };
-
-    $scope.initialize_Page();
-
-});
-angular.module('app.erp').controller('SubAccountCtrl', function ($rootScope, $scope, Utility_ERP, SubAccount_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-    $scope.statusOptions = [
-        { Value: null, Text: 'All' },
-        { Value: true, Text: 'Active' },
-        { Value: false, Text: 'Inactive' },
-    ];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Status: { PropertyName: 'Status', Operator: '=', Value: null },
-    };
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = SubAccount_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Sub Account Code', 'SubAccountCode', 'SubAccountCode', 'Text', true],
-            ['Sub Account Name', 'SubAccountName', 'SubAccountName', 'Text', true],
-            ['COA Code', 'COACode', 'COACode', 'Text', true],
-            ['COA Name', 'COAName', 'COAName', 'Text', true],
-            ['Status', 'Status', 'Status', 'Status', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.SaveFilterState('SubAccount', $scope);
-
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-    };
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.LoadFilterState('SubAccount', $scope);
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.showData();
-    };
-
-    $scope.initialize_Page();
-});
-angular.module('app.erp').controller('SubAccountFormCtrl', function ($rootScope, $scope, Utility_ERP, SubAccount_Service, Personels_Service) {
-    $scope.getData_Personels = async function (val) {
-        return await Personels_Service.Dropdown(val, 'SO');
-    };
-});
-
-
-// ini file Controller.js
-
-// ini file Controller.js
-
-angular.module('app.erp').controller('TaxListCtrl', function ($rootScope, $scope, Utility_ERP, TaxList_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 10;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-    $scope.statusOptions = [
-        { Value: null, Text: 'All' },
-        { Value: true, Text: 'Active' },
-        { Value: false, Text: 'Inactive' },
-    ];
-    $scope.taxTypeOptions = [
-        { Value: null, Text: 'All' },
-        { Value: 'VAT', Text: 'VAT' },
-        { Value: 'PPH', Text: 'PPH' },
-        { Value: 'PPN', Text: 'PPN' },
-    ];
-    $scope.taxCategoryOptions = [
-        { Value: null, Text: 'All' },
-        { Value: 'Sales', Text: 'Sales' },
-        { Value: 'Purchase', Text: 'Purchase' },
-    ];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        TaxType: { PropertyName: 'TaxType', Operator: '=', Value: null },
-        TaxCategory: { PropertyName: 'TaxCategory', Operator: '=', Value: null },
-        Status: { PropertyName: 'Status', Operator: '=', Value: null },
-    };
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = TaxList_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Tax Code', 'TaxCode', 'TaxCode', 'Text', true],
-            ['Tax Name', 'TaxName', 'TaxName', 'Text', true],
-            ['Tax Type', 'TaxType', 'TaxType', 'Text', true],
-            ['Tax Category', 'TaxCategory', 'TaxCategory', 'Text', true],
-            ['Tax Rate (%)', 'TaxRate', 'TaxRate', 'Number', true],
-            ['Status', 'Status', 'Status', 'Status', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.SaveFilterState('TaxList', $scope);
-
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-    };
-
-    async function Override_some_Filters() { }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.LoadFilterState('TaxList', $scope);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.showData();
-    };
-
-    $scope.initialize_Page();
-});
-// ini file Controller.js
-
-// ini file Controller.js
-
-// ini file Controller.js
-
-// ini file Controller.js
-
-// ini file Controller.js
-
-
-
-angular.module('app.erp').controller('UomsMDCtrl', function ($rootScope, $scope, Utility_ERP, Uoms_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-    $scope.activeOptions = [
-        { Value: null, Text: 'All' },
-        { Value: true, Text: 'Yes' },
-        { Value: false, Text: 'No' },
-    ];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Active: { PropertyName: 'Active', Operator: '=', Value: null },
-    };
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = Uoms_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Code', 'Code', 'Code', 'Text', true],
-            ['Short Name', 'ShortName', 'ShortName', 'Text', true],
-            ['Description', 'Description', 'Description', 'Text', true],
-            ['', 'Active', 'Active', 'Boolean', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-
-        $rootScope.SaveFilterState('UOM', $scope);
-    };
-
-    
-
-    async function Override_some_Filters() { }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.LoadFilterState('UOM', $scope);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.showData();
-    };
-
-    $scope.initialize_Page();
-});
-
-angular.module('app.erp').controller('UseBRCtrl', function ($rootScope, $scope, Utility_ERP, UseBR_Service, BackEndService) {
-    // Dummy data, just for "Paging"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-
-    // filter
-    $scope.filters = {
-        IsPersonnel: { PropertyName: 'IsPersonnel', Operator: '=', Value: true },
-    };
-
-    $scope.selectedBranch = '';
-    $scope.selectedStatus = '';
-    $scope.showAllStatus = false;
-
-    // References of data
-    $scope.data_EmployeeLocationAccess = [];
-    $scope.data_DocumentStatus_All = [];
-    $scope.data_DocumentStatus = [];
-    $scope.data_CustomerType = [];
-    $scope.data_BusinessLine = [];
-    $scope.data_BusinessRelationGroup = [];
-    $scope.data_BusinessRelationTitle = [];
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = UseBR_Service.Table($scope.filters, $scope.dt.pageLength, $scope.afterRequestData);
-
-        // format: Title, DbField, SortField, Format
-        let columns = [
-            ['Code', 'Code', 'Code', 'Text'],
-            ['Name', 'Name', 'Name', 'Text'],
-            ['Status', 'StatusName', 'StatusName', 'Text'],
-        ];
-
-        Utility_ERP.ProcessColumns($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        await $scope.dt.loadData();
-    };
-
-    $scope.initialize_Page = async function () {
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        // prettier-ignore
-        await Promise.allSettled([
-            $rootScope.EmployeeLocationAccess($scope)
-            , $scope.getData_DocumentStatus()
-            , $scope.getData_CustomerType()
-            , $scope.getData_BusinessLine()
-            , $scope.getData_BusinessRelationGroup()
-            , $scope.getData_BusinessRelationTitle()
-        ]);
-
-        $scope.showData();
-    };
-
-    $scope.afterRequestData = function () {
-        $scope.dt.data.forEach(function (row) {
-            row['rowSelected'] = false;
-        });
-    };
-
-    $scope.Branch_Changed = async function () {
-        await $scope.showData();
-    };
-
-    $scope.getData_DocumentStatus = async function () {
-        $scope.data_DocumentStatus_All = await Utility_ERP.getData_DocumentStatus('BusinessRelation');
-
-        // prettier-ignore
-        $scope.data_DocumentStatus = ($scope.showAllStatus ? $scope.data_DocumentStatus_All : $scope.data_DocumentStatus_All.filter(function (e) { return e.IsArchive == false; }));
-
-        // Default untuk DropdownList
-        if ($scope.data_DocumentStatus.length > 0) {
-            $scope.selectedStatus = $scope.data_DocumentStatus[0].StatusId;
-        }
-    };
-
-    $scope.selectedStatus_Change = async function () {
-        // prettier-ignore
-        $scope.data_DocumentStatus = ($scope.showAllStatus ? $scope.data_DocumentStatus_All : $scope.data_DocumentStatus_All.filter(function (e) { return e.IsArchive == false; }));
-
-        // just to make UX consistent
-        if ($scope.showAllStatus) $scope.selectedStatus = '';
-
-        await $scope.showData();
-    };
-
-    $scope.getData_CustomerType = async function () {
-        $scope.data_CustomerType = await UseBR_Service.getData_CustomerType();
-    };
-
-    $scope.getData_BusinessLine = async function () {
-        $scope.data_BusinessLine = await UseBR_Service.getData_BusinessLine();
-    };
-
-    $scope.getData_BusinessRelationGroup = async function () {
-        $scope.data_BusinessRelationGroup = await UseBR_Service.getData_BusinessRelationGroup();
-    };
-
-    $scope.getData_BusinessRelationTitle = async function () {
-        $scope.data_BusinessRelationTitle = await UseBR_Service.getData_BusinessRelationTitle();
-    };
-
-    $scope.voidDocument = function () { };
-
-    $scope.Block = async function () {
-        await $scope.ProcessBlock_UnBlock('Blocked');
-    };
-
-    $scope.UnBlock = async function () {
-        await $scope.ProcessBlock_UnBlock('UnBlocked');
-    };
-
-    $scope.ProcessBlock_UnBlock = async function (action) {
-        let selectedData = [];
-
-        for (let i = 0; i < $scope.dt.data.length; i++) {
-            if ($scope.dt.data[i]['rowSelected']) {
-                selectedData.push($scope.dt.data[i]['Code']);
-            }
-        }
-
-        if (selectedData.length <= 0) {
-            $.bigBox({
-                title: 'Pesan Error',
-                content: 'No data is selected!',
-                color: '#C46A69',
-                icon: 'fa fa-warning shake animated',
-                number: '',
-                timeout: 2000,
-            });
-
-            return;
-        }
-
-        var request = {
-            actionController: 'CustomerController',
-            actionName: action,
-            actionParam: selectedData,
-        };
-
-        await BackEndService.RequestAction(request);
-
-        $scope.selectAllRows = false;
-        $scope.showData();
-
-        $.bigBox(
-            {
-                title: 'Informasi',
-                content: 'Data berhasil disimpan',
-                color: '#739E73',
-                timeout: $rootScope.Timeout_Save(),
-                icon: 'fa fa-check',
-                number: '',
-            },
-            function () { }
-        );
-    };
-
-    $scope.initialize_Page();
-});
-
-'use strict';
-
-angular.module('app.erpUtils').factory('UseBR_Service', [
-    'BackEndService',
-    'DTService',
-    function (BackEndService, DTService) {
-        var service = {};
-
-        service.Table = function (filterObject, pageLength = 5, afterRequestData = null) {
-            let modelName = 'XSmBusinessRelation';
-            let defaultSortField = 'Name';
-            let defaultSortDirection = 'asc';
-            let defaultSearchKeyword = 'Code, Name';
-
-            return DTService.GenerateDTInstance(modelName, defaultSortField, defaultSortDirection, filterObject, defaultSearchKeyword, pageLength, afterRequestData);
-        };
-
-        service.List = async function () {
-            let request = {
-                modelName: 'XSmBusinessRelation',
-                fieldNames: ['*'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [],
-                sortList: ['Code asc'],
-            };
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.Dropdown = async function () {
-            let request = {
-                modelName: 'XSmBusinessRelation',
-                fieldNames: ['Code', 'Description', 'ShortName'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [{ PropertyName: 'Active', Operator: '=', Value: 'true' }],
-                sortList: ['Code asc'],
-            };
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.DataSingle = async function (code) {
-            let request = {
-                modelName: 'XSmBusinessRelationR',
-                criteriaList: [{ PropertyName: 'Code', Operator: '=', Value: code }],
-            };
-
-            let response = await BackEndService.RequestDataSingle(request);
-
-            return response.data;
-        };
-
-        service.Save = async function (data) {
-            let request = {
-                actionController: 'CustomerController',
-                actionName: 'Save',
-                actionParam: data,
-            };
-
-            return await BackEndService.RequestAction(request);
-        };
-
-        service.getData_AddressItem = async function (code) {
-            let request = {
-                modelName: 'XSmAddress',
-                fieldNames: ['*'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [{ PropertyName: 'BusinessRelationCode', Operator: '=', Value: code }],
-                sortList: ['AddressTypeCode asc'],
-            };
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.getData_ContactItem = async function () {
-            let ContactMapping = [
-                {
-                    TypeCode: 'BLG',
-                    Name: 'Jowo Wirawan',
-                    Gender: 'M',
-                    Position: 'Direktur',
-                    PhoneNumber: '021-8990 2828',
-                    FaxNumber: '021-8990 9999',
-                    EmailAddress: 'harmonijayasejahtera@gmail.com',
-                    Number: 1,
-
-                    XCode: '',
-                    ExistingItem: false,
-                    Deleted: false,
-                    recordNumber: 0,
-                    processRecord: false,
-                    selectedData: '',
-                    XContactCode: '',
-                },
-            ];
-
-            let response = {
-                data: {
-                    Data: ContactMapping,
-                },
-            };
-
-            return response.data.Data;
-        };
-
-        service.getData_Gender = async function () {
-            var request = {
-                modelName: 'XGender',
-                fieldNames: ['Code', 'Name'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [],
-                sortList: ['Code asc'],
-            };
-
-            let response = {
-                data: {
-                    Data: [
-                        {
-                            Code: 'M',
-                            Name: 'Male',
-                        },
-                        {
-                            Code: 'F',
-                            Name: 'Female',
-                        },
-                    ],
-                },
-            };
-
-            // TODO
-            // successCallBack(response);
-
-            //let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.getData_BankItem = async function (code) {
-            let BankMapping = [
-                {
-                    BRCode: 'H/0052',
-                    BankAccountNumber: '0001',
-                    InfoLine1: 'HARMONI JAYA SEJAHTERA',
-                    InfoLine2: 'BRI',
-                    XCode: '',
-                    ExistingItem: false,
-                    Deleted: false,
-                    recordNumber: 0,
-                    processRecord: false,
-                    selectedData: '',
-                    XBankCode: '',
-                },
-            ];
-
-            try {
-                let filteredData = BankMapping.filter((item) => item.BRCode === code);
-
-                if (filteredData.length === 0) {
-                    throw new Error('Data not found for the given code: ' + code);
-                }
-
-                let response = {
-                    data: {
-                        Data: filteredData,
-                    },
-                };
-
-                return response.data.Data;
-            } catch (error) { }
-        };
-
-        service.getData_TaxZone = async function (code) {
-            var request = {
-                modelName: 'XTaxZone',
-                fieldNames: ['Code', 'Description'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [],
-                sortList: ['Code asc'],
-            };
-
-            let response = {
-                data: {
-                    Data: [
-                        {
-                            Code: '01',
-                            Description: 'Non Ppn',
-                        },
-                        {
-                            Code: '02',
-                            Description: 'Ppn',
-                        },
-                    ],
-                },
-            };
-
-            // TODO
-            // successCallBack(response);
-
-            //let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.getData_WarehouseItem = async function (code) {
-            let WarehouseMapping = [
-                {
-                    BRCode: 'H/0052',
-                    WarehouseCode: 'JTGL',
-                    WarehouseName: 'J Tegal',
-                    XCode: '',
-                    ExistingItem: false,
-                    Deleted: false,
-                    recordNumber: 0,
-                    processRecord: false,
-                    selectedData: '',
-                    XWarehouseCode: '',
-                },
-                {
-                    BRCode: 'H/0052',
-                    WarehouseCode: 'PBGR',
-                    WarehouseName: 'P Bogor',
-                    XCode: '',
-                    ExistingItem: false,
-                    Deleted: false,
-                    recordNumber: 0,
-                    processRecord: false,
-                    selectedData: '',
-                    XWarehouseCode: '',
-                },
-                {
-                    BRCode: 'H/0052',
-                    WarehouseCode: 'DS',
-                    WarehouseName: 'DS (Obsolete)',
-                    XCode: '',
-                    ExistingItem: false,
-                    Deleted: false,
-                    recordNumber: 0,
-                    processRecord: false,
-                    selectedData: '',
-                    XWarehouseCode: '',
-                },
-            ];
-
-            try {
-                let filteredData = WarehouseMapping.filter((item) => item.BRCode === code);
-
-                if (filteredData.length === 0) {
-                    throw new Error('Data not found for the given code: ' + code);
-                }
-
-                let response = {
-                    data: {
-                        Data: filteredData,
-                    },
-                };
-
-                return response.data.Data;
-            } catch (error) { }
-        };
-
-        service.getData_CustomerType = async function () {
-            var request = {
-                modelName: 'XCustomerType',
-                fieldNames: ['Code', 'Name'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [],
-                sortList: ['Code asc'],
-            };
-
-            let response = {
-                data: {
-                    Data: [
-                        {
-                            Code: '01',
-                            Name: 'Toko',
-                        },
-                        {
-                            Code: 'CM',
-                            Name: 'Construction Management',
-                        },
-                        {
-                            Code: 'CS',
-                            Name: 'Consultant',
-                        },
-                        {
-                            Code: 'DS',
-                            Name: 'Distributor',
-                        },
-                        {
-                            Code: 'DV',
-                            Name: 'Developer',
-                        },
-                        {
-                            Code: 'MC',
-                            Name: 'Main Contractor',
-                        },
-                    ],
-                },
-            };
-
-            // TODO
-            // successCallBack(response);
-
-            //let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.getData_BusinessLine = async function () {
-            var request = {
-                modelName: 'XBusinessLine',
-                fieldNames: ['Code', 'Description'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [],
-                sortList: ['Code asc'],
-            };
-
-            let response = {
-                data: {
-                    Data: [
-                        {
-                            Code: 'HR',
-                            Description: 'High Rise Building',
-                        },
-                        {
-                            Code: 'IF',
-                            Description: 'Infrastructure',
-                        },
-                        {
-                            Code: 'IN',
-                            Description: 'Industrial',
-                        },
-                        {
-                            Code: 'MN',
-                            Description: 'Mining',
-                        },
-                        {
-                            Code: 'OG',
-                            Description: 'Oil and Gas',
-                        },
-                        {
-                            Code: 'PN',
-                            Description: 'Plantation',
-                        },
-                        {
-                            Code: 'RS',
-                            Description: 'Residential',
-                        },
-                    ],
-                },
-            };
-
-            // TODO
-            // successCallBack(response);
-
-            //let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.getData_BusinessRelationGroup = async function () {
-            var request = {
-                modelName: 'XBusinessRelationGroup',
-                fieldNames: ['Code', 'Description'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [],
-                sortList: ['Code asc'],
-            };
-
-            let response = {
-                data: {
-                    Data: [
-                        {
-                            Code: 'Group 1',
-                            Description: 'keterangan Group 1',
-                        },
-                    ],
-                },
-            };
-
-            // TODO
-            // successCallBack(response);
-
-            //let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.getData_BusinessRelationTitle = async function () {
-            var request = {
-                modelName: 'XBusinessRelationTitle',
-                fieldNames: ['Code', 'Description'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [],
-                sortList: ['Code asc'],
-            };
-
-            let response = {
-                data: {
-                    Data: [
-                        {
-                            Code: '01',
-                            Description: 'PD',
-                        },
-                        {
-                            Code: '02',
-                            Description: 'TB',
-                        },
-                        {
-                            Code: '03',
-                            Description: 'Toko',
-                        },
-                        {
-                            Code: '04',
-                            Description: 'UD',
-                        },
-                        {
-                            Code: '05',
-                            Description: 'PT',
-                        },
-                        {
-                            Code: '06',
-                            Description: 'PB',
-                        },
-                        {
-                            Code: '07',
-                            Description: 'CV',
-                        },
-                    ],
-                },
-            };
-
-            // TODO
-            // successCallBack(response);
-
-            //let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.getData_CorporateSize = async function () {
-            var request = {
-                modelName: 'XCorporateSize',
-                fieldNames: ['Code', 'Description'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [],
-                sortList: ['Code asc'],
-            };
-
-            let response = {
-                data: {
-                    Data: [
-                        {
-                            Code: 'small',
-                            Description: 'Small',
-                        },
-                        {
-                            Code: 'medium',
-                            Description: 'Medium',
-                        },
-                        {
-                            Code: 'enterprise',
-                            Description: 'Enterprise',
-                        },
-                    ],
-                },
-            };
-
-            // TODO
-            // successCallBack(response);
-
-            //let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.List_Privacy = async function (code) {
-            let request = {
-                modelName: 'XSmBusinessRelationLocationR',
-                fieldNames: ['*'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [{ PropertyName: 'BRCode', Operator: '=', Value: code }],
-                sortList: ['Name asc'],
-            };
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        return service;
-    },
-]);
-
-angular.module('app.erp').controller('UserListCtrl', function ($rootScope, $scope, Utility_ERP, UserList_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 10;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-    $scope.statusOptions = [
-        { Value: null, Text: 'All' },
-        { Value: true, Text: 'Active' },
-        { Value: false, Text: 'Inactive' },
-    ];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Employee: { PropertyName: 'LinkedEmployee', Operator: 'contains', Value: '' },
-        Status: { PropertyName: 'UserStatus', Operator: '=', Value: null },
-    };
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = UserList_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['User Name', 'UserName', 'UserName', 'Text', true],
-            ['Linked Employee', 'LinkedEmployee', 'LinkedEmployee', 'Text', true],
-            ['Role', 'Role', 'Role', 'Text', true],
-            ['Last Login', 'LastLogin', 'LastLogin', 'DateTime', true],
-            ['User Status', 'UserStatus', 'UserStatus', 'UserStatus', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.SaveFilterState('UserList', $scope);
-
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-    };
-
-    async function Override_some_Filters() { }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.LoadFilterState('UserList', $scope);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.showData();
-    };
-
-    $scope.initialize_Page();
-});
-angular.module('app.erp').controller('UserFormCtrl', function ($rootScope, $scope, $state, Utility_ERP, UserForm_Service) {
-
-    // Initialize variables
-    $scope.Is_Writeable = true;
-    $scope.Is_Create = true;
-    $scope.form = { submitted: false };
-    $scope.allData_toJson = false;
-
-    // Initialize model
-    $scope.model = {
-        Employee: '',
-        FullName: '',
-        EmailAddress: '',
-        Password: '',
-        ConfirmPassword: '',
-        AssignRole: ''
-    };
-
-    // Data for dropdowns
-    $scope.data_Roles = [
-        { Code: 'ADMIN', Name: 'Admin' },
-        { Code: 'SUPERVISOR', Name: 'Supervisor' },
-        { Code: 'MANAGER', Name: 'Manager' },
-        { Code: 'APPROVER', Name: 'Approver' }
-    ];
-
-    // Initialize function
-    $scope.init = function () {
-        var params = $state.params;
-
-        if (params && params.id) {
-            $scope.Is_Create = false;
-            $scope.loadData(params.id);
-        }
-    };
-
-    // Load existing data
-    $scope.loadData = function (id) {
-        $('#idLoading').show();
-
-        UserForm_Service.getById(id).then(function (response) {
-            if (response.data.success) {
-                $scope.model = response.data.data;
-            } else {
-                Utility_ERP.showAlert('Error', response.data.message, 'error');
-            }
-            $('#idLoading').hide();
-        }, function (error) {
-            Utility_ERP.showAlert('Error', 'Failed to load data', 'error');
-            $('#idLoading').hide();
-        });
-    };
-
-    // Save data
-    $scope.saveData = function () {
-        $scope.form.submitted = true;
-
-        // Validation
-        if (!$scope.model.Employee || !$scope.model.FullName || !$scope.model.EmailAddress ||
-            !$scope.model.Password || !$scope.model.ConfirmPassword || !$scope.model.AssignRole) {
-            Utility_ERP.showAlert('Validation Error', 'Please fill all required fields', 'warning');
-            return;
-        }
-
-        // Check password match
-        if ($scope.model.Password !== $scope.model.ConfirmPassword) {
-            Utility_ERP.showAlert('Validation Error', 'Passwords do not match', 'warning');
-            return;
-        }
-
-        // Check password length
-        if ($scope.model.Password.length < 8) {
-            Utility_ERP.showAlert('Validation Error', 'Password must be at least 8 characters', 'warning');
-            return;
-        }
-
-        $('#idLoading').show();
-
-        var savePromise = $scope.Is_Create ?
-            UserForm_Service.create($scope.model) :
-            UserForm_Service.update($scope.model);
-
-        savePromise.then(function (response) {
-            if (response.data.success) {
-                Utility_ERP.showAlert('Success', 'User saved successfully', 'success');
-                $scope.sdr_GoBack();
-            } else {
-                Utility_ERP.showAlert('Error', response.data.message, 'error');
-            }
-            $('#idLoading').hide();
-        }, function (error) {
-            Utility_ERP.showAlert('Error', 'Failed to save user', 'error');
-            $('#idLoading').hide();
-        });
-    };
-
-    // Toggle debug scope
-    $scope.Toggle_debugScope = function () {
-        $scope.allData_toJson = !$scope.allData_toJson;
-        if ($scope.allData_toJson) {
-            $scope.allData_toJson2 = {
-                model: $scope.model,
-                data_Roles: $scope.data_Roles
-            };
-        }
-    };
-
-    // Initialize on load
-    $scope.init();
-});
-angular.module('app.erp').controller('WarehouseCtrl', function ($rootScope, $scope, Utility_ERP, Warehouse_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-    $scope.statusOptions = [
-        { Value: null, Text: 'All' },
-        { Value: true, Text: 'Active' },
-        { Value: false, Text: 'Inactive' },
-    ];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Status: { PropertyName: 'Status', Operator: '=', Value: null },
-    };
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = Warehouse_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Warehouse Code', 'Code', 'Code', 'Text', true],
-            ['Warehouse Name', 'Name', 'Name', 'Text', true],
-            ['Sub Account', 'SubAccount', 'SubAccount', 'Text', true],
-            ['Status', 'Status', 'Status', 'Status', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.SaveFilterState('Warehouse', $scope);
-
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-    };
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.LoadFilterState('Warehouse', $scope);
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.showData();
-    };
-
-    $scope.initialize_Page();
-});
-angular.module('app.erp').controller('WarehouseFormCtrl', function ($rootScope, $scope, Utility_ERP, Warehouse_Service, Personels_Service) {
-    $scope.getData_Personels = async function (val) {
-        return await Personels_Service.Dropdown(val, 'SO');
-    };
-});
-
-
-
-
-
-
-angular.module('app.erp').controller('AssemblyOrdersCtrl', function ($rootScope, $scope, Utility_ERP, AssemblyOrders_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Branch: { PropertyName: 'LocationCode', Operator: 'in', Value: '' },
-        Warehouse: { PropertyName: 'WarehouseCode', Operator: 'in', Value: '' },
-        Reason: { PropertyName: 'ReasonCode', Operator: 'in', Value: '' },
-        DueDateFrom_date: { PropertyName: 'DueDate', Operator: '>=', Value: '' },
-        DueDateTo_date: { PropertyName: 'DueDate', Operator: '<=', Value: '' },
-        Status: { PropertyName: 'StatusId', Operator: 'in', Value: '' },
-    };
-
-    $scope.selectedBranch = '';
-    $scope.selectedWarehouse = '';
-    $scope.selectedReason = '';
-    $scope.selectedDueDateFrom = '';
-    $scope.selectedDueDateTo = '';
-    $scope.selectedStatus = '';
-    $scope.selectedShowAll = false;
-
-    $scope.data_EmployeeLocationAccess = [];
-    $scope.data_EmployeeWarehouseAccess = [];
-    $scope.data_Warehouse_perBranch = [];
-    $scope.data_Reason = [];
-    $scope.data_Status = [];
-    $scope.data_Status_All = [];
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = AssemblyOrders_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Order Nr.', 'OrderNr', 'OrderNr', 'Text', true],
-            ['Date', 'Date', 'Date', 'Date', true],
-            ['Branch', 'Branch', 'Branch', 'Text', true],
-            ['Warehouse', 'Warehouse', 'Warehouse', 'Text', true],
-            ['Reason', 'Reason', 'Reason', 'Text', true],
-            ['Item', 'Item', 'Item', 'Text', true],
-            ['Qty', 'Qty', 'Qty', 'Number', true],
-            ['Issued By', 'IssuedBy', 'IssuedBy', 'Text', true],
-            ['Status', 'Status', 'Status', 'Text', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        if (!$scope.selectedBranch) {
-            $scope.filters.Branch.Operator = 'in';
-            $scope.filters.Branch.Value = Utility_ERP.Value_OperatorIN_($scope.data_EmployeeLocationAccess, 'Code');
-        } else {
-            $scope.filters.Branch.Operator = '=';
-            $scope.filters.Branch.Value = $scope.selectedBranch;
-        }
-
-        if (!$scope.selectedWarehouse) {
-            $scope.filters.Warehouse.Operator = 'in';
-            $scope.filters.Warehouse.Value = Utility_ERP.Value_OperatorIN_($scope.data_Warehouse_perBranch, 'Code');
-        } else {
-            $scope.filters.Warehouse.Operator = '=';
-            $scope.filters.Warehouse.Value = $scope.selectedWarehouse;
-        }
-
-        if (!$scope.selectedReason) {
-            $scope.filters.Reason.Operator = 'in';
-            $scope.filters.Reason.Value = Utility_ERP.Value_OperatorIN_($scope.data_Reason, 'Code');
-        } else {
-            $scope.filters.Reason.Operator = '=';
-            $scope.filters.Reason.Value = $scope.selectedReason;
-        }
-
-        if ($rootScope.ValidString($scope.selectedStatus)) {
-            $scope.filters.Status.Operator = '=';
-            $scope.filters.Status.Value = $scope.selectedStatus;
-        } else {
-            $scope.filters.Status.Operator = 'in';
-            $scope.filters.Status.Value = Utility_ERP.Value_OperatorIN($scope.data_Status, 'StatusId', '');
-        }
-
-        $scope.filters.DueDateFrom_date.Value = $rootScope.Date_to_DB($scope.selectedDueDateFrom);
-        $scope.filters.DueDateTo_date.Value = $rootScope.Date_to_DB($scope.selectedDueDateTo);
-
-        Utility_ERP.Still_Processing($scope, true);
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-
-        $scope.filters['selectedShowAll'] = $scope.selectedShowAll;
-
-        $rootScope.SaveFilterState('AssemblyOrders', $scope);
-
-        delete $scope.filters['selectedShowAll'];
-    };
-
-    $scope.Branch_Changed = async function () {
-        // --  untuk Page ini, setiap kali Branch berubah --> maka Warehouse ke posisi "All"
-        // reset
-        $scope.selectedWarehouse = '';
-
-        $scope.Reorganize_Warehouse();
-
-        await $scope.showData();
-    };
-
-    $scope.Reorganize_Warehouse = function () {
-        var data = [];
-
-        if (!$scope.selectedBranch) {
-            // tanpa Filter Branch
-            data = $scope.data_EmployeeWarehouseAccess;
-        } else {
-            // filter berdasarkan Branch
-            data = $scope.data_EmployeeWarehouseAccess.filter(function (e) {
-                return e.LocationCode == $scope.selectedBranch;
-            });
-        }
-
-        $scope.data_Warehouse_perBranch = [...new Map(data.map((item) => [item['Code'], item])).values()].sort((x, y) => x.Code.localeCompare(y.Code));
-    };
-
-    $scope.getData_Reason = async function () {
-        $scope.data_Reason = await AssemblyOrders_Service.Dropdown_Reason();
-    };
-
-    $scope.getData_Status = async function () {
-        $scope.data_Status_All = await Utility_ERP.getData_DocumentStatus('AssemblyOrder');
-
-        // prettier-ignore
-        $scope.data_Status = ($scope.selectedShowAll ? $scope.data_Status_All : $scope.data_Status_All.filter(function (e) { return e.IsArchive == false; }));
-
-        $rootScope.SetDefaultDropdownList($scope.data_Status, 'StatusId', $scope, 'selectedStatus');
-    };
-
-    $scope.selectedShowAll_Change = async function (flag = true, flag2 = true) {
-        // prettier-ignore
-        $scope.data_Status = ($scope.selectedShowAll ? $scope.data_Status_All : $scope.data_Status_All.filter(function (e) { return e.IsArchive == false; }));
-
-        // just to make UX consistent
-        if (flag2) $scope.selectedStatus = '';
-
-        if (flag) {
-            await $scope.showData();
-        }
-    };
-
-    ;
-
-    async function Override_some_Filters() {
-        let branch = $scope.filters.Branch.Value;
-        if (branch && typeof branch === 'string' && branch.indexOf('(') >= 0) branch = '';
-
-        let warehouse = $scope.filters.Warehouse.Value;
-        if (warehouse && typeof warehouse === 'string' && warehouse.indexOf('(') >= 0) warehouse = '';
-        $scope.selectedWarehouse = warehouse;
-
-        let reason = $scope.filters.Reason.Value;
-        if (reason && typeof reason === 'string' && reason.indexOf('(') >= 0) reason = '';
-        $scope.selectedReason = reason;
-
-        let status = $scope.filters.Status.Value;
-        if (status && typeof status === 'string' && status.indexOf('(') >= 0) status = '';
-        $scope.selectedStatus = status;
-
-        if ($scope.LoadFilterState_) {
-            $scope.selectedBranch = branch;
-
-            $scope.selectedShowAll = $scope.filters['selectedShowAll'];
-            $scope.selectedShowAll_Change(false, false);
-
-            delete $scope.filters['selectedShowAll'];
-        }
-    }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        await Promise.allSettled([
-            $rootScope.EmployeeLocationAccess($scope, ''),
-            $rootScope.EmployeeWarehouseAccess($scope, ''),
-            $scope.getData_Reason(),
-            $scope.getData_Status()
-        ]);
-
-        $rootScope.LoadFilterState('AssemblyOrders', $scope);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.Reorganize_Warehouse();
-
-        $scope.showData();
-    };
-
-    $scope.verifyAssemblyClick = async function () {
-        // Implement verify assembly functionality
-    };
-
-    $scope.printForm = async function () {
-        // Implement print functionality
-    };
-
-    $scope.voidClick = async function () {
-        // Implement void functionality
-    };
-
-    $scope.initialize_Page();
-});
-
-
-angular.module('app.erp').controller('AssetDisposalsCtrl', function ($rootScope, $scope, Utility_ERP, AssetDisposals_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-    $scope.activeOptions = [
-        { Value: null, Text: 'All' },
-        { Value: true, Text: 'Yes' },
-        { Value: false, Text: 'No' },
-    ];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Active: { PropertyName: 'Active', Operator: '=', Value: null },
-    };
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = AssetDisposals_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Code', 'Code', 'Code', 'Text', true],
-            ['Short Name', 'ShortName', 'ShortName', 'Text', true],
-            ['Description', 'Description', 'Description', 'Text', true],
-            ['Active', 'Active', 'Active', 'Boolean', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-
-        $rootScope.SaveFilterState('AssetDisposals', $scope);
-    };
-
-    ;
-
-    async function Override_some_Filters() {
-        // No additional filter overrides needed for this page
-    }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.LoadFilterState('AssetDisposals', $scope);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.showData();
-    };
-
-    $scope.downloadSchema = async function () {
-        // TODO: Implement download schema functionality
-    };
-
-    $scope.uploadFile = async function () {
-        // TODO: Implement upload functionality
-    };
-
-    $scope.initialize_Page();
-});
-
-
-angular.module('app.erp').controller('AssetsCtrl', function ($rootScope, $scope, Utility_ERP, Assets_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Branch: { PropertyName: 'LocationCode', Operator: 'in', Value: '' },
-        Type: { PropertyName: 'TypeCode', Operator: 'in', Value: '' },
-        AcquisitionDateFrom_date: { PropertyName: 'AcquisitionDate', Operator: '>=', Value: '' },
-        AcquisitionDateTo_date: { PropertyName: 'AcquisitionDate', Operator: '<=', Value: '' },
-        DisposalDateFrom_date: { PropertyName: 'DisposalDate', Operator: '>=', Value: '' },
-        DisposalDateTo_date: { PropertyName: 'DisposalDate', Operator: '<=', Value: '' },
-        Status: { PropertyName: 'StatusId', Operator: 'in', Value: '' },
-    };
-
-    $scope.selectedBranch = '';
-    $scope.selectedType = '';
-    $scope.selectedAcquisitionDateFrom = '';
-    $scope.selectedAcquisitionDateTo = '';
-    $scope.selectedDisposalDateFrom = '';
-    $scope.selectedDisposalDateTo = '';
-    $scope.selectedStatus = '';
-    $scope.selectedShowAll = false;
-
-    $scope.data_EmployeeLocationAccess = [];
-    $scope.data_Type = [];
-    $scope.data_Status = [];
-    $scope.data_Status_All = [];
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = Assets_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Serial Number', 'SerialNumber', 'SerialNumber', 'Text', true],
-            ['Type', 'Type', 'Type', 'Text', true],
-            ['Branch', 'Branch', 'Branch', 'Text', true],
-            ['Name', 'Name', 'Name', 'Text', true],
-            ['Acquisition Date', 'AcquisitionDate', 'AcquisitionDate', 'Date', true],
-            ['Expected Disposal Date', 'ExpectedDisposalDate', 'ExpectedDisposalDate', 'Date', true],
-            ['Salvage Value', 'SalvageValue', 'SalvageValue', 'Currency', true],
-            ['Acq. Cost', 'AcqCost', 'AcqCost', 'Currency', true],
-            ['Depreciated', 'Depreciated', 'Depreciated', 'Currency', true],
-            ['Warrantied', 'Warrantied', 'Warrantied', 'Boolean', true],
-            ['Warranty Exp. Date', 'WarrantyExpDate', 'WarrantyExpDate', 'Date', true],
-            ['Status', 'Status', 'Status', 'Text', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        if (!$scope.selectedBranch) {
-            $scope.filters.Branch.Operator = 'in';
-            $scope.filters.Branch.Value = Utility_ERP.Value_OperatorIN_($scope.data_EmployeeLocationAccess, 'Code');
-        } else {
-            $scope.filters.Branch.Operator = '=';
-            $scope.filters.Branch.Value = $scope.selectedBranch;
-        }
-
-        if (!$scope.selectedType) {
-            $scope.filters.Type.Operator = 'in';
-            $scope.filters.Type.Value = Utility_ERP.Value_OperatorIN_($scope.data_Type, 'Code');
-        } else {
-            $scope.filters.Type.Operator = '=';
-            $scope.filters.Type.Value = $scope.selectedType;
-        }
-
-        if ($rootScope.ValidString($scope.selectedStatus)) {
-            $scope.filters.Status.Operator = '=';
-            $scope.filters.Status.Value = $scope.selectedStatus;
-        } else {
-            $scope.filters.Status.Operator = 'in';
-            $scope.filters.Status.Value = Utility_ERP.Value_OperatorIN($scope.data_Status, 'StatusId', '');
-        }
-
-        $scope.filters.AcquisitionDateFrom_date.Value = $rootScope.Date_to_DB($scope.selectedAcquisitionDateFrom);
-        $scope.filters.AcquisitionDateTo_date.Value = $rootScope.Date_to_DB($scope.selectedAcquisitionDateTo);
-
-        $scope.filters.DisposalDateFrom_date.Value = $rootScope.Date_to_DB($scope.selectedDisposalDateFrom);
-        $scope.filters.DisposalDateTo_date.Value = $rootScope.Date_to_DB($scope.selectedDisposalDateTo);
-
-        Utility_ERP.Still_Processing($scope, true);
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-
-        $scope.filters['selectedShowAll'] = $scope.selectedShowAll;
-
-        $rootScope.SaveFilterState('Assets', $scope);
-
-        delete $scope.filters['selectedShowAll'];
-    };
-
-    $scope.getData_Type = async function () {
-        $scope.data_Type = await Assets_Service.Dropdown_Type();
-    };
-
-    $scope.getData_Status = async function () {
-        $scope.data_Status_All = await Utility_ERP.getData_DocumentStatus('Asset');
-
-        // prettier-ignore
-        $scope.data_Status = ($scope.selectedShowAll ? $scope.data_Status_All : $scope.data_Status_All.filter(function (e) { return e.IsArchive == false; }));
-
-        $rootScope.SetDefaultDropdownList($scope.data_Status, 'StatusId', $scope, 'selectedStatus');
-    };
-
-    $scope.selectedShowAll_Change = async function (flag = true, flag2 = true) {
-        // prettier-ignore
-        $scope.data_Status = ($scope.selectedShowAll ? $scope.data_Status_All : $scope.data_Status_All.filter(function (e) { return e.IsArchive == false; }));
-
-        // just to make UX consistent
-        if (flag2) $scope.selectedStatus = '';
-
-        if (flag) {
-            await $scope.showData();
-        }
-    };
-
-    ;
-
-    async function Override_some_Filters() {
-        let branch = $scope.filters.Branch.Value;
-        if (branch && typeof branch === 'string' && branch.indexOf('(') >= 0) branch = '';
-        $scope.selectedBranch = branch;
-
-        let type = $scope.filters.Type.Value;
-        if (type && typeof type === 'string' && type.indexOf('(') >= 0) type = '';
-        $scope.selectedType = type;
-
-        let status = $scope.filters.Status.Value;
-        if (status && typeof status === 'string' && status.indexOf('(') >= 0) status = '';
-        $scope.selectedStatus = status;
-
-        if ($scope.LoadFilterState_) {
-            $scope.selectedShowAll = $scope.filters['selectedShowAll'];
-            $scope.selectedShowAll_Change(false, false);
-
-            delete $scope.filters['selectedShowAll'];
-        }
-    }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        await Promise.allSettled([
-            $rootScope.EmployeeLocationAccess($scope, ''),
-            $scope.getData_Type(),
-            $scope.getData_Status()
-        ]);
-
-        $rootScope.LoadFilterState('Assets', $scope);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.showData();
-    };
-
-    $scope.disposeClick = async function () {
-        // Implement dispose functionality
-    };
-
-    $scope.downloadSchemaClick = async function () {
-        // Implement download schema functionality
-    };
-
-    $scope.uploadClick = async function () {
-        // Implement upload functionality
-    };
-
-    $scope.initialize_Page();
-});
-// ini file Controller.js
-
-angular.module('app.erp').controller('AssetTypesCtrl', function ($rootScope, $scope, Utility_ERP, AssetTypes_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-    $scope.activeOptions = [
-        { Value: null, Text: 'All' },
-        { Value: true, Text: 'Yes' },
-        { Value: false, Text: 'No' },
-    ];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Active: { PropertyName: 'Active', Operator: '=', Value: null },
-    };
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = AssetTypes_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Code', 'Code', 'Code', 'Text', true],
-            ['Description', 'Description', 'Description', 'Text', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-
-        $rootScope.SaveFilterState('AssetTypes', $scope);
-    };
-
-    ;
-
-    async function Override_some_Filters() {
-        // No special overrides needed for this simple page
-    }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.LoadFilterState('AssetTypes', $scope);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.showData();
-    };
-
-    $scope.initialize_Page();
-});
-angular.module('app.erp').controller('BranchAllocationCtrl', function ($rootScope, $scope, Utility_ERP, BranchAllocation_Service, Inventory_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Branch: { PropertyName: 'LocationCode', Operator: 'in', Value: '' },
-        Warehouse: { PropertyName: 'WarehouseCode', Operator: 'in', Value: '' },
-        Brand: { PropertyName: 'Brand', Operator: 'in', Value: '' },
-        Profile: { PropertyName: 'Profile', Operator: 'in', Value: '' },
-        Category: { PropertyName: 'CategoryCode', Operator: 'in', Value: '' },
-    };
-
-    $scope.selectedBranch = '';
-    $scope.selectedWarehouse = '';
-    $scope.selectedBrand = '';
-    $scope.selectedProfile = '';
-    $scope.selectedCategory = '';
-
-    $scope.data_EmployeeLocationAccess = [];
-    $scope.data_EmployeeWarehouseAccess = [];
-    $scope.data_Warehouse_perBranch = [];
-    $scope.data_Brand = [];
-    $scope.data_Profile = [];
-    $scope.data_Category = [];
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = BranchAllocation_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Item Code', 'ItemCode', 'ItemCode', 'Text', true],
-            ['Item Name', 'ItemName', 'ItemName', 'Text', true],
-            ['Brand', 'Brand', 'Brand', 'Text', true],
-            ['Category', 'Category', 'Category', 'Text', true],
-            ['Uom', 'Uom', 'Uom', 'Text', true],
-            ['Physical', 'Physical', 'Physical', 'Number', true],
-            ['Available', 'Available', 'Available', 'Number', true],
-            ['Peksi %', 'PeksiPercent', 'PeksiPercent', 'Number', true],
-            ['Trikaya %', 'TrikayaPercent', 'TrikayaPercent', 'Number', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        if (!$scope.selectedBranch) {
-            $scope.filters.Branch.Operator = 'in';
-            $scope.filters.Branch.Value = Utility_ERP.Value_OperatorIN_($scope.data_EmployeeLocationAccess, 'Code');
-        } else {
-            $scope.filters.Branch.Operator = '=';
-            $scope.filters.Branch.Value = $scope.selectedBranch;
-        }
-
-        if (!$scope.selectedWarehouse) {
-            $scope.filters.Warehouse.Operator = 'in';
-            $scope.filters.Warehouse.Value = Utility_ERP.Value_OperatorIN_($scope.data_Warehouse_perBranch, 'Code');
-        } else {
-            $scope.filters.Warehouse.Operator = '=';
-            $scope.filters.Warehouse.Value = $scope.selectedWarehouse;
-        }
-
-        if (!$scope.selectedBrand) {
-            $scope.filters.Brand.Operator = 'in';
-            $scope.filters.Brand.Value = Utility_ERP.Value_OperatorIN_($scope.data_Brand, 'Code');
-        } else {
-            $scope.filters.Brand.Operator = '=';
-            $scope.filters.Brand.Value = $scope.selectedBrand;
-        }
-
-        if (!$scope.selectedProfile) {
-            $scope.filters.Profile.Operator = 'in';
-            $scope.filters.Profile.Value = Utility_ERP.Value_OperatorIN_($scope.data_Profile, 'Code');
-        } else {
-            $scope.filters.Profile.Operator = '=';
-            $scope.filters.Profile.Value = $scope.selectedProfile;
-        }
-
-        if (!$scope.selectedCategory) {
-            $scope.filters.Category.Operator = 'in';
-            $scope.filters.Category.Value = Utility_ERP.Value_OperatorIN_($scope.data_Category, 'Code');
-        } else {
-            $scope.filters.Category.Operator = '=';
-            $scope.filters.Category.Value = $scope.selectedCategory;
-        }
-
-        Utility_ERP.Still_Processing($scope, true);
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-
-        $rootScope.SaveFilterState('BranchAllocation', $scope);
-    };
-
-    $scope.Branch_Changed = async function () {
-        // reset
-        $scope.selectedWarehouse = '';
-
-        $scope.Reorganize_Warehouse();
-
-        await $scope.showData();
-    };
-
-    $scope.Reorganize_Warehouse = function () {
-        var data = [];
-
-        if (!$scope.selectedBranch) {
-            // tanpa Filter Branch
-            data = $scope.data_EmployeeWarehouseAccess;
-        } else {
-            // filter berdasarkan Branch
-            data = $scope.data_EmployeeWarehouseAccess.filter(function (e) {
-                return e.LocationCode == $scope.selectedBranch;
-            });
-        }
-
-        $scope.data_Warehouse_perBranch = [...new Map(data.map((item) => [item['Code'], item])).values()].sort((x, y) => x.Code.localeCompare(y.Code));
-    };
-
-    $scope.getData_Brand = async function () {
-        $scope.data_Brand = await Inventory_Service.Dropdown_Brand();
-    };
-
-    $scope.getData_Profile = async function () {
-        $scope.data_Profile = await Inventory_Service.Dropdown_Profile();
-    };
-
-    $scope.getData_Category = async function () {
-        $scope.data_Category = await Inventory_Service.Dropdown_Category();
-    };
-
-    
-
-    async function Override_some_Filters() {
-        let branch = $scope.filters.Branch.Value;
-        if (branch && typeof branch === 'string' && branch.indexOf('(') >= 0) branch = '';
-
-        let warehouse = $scope.filters.Warehouse.Value;
-        if (warehouse && typeof warehouse === 'string' && warehouse.indexOf('(') >= 0) warehouse = '';
-        $scope.selectedWarehouse = warehouse;
-
-        let brand = $scope.filters.Brand.Value;
-        if (brand && typeof brand === 'string' && brand.indexOf('(') >= 0) brand = '';
-        $scope.selectedBrand = brand;
-
-        let profile = $scope.filters.Profile.Value;
-        if (profile && typeof profile === 'string' && profile.indexOf('(') >= 0) profile = '';
-        $scope.selectedProfile = profile;
-
-        let category = $scope.filters.Category.Value;
-        if (category && typeof category === 'string' && category.indexOf('(') >= 0) category = '';
-        $scope.selectedCategory = category;
-
-        if ($scope.LoadFilterState_) {
-            $scope.selectedBranch = branch;
-        }
-    }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        await Promise.allSettled([
-            $rootScope.EmployeeLocationAccess($scope, ''),
-            $rootScope.EmployeeWarehouseAccess($scope, ''),
-            $scope.getData_Brand(),
-            $scope.getData_Profile(),
-            $scope.getData_Category()
-        ]);
-
-        $rootScope.LoadFilterState('BranchAllocation', $scope);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.Reorganize_Warehouse();
-
-        $scope.showData();
-    };
-
-    $scope.saveData = async function () {
-        // Implementation for save functionality
-    }
-
-    $scope.initialize_Page();
-});
-angular.module('app.erp').controller('BrandFormCtrl', function ($rootScope, $scope, Utility_ERP, Brands_Service) {
-
-});
-
-angular.module('app.erp').controller('BrandsCtrl', function ($rootScope, $scope, Utility_ERP, Brands_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-    $scope.activeOptions = [
-        { Value: null, Text: 'All' },
-        { Value: true, Text: 'Yes' },
-        { Value: false, Text: 'No' },
-    ];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Active: { PropertyName: 'Active', Operator: '=', Value: null },
-    };
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = Brands_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Code', 'Code', 'Code', 'Text', true],
-            ['Description', 'Description', 'Description', 'Text', true],
-            ['', 'Active', 'Active', 'Boolean', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-
-        $rootScope.SaveFilterState('Brand', $scope);
-    };
-
-    
-
-    async function Override_some_Filters() { }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.LoadFilterState('Brand', $scope);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.showData();
-    };
-
-    $scope.initialize_Page();
-});
-
-angular.module('app.erp').controller('CategoriesCtrl', function ($rootScope, $scope, BackEndService, Utility_ERP, Categories_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 10000;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10000];
-    $scope.activeOptions = [
-        { Value: null, Text: 'All' },
-        { Value: true, Text: 'Yes' },
-        { Value: false, Text: 'No' },
-    ];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Active: { PropertyName: 'Active', Operator: '=', Value: null },
-        Parent: { PropertyName: 'ParentCode', Operator: '=', Value: null },
-    };
-
-    $scope.selectedParent = '';
-
-    // some Functions
-    var loadData_Custom = async function () {
-        var request = {
-            modelName: $scope.dt.dataModel,
-            maximumResult: ($scope.dt.pageLength <= 100) ? $scope.dt.pageLength : 100,
-            fieldNames: ['*'],
-
-            sortList: [$scope.dt.activeSortField + ' ' + $scope.dt.activeSortDirection],
-            pageNumber: $scope.dt.currentPage,
-        };
-
-        $scope.dt.applyFilters(request);
-
-        $scope.dt.loading = true;
-
-        // reset
-        $scope.dt.data = [];
-        //dt.totalRows = 0;
-        //dt.totalPages = 0;
-
-        let response = await BackEndService.RequestDataList_X(request);
-        $scope.dt.loading = false;
-
-        if (response.success) {
-            // request data success
-            $scope.dt.data = response.data.Data;
-            $scope.dt.totalRows = response.data.TotalRows;
-            if ($scope.dt.totalRows < $scope.dt.pageLength) $scope.dt.totalPages = 1;
-            else $scope.dt.totalPages = Math.ceil($scope.dt.totalRows / $scope.dt.pageLength);
-
-            var kolom_id = 'Code';
-            var kolom_parent_id = 'ParentCode';
-            var kolom_code = 'Code';
-            var kolom_desc = 'Description';
-
-            $scope.dt.treeData = Utility_ERP.sdr_BuildFlatTreeData($scope, kolom_id, kolom_parent_id, kolom_code, kolom_desc);
-        } else {
-            // request data failed
-            // show Error: sudah dihandle oleh SmartAdmin - function notifyError() menggunakan $.bigBox()
-        }
-
-        BackEndService.Log_Activity();
-    };
-
-
-    $scope.CreateTable = function () {
-        $scope.dt = Categories_Service.Table($scope);
-
-        $scope.dt.loadData = loadData_Custom;
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Code', 'Code', 'Code', 'Text', true],
-            //['Description', 'Description', 'Description', 'Text', true],
-            // ['Parent', 'ParentCode', 'ParentCode', 'ParentName', true],
-            // ['Level Type', 'LevelType', 'LevelType', 'Text', true],
-            // ['Item Type', 'ItemType', 'ItemType', 'Number', true],
-            ['', 'Active', 'Active', 'Boolean', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $scope.filters['selectedParent'] = $scope.selectedParent;
-
-        $rootScope.SaveFilterState('Category', $scope);
-
-        delete $scope.filters['selectedParent'];
-
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-    };
-
-
-
-    $scope.getData_Parent = function (val) {
-        return Categories_Service.Dropdown_Category2(val);
-    };
-
-    async function Override_some_Filters() {
-        if ($scope.LoadFilterState_) {
-            $scope.selectedParent = $scope.filters['selectedParent'];
-            delete $scope.filters['selectedParent'];
-        }
-    }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.LoadFilterState('Category', $scope);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.showData();
-    };
-
-    $scope.initialize_Page();
-});
-
-angular.module('app.erp').controller('CategoriesXCtrl', function ($rootScope, $scope, BackEndService, Utility_ERP, Categories_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 10000;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10000];
-    $scope.activeOptions = [
-        { Value: null, Text: 'All' },
-        { Value: true, Text: 'Yes' },
-        { Value: false, Text: 'No' },
-    ];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Active: { PropertyName: 'Active', Operator: '=', Value: null },
-        Parent: { PropertyName: 'ParentCode', Operator: '=', Value: null },
-    };
-
-    $scope.selectedParent = '';
-
-    // some Functions
-    var loadData_Custom = async function () {
-        var request = {
-            modelName: $scope.dt.dataModel,
-            maximumResult: ($scope.dt.pageLength <= 100) ? $scope.dt.pageLength : 100,
-            fieldNames: ['*'],
-
-            sortList: [$scope.dt.activeSortField + ' ' + $scope.dt.activeSortDirection],
-            pageNumber: $scope.dt.currentPage,
-        };
-
-        $scope.dt.applyFilters(request);
-
-        $scope.dt.loading = true;
-
-        // reset
-        $scope.dt.data = [];
-        //dt.totalRows = 0;
-        //dt.totalPages = 0;
-
-        let response = await BackEndService.RequestDataList_X(request);
-        $scope.dt.loading = false;
-
-        if (response.success) {
-            // request data success
-            $scope.dt.data = response.data.Data;
-            $scope.dt.totalRows = response.data.TotalRows;
-            if ($scope.dt.totalRows < $scope.dt.pageLength) $scope.dt.totalPages = 1;
-            else $scope.dt.totalPages = Math.ceil($scope.dt.totalRows / $scope.dt.pageLength);
-
-            var kolom_id = 'AccountId';
-            var kolom_parent_id = 'ParentId';
-            var kolom_code = 'AccountCode';
-            var kolom_desc = 'Description';
-
-            $scope.dt.treeData = Utility_ERP.sdr_BuildFlatTreeData($scope, kolom_id, kolom_parent_id, kolom_code, kolom_desc);
-        } else {
-            // request data failed
-            // show Error: sudah dihandle oleh SmartAdmin - function notifyError() menggunakan $.bigBox()
-        }
-
-        BackEndService.Log_Activity();
-    };
-
-
-    $scope.CreateTable = function () {
-        $scope.dt = Categories_Service.Table($scope);
-
-        $scope.dt.loadData = loadData_Custom;
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Code', 'Code', 'Code', 'Text', true],
-            ['Description', 'Description', 'Description', 'Text', true],
-            ['Parent', 'ParentCode', 'ParentCode', 'ParentName', true],
-            ['Level Type', 'LevelType', 'LevelType', 'Text', true],
-            ['Item Type', 'ItemType', 'ItemType', 'Number', true],
-            ['', 'Active', 'Active', 'Boolean', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $scope.filters['selectedParent'] = $scope.selectedParent;
-
-        $rootScope.SaveFilterState('Category', $scope);
-
-        delete $scope.filters['selectedParent'];
-
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-    };
-
-
-
-    $scope.getData_Parent = function (val) {
-        return Categories_Service.Dropdown_Category2(val);
-    };
-
-    async function Override_some_Filters() {
-        if ($scope.LoadFilterState_) {
-            $scope.selectedParent = $scope.filters['selectedParent'];
-            delete $scope.filters['selectedParent'];
-        }
-    }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.LoadFilterState('Category', $scope);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.showData();
-    };
-
-    $scope.initialize_Page();
-});
-
-angular.module('app.erp').controller('CategoryFormCtrl', function ($rootScope, $scope, Utility_ERP, Categories_Service) {
-});
-
-angular.module('app.erp').controller('ComparisonPanelCtrl', function ($rootScope, $scope, Utility_ERP, ComparisonPanel_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-    $scope.activeOptions = [
-        { Value: null, Text: 'All' },
-        { Value: true, Text: 'Yes' },
-        { Value: false, Text: 'No' },
-    ];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Active: { PropertyName: 'Active', Operator: '=', Value: null },
-    };
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = ComparisonPanel_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Code', 'Code', 'Code', 'Text', true],
-            ['Short Name', 'ShortName', 'ShortName', 'Text', true],
-            ['Description', 'Description', 'Description', 'Text', true],
-            ['Active', 'Active', 'Active', 'Boolean', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-
-        $rootScope.SaveFilterState('ComparisonPanel', $scope);
-    };
-
-    ;
-
-    async function Override_some_Filters() {
-        // No additional filter overrides needed for this page
-    }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.LoadFilterState('ComparisonPanel', $scope);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.showData();
-    };
-
-    $scope.downloadSchema = async function () {
-        // TODO: Implement download schema functionality
-    };
-
-    $scope.uploadFile = async function () {
-        // TODO: Implement upload functionality
-    };
-
-    $scope.initialize_Page();
-});
-angular.module('app.erp').controller('ContractPositionCtrl', function ($rootScope, $scope, Utility_ERP, ContractPosition_Service, Inventory_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Contract: { PropertyName: 'ContractCode', Operator: 'in', Value: '' },
-        Profile: { PropertyName: 'Profile', Operator: 'in', Value: '' },
-        Brand: { PropertyName: 'Brand', Operator: 'in', Value: '' },
-        Category: { PropertyName: 'CategoryCode', Operator: 'in', Value: '' },
-    };
-
-    $scope.selectedContract = '';
-    $scope.selectedProfile = '';
-    $scope.selectedBrand = '';
-    $scope.selectedCategory = '';
-
-    $scope.data_Contract = [];
-    $scope.data_Profile = [];
-    $scope.data_Brand = [];
-    $scope.data_Category = [];
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = ContractPosition_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Item Code', 'ItemCode', 'ItemCode', 'Text', true],
-            ['Item Name', 'ItemName', 'ItemName', 'Text', true],
-            ['Brand', 'Brand', 'Brand', 'Text', true],
-            ['Category', 'Category', 'Category', 'Text', true],
-            ['Uom', 'Uom', 'Uom', 'Text', true],
-            ['Ordered', 'Ordered', 'Ordered', 'Number', true],
-            ['Open', 'Open', 'Open', 'Number', true],
-            ['On P/R', 'OnPR', 'OnPR', 'Number', true],
-            ['On P/O', 'OnPO', 'OnPO', 'Number', true],
-            ['Reserved', 'Reserved', 'Reserved', 'Number', true],
-            ['Demand', 'Demand', 'Demand', 'Number', true],
-            ['Shipment', 'Shipment', 'Shipment', 'Number', true],
-            ['Picking', 'Picking', 'Picking', 'Number', true],
-            ['Routing', 'Routing', 'Routing', 'Number', true],
-            ['Manifest', 'Manifest', 'Manifest', 'Number', true],
-            ['Delivery', 'Delivery', 'Delivery', 'Number', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        if (!$scope.selectedContract) {
-            $scope.filters.Contract.Operator = 'in';
-            $scope.filters.Contract.Value = Utility_ERP.Value_OperatorIN_($scope.data_Contract, 'Code');
-        } else {
-            $scope.filters.Contract.Operator = '=';
-            $scope.filters.Contract.Value = $scope.selectedContract;
-        }
-
-        if (!$scope.selectedProfile) {
-            $scope.filters.Profile.Operator = 'in';
-            $scope.filters.Profile.Value = Utility_ERP.Value_OperatorIN_($scope.data_Profile, 'Code');
-        } else {
-            $scope.filters.Profile.Operator = '=';
-            $scope.filters.Profile.Value = $scope.selectedProfile;
-        }
-
-        if (!$scope.selectedBrand) {
-            $scope.filters.Brand.Operator = 'in';
-            $scope.filters.Brand.Value = Utility_ERP.Value_OperatorIN_($scope.data_Brand, 'Code');
-        } else {
-            $scope.filters.Brand.Operator = '=';
-            $scope.filters.Brand.Value = $scope.selectedBrand;
-        }
-
-        if (!$scope.selectedCategory) {
-            $scope.filters.Category.Operator = 'in';
-            $scope.filters.Category.Value = Utility_ERP.Value_OperatorIN_($scope.data_Category, 'Code');
-        } else {
-            $scope.filters.Category.Operator = '=';
-            $scope.filters.Category.Value = $scope.selectedCategory;
-        }
-
-        Utility_ERP.Still_Processing($scope, true);
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-
-        $rootScope.SaveFilterState('ContractPosition', $scope);
-    };
-
-    $scope.getData_Contract = async function () {
-        $scope.data_Contract = await Inventory_Service.Dropdown_Contract();
-    };
-
-    $scope.getData_Profile = async function () {
-        $scope.data_Profile = await Inventory_Service.Dropdown_Profile();
-    };
-
-    $scope.getData_Brand = async function () {
-        $scope.data_Brand = await Inventory_Service.Dropdown_Brand();
-    };
-
-    $scope.getData_Category = async function () {
-        $scope.data_Category = await Inventory_Service.Dropdown_Category();
-    };
-
-    
-
-    async function Override_some_Filters() {
-        let contract = $scope.filters.Contract.Value;
-        if (contract && typeof contract === 'string' && contract.indexOf('(') >= 0) contract = '';
-        $scope.selectedContract = contract;
-
-        let profile = $scope.filters.Profile.Value;
-        if (profile && typeof profile === 'string' && profile.indexOf('(') >= 0) profile = '';
-        $scope.selectedProfile = profile;
-
-        let brand = $scope.filters.Brand.Value;
-        if (brand && typeof brand === 'string' && brand.indexOf('(') >= 0) brand = '';
-        $scope.selectedBrand = brand;
-
-        let category = $scope.filters.Category.Value;
-        if (category && typeof category === 'string' && category.indexOf('(') >= 0) category = '';
-        $scope.selectedCategory = category;
-    }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        await Promise.allSettled([
-            $scope.getData_Contract(),
-            $scope.getData_Profile(),
-            $scope.getData_Brand(),
-            $scope.getData_Category()
-        ]);
-
-        $rootScope.LoadFilterState('ContractPosition', $scope);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.showData();
-    };
-
-    $scope.initialize_Page();
-});
-angular.module('app.erp').controller('CostGroupFormCtrl', function ($rootScope, $scope, Utility_ERP, CostGroups_Service) {
-});
-angular.module('app.erp').controller('CostGroupsCtrl', function ($rootScope, $scope, Utility_ERP, CostGroups_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-    $scope.activeOptions = [
-        { Value: null, Text: 'All' },
-        { Value: true, Text: 'Yes' },
-        { Value: false, Text: 'No' },
-    ];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Active: { PropertyName: 'Active', Operator: '=', Value: null },
-    };
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = CostGroups_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Code', 'Code', 'Code', 'Text', true],
-            ['Description', 'Name', 'Name', 'Text', true],
-            ['', 'Active', 'Active', 'Boolean', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-
-        $rootScope.SaveFilterState('CostGroup', $scope);
-    };
-
-    
-
-    async function Override_some_Filters() { }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.LoadFilterState('CostGroup', $scope);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.showData();
-    };
-
-    $scope.initialize_Page();
-});
-
-
-
-// ini file Controller.js
-
-angular.module('app.erp').controller('CountVerificationCtrl', function ($rootScope, $scope, Utility_ERP, CountVerification_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-    $scope.activeOptions = [
-        { Value: null, Text: 'All' },
-        { Value: true, Text: 'Yes' },
-        { Value: false, Text: 'No' },
-    ];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Active: { PropertyName: 'Active', Operator: '=', Value: null },
-    };
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = CountVerification_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Sheet #', 'SheetNo', 'SheetNo', 'Text', true],
-            ['Sheet Name', 'SheetName', 'SheetName', 'Text', true],
-            ['Date', 'Date', 'Date', 'Date', true],
-            ['Counter', 'Counter', 'Counter', 'Text', true],
-            ['Noter', 'Noter', 'Noter', 'Text', true],
-            ['Diff %', 'DiffPct', 'DiffPct', 'Number', true],
-            ['Status', 'Status', 'Status', 'Text', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-
-        $rootScope.SaveFilterState('CountVerification', $scope);
-    };
-
-    ;
-
-    async function Override_some_Filters() {
-        // No additional filters to override for this page
-    }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.LoadFilterState('CountVerification', $scope);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.showData();
-    };
-
-    $scope.applySheet = async function () {
-        // Implementation for Apply Sheet action
-    };
-
-    $scope.initialize_Page();
-});
-angular.module('app.erp').controller('DeliveredClosedDoSelectionCtrl', function ($rootScope, $scope, Utility_ERP, DeliveredClosedDoSelection_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-    $scope.activeOptions = [
-        { Value: null, Text: 'All' },
-        { Value: true, Text: 'Yes' },
-        { Value: false, Text: 'No' },
-    ];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Active: { PropertyName: 'Active', Operator: '=', Value: null },
-    };
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = DeliveredClosedDoSelection_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Shipment #', 'ShipmentNo', 'ShipmentNo', 'Text', true],
-            ['Branch', 'Branch', 'Branch', 'Text', true],
-            ['Warehouse', 'Warehouse', 'Warehouse', 'Text', true],
-            ['Date', 'Date', 'Date', 'Date', true],
-            ['Source Type', 'SourceType', 'SourceType', 'Text', true],
-            ['Source Nr.', 'SourceNr', 'SourceNr', 'Text', true],
-            ['Consignee', 'Consignee', 'Consignee', 'Text', true],
-            ['Delivered Date', 'DeliveredDate', 'DeliveredDate', 'Date', true],
-            ['Status', 'Status', 'Status', 'Text', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-
-        $rootScope.SaveFilterState('DeliveredClosedDoSelection', $scope);
-    };
-
-    ;
-
-    async function Override_some_Filters() {
-        // No additional filters to override for this page
-    }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.LoadFilterState('DeliveredClosedDoSelection', $scope);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.showData();
-    };
-
-    $scope.addSelection = async function () {
-        // Implementation for Add action
-    };
-
-    $scope.initialize_Page();
-});
-// ini file Controller.js
-
-angular.module('app.erp').controller('DisassemblyOrdersCtrl', function ($rootScope, $scope, Utility_ERP, DisassemblyOrders_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-    $scope.activeOptions = [
-        { Value: null, Text: 'All' },
-        { Value: true, Text: 'Yes' },
-        { Value: false, Text: 'No' },
-    ];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Active: { PropertyName: 'Active', Operator: '=', Value: null },
-    };
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = DisassemblyOrders_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Code', 'Code', 'Code', 'Text', true],
-            ['Short Name', 'ShortName', 'ShortName', 'Text', true],
-            ['Description', 'Description', 'Description', 'Text', true],
-            ['Active', 'Active', 'Active', 'Boolean', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-
-        $rootScope.SaveFilterState('DisassemblyOrders', $scope);
-    };
-
-    ;
-
-    async function Override_some_Filters() {
-        // No additional filter overrides needed for this page
-    }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.LoadFilterState('DisassemblyOrders', $scope);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.showData();
-    };
-
-    $scope.downloadSchema = async function () {
-        // TODO: Implement download schema functionality
-    };
-
-    $scope.uploadFile = async function () {
-        // TODO: Implement upload functionality
-    };
-
-    $scope.initialize_Page();
-});
-angular.module('app.erp').controller('DisposalMethodsCtrl', function ($rootScope, $scope, Utility_ERP, DisposalMethods_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-    $scope.activeOptions = [
-        { Value: null, Text: 'All' },
-        { Value: true, Text: 'Yes' },
-        { Value: false, Text: 'No' },
-    ];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Active: { PropertyName: 'Active', Operator: '=', Value: null },
-    };
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = DisposalMethods_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Code', 'Code', 'Code', 'Text', true],
-            ['Description', 'Description', 'Description', 'Text', true],
-            ['', 'Active', 'Active', 'Boolean', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-
-        $rootScope.SaveFilterState('DisposalMethod', $scope);
-    };
-
-    
-
-    async function Override_some_Filters() { }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.LoadFilterState('DisposalMethod', $scope);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.showData();
-    };
-
-    $scope.initialize_Page();
-});
-
-angular.module('app.erp').controller('DisposalMethodsFormCtrl', function ($rootScope, $scope, Utility_ERP, DisposalMethods_Service) {
-});
-angular.module('app.erp').controller('DropshipPositionsCtrl', function ($rootScope, $scope, Utility_ERP, DropshipPositions_Service, Inventory_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Branch: { PropertyName: 'LocationCode', Operator: 'in', Value: '' },
-        Warehouse: { PropertyName: 'WarehouseCode', Operator: 'in', Value: '' },
-        Brand: { PropertyName: 'Brand', Operator: 'in', Value: '' },
-        Profile: { PropertyName: 'Profile', Operator: 'in', Value: '' },
-        Location: { PropertyName: 'LocationCode', Operator: 'in', Value: '' },
-        Category: { PropertyName: 'CategoryCode', Operator: 'in', Value: '' },
-        DateFrom_date: { PropertyName: 'Date', Operator: '>=', Value: '' },
-        DateTo_date: { PropertyName: 'Date', Operator: '<=', Value: '' },
-        HideEmptyStock: { PropertyName: 'Outstanding', Operator: '>', Value: null },
-    };
-
-    $scope.selectedBranch = '';
-    $scope.selectedWarehouse = '';
-    $scope.selectedBrand = '';
-    $scope.selectedProfile = '';
-    $scope.selectedLocation = '';
-    $scope.selectedCategory = '';
-    $scope.selectedDateFrom = '';
-    $scope.selectedDateTo = '';
-    $scope.selectedHideEmptyStock = false;
-
-    $scope.data_EmployeeLocationAccess = [];
-    $scope.data_EmployeeWarehouseAccess = [];
-    $scope.data_Warehouse_perBranch = [];
-    $scope.data_Brand = [];
-    $scope.data_Profile = [];
-    $scope.data_Location = [];
-    $scope.data_Category = [];
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = DropshipPositions_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Item Code', 'ItemCode', 'ItemCode', 'Text', true],
-            ['Item Name', 'ItemName', 'ItemName', 'Text', true],
-            ['Brand', 'Brand', 'Brand', 'Text', true],
-            ['Uom', 'Uom', 'Uom', 'Text', true],
-            ['On P/R', 'OnPR', 'OnPR', 'Number', true],
-            ['Outstanding', 'Outstanding', 'Outstanding', 'Number', true],
-            ['Drafted', 'Drafted', 'Drafted', 'Number', true],
-            ['Submitted', 'Submitted', 'Submitted', 'Number', true],
-            ['Delivery', 'Delivery', 'Delivery', 'Number', true],
-            ['Received', 'Received', 'Received', 'Number', true],
-            ['Delivered', 'Delivered', 'Delivered', 'Number', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        if (!$scope.selectedBranch) {
-            $scope.filters.Branch.Operator = 'in';
-            $scope.filters.Branch.Value = Utility_ERP.Value_OperatorIN_($scope.data_EmployeeLocationAccess, 'Code');
-        } else {
-            $scope.filters.Branch.Operator = '=';
-            $scope.filters.Branch.Value = $scope.selectedBranch;
-        }
-
-        if (!$scope.selectedWarehouse) {
-            $scope.filters.Warehouse.Operator = 'in';
-            $scope.filters.Warehouse.Value = Utility_ERP.Value_OperatorIN_($scope.data_Warehouse_perBranch, 'Code');
-        } else {
-            $scope.filters.Warehouse.Operator = '=';
-            $scope.filters.Warehouse.Value = $scope.selectedWarehouse;
-        }
-
-        if (!$scope.selectedBrand) {
-            $scope.filters.Brand.Operator = 'in';
-            $scope.filters.Brand.Value = Utility_ERP.Value_OperatorIN_($scope.data_Brand, 'Code');
-        } else {
-            $scope.filters.Brand.Operator = '=';
-            $scope.filters.Brand.Value = $scope.selectedBrand;
-        }
-
-        if (!$scope.selectedProfile) {
-            $scope.filters.Profile.Operator = 'in';
-            $scope.filters.Profile.Value = Utility_ERP.Value_OperatorIN_($scope.data_Profile, 'Code');
-        } else {
-            $scope.filters.Profile.Operator = '=';
-            $scope.filters.Profile.Value = $scope.selectedProfile;
-        }
-
-        if (!$scope.selectedLocation) {
-            $scope.filters.Location.Operator = 'in';
-            $scope.filters.Location.Value = Utility_ERP.Value_OperatorIN_($scope.data_Location, 'Code');
-        } else {
-            $scope.filters.Location.Operator = '=';
-            $scope.filters.Location.Value = $scope.selectedLocation;
-        }
-
-        if (!$scope.selectedCategory) {
-            $scope.filters.Category.Operator = 'in';
-            $scope.filters.Category.Value = Utility_ERP.Value_OperatorIN_($scope.data_Category, 'Code');
-        } else {
-            $scope.filters.Category.Operator = '=';
-            $scope.filters.Category.Value = $scope.selectedCategory;
-        }
-
-        $scope.filters.DateFrom_date.Value = $rootScope.Date_to_DB($scope.selectedDateFrom);
-        $scope.filters.DateTo_date.Value = $rootScope.Date_to_DB($scope.selectedDateTo);
-
-        $scope.filters.HideEmptyStock.Value = null;
-        if ($scope.selectedHideEmptyStock) {
-            $scope.filters.HideEmptyStock.Value = 0;
-        }
-
-        Utility_ERP.Still_Processing($scope, true);
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-
-        $scope.filters['selectedHideEmptyStock'] = $scope.selectedHideEmptyStock;
-
-        $rootScope.SaveFilterState('DropshipPositions', $scope);
-
-        delete $scope.filters['selectedHideEmptyStock'];
-    };
-
-    $scope.Branch_Changed = async function () {
-        // reset
-        $scope.selectedWarehouse = '';
-
-        $scope.Reorganize_Warehouse();
-
-        await $scope.showData();
-    };
-
-    $scope.Reorganize_Warehouse = function () {
-        var data = [];
-
-        if (!$scope.selectedBranch) {
-            // tanpa Filter Branch
-            data = $scope.data_EmployeeWarehouseAccess;
-        } else {
-            // filter berdasarkan Branch
-            data = $scope.data_EmployeeWarehouseAccess.filter(function (e) {
-                return e.LocationCode == $scope.selectedBranch;
-            });
-        }
-
-        $scope.data_Warehouse_perBranch = [...new Map(data.map((item) => [item['Code'], item])).values()].sort((x, y) => x.Code.localeCompare(y.Code));
-    };
-
-    $scope.getData_Brand = async function () {
-        $scope.data_Brand = await Inventory_Service.Dropdown_Brand();
-    };
-
-    $scope.getData_Profile = async function () {
-        $scope.data_Profile = await Inventory_Service.Dropdown_Profile();
-    };
-
-    $scope.getData_Location = async function () {
-        $scope.data_Location = await Inventory_Service.Dropdown_Location();
-    };
-
-    $scope.getData_Category = async function () {
-        $scope.data_Category = await Inventory_Service.Dropdown_Category();
-    };
-
-    
-
-    async function Override_some_Filters() {
-        let branch = $scope.filters.Branch.Value;
-        if (branch && typeof branch === 'string' && branch.indexOf('(') >= 0) branch = '';
-
-        let warehouse = $scope.filters.Warehouse.Value;
-        if (warehouse && typeof warehouse === 'string' && warehouse.indexOf('(') >= 0) warehouse = '';
-        $scope.selectedWarehouse = warehouse;
-
-        let brand = $scope.filters.Brand.Value;
-        if (brand && typeof brand === 'string' && brand.indexOf('(') >= 0) brand = '';
-        $scope.selectedBrand = brand;
-
-        let profile = $scope.filters.Profile.Value;
-        if (profile && typeof profile === 'string' && profile.indexOf('(') >= 0) profile = '';
-        $scope.selectedProfile = profile;
-
-        let location = $scope.filters.Location.Value;
-        if (location && typeof location === 'string' && location.indexOf('(') >= 0) location = '';
-        $scope.selectedLocation = location;
-
-        let category = $scope.filters.Category.Value;
-        if (category && typeof category === 'string' && category.indexOf('(') >= 0) category = '';
-        $scope.selectedCategory = category;
-
-        if ($scope.LoadFilterState_) {
-            $scope.selectedBranch = branch;
-
-            $scope.selectedHideEmptyStock = $scope.filters['selectedHideEmptyStock'];
-            delete $scope.filters['selectedHideEmptyStock'];
-        }
-    }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        await Promise.allSettled([
-            $rootScope.EmployeeLocationAccess($scope, ''),
-            $rootScope.EmployeeWarehouseAccess($scope, ''),
-            $scope.getData_Brand(),
-            $scope.getData_Profile(),
-            $scope.getData_Location(),
-            $scope.getData_Category()
-        ]);
-
-        $rootScope.LoadFilterState('DropshipPositions', $scope);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.Reorganize_Warehouse();
-
-        $scope.showData();
-    };
-
-    $scope.printList = async function () {
-        // Implementation for print list functionality
-    }
-
-    $scope.initialize_Page();
-});
-angular.module('app.erp').controller('InventoryAdjustmentsCtrl', function ($rootScope, $scope, Utility_ERP, InventoryAdjustments_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Branch: { PropertyName: 'LocationCode', Operator: 'in', Value: '' },
-        Warehouse: { PropertyName: 'WarehouseCode', Operator: 'in', Value: '' },
-        DateFrom_date: { PropertyName: 'Date', Operator: '>=', Value: '' },
-        DateTo_date: { PropertyName: 'Date', Operator: '<=', Value: '' },
-        Status: { PropertyName: 'StatusId', Operator: 'in', Value: '' },
-    };
-
-    $scope.selectedBranch = '';
-    $scope.selectedWarehouse = '';
-    $scope.selectedDateFrom = '';
-    $scope.selectedDateTo = '';
-    $scope.selectedStatus = '';
-    $scope.selectedShowAll = false;
-
-    $scope.data_EmployeeLocationAccess = [];
-    $scope.data_EmployeeWarehouseAccess = [];
-    $scope.data_Warehouse_perBranch = [];
-    $scope.data_Status = [];
-    $scope.data_Status_All = [];
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = InventoryAdjustments_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Doc Nr.', 'DocNr', 'DocNr', 'Text', true],
-            ['Date', 'Date', 'Date', 'Date', true],
-            ['Branch', 'Branch', 'Branch', 'Text', true],
-            ['Warehouse', 'Warehouse', 'Warehouse', 'Text', true],
-            ['Adj Qty', 'AdjQty', 'AdjQty', 'Number', true],
-            ['Issued By', 'IssuedBy', 'IssuedBy', 'Text', true],
-            ['Status', 'Status', 'Status', 'Text', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        if (!$scope.selectedBranch) {
-            $scope.filters.Branch.Operator = 'in';
-            $scope.filters.Branch.Value = Utility_ERP.Value_OperatorIN_($scope.data_EmployeeLocationAccess, 'Code');
-        } else {
-            $scope.filters.Branch.Operator = '=';
-            $scope.filters.Branch.Value = $scope.selectedBranch;
-        }
-
-        if (!$scope.selectedWarehouse) {
-            $scope.filters.Warehouse.Operator = 'in';
-            $scope.filters.Warehouse.Value = Utility_ERP.Value_OperatorIN_($scope.data_Warehouse_perBranch, 'Code');
-        } else {
-            $scope.filters.Warehouse.Operator = '=';
-            $scope.filters.Warehouse.Value = $scope.selectedWarehouse;
-        }
-
-        if ($rootScope.ValidString($scope.selectedStatus)) {
-            $scope.filters.Status.Operator = '=';
-            $scope.filters.Status.Value = $scope.selectedStatus;
-        } else {
-            $scope.filters.Status.Operator = 'in';
-            $scope.filters.Status.Value = Utility_ERP.Value_OperatorIN($scope.data_Status, 'StatusId', '');
-        }
-
-        $scope.filters.DateFrom_date.Value = $rootScope.Date_to_DB($scope.selectedDateFrom);
-        $scope.filters.DateTo_date.Value = $rootScope.Date_to_DB($scope.selectedDateTo);
-
-        Utility_ERP.Still_Processing($scope, true);
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-
-        $scope.filters['selectedShowAll'] = $scope.selectedShowAll;
-
-        $rootScope.SaveFilterState('InventoryAdjustments', $scope);
-
-        delete $scope.filters['selectedShowAll'];
-    };
-
-    $scope.Branch_Changed = async function () {
-        // --  untuk Page ini, setiap kali Branch berubah --> maka Warehouse ke posisi "All"
-        // reset
-        $scope.selectedWarehouse = '';
-
-        $scope.Reorganize_Warehouse();
-
-        await $scope.showData();
-    };
-
-    $scope.Reorganize_Warehouse = function () {
-        var data = [];
-
-        if (!$scope.selectedBranch) {
-            // tanpa Filter Branch
-            data = $scope.data_EmployeeWarehouseAccess;
-        } else {
-            // filter berdasarkan Branch
-            data = $scope.data_EmployeeWarehouseAccess.filter(function (e) {
-                return e.LocationCode == $scope.selectedBranch;
-            });
-        }
-
-        $scope.data_Warehouse_perBranch = [...new Map(data.map((item) => [item['Code'], item])).values()].sort((x, y) => x.Code.localeCompare(y.Code));
-    };
-
-    $scope.getData_Status = async function () {
-        $scope.data_Status_All = await Utility_ERP.getData_DocumentStatus('InventoryAdjustment');
-
-        // prettier-ignore
-        $scope.data_Status = ($scope.selectedShowAll ? $scope.data_Status_All : $scope.data_Status_All.filter(function (e) { return e.IsArchive == false; }));
-
-        $rootScope.SetDefaultDropdownList($scope.data_Status, 'StatusId', $scope, 'selectedStatus');
-    };
-
-    $scope.selectedShowAll_Change = async function (flag = true, flag2 = true) {
-        // prettier-ignore
-        $scope.data_Status = ($scope.selectedShowAll ? $scope.data_Status_All : $scope.data_Status_All.filter(function (e) { return e.IsArchive == false; }));
-
-        // just to make UX consistent
-        if (flag2) $scope.selectedStatus = '';
-
-        if (flag) {
-            await $scope.showData();
-        }
-    };
-
-    ;
-
-    async function Override_some_Filters() {
-        let branch = $scope.filters.Branch.Value;
-        if (branch && typeof branch === 'string' && branch.indexOf('(') >= 0) branch = '';
-
-        let warehouse = $scope.filters.Warehouse.Value;
-        if (warehouse && typeof warehouse === 'string' && warehouse.indexOf('(') >= 0) warehouse = '';
-        $scope.selectedWarehouse = warehouse;
-
-        let status = $scope.filters.Status.Value;
-        if (status && typeof status === 'string' && status.indexOf('(') >= 0) status = '';
-        $scope.selectedStatus = status;
-
-        if ($scope.LoadFilterState_) {
-            $scope.selectedBranch = branch;
-
-            $scope.selectedShowAll = $scope.filters['selectedShowAll'];
-            $scope.selectedShowAll_Change(false, false);
-
-            delete $scope.filters['selectedShowAll'];
-        }
-    }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        await Promise.allSettled([
-            $rootScope.EmployeeLocationAccess($scope, ''),
-            $rootScope.EmployeeWarehouseAccess($scope, ''),
-            $scope.getData_Status()
-        ]);
-
-        $rootScope.LoadFilterState('InventoryAdjustments', $scope);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.Reorganize_Warehouse();
-
-        $scope.showData();
-    };
-
-    $scope.verifyClick = async function () {
-        // Implement verify functionality
-    };
-
-    $scope.voidClick = async function () {
-        // Implement void functionality
-    };
-
-    $scope.initialize_Page();
-});
-angular.module('app.erp').controller('InventoryCountsCtrl', function ($rootScope, $scope, Utility_ERP, InventoryCounts_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Branch: { PropertyName: 'LocationCode', Operator: 'in', Value: '' },
-        Warehouse: { PropertyName: 'WarehouseCode', Operator: 'in', Value: '' },
-        DateFrom_date: { PropertyName: 'Date', Operator: '>=', Value: '' },
-        DateTo_date: { PropertyName: 'Date', Operator: '<=', Value: '' },
-        VerifiedDateFrom_date: { PropertyName: 'VerifiedDate', Operator: '>=', Value: '' },
-        VerifiedDateTo_date: { PropertyName: 'VerifiedDate', Operator: '<=', Value: '' },
-        Status: { PropertyName: 'StatusId', Operator: 'in', Value: '' },
-    };
-
-    $scope.selectedBranch = '';
-    $scope.selectedWarehouse = '';
-    $scope.selectedDateFrom = '';
-    $scope.selectedDateTo = '';
-    $scope.selectedVerifiedDateFrom = '';
-    $scope.selectedVerifiedDateTo = '';
-    $scope.selectedStatus = '';
-    $scope.selectedShowAll = false;
-
-    $scope.data_EmployeeLocationAccess = [];
-    $scope.data_EmployeeWarehouseAccess = [];
-    $scope.data_Warehouse_perBranch = [];
-    $scope.data_Status = [];
-    $scope.data_Status_All = [];
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = InventoryCounts_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Process Nr.', 'ProcessNr', 'ProcessNr', 'Text', true],
-            ['Date', 'Date', 'Date', 'Date', true],
-            ['Branch', 'Branch', 'Branch', 'Text', true],
-            ['Warehouse', 'Warehouse', 'Warehouse', 'Text', true],
-            ['Issued By', 'IssuedBy', 'IssuedBy', 'Text', true],
-            ['Notes', 'Notes', 'Notes', 'Text', true],
-            ['Verified Date', 'VerifiedDate', 'VerifiedDate', 'Date', true],
-            ['Status', 'Status', 'Status', 'Text', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        if (!$scope.selectedBranch) {
-            $scope.filters.Branch.Operator = 'in';
-            $scope.filters.Branch.Value = Utility_ERP.Value_OperatorIN_($scope.data_EmployeeLocationAccess, 'Code');
-        } else {
-            $scope.filters.Branch.Operator = '=';
-            $scope.filters.Branch.Value = $scope.selectedBranch;
-        }
-
-        if (!$scope.selectedWarehouse) {
-            $scope.filters.Warehouse.Operator = 'in';
-            $scope.filters.Warehouse.Value = Utility_ERP.Value_OperatorIN_($scope.data_Warehouse_perBranch, 'Code');
-        } else {
-            $scope.filters.Warehouse.Operator = '=';
-            $scope.filters.Warehouse.Value = $scope.selectedWarehouse;
-        }
-
-        if ($rootScope.ValidString($scope.selectedStatus)) {
-            $scope.filters.Status.Operator = '=';
-            $scope.filters.Status.Value = $scope.selectedStatus;
-        } else {
-            $scope.filters.Status.Operator = 'in';
-            $scope.filters.Status.Value = Utility_ERP.Value_OperatorIN($scope.data_Status, 'StatusId', '');
-        }
-
-        $scope.filters.DateFrom_date.Value = $rootScope.Date_to_DB($scope.selectedDateFrom);
-        $scope.filters.DateTo_date.Value = $rootScope.Date_to_DB($scope.selectedDateTo);
-
-        $scope.filters.VerifiedDateFrom_date.Value = $rootScope.Date_to_DB($scope.selectedVerifiedDateFrom);
-        $scope.filters.VerifiedDateTo_date.Value = $rootScope.Date_to_DB($scope.selectedVerifiedDateTo);
-
-        Utility_ERP.Still_Processing($scope, true);
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-
-        $scope.filters['selectedShowAll'] = $scope.selectedShowAll;
-
-        $rootScope.SaveFilterState('InventoryCounts', $scope);
-
-        delete $scope.filters['selectedShowAll'];
-    };
-
-    $scope.Branch_Changed = async function () {
-        // --  untuk Page ini, setiap kali Branch berubah --> maka Warehouse ke posisi "All"
-        // reset
-        $scope.selectedWarehouse = '';
-
-        $scope.Reorganize_Warehouse();
-
-        await $scope.showData();
-    };
-
-    $scope.Reorganize_Warehouse = function () {
-        var data = [];
-
-        if (!$scope.selectedBranch) {
-            // tanpa Filter Branch
-            data = $scope.data_EmployeeWarehouseAccess;
-        } else {
-            // filter berdasarkan Branch
-            data = $scope.data_EmployeeWarehouseAccess.filter(function (e) {
-                return e.LocationCode == $scope.selectedBranch;
-            });
-        }
-
-        $scope.data_Warehouse_perBranch = [...new Map(data.map((item) => [item['Code'], item])).values()].sort((x, y) => x.Code.localeCompare(y.Code));
-    };
-
-    $scope.getData_Status = async function () {
-        $scope.data_Status_All = await Utility_ERP.getData_DocumentStatus('InventoryCount');
-
-        // prettier-ignore
-        $scope.data_Status = ($scope.selectedShowAll ? $scope.data_Status_All : $scope.data_Status_All.filter(function (e) { return e.IsArchive == false; }));
-
-        $rootScope.SetDefaultDropdownList($scope.data_Status, 'StatusId', $scope, 'selectedStatus');
-    };
-
-    $scope.selectedShowAll_Change = async function (flag = true, flag2 = true) {
-        // prettier-ignore
-        $scope.data_Status = ($scope.selectedShowAll ? $scope.data_Status_All : $scope.data_Status_All.filter(function (e) { return e.IsArchive == false; }));
-
-        // just to make UX consistent
-        if (flag2) $scope.selectedStatus = '';
-
-        if (flag) {
-            await $scope.showData();
-        }
-    };
-
-    ;
-
-    async function Override_some_Filters() {
-        let branch = $scope.filters.Branch.Value;
-        if (branch && typeof branch === 'string' && branch.indexOf('(') >= 0) branch = '';
-
-        let warehouse = $scope.filters.Warehouse.Value;
-        if (warehouse && typeof warehouse === 'string' && warehouse.indexOf('(') >= 0) warehouse = '';
-        $scope.selectedWarehouse = warehouse;
-
-        let status = $scope.filters.Status.Value;
-        if (status && typeof status === 'string' && status.indexOf('(') >= 0) status = '';
-        $scope.selectedStatus = status;
-
-        if ($scope.LoadFilterState_) {
-            $scope.selectedBranch = branch;
-
-            $scope.selectedShowAll = $scope.filters['selectedShowAll'];
-            $scope.selectedShowAll_Change(false, false);
-
-            delete $scope.filters['selectedShowAll'];
-        }
-    }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        await Promise.allSettled([
-            $rootScope.EmployeeLocationAccess($scope, ''),
-            $rootScope.EmployeeWarehouseAccess($scope, ''),
-            $scope.getData_Status()
-        ]);
-
-        $rootScope.LoadFilterState('InventoryCounts', $scope);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.Reorganize_Warehouse();
-
-        $scope.showData();
-    };
-
-    $scope.addCountSheetClick = async function () {
-        // Implement add count sheet functionality
-    };
-
-    $scope.verifyClick = async function () {
-        // Implement verify functionality
-    };
-
-    $scope.deleteClick = async function () {
-        // Implement delete functionality
-    };
-
-    $scope.printCountSheetClick = async function () {
-        // Implement print count sheet functionality
-    };
-
-    $scope.printComparisonClick = async function () {
-        // Implement print comparison functionality
-    };
-
-    $scope.initialize_Page();
-});
-angular.module('app.erp').controller('InventoryIsolationsCtrl', function ($rootScope, $scope, Utility_ERP, InventoryIsolations_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Branch: { PropertyName: 'LocationCode', Operator: 'in', Value: '' },
-        Warehouse: { PropertyName: 'WarehouseCode', Operator: 'in', Value: '' },
-        DateFrom_date: { PropertyName: 'Date', Operator: '>=', Value: '' },
-        DateTo_date: { PropertyName: 'Date', Operator: '<=', Value: '' },
-        IsolationSourceType: { PropertyName: 'IsolationSourceTypeCode', Operator: 'in', Value: '' },
-        IsolationSourceNr: { PropertyName: 'IsolationSourceNr', Operator: 'like', Value: null },
-        Reason: { PropertyName: 'ReasonCode', Operator: 'in', Value: '' },
-        Status: { PropertyName: 'StatusId', Operator: 'in', Value: '' },
-    };
-
-    $scope.selectedBranch = '';
-    $scope.selectedWarehouse = '';
-    $scope.selectedDateFrom = '';
-    $scope.selectedDateTo = '';
-    $scope.selectedIsolationSourceType = '';
-    $scope.selectedReason = '';
-    $scope.selectedStatus = '';
-    $scope.selectedShowAll = false;
-
-    $scope.data_EmployeeLocationAccess = [];
-    $scope.data_EmployeeWarehouseAccess = [];
-    $scope.data_Warehouse_perBranch = [];
-    $scope.data_IsolationSourceType = [];
-    $scope.data_Reason = [];
-    $scope.data_Status = [];
-    $scope.data_Status_All = [];
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = InventoryIsolations_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Doc Nr.', 'DocNr', 'DocNr', 'Text', true],
-            ['Date', 'Date', 'Date', 'Date', true],
-            ['Branch', 'Branch', 'Branch', 'Text', true],
-            ['Warehouse', 'Warehouse', 'Warehouse', 'Text', true],
-            ['Reason', 'Reason', 'Reason', 'Text', true],
-            ['Doc. Type', 'DocType', 'DocType', 'Text', true],
-            ['Doc. Number', 'DocNumber', 'DocNumber', 'Text', true],
-            ['Open Qty', 'OpenQty', 'OpenQty', 'Number', true],
-            ['Total Qty', 'TotalQty', 'TotalQty', 'Number', true],
-            ['Issued By', 'IssuedBy', 'IssuedBy', 'Text', true],
-            ['Status', 'Status', 'Status', 'Text', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        if (!$scope.selectedBranch) {
-            $scope.filters.Branch.Operator = 'in';
-            $scope.filters.Branch.Value = Utility_ERP.Value_OperatorIN_($scope.data_EmployeeLocationAccess, 'Code');
-        } else {
-            $scope.filters.Branch.Operator = '=';
-            $scope.filters.Branch.Value = $scope.selectedBranch;
-        }
-
-        if (!$scope.selectedWarehouse) {
-            $scope.filters.Warehouse.Operator = 'in';
-            $scope.filters.Warehouse.Value = Utility_ERP.Value_OperatorIN_($scope.data_Warehouse_perBranch, 'Code');
-        } else {
-            $scope.filters.Warehouse.Operator = '=';
-            $scope.filters.Warehouse.Value = $scope.selectedWarehouse;
-        }
-
-        if (!$scope.selectedIsolationSourceType) {
-            $scope.filters.IsolationSourceType.Operator = 'in';
-            $scope.filters.IsolationSourceType.Value = Utility_ERP.Value_OperatorIN_($scope.data_IsolationSourceType, 'Code');
-        } else {
-            $scope.filters.IsolationSourceType.Operator = '=';
-            $scope.filters.IsolationSourceType.Value = $scope.selectedIsolationSourceType;
-        }
-
-        if (!$scope.selectedReason) {
-            $scope.filters.Reason.Operator = 'in';
-            $scope.filters.Reason.Value = Utility_ERP.Value_OperatorIN_($scope.data_Reason, 'Code');
-        } else {
-            $scope.filters.Reason.Operator = '=';
-            $scope.filters.Reason.Value = $scope.selectedReason;
-        }
-
-        if ($rootScope.ValidString($scope.selectedStatus)) {
-            $scope.filters.Status.Operator = '=';
-            $scope.filters.Status.Value = $scope.selectedStatus;
-        } else {
-            $scope.filters.Status.Operator = 'in';
-            $scope.filters.Status.Value = Utility_ERP.Value_OperatorIN($scope.data_Status, 'StatusId', '');
-        }
-
-        $scope.filters.DateFrom_date.Value = $rootScope.Date_to_DB($scope.selectedDateFrom);
-        $scope.filters.DateTo_date.Value = $rootScope.Date_to_DB($scope.selectedDateTo);
-
-        Utility_ERP.Still_Processing($scope, true);
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-
-        $scope.filters['selectedShowAll'] = $scope.selectedShowAll;
-
-        $rootScope.SaveFilterState('InventoryIsolations', $scope);
-
-        delete $scope.filters['selectedShowAll'];
-    };
-
-    $scope.Branch_Changed = async function () {
-        // --  untuk Page ini, setiap kali Branch berubah --> maka Warehouse ke posisi "All"
-        // reset
-        $scope.selectedWarehouse = '';
-
-        $scope.Reorganize_Warehouse();
-
-        await $scope.showData();
-    };
-
-    $scope.Reorganize_Warehouse = function () {
-        var data = [];
-
-        if (!$scope.selectedBranch) {
-            // tanpa Filter Branch
-            data = $scope.data_EmployeeWarehouseAccess;
-        } else {
-            // filter berdasarkan Branch
-            data = $scope.data_EmployeeWarehouseAccess.filter(function (e) {
-                return e.LocationCode == $scope.selectedBranch;
-            });
-        }
-
-        $scope.data_Warehouse_perBranch = [...new Map(data.map((item) => [item['Code'], item])).values()].sort((x, y) => x.Code.localeCompare(y.Code));
-    };
-
-    $scope.getData_IsolationSourceType = async function () {
-        $scope.data_IsolationSourceType = await InventoryIsolations_Service.Dropdown_IsolationSourceType();
-    };
-
-    $scope.getData_Reason = async function () {
-        $scope.data_Reason = await InventoryIsolations_Service.Dropdown_Reason();
-    };
-
-    $scope.getData_Status = async function () {
-        $scope.data_Status_All = await Utility_ERP.getData_DocumentStatus('InventoryIsolation');
-
-        // prettier-ignore
-        $scope.data_Status = ($scope.selectedShowAll ? $scope.data_Status_All : $scope.data_Status_All.filter(function (e) { return e.IsArchive == false; }));
-
-        $rootScope.SetDefaultDropdownList($scope.data_Status, 'StatusId', $scope, 'selectedStatus');
-    };
-
-    $scope.selectedShowAll_Change = async function (flag = true, flag2 = true) {
-        // prettier-ignore
-        $scope.data_Status = ($scope.selectedShowAll ? $scope.data_Status_All : $scope.data_Status_All.filter(function (e) { return e.IsArchive == false; }));
-
-        // just to make UX consistent
-        if (flag2) $scope.selectedStatus = '';
-
-        if (flag) {
-            await $scope.showData();
-        }
-    };
-
-    ;
-
-    async function Override_some_Filters() {
-        let branch = $scope.filters.Branch.Value;
-        if (branch && typeof branch === 'string' && branch.indexOf('(') >= 0) branch = '';
-
-        let warehouse = $scope.filters.Warehouse.Value;
-        if (warehouse && typeof warehouse === 'string' && warehouse.indexOf('(') >= 0) warehouse = '';
-        $scope.selectedWarehouse = warehouse;
-
-        let isolationSourceType = $scope.filters.IsolationSourceType.Value;
-        if (isolationSourceType && typeof isolationSourceType === 'string' && isolationSourceType.indexOf('(') >= 0) isolationSourceType = '';
-        $scope.selectedIsolationSourceType = isolationSourceType;
-
-        let reason = $scope.filters.Reason.Value;
-        if (reason && typeof reason === 'string' && reason.indexOf('(') >= 0) reason = '';
-        $scope.selectedReason = reason;
-
-        let status = $scope.filters.Status.Value;
-        if (status && typeof status === 'string' && status.indexOf('(') >= 0) status = '';
-        $scope.selectedStatus = status;
-
-        if ($scope.LoadFilterState_) {
-            $scope.selectedBranch = branch;
-
-            $scope.selectedShowAll = $scope.filters['selectedShowAll'];
-            $scope.selectedShowAll_Change(false, false);
-
-            delete $scope.filters['selectedShowAll'];
-        }
-    }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        await Promise.allSettled([
-            $rootScope.EmployeeLocationAccess($scope, ''),
-            $rootScope.EmployeeWarehouseAccess($scope, ''),
-            $scope.getData_IsolationSourceType(),
-            $scope.getData_Reason(),
-            $scope.getData_Status()
-        ]);
-
-        $rootScope.LoadFilterState('InventoryIsolations', $scope);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.Reorganize_Warehouse();
-
-        $scope.showData();
-    };
-
-    $scope.verifyClick = async function () {
-        // Implement verify functionality
-    };
-
-    $scope.printForm = async function () {
-        // Implement print functionality
-    };
-
-    $scope.initialize_Page();
-});
-angular.module('app.erp').controller('InventoryIssueVerificationCtrl', function ($rootScope, $scope, Utility_ERP, InventoryIssueVerification_Service, BusinessRelation_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        ReceivedDate_date: { PropertyName: 'ReceivedDate', Operator: '=', Value: '' },
-        Receiver: { PropertyName: 'ReceiverID', Operator: '=', Value: '' },
-    };
-
-    $scope.selectedReceivedDate = $rootScope.Date_to_UI(new Date());
-    $scope.selectedReceiver = '';
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = InventoryIssueVerification_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Item Code', 'ItemCode', 'ItemCode', 'Text', true],
-            ['Description', 'Description', 'Description', 'Text', true],
-            ['Qty', 'Qty', 'Qty', 'Number', true],
-            ['Uom', 'Uom', 'Uom', 'Text', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        $scope.filters.ReceivedDate_date.Value = $rootScope.Date_to_DB($scope.selectedReceivedDate);
-
-        Utility_ERP.Still_Processing($scope, true);
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-
-        $scope.filters['selectedReceiver'] = $scope.selectedReceiver;
-
-        $rootScope.SaveFilterState('InventoryIssueVerification', $scope);
-
-        delete $scope.filters['selectedReceiver'];
-    };
-
-    $scope.getData_Customer = async function (val) {
-        return await $rootScope.getData_Customer(val, $scope);
-    };
-
-    $scope.receiverSelected = async function (flag = true) {
-        if (flag) {
-            $scope.showData();
-        }
-    };
-
-    ;
-
-    async function Override_some_Filters() {
-        if ($scope.LoadFilterState_) {
-            $scope.selectedReceiver = $scope.filters['selectedReceiver'];
-            delete $scope.filters['selectedReceiver'];
-        }
-    }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.LoadFilterState('InventoryIssueVerification', $scope);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.showData();
-    };
-
-    $scope.verifyClick = async function () {
-        // Implement verify logic here
-    };
-
-    $scope.initialize_Page();
-});
-angular.module('app.erp').controller('InventoryItemFormCtrl', function ($rootScope, $scope, $stateParams, Utility_ERP, InventoryItems_Service, Inventory_Service) {
-});
-
-angular.module('app.erp').controller('InventoryItemsCtrl', function ($rootScope, $scope, $stateParams, Utility_ERP, InventoryItems_Service, Inventory_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Profile: { PropertyName: 'ItemTypeCode', Operator: '=', Value: null },
-        Category: { PropertyName: 'CategoryCode', Operator: '=', Value: null },
-        Manufacture: { PropertyName: 'ManufacturerCode', Operator: '=', Value: null },
-        Brand: { PropertyName: 'BrandCode', Operator: '=', Value: null },
-        StockingType: { PropertyName: 'StockingTypeCode', Operator: '=', Value: null },
-    };
-
-    $scope.selectedCategory = '';
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = InventoryItems_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Code', 'Code', 'Code', 'Text', true],
-            ['Name', 'ShortName', 'ShortName', 'Text', true],
-            ['Profile', 'TypeName', 'TypeName', 'Text', true],
-            ['Category', 'CategoryName', 'CategoryName', 'Text', true],
-            ['Brand', 'BrandName', 'BrandName', 'Text', true],
-            ['Manufacture', 'ManufactureName', 'ManufactureName', 'Text', true],
-            ['Stocking Name', 'StockingTypeName', 'StockingTypeName', 'Text', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $scope.filters['selectedCategory'] = $scope.selectedCategory;
-
-        $rootScope.SaveFilterState('InventoryItem', $scope);
-
-        delete $scope.filters['selectedCategory'];
-
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-    };
-
-    
-
-    // getData functions for Dropdown to Service filters
-    $scope.getData_Profile = async function () {
-        $scope.data_Profile = await Inventory_Service.Dropdown_Profile();
-
-        // Special case
-        $scope.data_Profile.unshift({ Code: '', Name: 'Select an Item' });
-
-        // Default untuk DropdownList
-        try {
-            $scope.filters.Profile.Value = '';
-        } catch (error) { }
-    };
-
-    $scope.getData_Manufacture = async function () {
-        $scope.data_Manufacture = await Inventory_Service.Dropdown_Manufacturer();
-
-        // Special case
-        $scope.data_Manufacture.unshift({ Code: '', Description: 'Select an Item' });
-
-        // Default untuk DropdownList
-        try {
-            $scope.filters.Manufacture.Value = '';
-        } catch (error) { }
-    };
-
-    $scope.getData_Brand = async function () {
-        $scope.data_Brand = await Inventory_Service.Dropdown_Brand();
-
-        // Special case
-        $scope.data_Brand.unshift({ Code: '', Description: 'Select an Item' });
-
-        // Default untuk DropdownList
-        try {
-            $scope.filters.Brand.Value = '';
-        } catch (error) { }
-    };
-
-    $scope.getData_StockingType = async function () {
-        $scope.data_StockingType = await Inventory_Service.Dropdown_StockingType();
-    };
-
-    // getData function for typeahead filter
-    $scope.getData_Category = function (val) {
-        return Inventory_Service.Dropdown_Category2(val);
-    };
-
-    async function Override_some_Filters() {
-        let profile = $rootScope.Simple_Decode($rootScope.getParamValue($stateParams, 'profile'));
-        if (profile) {
-            $scope.filters.Profile.Value = profile;
-        }
-
-        let manufacture = $rootScope.Simple_Decode($rootScope.getParamValue($stateParams, 'manufacture'));
-        if (manufacture) {
-            $scope.filters.Manufacture.Value = manufacture;
-        }
-
-        let brand = $rootScope.Simple_Decode($rootScope.getParamValue($stateParams, 'brand'));
-        if (brand) {
-            $scope.filters.Brand.Value = brand;
-        }
-
-        let stockingType = $rootScope.Simple_Decode($rootScope.getParamValue($stateParams, 'stockingType'));
-        if (stockingType) {
-            $scope.filters.StockingType.Value = stockingType;
-        }
-
-        if ($scope.LoadFilterState_) {
-            $scope.selectedCategory = $scope.filters['selectedCategory'];
-            delete $scope.filters['selectedCategory'];
-        }
-    }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.LoadFilterState('InventoryItem', $scope);
-
-        await Promise.allSettled([
-            $scope.getData_Profile(),
-            $scope.getData_Manufacture(),
-            $scope.getData_Brand(),
-            $scope.getData_StockingType(),
-        ]);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.showData();
-    };
-
-    $scope.initialize_Page();
-});
-
-angular.module('app.erp').controller('InventoryLeaseCtrl', function ($rootScope, $scope, Utility_ERP, InventoryLease_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Branch: { PropertyName: 'LocationCode', Operator: 'in', Value: '' },
-        Warehouse: { PropertyName: 'WarehouseCode', Operator: 'in', Value: '' },
-        DateFrom_date: { PropertyName: 'Date', Operator: '>=', Value: '' },
-        DateTo_date: { PropertyName: 'Date', Operator: '<=', Value: '' },
-        DueDateFrom_date: { PropertyName: 'DueDate', Operator: '>=', Value: '' },
-        DueDateTo_date: { PropertyName: 'DueDate', Operator: '<=', Value: '' },
-        Reason: { PropertyName: 'ReasonCode', Operator: 'in', Value: '' },
-        IssuedTo: { PropertyName: 'IssuedToID', Operator: '=', Value: '' },
-        Status: { PropertyName: 'StatusId', Operator: 'in', Value: '' },
-    };
-
-    $scope.selectedBranch = '';
-    $scope.selectedWarehouse = '';
-    $scope.selectedDateFrom = '';
-    $scope.selectedDateTo = '';
-    $scope.selectedDueDateFrom = '';
-    $scope.selectedDueDateTo = '';
-    $scope.selectedReason = '';
-    $scope.selectedIssuedTo = '';
-    $scope.selectedStatus = '';
-    $scope.selectedShowAll = false;
-
-    $scope.data_EmployeeLocationAccess = [];
-    $scope.data_EmployeeWarehouseAccess = [];
-    $scope.data_Warehouse_perBranch = [];
-    $scope.data_Reason = [];
-    $scope.data_Status = [];
-    $scope.data_Status_All = [];
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = InventoryLease_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Doc Nr.', 'DocNr', 'DocNr', 'Text', true],
-            ['Date', 'Date', 'Date', 'Date', true],
-            ['Branch', 'Branch', 'Branch', 'Text', true],
-            ['Warehouse', 'Warehouse', 'Warehouse', 'Text', true],
-            ['Requested By', 'RequestedBy', 'RequestedBy', 'Text', true],
-            ['Reason', 'Reason', 'Reason', 'Text', true],
-            ['Open Qty', 'OpenQty', 'OpenQty', 'Number', true],
-            ['Total Qty', 'TotalQty', 'TotalQty', 'Number', true],
-            ['Issued By', 'IssuedBy', 'IssuedBy', 'Text', true],
-            ['Status', 'Status', 'Status', 'Text', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        if (!$scope.selectedBranch) {
-            $scope.filters.Branch.Operator = 'in';
-            $scope.filters.Branch.Value = Utility_ERP.Value_OperatorIN_($scope.data_EmployeeLocationAccess, 'Code');
-        } else {
-            $scope.filters.Branch.Operator = '=';
-            $scope.filters.Branch.Value = $scope.selectedBranch;
-        }
-
-        if (!$scope.selectedWarehouse) {
-            $scope.filters.Warehouse.Operator = 'in';
-            $scope.filters.Warehouse.Value = Utility_ERP.Value_OperatorIN_($scope.data_Warehouse_perBranch, 'Code');
-        } else {
-            $scope.filters.Warehouse.Operator = '=';
-            $scope.filters.Warehouse.Value = $scope.selectedWarehouse;
-        }
-
-        if (!$scope.selectedReason) {
-            $scope.filters.Reason.Operator = 'in';
-            $scope.filters.Reason.Value = Utility_ERP.Value_OperatorIN_($scope.data_Reason, 'Code');
-        } else {
-            $scope.filters.Reason.Operator = '=';
-            $scope.filters.Reason.Value = $scope.selectedReason;
-        }
-
-        if ($rootScope.ValidString($scope.selectedStatus)) {
-            $scope.filters.Status.Operator = '=';
-            $scope.filters.Status.Value = $scope.selectedStatus;
-        } else {
-            $scope.filters.Status.Operator = 'in';
-            $scope.filters.Status.Value = Utility_ERP.Value_OperatorIN($scope.data_Status, 'StatusId', '');
-        }
-
-        $scope.filters.DateFrom_date.Value = $rootScope.Date_to_DB($scope.selectedDateFrom);
-        $scope.filters.DateTo_date.Value = $rootScope.Date_to_DB($scope.selectedDateTo);
-
-        $scope.filters.DueDateFrom_date.Value = $rootScope.Date_to_DB($scope.selectedDueDateFrom);
-        $scope.filters.DueDateTo_date.Value = $rootScope.Date_to_DB($scope.selectedDueDateTo);
-
-        Utility_ERP.Still_Processing($scope, true);
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-
-        $scope.filters['selectedIssuedTo'] = $scope.selectedIssuedTo;
-        $scope.filters['selectedShowAll'] = $scope.selectedShowAll;
-
-        $rootScope.SaveFilterState('InventoryLease', $scope);
-
-        delete $scope.filters['selectedIssuedTo'];
-        delete $scope.filters['selectedShowAll'];
-    };
-
-    $scope.Branch_Changed = async function () {
-        // --  untuk Page ini, setiap kali Branch berubah --> maka Warehouse ke posisi "All"
-        // reset
-        $scope.selectedWarehouse = '';
-
-        $scope.Reorganize_Warehouse();
-
-        await $scope.showData();
-    };
-
-    $scope.Reorganize_Warehouse = function () {
-        var data = [];
-
-        if (!$scope.selectedBranch) {
-            // tanpa Filter Branch
-            data = $scope.data_EmployeeWarehouseAccess;
-        } else {
-            // filter berdasarkan Branch
-            data = $scope.data_EmployeeWarehouseAccess.filter(function (e) {
-                return e.LocationCode == $scope.selectedBranch;
-            });
-        }
-
-        $scope.data_Warehouse_perBranch = [...new Map(data.map((item) => [item['Code'], item])).values()].sort((x, y) => x.Code.localeCompare(y.Code));
-    };
-
-    $scope.getData_Customer = async function (val) {
-        return await $rootScope.getData_Customer(val, $scope);
-    };
-
-    $scope.getData_Reason = async function () {
-        $scope.data_Reason = await InventoryLease_Service.Dropdown_Reason();
-    };
-
-    $scope.getData_Status = async function () {
-        $scope.data_Status_All = await Utility_ERP.getData_DocumentStatus('InventoryLease');
-
-        // prettier-ignore
-        $scope.data_Status = ($scope.selectedShowAll ? $scope.data_Status_All : $scope.data_Status_All.filter(function (e) { return e.IsArchive == false; }));
-
-        $rootScope.SetDefaultDropdownList($scope.data_Status, 'StatusId', $scope, 'selectedStatus');
-    };
-
-    $scope.selectedShowAll_Change = async function (flag = true, flag2 = true) {
-        // prettier-ignore
-        $scope.data_Status = ($scope.selectedShowAll ? $scope.data_Status_All : $scope.data_Status_All.filter(function (e) { return e.IsArchive == false; }));
-
-        // just to make UX consistent
-        if (flag2) $scope.selectedStatus = '';
-
-        if (flag) {
-            await $scope.showData();
-        }
-    };
-
-    ;
-
-    async function Override_some_Filters() {
-        let branch = $scope.filters.Branch.Value;
-        if (branch && typeof branch === 'string' && branch.indexOf('(') >= 0) branch = '';
-
-        let warehouse = $scope.filters.Warehouse.Value;
-        if (warehouse && typeof warehouse === 'string' && warehouse.indexOf('(') >= 0) warehouse = '';
-        $scope.selectedWarehouse = warehouse;
-
-        let reason = $scope.filters.Reason.Value;
-        if (reason && typeof reason === 'string' && reason.indexOf('(') >= 0) reason = '';
-        $scope.selectedReason = reason;
-
-        let status = $scope.filters.Status.Value;
-        if (status && typeof status === 'string' && status.indexOf('(') >= 0) status = '';
-        $scope.selectedStatus = status;
-
-        if ($scope.LoadFilterState_) {
-            $scope.selectedBranch = branch;
-
-            $scope.selectedIssuedTo = $scope.filters['selectedIssuedTo'];
-            delete $scope.filters['selectedIssuedTo'];
-
-            $scope.selectedShowAll = $scope.filters['selectedShowAll'];
-            $scope.selectedShowAll_Change(false, false);
-
-            delete $scope.filters['selectedShowAll'];
-        }
-    }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        await Promise.allSettled([
-            $rootScope.EmployeeLocationAccess($scope, ''),
-            $rootScope.EmployeeWarehouseAccess($scope, ''),
-            $scope.getData_Reason(),
-            $scope.getData_Status()
-        ]);
-
-        $rootScope.LoadFilterState('InventoryLease', $scope);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.Reorganize_Warehouse();
-
-        $scope.showData();
-    };
-
-    $scope.verifyIssueClick = async function () {
-        // Implement verify issue functionality
-    };
-
-    $scope.returnInventoryClick = async function () {
-        // Implement return inventory functionality
-    };
-
-    $scope.expenseClick = async function () {
-        // Implement expense functionality
-    };
-
-    $scope.billClick = async function () {
-        // Implement bill functionality
-    };
-
-    $scope.printForm = async function () {
-        // Implement print functionality
-    };
-
-    $scope.voidClick = async function () {
-        // Implement void functionality
-    };
-
-    $scope.initialize_Page();
-});
-// ini file Controller.js
-
-
-
-// ini file Controller.js
-
-angular.module('app.erp').controller('InventoryReceiptVerificationCtrl', function ($rootScope, $scope, Utility_ERP, InventoryReceiptVerification_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        ReceivedDate_date: { PropertyName: 'ReceivedDate', Operator: '=', Value: '' },
-        Receiver: { PropertyName: 'ReceiverCode', Operator: '=', Value: '' },
-    };
-
-    $scope.selectedReceivedDate = $rootScope.Date_to_UI(new Date());
-    $scope.selectedReceiver = '';
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = InventoryReceiptVerification_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Item Code', 'ItemCode', 'ItemCode', 'Text', true],
-            ['Description', 'Description', 'Description', 'Text', true],
-            ['Qty', 'Qty', 'Qty', 'Number', true],
-            ['Uom', 'Uom', 'Uom', 'Text', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        $scope.filters.ReceivedDate_date.Value = $rootScope.Date_to_DB($scope.selectedReceivedDate);
-
-        Utility_ERP.Still_Processing($scope, true);
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-
-        $scope.filters['selectedReceiver'] = $scope.selectedReceiver;
-
-        $rootScope.SaveFilterState('InventoryReceiptVerification', $scope);
-
-        delete $scope.filters['selectedReceiver'];
-    };
-
-    $scope.getData_Customer = async function (val) {
-        return await $rootScope.getData_Customer(val, $scope);
-    };
-
-    ;
-
-    async function Override_some_Filters() {
-        if ($scope.LoadFilterState_) {
-            $scope.selectedReceiver = $scope.filters['selectedReceiver'];
-            delete $scope.filters['selectedReceiver'];
-        }
-    }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.LoadFilterState('InventoryReceiptVerification', $scope);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.showData();
-    };
-
-    $scope.verifyReceipt = async function () {
-        // Implementation for Verify
-    };
-
-    $scope.initialize_Page();
-});
-angular.module('app.erp').controller('InventoryRequestsCtrl', function ($rootScope, $scope, Utility_ERP, InventoryRequests_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-    $scope.statusOptions = [
-        { Value: null, Text: 'All' },
-        { Value: 'Open', Text: 'Open' },
-        { Value: 'Closed', Text: 'Closed' },
-        { Value: 'Verified', Text: 'Verified' },
-    ];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Branch: { PropertyName: 'LocationCode', Operator: 'in', Value: '' },
-        Warehouse: { PropertyName: 'WarehouseCode', Operator: 'in', Value: '' },
-        RequestedBy: { PropertyName: 'RequestedByID', Operator: '=', Value: '' },
-        DateFrom_date: { PropertyName: 'Date', Operator: '>=', Value: '' },
-        DateTo_date: { PropertyName: 'Date', Operator: '<=', Value: '' },
-        Status: { PropertyName: 'Status', Operator: '=', Value: null },
-    };
-
-    $scope.selectedBranch = '';
-    $scope.selectedWarehouse = '';
-    $scope.selectedRequestedBy = '';
-    $scope.selectedDateFrom = '';
-    $scope.selectedDateTo = '';
-    $scope.selectedShowAll = false;
-
-    $scope.data_EmployeeLocationAccess = [];
-    $scope.data_EmployeeWarehouseAccess = [];
-    $scope.data_Warehouse_perBranch = [];
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = InventoryRequests_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Doc Nr.', 'DocNr', 'DocNr', 'Text', true],
-            ['Date', 'Date', 'Date', 'Date', true],
-            ['Branch', 'Branch', 'Branch', 'Text', true],
-            ['Warehouse', 'Warehouse', 'Warehouse', 'Text', true],
-            ['Requested By', 'RequestedBy', 'RequestedBy', 'Text', true],
-            ['Notes', 'Notes', 'Notes', 'Text', true],
-            ['Open Qty', 'OpenQty', 'OpenQty', 'Number', true],
-            ['Total Qty', 'TotalQty', 'TotalQty', 'Number', true],
-            ['R', 'R', 'R', 'Boolean', true],
-            ['Issued By', 'IssuedBy', 'IssuedBy', 'Text', true],
-            ['Status', 'Status', 'Status', 'Text', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        if (!$scope.selectedBranch) {
-            $scope.filters.Branch.Operator = 'in';
-            $scope.filters.Branch.Value = Utility_ERP.Value_OperatorIN_($scope.data_EmployeeLocationAccess, 'Code');
-        } else {
-            $scope.filters.Branch.Operator = '=';
-            $scope.filters.Branch.Value = $scope.selectedBranch;
-        }
-
-        if (!$scope.selectedWarehouse) {
-            $scope.filters.Warehouse.Operator = 'in';
-            $scope.filters.Warehouse.Value = Utility_ERP.Value_OperatorIN_($scope.data_Warehouse_perBranch, 'Code');
-        } else {
-            $scope.filters.Warehouse.Operator = '=';
-            $scope.filters.Warehouse.Value = $scope.selectedWarehouse;
-        }
-
-        $scope.filters.DateFrom_date.Value = $rootScope.Date_to_DB($scope.selectedDateFrom);
-        $scope.filters.DateTo_date.Value = $rootScope.Date_to_DB($scope.selectedDateTo);
-
-        Utility_ERP.Still_Processing($scope, true);
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-
-        $scope.filters['selectedRequestedBy'] = $scope.selectedRequestedBy;
-        $scope.filters['selectedShowAll'] = $scope.selectedShowAll;
-
-        $rootScope.SaveFilterState('InventoryRequests', $scope);
-
-        delete $scope.filters['selectedRequestedBy'];
-        delete $scope.filters['selectedShowAll'];
-    };
-
-    $scope.Branch_Changed = async function () {
-        // --  untuk Page ini, setiap kali Branch berubah --> maka Warehouse ke posisi "All"
-        // reset
-        $scope.selectedWarehouse = '';
-
-        $scope.Reorganize_Warehouse();
-
-        await $scope.showData();
-    };
-
-    $scope.Reorganize_Warehouse = function () {
-        var data = [];
-
-        if (!$scope.selectedBranch) {
-            // tanpa Filter Branch
-            data = $scope.data_EmployeeWarehouseAccess;
-        } else {
-            // filter berdasarkan Branch
-            data = $scope.data_EmployeeWarehouseAccess.filter(function (e) {
-                return e.LocationCode == $scope.selectedBranch;
-            });
-        }
-
-        $scope.data_Warehouse_perBranch = [...new Map(data.map((item) => [item['Code'], item])).values()].sort((x, y) => x.Code.localeCompare(y.Code));
-    };
-
-    $scope.getData_Customer = async function (val) {
-        return await $rootScope.getData_Customer(val, $scope);
-    };
-
-    $scope.selectedShowAll_Change = async function (flag = true, flag2 = true) {
-        // Implement logic if needed for Show All checkbox
-
-        if (flag) {
-            await $scope.showData();
-        }
-    };
-
-    ;
-
-    async function Override_some_Filters() {
-        let branch = $scope.filters.Branch.Value;
-        if (branch && typeof branch === 'string' && branch.indexOf('(') >= 0) branch = '';
-
-        let warehouse = $scope.filters.Warehouse.Value;
-        if (warehouse && typeof warehouse === 'string' && warehouse.indexOf('(') >= 0) warehouse = '';
-        $scope.selectedWarehouse = warehouse;
-
-        if ($scope.LoadFilterState_) {
-            $scope.selectedBranch = branch;
-
-            $scope.selectedRequestedBy = $scope.filters['selectedRequestedBy'];
-            delete $scope.filters['selectedRequestedBy'];
-
-            $scope.selectedShowAll = $scope.filters['selectedShowAll'];
-            $scope.selectedShowAll_Change(false, false);
-
-            delete $scope.filters['selectedShowAll'];
-        }
-    }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        await Promise.allSettled([
-            $rootScope.EmployeeLocationAccess($scope, ''),
-            $rootScope.EmployeeWarehouseAccess($scope, '')
-        ]);
-
-        $rootScope.LoadFilterState('InventoryRequests', $scope);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.Reorganize_Warehouse();
-
-        $scope.showData();
-    };
-
-    $scope.printForm = async function () {
-        // Implement print functionality
-    };
-
-    $scope.verifyClick = async function () {
-        // Implement verify functionality
-    };
-
-    $scope.closeClick = async function () {
-        // Implement close functionality
-    };
-
-    $scope.reserveClick = async function () {
-        // Implement reserve functionality
-    };
-
-    $scope.unReserveClick = async function () {
-        // Implement un reserve functionality
-    };
-
-    $scope.initialize_Page();
-});
-// ini file Controller.js
-
-angular.module('app.erp').controller('IsolationVerificationCtrl', function ($rootScope, $scope, Utility_ERP, IsolationVerification_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-    $scope.activeOptions = [
-        { Value: null, Text: 'All' },
-        { Value: true, Text: 'Yes' },
-        { Value: false, Text: 'No' },
-    ];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Active: { PropertyName: 'Active', Operator: '=', Value: null },
-    };
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = IsolationVerification_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Item Code', 'ItemCode', 'ItemCode', 'Text', true],
-            ['Description', 'Description', 'Description', 'Text', true],
-            ['Qty', 'Qty1', 'Qty1', 'Number', true],
-            ['Uom', 'Uom1', 'Uom1', 'Text', true],
-            ['Qty', 'Qty2', 'Qty2', 'Number', true],
-            ['Uom', 'Uom2', 'Uom2', 'Text', true],
-            ['Qty', 'Qty3', 'Qty3', 'Number', true],
-            ['Uom', 'Uom3', 'Uom3', 'Text', true],
-            ['Actions', 'Actions', 'Actions', 'Text', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-
-        $rootScope.SaveFilterState('IsolationVerification', $scope);
-    };
-
-    ;
-
-    async function Override_some_Filters() {
-        // No additional filters to override for this page
-    }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.LoadFilterState('IsolationVerification', $scope);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.showData();
-    };
-
-    $scope.verifyIsolation = async function () {
-        // Implementation for Verify Isolation action
-    };
-
-    $scope.initialize_Page();
-});
-
-
-angular.module('app.erp').controller('ItemCostsCtrl', function ($rootScope, $scope, Utility_ERP, ItemCosts_Service, Inventory_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        CostGroup: { PropertyName: 'CostGroupCode', Operator: 'in', Value: '' },
-        Currency: { PropertyName: 'CurrencyCode', Operator: 'in', Value: '' },
-        Brand: { PropertyName: 'BrandCode', Operator: 'in', Value: '' },
-        Category: { PropertyName: 'CategoryCode', Operator: 'in', Value: '' },
-        EffectiveDateFrom_date: { PropertyName: 'EffectiveDate', Operator: '>=', Value: '' },
-        EffectiveDateTo_date: { PropertyName: 'EffectiveDate', Operator: '<=', Value: '' },
-    };
-
-    $scope.selectedCostGroup = '';
-    $scope.selectedCurrency = '';
-    $scope.selectedBrand = '';
-    $scope.selectedCategory = '';
-    $scope.selectedEffectiveDateFrom = '';
-    $scope.selectedEffectiveDateTo = '';
-
-    $scope.data_CostGroup = [];
-    $scope.data_Currency = [];
-    $scope.data_Brand = [];
-    $scope.data_Category = [];
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = ItemCosts_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Item #', 'ItemNumber', 'ItemNumber', 'Text', true],
-            ['Category', 'Category', 'Category', 'Text', true],
-            ['Brand', 'Brand', 'Brand', 'Text', true],
-            ['Type', 'Type', 'Type', 'Text', true],
-            ['Name', 'Name', 'Name', 'Text', true],
-            ['Uom', 'Uom', 'Uom', 'Text', true],
-            ['Current Cost', 'CurrentCost', 'CurrentCost', 'Currency', true],
-            ['Valid From', 'ValidFrom', 'ValidFrom', 'Date', true],
-            ['New Cost', 'NewCost', 'NewCost', 'Currency', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        if (!$scope.selectedCostGroup) {
-            $scope.filters.CostGroup.Operator = 'in';
-            $scope.filters.CostGroup.Value = Utility_ERP.Value_OperatorIN_($scope.data_CostGroup, 'Code');
-        } else {
-            $scope.filters.CostGroup.Operator = '=';
-            $scope.filters.CostGroup.Value = $scope.selectedCostGroup;
-        }
-
-        if (!$scope.selectedCurrency) {
-            $scope.filters.Currency.Operator = 'in';
-            $scope.filters.Currency.Value = Utility_ERP.Value_OperatorIN_($scope.data_Currency, 'Code');
-        } else {
-            $scope.filters.Currency.Operator = '=';
-            $scope.filters.Currency.Value = $scope.selectedCurrency;
-        }
-
-        if (!$scope.selectedBrand) {
-            $scope.filters.Brand.Operator = 'in';
-            $scope.filters.Brand.Value = Utility_ERP.Value_OperatorIN_($scope.data_Brand, 'Code');
-        } else {
-            $scope.filters.Brand.Operator = '=';
-            $scope.filters.Brand.Value = $scope.selectedBrand;
-        }
-
-        if (!$scope.selectedCategory) {
-            $scope.filters.Category.Operator = 'in';
-            $scope.filters.Category.Value = Utility_ERP.Value_OperatorIN_($scope.data_Category, 'Code');
-        } else {
-            $scope.filters.Category.Operator = '=';
-            $scope.filters.Category.Value = $scope.selectedCategory;
-        }
-
-        $scope.filters.EffectiveDateFrom_date.Value = $rootScope.Date_to_DB($scope.selectedEffectiveDateFrom);
-        $scope.filters.EffectiveDateTo_date.Value = $rootScope.Date_to_DB($scope.selectedEffectiveDateTo);
-
-        Utility_ERP.Still_Processing($scope, true);
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-
-        $rootScope.SaveFilterState('ItemCosts', $scope);
-    };
-
-    $scope.getData_CostGroup = async function () {
-        $scope.data_CostGroup = await Inventory_Service.Dropdown_CostGroup();
-    };
-
-    $scope.getData_Currency = async function () {
-        $scope.data_Currency = await Inventory_Service.Dropdown_Currency();
-    };
-
-    $scope.getData_Brand = async function () {
-        $scope.data_Brand = await Inventory_Service.Dropdown_Brand();
-    };
-
-    $scope.getData_Category = async function () {
-        $scope.data_Category = await Inventory_Service.Dropdown_Category();
-    };
-
-    ;
-
-    async function Override_some_Filters() {
-        let costGroup = $scope.filters.CostGroup.Value;
-        if (costGroup && typeof costGroup === 'string' && costGroup.indexOf('(') >= 0) costGroup = '';
-        $scope.selectedCostGroup = costGroup;
-
-        let currency = $scope.filters.Currency.Value;
-        if (currency && typeof currency === 'string' && currency.indexOf('(') >= 0) currency = '';
-        $scope.selectedCurrency = currency;
-
-        let brand = $scope.filters.Brand.Value;
-        if (brand && typeof brand === 'string' && brand.indexOf('(') >= 0) brand = '';
-        $scope.selectedBrand = brand;
-
-        let category = $scope.filters.Category.Value;
-        if (category && typeof category === 'string' && category.indexOf('(') >= 0) category = '';
-        $scope.selectedCategory = category;
-    }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        await Promise.allSettled([
-            $scope.getData_CostGroup(),
-            $scope.getData_Currency(),
-            $scope.getData_Brand(),
-            $scope.getData_Category()
-        ]);
-
-        $rootScope.LoadFilterState('ItemCosts', $scope);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.showData();
-    };
-
-    $scope.recalculate = async function () {
-        // TODO: Implement recalculate functionality
-    };
-
-    $scope.printMovements = async function () {
-        // TODO: Implement print movements functionality
-    };
-
-    $scope.downloadSchema = async function () {
-        // TODO: Implement download schema functionality
-    };
-
-    $scope.uploadFile = async function () {
-        // TODO: Implement upload functionality
-    };
-
-    $scope.initialize_Page();
-});
-angular.module('app.erp').controller('ManufacturerFormCtrl', function ($rootScope, $scope, Utility_ERP, Manufacturers_Service) {
-});
-angular.module('app.erp').controller('ManufacturersCtrl', function ($rootScope, $scope, Utility_ERP, Manufacturers_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-    $scope.activeOptions = [
-        { Value: null, Text: 'All' },
-        { Value: true, Text: 'Yes' },
-        { Value: false, Text: 'No' },
-    ];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Active: { PropertyName: 'Active', Operator: '=', Value: null },
-    };
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = Manufacturers_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Code', 'Code', 'Code', 'Text', true],
-            ['Description', 'Description', 'Description', 'Text', true],
-            ['', 'Active', 'Active', 'Boolean', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-
-        $rootScope.SaveFilterState('Manufacturer', $scope);
-    };
-
-    
-
-    async function Override_some_Filters() { }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.LoadFilterState('Manufacturer', $scope);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.showData();
-    };
-
-    $scope.initialize_Page();
-});
-
-
-
-angular.module('app.erp').controller('OutgoingOrdersCtrl', function ($rootScope, $scope, Utility_ERP, OutgoingOrders_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Branch: { PropertyName: 'LocationCode', Operator: 'in', Value: '' },
-        RequestFrom: { PropertyName: 'RequestFromCode', Operator: 'in', Value: '' },
-        DateFrom_date: { PropertyName: 'Date', Operator: '>=', Value: '' },
-        DateTo_date: { PropertyName: 'Date', Operator: '<=', Value: '' },
-        DeliverTo: { PropertyName: 'DeliverToCode', Operator: 'in', Value: '' },
-        RequiredDateFrom_date: { PropertyName: 'RequiredDate', Operator: '>=', Value: '' },
-        RequiredDateTo_date: { PropertyName: 'RequiredDate', Operator: '<=', Value: '' },
-        Status: { PropertyName: 'StatusId', Operator: 'in', Value: '' },
-    };
-
-    $scope.selectedBranch = '';
-    $scope.selectedRequestFrom = '';
-    $scope.selectedDateFrom = '';
-    $scope.selectedDateTo = '';
-    $scope.selectedDeliverTo = '';
-    $scope.selectedRequiredDateFrom = '';
-    $scope.selectedRequiredDateTo = '';
-    $scope.selectedStatus = '';
-    $scope.selectedShowAll = false;
-
-    $scope.data_EmployeeLocationAccess = [];
-    $scope.data_RequestFrom = [];
-    $scope.data_DeliverTo = [];
-    $scope.data_Status = [];
-    $scope.data_Status_All = [];
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = OutgoingOrders_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Request Nr.', 'RequestNr', 'RequestNr', 'Text', true],
-            ['Date', 'Date', 'Date', 'Date', true],
-            ['Branch', 'Branch', 'Branch', 'Text', true],
-            ['Request To', 'RequestTo', 'RequestTo', 'Text', true],
-            ['Deliver To', 'DeliverTo', 'DeliverTo', 'Text', true],
-            ['Open Qty', 'OpenQty', 'OpenQty', 'Number', true],
-            ['Total Qty', 'TotalQty', 'TotalQty', 'Number', true],
-            ['Required Date', 'RequiredDate', 'RequiredDate', 'Date', true],
-            ['Issued By', 'IssuedBy', 'IssuedBy', 'Text', true],
-            ['Direct', 'Direct', 'Direct', 'Boolean', true],
-            ['Status', 'Status', 'Status', 'Text', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        if (!$scope.selectedBranch) {
-            $scope.filters.Branch.Operator = 'in';
-            $scope.filters.Branch.Value = Utility_ERP.Value_OperatorIN_($scope.data_EmployeeLocationAccess, 'Code');
-        } else {
-            $scope.filters.Branch.Operator = '=';
-            $scope.filters.Branch.Value = $scope.selectedBranch;
-        }
-
-        if (!$scope.selectedRequestFrom) {
-            $scope.filters.RequestFrom.Operator = 'in';
-            $scope.filters.RequestFrom.Value = Utility_ERP.Value_OperatorIN_($scope.data_RequestFrom, 'Code');
-        } else {
-            $scope.filters.RequestFrom.Operator = '=';
-            $scope.filters.RequestFrom.Value = $scope.selectedRequestFrom;
-        }
-
-        if (!$scope.selectedDeliverTo) {
-            $scope.filters.DeliverTo.Operator = 'in';
-            $scope.filters.DeliverTo.Value = Utility_ERP.Value_OperatorIN_($scope.data_DeliverTo, 'Code');
-        } else {
-            $scope.filters.DeliverTo.Operator = '=';
-            $scope.filters.DeliverTo.Value = $scope.selectedDeliverTo;
-        }
-
-        if ($rootScope.ValidString($scope.selectedStatus)) {
-            $scope.filters.Status.Operator = '=';
-            $scope.filters.Status.Value = $scope.selectedStatus;
-        } else {
-            $scope.filters.Status.Operator = 'in';
-            $scope.filters.Status.Value = Utility_ERP.Value_OperatorIN($scope.data_Status, 'StatusId', '');
-        }
-
-        $scope.filters.DateFrom_date.Value = $rootScope.Date_to_DB($scope.selectedDateFrom);
-        $scope.filters.DateTo_date.Value = $rootScope.Date_to_DB($scope.selectedDateTo);
-
-        $scope.filters.RequiredDateFrom_date.Value = $rootScope.Date_to_DB($scope.selectedRequiredDateFrom);
-        $scope.filters.RequiredDateTo_date.Value = $rootScope.Date_to_DB($scope.selectedRequiredDateTo);
-
-        Utility_ERP.Still_Processing($scope, true);
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-
-        $scope.filters['selectedShowAll'] = $scope.selectedShowAll;
-
-        $rootScope.SaveFilterState('OutgoingOrders', $scope);
-
-        delete $scope.filters['selectedShowAll'];
-    };
-
-    $scope.Branch_Changed = async function () {
-        // reset
-        await $scope.showData();
-    };
-
-    $scope.getData_RequestFrom = async function () {
-        // Implement service call to get RequestFrom dropdown data
-        // $scope.data_RequestFrom = await OutgoingOrders_Service.Dropdown_RequestFrom();
-    };
-
-    $scope.getData_DeliverTo = async function () {
-        // Implement service call to get DeliverTo dropdown data
-        // $scope.data_DeliverTo = await OutgoingOrders_Service.Dropdown_DeliverTo();
-    };
-
-    $scope.getData_Status = async function () {
-        $scope.data_Status_All = await Utility_ERP.getData_DocumentStatus('OutgoingOrder');
-
-        // prettier-ignore
-        $scope.data_Status = ($scope.selectedShowAll ? $scope.data_Status_All : $scope.data_Status_All.filter(function (e) { return e.IsArchive == false; }));
-
-        $rootScope.SetDefaultDropdownList($scope.data_Status, 'StatusId', $scope, 'selectedStatus');
-    };
-
-    $scope.selectedShowAll_Change = async function (flag = true, flag2 = true) {
-        // prettier-ignore
-        $scope.data_Status = ($scope.selectedShowAll ? $scope.data_Status_All : $scope.data_Status_All.filter(function (e) { return e.IsArchive == false; }));
-
-        // just to make UX consistent
-        if (flag2) $scope.selectedStatus = '';
-
-        if (flag) {
-            await $scope.showData();
-        }
-    };
-
-    ;
-
-    async function Override_some_Filters() {
-        let branch = $scope.filters.Branch.Value;
-        if (branch && typeof branch === 'string' && branch.indexOf('(') >= 0) branch = '';
-
-        let requestFrom = $scope.filters.RequestFrom.Value;
-        if (requestFrom && typeof requestFrom === 'string' && requestFrom.indexOf('(') >= 0) requestFrom = '';
-        $scope.selectedRequestFrom = requestFrom;
-
-        let deliverTo = $scope.filters.DeliverTo.Value;
-        if (deliverTo && typeof deliverTo === 'string' && deliverTo.indexOf('(') >= 0) deliverTo = '';
-        $scope.selectedDeliverTo = deliverTo;
-
-        let status = $scope.filters.Status.Value;
-        if (status && typeof status === 'string' && status.indexOf('(') >= 0) status = '';
-        $scope.selectedStatus = status;
-
-        if ($scope.LoadFilterState_) {
-            $scope.selectedBranch = branch;
-
-            $scope.selectedShowAll = $scope.filters['selectedShowAll'];
-            $scope.selectedShowAll_Change(false, false);
-
-            delete $scope.filters['selectedShowAll'];
-        }
-    }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        await Promise.allSettled([
-            $rootScope.EmployeeLocationAccess($scope, ''),
-            $scope.getData_RequestFrom(),
-            $scope.getData_DeliverTo(),
-            $scope.getData_Status()
-        ]);
-
-        $rootScope.LoadFilterState('OutgoingOrders', $scope);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.showData();
-    };
-
-    $scope.printForm = async function () {
-        // Implement print functionality
-    };
-
-    $scope.deliveryClick = async function () {
-        // Implement delivery functionality
-    };
-
-    $scope.voidClick = async function () {
-        // Implement void functionality
-    };
-
-    $scope.initialize_Page();
-});
-angular.module('app.erp').controller('ProfileFormCtrl', function ($rootScope, $scope, Utility_ERP, Profiles_Service) {
-
-});
-
-angular.module('app.erp').controller('ProfilesCtrl', function ($rootScope, $scope, Utility_ERP, Profiles_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-    $scope.activeOptions = [
-        { Value: null, Text: 'All' },
-        { Value: true, Text: 'Yes' },
-        { Value: false, Text: 'No' },
-    ];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Active: { PropertyName: 'Active', Operator: '=', Value: null },
-    };
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = Profiles_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Code', 'Code', 'Code', 'Text', true],
-            ['Description', 'Name', 'Name', 'Text', true],
-            ['', 'Active', 'Active', 'Boolean', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-
-        $rootScope.SaveFilterState('Profile', $scope);
-    };
-
-    
-
-    async function Override_some_Filters() { }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.LoadFilterState('Profile', $scope);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.showData();
-    };
-
-    $scope.initialize_Page();
-});
-
-angular.module('app.erp').controller('ReplenishmentCtrl', function ($rootScope, $scope, Utility_ERP, Replenishment_Service, Inventory_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Warehouse: { PropertyName: 'WarehouseCode', Operator: 'in', Value: '' },
-        Brand: { PropertyName: 'Brand', Operator: 'in', Value: '' },
-        Profile: { PropertyName: 'Profile', Operator: 'in', Value: '' },
-        Category: { PropertyName: 'CategoryCode', Operator: 'in', Value: '' },
-    };
-
-    $scope.selectedWarehouse = '';
-    $scope.selectedBrand = '';
-    $scope.selectedProfile = '';
-    $scope.selectedCategory = '';
-    $scope.selectedShowAll = false;
-
-    $scope.data_EmployeeWarehouseAccess = [];
-    $scope.data_Brand = [];
-    $scope.data_Brand_All = [];
-    $scope.data_Profile = [];
-    $scope.data_Profile_All = [];
-    $scope.data_Category = [];
-    $scope.data_Category_All = [];
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = Replenishment_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Item Code', 'ItemCode', 'ItemCode', 'Text', true],
-            ['Item Name', 'ItemName', 'ItemName', 'Text', true],
-            ['Brand', 'Brand', 'Brand', 'Text', true],
-            ['Uom', 'Uom', 'Uom', 'Text', true],
-            ['Lead Time', 'LeadTime', 'LeadTime', 'Number', true],
-            ['Reserved', 'Reserved', 'Reserved', 'Number', true],
-            ['Demand', 'Demand', 'Demand', 'Number', true],
-            ['Physical', 'Physical', 'Physical', 'Number', true],
-            ['Available', 'Available', 'Available', 'Number', true],
-            ['Reorder Point', 'ReorderPoint', 'ReorderPoint', 'Number', true],
-            ['EOQ', 'EOQ', 'EOQ', 'Number', true],
-            ['On PR', 'OnPR', 'OnPR', 'Number', true],
-            ['On PO', 'OnPO', 'OnPO', 'Number', true],
-            ['Rec. Order', 'RecOrder', 'RecOrder', 'Number', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        if (!$scope.selectedWarehouse) {
-            $scope.filters.Warehouse.Operator = 'in';
-            $scope.filters.Warehouse.Value = Utility_ERP.Value_OperatorIN_($scope.data_EmployeeWarehouseAccess, 'Code');
-        } else {
-            $scope.filters.Warehouse.Operator = '=';
-            $scope.filters.Warehouse.Value = $scope.selectedWarehouse;
-        }
-
-        if (!$scope.selectedBrand) {
-            $scope.filters.Brand.Operator = 'in';
-            $scope.filters.Brand.Value = Utility_ERP.Value_OperatorIN_($scope.data_Brand, 'Code');
-        } else {
-            $scope.filters.Brand.Operator = '=';
-            $scope.filters.Brand.Value = $scope.selectedBrand;
-        }
-
-        if (!$scope.selectedProfile) {
-            $scope.filters.Profile.Operator = 'in';
-            $scope.filters.Profile.Value = Utility_ERP.Value_OperatorIN_($scope.data_Profile, 'Code');
-        } else {
-            $scope.filters.Profile.Operator = '=';
-            $scope.filters.Profile.Value = $scope.selectedProfile;
-        }
-
-        if (!$scope.selectedCategory) {
-            $scope.filters.Category.Operator = 'in';
-            $scope.filters.Category.Value = Utility_ERP.Value_OperatorIN_($scope.data_Category, 'Code');
-        } else {
-            $scope.filters.Category.Operator = '=';
-            $scope.filters.Category.Value = $scope.selectedCategory;
-        }
-
-        Utility_ERP.Still_Processing($scope, true);
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-
-        $scope.filters['selectedShowAll'] = $scope.selectedShowAll;
-
-        $rootScope.SaveFilterState('Replenishment', $scope);
-
-        delete $scope.filters['selectedShowAll'];
-    };
-
-    $scope.getData_Brand = async function () {
-        $scope.data_Brand_All = await Inventory_Service.Dropdown_Brand();
-
-        // prettier-ignore
-        $scope.data_Brand = ($scope.selectedShowAll ? $scope.data_Brand_All : $scope.data_Brand_All.filter(function (e) { return e.IsArchive == false; }));
-    };
-
-    $scope.getData_Profile = async function () {
-        $scope.data_Profile_All = await Inventory_Service.Dropdown_Profile();
-
-        // prettier-ignore
-        $scope.data_Profile = ($scope.selectedShowAll ? $scope.data_Profile_All : $scope.data_Profile_All.filter(function (e) { return e.IsArchive == false; }));
-    };
-
-    $scope.getData_Category = async function () {
-        $scope.data_Category_All = await Inventory_Service.Dropdown_Category();
-
-        // prettier-ignore
-        $scope.data_Category = ($scope.selectedShowAll ? $scope.data_Category_All : $scope.data_Category_All.filter(function (e) { return e.IsArchive == false; }));
-    };
-
-    $scope.selectedShowAll_Change = async function (flag = true, flag2 = true) {
-        // prettier-ignore
-        $scope.data_Brand = ($scope.selectedShowAll ? $scope.data_Brand_All : $scope.data_Brand_All.filter(function (e) { return e.IsArchive == false; }));
-
-        // prettier-ignore
-        $scope.data_Profile = ($scope.selectedShowAll ? $scope.data_Profile_All : $scope.data_Profile_All.filter(function (e) { return e.IsArchive == false; }));
-
-        // prettier-ignore
-        $scope.data_Category = ($scope.selectedShowAll ? $scope.data_Category_All : $scope.data_Category_All.filter(function (e) { return e.IsArchive == false; }));
-
-        // just to make UX consistent
-        if (flag2) {
-            $scope.selectedBrand = '';
-            $scope.selectedProfile = '';
-            $scope.selectedCategory = '';
-        }
-
-        if (flag) {
-            await $scope.showData();
-        }
-    };
-
-    
-
-    async function Override_some_Filters() {
-        let warehouse = $scope.filters.Warehouse.Value;
-        if (warehouse && typeof warehouse === 'string' && warehouse.indexOf('(') >= 0) warehouse = '';
-        $scope.selectedWarehouse = warehouse;
-
-        let brand = $scope.filters.Brand.Value;
-        if (brand && typeof brand === 'string' && brand.indexOf('(') >= 0) brand = '';
-        $scope.selectedBrand = brand;
-
-        let profile = $scope.filters.Profile.Value;
-        if (profile && typeof profile === 'string' && profile.indexOf('(') >= 0) profile = '';
-        $scope.selectedProfile = profile;
-
-        let category = $scope.filters.Category.Value;
-        if (category && typeof category === 'string' && category.indexOf('(') >= 0) category = '';
-        $scope.selectedCategory = category;
-
-        if ($scope.LoadFilterState_) {
-            $scope.selectedShowAll = $scope.filters['selectedShowAll'];
-            $scope.selectedShowAll_Change(false, false);
-
-            delete $scope.filters['selectedShowAll'];
-        }
-    }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        await Promise.allSettled([
-            $rootScope.EmployeeWarehouseAccess($scope, ''),
-            $scope.getData_Brand(),
-            $scope.getData_Profile(),
-            $scope.getData_Category()
-        ]);
-
-        $rootScope.LoadFilterState('Replenishment', $scope);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.showData();
-    };
-
-    $scope.createPO = async function () {
-        // Implementation for create P/O functionality
-    }
-
-    $scope.exportList = async function () {
-        // Implementation for export to excel functionality
-    }
-
-    $scope.initialize_Page();
-});
-angular.module('app.erp').controller('ReservePositionsCtrl', function ($rootScope, $scope, Utility_ERP, ReservePositions_Service, Inventory_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Branch: { PropertyName: 'LocationCode', Operator: 'in', Value: '' },
-        Warehouse: { PropertyName: 'WarehouseCode', Operator: 'in', Value: '' },
-        Age: { PropertyName: 'Age', Operator: 'in', Value: '' },
-        Brand: { PropertyName: 'Brand', Operator: 'in', Value: '' },
-        Profile: { PropertyName: 'Profile', Operator: 'in', Value: '' },
-        Category: { PropertyName: 'CategoryCode', Operator: 'in', Value: '' },
-    };
-
-    $scope.selectedBranch = '';
-    $scope.selectedWarehouse = '';
-    $scope.selectedAge = '';
-    $scope.selectedBrand = '';
-    $scope.selectedProfile = '';
-    $scope.selectedCategory = '';
-
-    $scope.data_EmployeeLocationAccess = [];
-    $scope.data_EmployeeWarehouseAccess = [];
-    $scope.data_Warehouse_perBranch = [];
-    $scope.data_Age = [];
-    $scope.data_Brand = [];
-    $scope.data_Profile = [];
-    $scope.data_Category = [];
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = ReservePositions_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Item Code', 'ItemCode', 'ItemCode', 'Text', true],
-            ['Brand', 'Brand', 'Brand', 'Text', true],
-            ['Item Name', 'ItemName', 'ItemName', 'Text', true],
-            ['Current', 'Current', 'Current', 'Number', true],
-            ['1 - 7 Days', 'Days1to7', 'Days1to7', 'Number', true],
-            ['8 - 14 Days', 'Days8to14', 'Days8to14', 'Number', true],
-            ['15 - 30 Days', 'Days15to30', 'Days15to30', 'Number', true],
-            ['31 - 45 Days', 'Days31to45', 'Days31to45', 'Number', true],
-            ['> 45 Days', 'DaysOver45', 'DaysOver45', 'Number', true],
-            ['Total', 'Total', 'Total', 'Number', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        if (!$scope.selectedBranch) {
-            $scope.filters.Branch.Operator = 'in';
-            $scope.filters.Branch.Value = Utility_ERP.Value_OperatorIN_($scope.data_EmployeeLocationAccess, 'Code');
-        } else {
-            $scope.filters.Branch.Operator = '=';
-            $scope.filters.Branch.Value = $scope.selectedBranch;
-        }
-
-        if (!$scope.selectedWarehouse) {
-            $scope.filters.Warehouse.Operator = 'in';
-            $scope.filters.Warehouse.Value = Utility_ERP.Value_OperatorIN_($scope.data_Warehouse_perBranch, 'Code');
-        } else {
-            $scope.filters.Warehouse.Operator = '=';
-            $scope.filters.Warehouse.Value = $scope.selectedWarehouse;
-        }
-
-        if (!$scope.selectedAge) {
-            $scope.filters.Age.Operator = 'in';
-            $scope.filters.Age.Value = Utility_ERP.Value_OperatorIN_($scope.data_Age, 'Code');
-        } else {
-            $scope.filters.Age.Operator = '=';
-            $scope.filters.Age.Value = $scope.selectedAge;
-        }
-
-        if (!$scope.selectedBrand) {
-            $scope.filters.Brand.Operator = 'in';
-            $scope.filters.Brand.Value = Utility_ERP.Value_OperatorIN_($scope.data_Brand, 'Code');
-        } else {
-            $scope.filters.Brand.Operator = '=';
-            $scope.filters.Brand.Value = $scope.selectedBrand;
-        }
-
-        if (!$scope.selectedProfile) {
-            $scope.filters.Profile.Operator = 'in';
-            $scope.filters.Profile.Value = Utility_ERP.Value_OperatorIN_($scope.data_Profile, 'Code');
-        } else {
-            $scope.filters.Profile.Operator = '=';
-            $scope.filters.Profile.Value = $scope.selectedProfile;
-        }
-
-        if (!$scope.selectedCategory) {
-            $scope.filters.Category.Operator = 'in';
-            $scope.filters.Category.Value = Utility_ERP.Value_OperatorIN_($scope.data_Category, 'Code');
-        } else {
-            $scope.filters.Category.Operator = '=';
-            $scope.filters.Category.Value = $scope.selectedCategory;
-        }
-
-        Utility_ERP.Still_Processing($scope, true);
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-
-        $rootScope.SaveFilterState('ReservePositions', $scope);
-    };
-
-    $scope.Branch_Changed = async function () {
-        // reset
-        $scope.selectedWarehouse = '';
-
-        $scope.Reorganize_Warehouse();
-
-        await $scope.showData();
-    };
-
-    $scope.Reorganize_Warehouse = function () {
-        var data = [];
-
-        if (!$scope.selectedBranch) {
-            // tanpa Filter Branch
-            data = $scope.data_EmployeeWarehouseAccess;
-        } else {
-            // filter berdasarkan Branch
-            data = $scope.data_EmployeeWarehouseAccess.filter(function (e) {
-                return e.LocationCode == $scope.selectedBranch;
-            });
-        }
-
-        $scope.data_Warehouse_perBranch = [...new Map(data.map((item) => [item['Code'], item])).values()].sort((x, y) => x.Code.localeCompare(y.Code));
-    };
-
-    $scope.getData_Age = async function () {
-        $scope.data_Age = await Inventory_Service.Dropdown_Age();
-    };
-
-    $scope.getData_Brand = async function () {
-        $scope.data_Brand = await Inventory_Service.Dropdown_Brand();
-    };
-
-    $scope.getData_Profile = async function () {
-        $scope.data_Profile = await Inventory_Service.Dropdown_Profile();
-    };
-
-    $scope.getData_Category = async function () {
-        $scope.data_Category = await Inventory_Service.Dropdown_Category();
-    };
-
-    
-
-    async function Override_some_Filters() {
-        let branch = $scope.filters.Branch.Value;
-        if (branch && typeof branch === 'string' && branch.indexOf('(') >= 0) branch = '';
-
-        let warehouse = $scope.filters.Warehouse.Value;
-        if (warehouse && typeof warehouse === 'string' && warehouse.indexOf('(') >= 0) warehouse = '';
-        $scope.selectedWarehouse = warehouse;
-
-        let age = $scope.filters.Age.Value;
-        if (age && typeof age === 'string' && age.indexOf('(') >= 0) age = '';
-        $scope.selectedAge = age;
-
-        let brand = $scope.filters.Brand.Value;
-        if (brand && typeof brand === 'string' && brand.indexOf('(') >= 0) brand = '';
-        $scope.selectedBrand = brand;
-
-        let profile = $scope.filters.Profile.Value;
-        if (profile && typeof profile === 'string' && profile.indexOf('(') >= 0) profile = '';
-        $scope.selectedProfile = profile;
-
-        let category = $scope.filters.Category.Value;
-        if (category && typeof category === 'string' && category.indexOf('(') >= 0) category = '';
-        $scope.selectedCategory = category;
-
-        if ($scope.LoadFilterState_) {
-            $scope.selectedBranch = branch;
-        }
-    }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        await Promise.allSettled([
-            $rootScope.EmployeeLocationAccess($scope, ''),
-            $rootScope.EmployeeWarehouseAccess($scope, ''),
-            $scope.getData_Age(),
-            $scope.getData_Brand(),
-            $scope.getData_Profile(),
-            $scope.getData_Category()
-        ]);
-
-        $rootScope.LoadFilterState('ReservePositions', $scope);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.Reorganize_Warehouse();
-
-        $scope.showData();
-    };
-
-    $scope.initialize_Page();
-});
-angular.module('app.erp').controller('StockPositionsCtrl', function ($rootScope, $scope, Utility_ERP, StockPositions_Service, Inventory_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Branch: { PropertyName: 'LocationCode', Operator: 'in', Value: '' },
-        Warehouse: { PropertyName: 'WarehouseCode', Operator: 'in', Value: '' },
-        ShowAvailableOnly: { PropertyName: 'Available', Operator: '>', Value: null },
-        Brand: { PropertyName: 'Brand', Operator: 'in', Value: '' },
-        Profile: { PropertyName: 'Profile', Operator: 'in', Value: '' },
-        ShowDemandOnly: { PropertyName: 'Demand', Operator: '>', Value: null },
-        Category: { PropertyName: 'CategoryCode', Operator: 'in', Value: '' },
-    };
-
-    $scope.selectedBranch = '';
-    $scope.selectedWarehouse = '';
-    $scope.selectedShowAvailableOnly = false;
-    $scope.selectedBrand = '';
-    $scope.selectedProfile = '';
-    $scope.selectedShowDemandOnly = false;
-    $scope.selectedCategory = '';
-
-    $scope.data_EmployeeLocationAccess = [];
-    $scope.data_EmployeeWarehouseAccess = [];
-    $scope.data_Warehouse_perBranch = [];
-    $scope.data_Brand = [];
-    $scope.data_Profile = [];
-    $scope.data_Category = [];
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = StockPositions_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Item Code', 'ItemCode', 'ItemCode', 'Text', true],
-            ['Item Name', 'ItemName', 'ItemName', 'Text', true],
-            ['Brand', 'Brand', 'Brand', 'Text', true],
-            ['TR', 'TR', 'TR', 'Number', true],
-            ['PO', 'PO', 'PO', 'Number', true],
-            ['Reserved', 'Reserved', 'Reserved', 'Number', true],
-            ['Demand', 'Demand', 'Demand', 'Number', true],
-            ['Shipment', 'Shipment', 'Shipment', 'Number', true],
-            ['Picking', 'Picking', 'Picking', 'Number', true],
-            ['Routing', 'Routing', 'Routing', 'Number', true],
-            ['Manifest', 'Manifest', 'Manifest', 'Number', true],
-            ['Delivery', 'Delivery', 'Delivery', 'Number', true],
-            ['Isolation', 'Isolation', 'Isolation', 'Number', true],
-            ['Physical', 'Physical', 'Physical', 'Number', true],
-            ['Available', 'Available', 'Available', 'Number', true],
-            ['VAT', 'VAT', 'VAT', 'Number', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        if (!$scope.selectedBranch) {
-            $scope.filters.Branch.Operator = 'in';
-            $scope.filters.Branch.Value = Utility_ERP.Value_OperatorIN_($scope.data_EmployeeLocationAccess, 'Code');
-        } else {
-            $scope.filters.Branch.Operator = '=';
-            $scope.filters.Branch.Value = $scope.selectedBranch;
-        }
-
-        if (!$scope.selectedWarehouse) {
-            $scope.filters.Warehouse.Operator = 'in';
-            $scope.filters.Warehouse.Value = Utility_ERP.Value_OperatorIN_($scope.data_Warehouse_perBranch, 'Code');
-        } else {
-            $scope.filters.Warehouse.Operator = '=';
-            $scope.filters.Warehouse.Value = $scope.selectedWarehouse;
-        }
-
-        $scope.filters.ShowAvailableOnly.Value = null;
-        if ($scope.selectedShowAvailableOnly) {
-            $scope.filters.ShowAvailableOnly.Value = 0;
-        }
-
-        if (!$scope.selectedBrand) {
-            $scope.filters.Brand.Operator = 'in';
-            $scope.filters.Brand.Value = Utility_ERP.Value_OperatorIN_($scope.data_Brand, 'Code');
-        } else {
-            $scope.filters.Brand.Operator = '=';
-            $scope.filters.Brand.Value = $scope.selectedBrand;
-        }
-
-        if (!$scope.selectedProfile) {
-            $scope.filters.Profile.Operator = 'in';
-            $scope.filters.Profile.Value = Utility_ERP.Value_OperatorIN_($scope.data_Profile, 'Code');
-        } else {
-            $scope.filters.Profile.Operator = '=';
-            $scope.filters.Profile.Value = $scope.selectedProfile;
-        }
-
-        $scope.filters.ShowDemandOnly.Value = null;
-        if ($scope.selectedShowDemandOnly) {
-            $scope.filters.ShowDemandOnly.Value = 0;
-        }
-
-        if (!$scope.selectedCategory) {
-            $scope.filters.Category.Operator = 'in';
-            $scope.filters.Category.Value = Utility_ERP.Value_OperatorIN_($scope.data_Category, 'Code');
-        } else {
-            $scope.filters.Category.Operator = '=';
-            $scope.filters.Category.Value = $scope.selectedCategory;
-        }
-
-        Utility_ERP.Still_Processing($scope, true);
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-
-        $scope.filters['selectedShowAvailableOnly'] = $scope.selectedShowAvailableOnly;
-        $scope.filters['selectedShowDemandOnly'] = $scope.selectedShowDemandOnly;
-
-        $rootScope.SaveFilterState('StockPositions', $scope);
-
-        delete $scope.filters['selectedShowAvailableOnly'];
-        delete $scope.filters['selectedShowDemandOnly'];
-    };
-
-    $scope.Branch_Changed = async function () {
-        // reset
-        $scope.selectedWarehouse = '';
-
-        $scope.Reorganize_Warehouse();
-
-        await $scope.showData();
-    };
-
-    $scope.Reorganize_Warehouse = function () {
-        var data = [];
-
-        if (!$scope.selectedBranch) {
-            // tanpa Filter Branch
-            data = $scope.data_EmployeeWarehouseAccess;
-        } else {
-            // filter berdasarkan Branch
-            data = $scope.data_EmployeeWarehouseAccess.filter(function (e) {
-                return e.LocationCode == $scope.selectedBranch;
-            });
-        }
-
-        $scope.data_Warehouse_perBranch = [...new Map(data.map((item) => [item['Code'], item])).values()].sort((x, y) => x.Code.localeCompare(y.Code));
-    };
-
-    $scope.getData_Brand = async function () {
-        $scope.data_Brand = await Inventory_Service.Dropdown_Brand();
-    };
-
-    $scope.getData_Profile = async function () {
-        $scope.data_Profile = await Inventory_Service.Dropdown_Profile();
-    };
-
-    $scope.getData_Category = async function () {
-        $scope.data_Category = await Inventory_Service.Dropdown_Category();
-    };
-
-    
-
-    async function Override_some_Filters() {
-        let branch = $scope.filters.Branch.Value;
-        if (branch && typeof branch === 'string' && branch.indexOf('(') >= 0) branch = '';
-
-        let warehouse = $scope.filters.Warehouse.Value;
-        if (warehouse && typeof warehouse === 'string' && warehouse.indexOf('(') >= 0) warehouse = '';
-        $scope.selectedWarehouse = warehouse;
-
-        let brand = $scope.filters.Brand.Value;
-        if (brand && typeof brand === 'string' && brand.indexOf('(') >= 0) brand = '';
-        $scope.selectedBrand = brand;
-
-        let profile = $scope.filters.Profile.Value;
-        if (profile && typeof profile === 'string' && profile.indexOf('(') >= 0) profile = '';
-        $scope.selectedProfile = profile;
-
-        let category = $scope.filters.Category.Value;
-        if (category && typeof category === 'string' && category.indexOf('(') >= 0) category = '';
-        $scope.selectedCategory = category;
-
-        if ($scope.LoadFilterState_) {
-            $scope.selectedBranch = branch;
-
-            $scope.selectedShowAvailableOnly = $scope.filters['selectedShowAvailableOnly'];
-            delete $scope.filters['selectedShowAvailableOnly'];
-
-            $scope.selectedShowDemandOnly = $scope.filters['selectedShowDemandOnly'];
-            delete $scope.filters['selectedShowDemandOnly'];
-        }
-    }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        await Promise.allSettled([
-            $rootScope.EmployeeLocationAccess($scope, ''),
-            $rootScope.EmployeeWarehouseAccess($scope, ''),
-            $scope.getData_Brand(),
-            $scope.getData_Profile(),
-            $scope.getData_Category()
-        ]);
-
-        $rootScope.LoadFilterState('StockPositions', $scope);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.Reorganize_Warehouse();
-
-        $scope.showData();
-    };
-
-    $scope.exportList = async function () { }
-
-    $scope.downloadSchema = async function () { }
-
-    $scope.uploadData = async function () { }
-
-    $scope.initialize_Page();
-});
-angular.module('app.erp').controller('TaxPositionsCtrl', function ($rootScope, $scope, Utility_ERP, TaxPositions_Service, Inventory_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Branch: { PropertyName: 'LocationCode', Operator: 'in', Value: '' },
-        Warehouse: { PropertyName: 'WarehouseCode', Operator: 'in', Value: '' },
-        Brand: { PropertyName: 'Brand', Operator: 'in', Value: '' },
-        Profile: { PropertyName: 'Profile', Operator: 'in', Value: '' },
-        Category: { PropertyName: 'CategoryCode', Operator: 'in', Value: '' },
-    };
-
-    $scope.selectedBranch = '';
-    $scope.selectedWarehouse = '';
-    $scope.selectedBrand = '';
-    $scope.selectedProfile = '';
-    $scope.selectedCategory = '';
-
-    $scope.data_EmployeeLocationAccess = [];
-    $scope.data_EmployeeWarehouseAccess = [];
-    $scope.data_Warehouse_perBranch = [];
-    $scope.data_Brand = [];
-    $scope.data_Profile = [];
-    $scope.data_Category = [];
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = TaxPositions_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Item Code', 'ItemCode', 'ItemCode', 'Text', true],
-            ['Item Name', 'ItemName', 'ItemName', 'Text', true],
-            ['Brand', 'Brand', 'Brand', 'Text', true],
-            ['Category', 'Category', 'Category', 'Text', true],
-            ['PR', 'PR', 'PR', 'Number', true],
-            ['PO', 'PO', 'PO', 'Number', true],
-            ['Reserved', 'Reserved', 'Reserved', 'Number', true],
-            ['Demand', 'Demand', 'Demand', 'Number', true],
-            ['Physical', 'Physical', 'Physical', 'Number', true],
-            ['Available', 'Available', 'Available', 'Number', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        if (!$scope.selectedBranch) {
-            $scope.filters.Branch.Operator = 'in';
-            $scope.filters.Branch.Value = Utility_ERP.Value_OperatorIN_($scope.data_EmployeeLocationAccess, 'Code');
-        } else {
-            $scope.filters.Branch.Operator = '=';
-            $scope.filters.Branch.Value = $scope.selectedBranch;
-        }
-
-        if (!$scope.selectedWarehouse) {
-            $scope.filters.Warehouse.Operator = 'in';
-            $scope.filters.Warehouse.Value = Utility_ERP.Value_OperatorIN_($scope.data_Warehouse_perBranch, 'Code');
-        } else {
-            $scope.filters.Warehouse.Operator = '=';
-            $scope.filters.Warehouse.Value = $scope.selectedWarehouse;
-        }
-
-        if (!$scope.selectedBrand) {
-            $scope.filters.Brand.Operator = 'in';
-            $scope.filters.Brand.Value = Utility_ERP.Value_OperatorIN_($scope.data_Brand, 'Code');
-        } else {
-            $scope.filters.Brand.Operator = '=';
-            $scope.filters.Brand.Value = $scope.selectedBrand;
-        }
-
-        if (!$scope.selectedProfile) {
-            $scope.filters.Profile.Operator = 'in';
-            $scope.filters.Profile.Value = Utility_ERP.Value_OperatorIN_($scope.data_Profile, 'Code');
-        } else {
-            $scope.filters.Profile.Operator = '=';
-            $scope.filters.Profile.Value = $scope.selectedProfile;
-        }
-
-        if (!$scope.selectedCategory) {
-            $scope.filters.Category.Operator = 'in';
-            $scope.filters.Category.Value = Utility_ERP.Value_OperatorIN_($scope.data_Category, 'Code');
-        } else {
-            $scope.filters.Category.Operator = '=';
-            $scope.filters.Category.Value = $scope.selectedCategory;
-        }
-
-        Utility_ERP.Still_Processing($scope, true);
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-
-        $rootScope.SaveFilterState('TaxPositions', $scope);
-    };
-
-    $scope.Branch_Changed = async function () {
-        // reset
-        $scope.selectedWarehouse = '';
-
-        $scope.Reorganize_Warehouse();
-
-        await $scope.showData();
-    };
-
-    $scope.Reorganize_Warehouse = function () {
-        var data = [];
-
-        if (!$scope.selectedBranch) {
-            // tanpa Filter Branch
-            data = $scope.data_EmployeeWarehouseAccess;
-        } else {
-            // filter berdasarkan Branch
-            data = $scope.data_EmployeeWarehouseAccess.filter(function (e) {
-                return e.LocationCode == $scope.selectedBranch;
-            });
-        }
-
-        $scope.data_Warehouse_perBranch = [...new Map(data.map((item) => [item['Code'], item])).values()].sort((x, y) => x.Code.localeCompare(y.Code));
-    };
-
-    $scope.getData_Brand = async function () {
-        $scope.data_Brand = await Inventory_Service.Dropdown_Brand();
-    };
-
-    $scope.getData_Profile = async function () {
-        $scope.data_Profile = await Inventory_Service.Dropdown_Profile();
-    };
-
-    $scope.getData_Category = async function () {
-        $scope.data_Category = await Inventory_Service.Dropdown_Category();
-    };
-
-    
-
-    async function Override_some_Filters() {
-        let branch = $scope.filters.Branch.Value;
-        if (branch && typeof branch === 'string' && branch.indexOf('(') >= 0) branch = '';
-
-        let warehouse = $scope.filters.Warehouse.Value;
-        if (warehouse && typeof warehouse === 'string' && warehouse.indexOf('(') >= 0) warehouse = '';
-        $scope.selectedWarehouse = warehouse;
-
-        let brand = $scope.filters.Brand.Value;
-        if (brand && typeof brand === 'string' && brand.indexOf('(') >= 0) brand = '';
-        $scope.selectedBrand = brand;
-
-        let profile = $scope.filters.Profile.Value;
-        if (profile && typeof profile === 'string' && profile.indexOf('(') >= 0) profile = '';
-        $scope.selectedProfile = profile;
-
-        let category = $scope.filters.Category.Value;
-        if (category && typeof category === 'string' && category.indexOf('(') >= 0) category = '';
-        $scope.selectedCategory = category;
-
-        if ($scope.LoadFilterState_) {
-            $scope.selectedBranch = branch;
-        }
-    }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        await Promise.allSettled([
-            $rootScope.EmployeeLocationAccess($scope, ''),
-            $rootScope.EmployeeWarehouseAccess($scope, ''),
-            $scope.getData_Brand(),
-            $scope.getData_Profile(),
-            $scope.getData_Category()
-        ]);
-
-        $rootScope.LoadFilterState('TaxPositions', $scope);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.Reorganize_Warehouse();
-
-        $scope.showData();
-    };
-
-    $scope.exportToCsv = async function () {
-        // Implementation for export to csv functionality
-    }
-
-    $scope.downloadSchema = async function () {
-        // Implementation for download schema functionality
-    }
-
-    $scope.uploadData = async function () {
-        // Implementation for upload functionality
-    }
-
-    $scope.initialize_Page();
-});
-angular.module('app.erp').controller('TaxReplenishmentCtrl', function ($rootScope, $scope, Utility_ERP, TaxReplenishment_Service, Inventory_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Warehouse: { PropertyName: 'WarehouseCode', Operator: 'in', Value: '' },
-        Brand: { PropertyName: 'Brand', Operator: 'in', Value: '' },
-        Profile: { PropertyName: 'Profile', Operator: 'in', Value: '' },
-        Category: { PropertyName: 'CategoryCode', Operator: 'in', Value: '' },
-    };
-
-    $scope.selectedWarehouse = '';
-    $scope.selectedBrand = '';
-    $scope.selectedProfile = '';
-    $scope.selectedCategory = '';
-    $scope.selectedShowAll = false;
-
-    $scope.data_EmployeeWarehouseAccess = [];
-    $scope.data_Brand = [];
-    $scope.data_Brand_All = [];
-    $scope.data_Profile = [];
-    $scope.data_Profile_All = [];
-    $scope.data_Category = [];
-    $scope.data_Category_All = [];
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = TaxReplenishment_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Item Code', 'ItemCode', 'ItemCode', 'Text', true],
-            ['Item Name', 'ItemName', 'ItemName', 'Text', true],
-            ['Brand', 'Brand', 'Brand', 'Text', true],
-            ['Category', 'Category', 'Category', 'Text', true],
-            ['Uom', 'Uom', 'Uom', 'Text', true],
-            ['Lead Time', 'LeadTime', 'LeadTime', 'Number', true],
-            ['Reserved', 'Reserved', 'Reserved', 'Number', true],
-            ['Demand', 'Demand', 'Demand', 'Number', true],
-            ['Physical', 'Physical', 'Physical', 'Number', true],
-            ['Available', 'Available', 'Available', 'Number', true],
-            ['Reorder Point', 'ReorderPoint', 'ReorderPoint', 'Number', true],
-            ['EOQ', 'EOQ', 'EOQ', 'Number', true],
-            ['On PR', 'OnPR', 'OnPR', 'Number', true],
-            ['On PO', 'OnPO', 'OnPO', 'Number', true],
-            ['On Rec.', 'OnRec', 'OnRec', 'Number', true],
-            ['Rec. Order', 'RecOrder', 'RecOrder', 'Number', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        if (!$scope.selectedWarehouse) {
-            $scope.filters.Warehouse.Operator = 'in';
-            $scope.filters.Warehouse.Value = Utility_ERP.Value_OperatorIN_($scope.data_EmployeeWarehouseAccess, 'Code');
-        } else {
-            $scope.filters.Warehouse.Operator = '=';
-            $scope.filters.Warehouse.Value = $scope.selectedWarehouse;
-        }
-
-        if (!$scope.selectedBrand) {
-            $scope.filters.Brand.Operator = 'in';
-            $scope.filters.Brand.Value = Utility_ERP.Value_OperatorIN_($scope.data_Brand, 'Code');
-        } else {
-            $scope.filters.Brand.Operator = '=';
-            $scope.filters.Brand.Value = $scope.selectedBrand;
-        }
-
-        if (!$scope.selectedProfile) {
-            $scope.filters.Profile.Operator = 'in';
-            $scope.filters.Profile.Value = Utility_ERP.Value_OperatorIN_($scope.data_Profile, 'Code');
-        } else {
-            $scope.filters.Profile.Operator = '=';
-            $scope.filters.Profile.Value = $scope.selectedProfile;
-        }
-
-        if (!$scope.selectedCategory) {
-            $scope.filters.Category.Operator = 'in';
-            $scope.filters.Category.Value = Utility_ERP.Value_OperatorIN_($scope.data_Category, 'Code');
-        } else {
-            $scope.filters.Category.Operator = '=';
-            $scope.filters.Category.Value = $scope.selectedCategory;
-        }
-
-        Utility_ERP.Still_Processing($scope, true);
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-
-        $scope.filters['selectedShowAll'] = $scope.selectedShowAll;
-
-        $rootScope.SaveFilterState('TaxReplenishment', $scope);
-
-        delete $scope.filters['selectedShowAll'];
-    };
-
-    $scope.getData_Brand = async function () {
-        $scope.data_Brand_All = await Inventory_Service.Dropdown_Brand();
-
-        // prettier-ignore
-        $scope.data_Brand = ($scope.selectedShowAll ? $scope.data_Brand_All : $scope.data_Brand_All.filter(function (e) { return e.IsArchive == false; }));
-    };
-
-    $scope.getData_Profile = async function () {
-        $scope.data_Profile_All = await Inventory_Service.Dropdown_Profile();
-
-        // prettier-ignore
-        $scope.data_Profile = ($scope.selectedShowAll ? $scope.data_Profile_All : $scope.data_Profile_All.filter(function (e) { return e.IsArchive == false; }));
-    };
-
-    $scope.getData_Category = async function () {
-        $scope.data_Category_All = await Inventory_Service.Dropdown_Category();
-
-        // prettier-ignore
-        $scope.data_Category = ($scope.selectedShowAll ? $scope.data_Category_All : $scope.data_Category_All.filter(function (e) { return e.IsArchive == false; }));
-    };
-
-    $scope.selectedShowAll_Change = async function (flag = true, flag2 = true) {
-        // prettier-ignore
-        $scope.data_Brand = ($scope.selectedShowAll ? $scope.data_Brand_All : $scope.data_Brand_All.filter(function (e) { return e.IsArchive == false; }));
-
-        // prettier-ignore
-        $scope.data_Profile = ($scope.selectedShowAll ? $scope.data_Profile_All : $scope.data_Profile_All.filter(function (e) { return e.IsArchive == false; }));
-
-        // prettier-ignore
-        $scope.data_Category = ($scope.selectedShowAll ? $scope.data_Category_All : $scope.data_Category_All.filter(function (e) { return e.IsArchive == false; }));
-
-        // just to make UX consistent
-        if (flag2) {
-            $scope.selectedBrand = '';
-            $scope.selectedProfile = '';
-            $scope.selectedCategory = '';
-        }
-
-        if (flag) {
-            await $scope.showData();
-        }
-    };
-
-    
-
-    async function Override_some_Filters() {
-        let warehouse = $scope.filters.Warehouse.Value;
-        if (warehouse && typeof warehouse === 'string' && warehouse.indexOf('(') >= 0) warehouse = '';
-        $scope.selectedWarehouse = warehouse;
-
-        let brand = $scope.filters.Brand.Value;
-        if (brand && typeof brand === 'string' && brand.indexOf('(') >= 0) brand = '';
-        $scope.selectedBrand = brand;
-
-        let profile = $scope.filters.Profile.Value;
-        if (profile && typeof profile === 'string' && profile.indexOf('(') >= 0) profile = '';
-        $scope.selectedProfile = profile;
-
-        let category = $scope.filters.Category.Value;
-        if (category && typeof category === 'string' && category.indexOf('(') >= 0) category = '';
-        $scope.selectedCategory = category;
-
-        if ($scope.LoadFilterState_) {
-            $scope.selectedShowAll = $scope.filters['selectedShowAll'];
-            $scope.selectedShowAll_Change(false, false);
-
-            delete $scope.filters['selectedShowAll'];
-        }
-    }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        await Promise.allSettled([
-            $rootScope.EmployeeWarehouseAccess($scope, ''),
-            $scope.getData_Brand(),
-            $scope.getData_Profile(),
-            $scope.getData_Category()
-        ]);
-
-        $rootScope.LoadFilterState('TaxReplenishment', $scope);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.showData();
-    };
-
-    $scope.createPO = async function () {
-        // Implementation for create P/O functionality
-    }
-
-    $scope.initialize_Page();
-});
-// ini file Controller.js
-
-
-
-angular.module('app.erp').controller('TransferRequestsCtrl', function ($rootScope, $scope, Utility_ERP, TransferRequests_Service, Inventory_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Branch: { PropertyName: 'LocationCode', Operator: 'in', Value: '' },
-        RequestFrom: { PropertyName: 'RequestFromCode', Operator: 'in', Value: '' },
-        DateFrom_date: { PropertyName: 'Date', Operator: '>=', Value: '' },
-        DateTo_date: { PropertyName: 'Date', Operator: '<=', Value: '' },
-        DeliverTo: { PropertyName: 'DeliverToCode', Operator: 'in', Value: '' },
-        RequiredDateFrom_date: { PropertyName: 'RequiredDate', Operator: '>=', Value: '' },
-        RequiredDateTo_date: { PropertyName: 'RequiredDate', Operator: '<=', Value: '' },
-        Status: { PropertyName: 'StatusId', Operator: 'in', Value: '' },
-    };
-
-    $scope.selectedBranch = '';
-    $scope.selectedRequestFrom = '';
-    $scope.selectedDateFrom = '';
-    $scope.selectedDateTo = '';
-    $scope.selectedDeliverTo = '';
-    $scope.selectedRequiredDateFrom = '';
-    $scope.selectedRequiredDateTo = '';
-    $scope.selectedStatus = '';
-    $scope.selectedShowAll = false;
-
-    $scope.data_EmployeeLocationAccess = [];
-    $scope.data_RequestFrom = [];
-    $scope.data_DeliverTo = [];
-    $scope.data_Status = [];
-    $scope.data_Status_All = [];
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = TransferRequests_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Request Nr.', 'RequestNr', 'RequestNr', 'Text', true],
-            ['Date', 'Date', 'Date', 'Date', true],
-            ['Branch', 'Branch', 'Branch', 'Text', true],
-            ['From W/H', 'FromWH', 'FromWH', 'Text', true],
-            ['Dest. W/H', 'DestWH', 'DestWH', 'Text', true],
-            ['Open Qty', 'OpenQty', 'OpenQty', 'Number', true],
-            ['Total Qty', 'TotalQty', 'TotalQty', 'Number', true],
-            ['Required Date', 'RequiredDate', 'RequiredDate', 'Date', true],
-            ['Issued By', 'IssuedBy', 'IssuedBy', 'Text', true],
-            ['Status', 'Status', 'Status', 'Text', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        if (!$scope.selectedBranch) {
-            $scope.filters.Branch.Operator = 'in';
-            $scope.filters.Branch.Value = Utility_ERP.Value_OperatorIN_($scope.data_EmployeeLocationAccess, 'Code');
-        } else {
-            $scope.filters.Branch.Operator = '=';
-            $scope.filters.Branch.Value = $scope.selectedBranch;
-        }
-
-        if (!$scope.selectedRequestFrom) {
-            $scope.filters.RequestFrom.Operator = 'in';
-            $scope.filters.RequestFrom.Value = Utility_ERP.Value_OperatorIN_($scope.data_RequestFrom, 'Code');
-        } else {
-            $scope.filters.RequestFrom.Operator = '=';
-            $scope.filters.RequestFrom.Value = $scope.selectedRequestFrom;
-        }
-
-        $scope.filters.DateFrom_date.Value = $rootScope.Date_to_DB($scope.selectedDateFrom);
-        $scope.filters.DateTo_date.Value = $rootScope.Date_to_DB($scope.selectedDateTo);
-
-        if (!$scope.selectedDeliverTo) {
-            $scope.filters.DeliverTo.Operator = 'in';
-            $scope.filters.DeliverTo.Value = Utility_ERP.Value_OperatorIN_($scope.data_DeliverTo, 'Code');
-        } else {
-            $scope.filters.DeliverTo.Operator = '=';
-            $scope.filters.DeliverTo.Value = $scope.selectedDeliverTo;
-        }
-
-        $scope.filters.RequiredDateFrom_date.Value = $rootScope.Date_to_DB($scope.selectedRequiredDateFrom);
-        $scope.filters.RequiredDateTo_date.Value = $rootScope.Date_to_DB($scope.selectedRequiredDateTo);
-
-        if ($rootScope.ValidString($scope.selectedStatus)) {
-            $scope.filters.Status.Operator = '=';
-            $scope.filters.Status.Value = $scope.selectedStatus;
-        } else {
-            $scope.filters.Status.Operator = 'in';
-            $scope.filters.Status.Value = Utility_ERP.Value_OperatorIN($scope.data_Status, 'StatusId', '');
-        }
-
-        Utility_ERP.Still_Processing($scope, true);
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-
-        $scope.filters['selectedShowAll'] = $scope.selectedShowAll;
-
-        $rootScope.SaveFilterState('TransferRequests', $scope);
-
-        delete $scope.filters['selectedShowAll'];
-    };
-
-    $scope.getData_RequestFrom = async function () {
-        $scope.data_RequestFrom = await Inventory_Service.Dropdown_Warehouse();
-    };
-
-    $scope.getData_DeliverTo = async function () {
-        $scope.data_DeliverTo = await Inventory_Service.Dropdown_Warehouse();
-    };
-
-    $scope.getData_Status = async function () {
-        $scope.data_Status_All = await Utility_ERP.getData_DocumentStatus('TransferRequest');
-
-        // prettier-ignore
-        $scope.data_Status = ($scope.selectedShowAll ? $scope.data_Status_All : $scope.data_Status_All.filter(function (e) { return e.IsArchive == false; }));
-
-        $rootScope.SetDefaultDropdownList($scope.data_Status, 'StatusId', $scope, 'selectedStatus');
-    };
-
-    $scope.selectedShowAll_Change = async function (flag = true, flag2 = true) {
-        // prettier-ignore
-        $scope.data_Status = ($scope.selectedShowAll ? $scope.data_Status_All : $scope.data_Status_All.filter(function (e) { return e.IsArchive == false; }));
-
-        // just to make UX consistent
-        if (flag2) $scope.selectedStatus = '';
-
-        if (flag) {
-            await $scope.showData();
-        }
-    };
-
-    
-
-    async function Override_some_Filters() {
-        let branch = $scope.filters.Branch.Value;
-        if (branch && typeof branch === 'string' && branch.indexOf('(') >= 0) branch = '';
-        $scope.selectedBranch = branch;
-
-        let requestFrom = $scope.filters.RequestFrom.Value;
-        if (requestFrom && typeof requestFrom === 'string' && requestFrom.indexOf('(') >= 0) requestFrom = '';
-        $scope.selectedRequestFrom = requestFrom;
-
-        let deliverTo = $scope.filters.DeliverTo.Value;
-        if (deliverTo && typeof deliverTo === 'string' && deliverTo.indexOf('(') >= 0) deliverTo = '';
-        $scope.selectedDeliverTo = deliverTo;
-
-        let status = $scope.filters.Status.Value;
-        if (status && typeof status === 'string' && status.indexOf('(') >= 0) status = '';
-        $scope.selectedStatus = status;
-
-        if ($scope.LoadFilterState_) {
-            $scope.selectedShowAll = $scope.filters['selectedShowAll'];
-            $scope.selectedShowAll_Change(false, false);
-
-            delete $scope.filters['selectedShowAll'];
-        }
-    }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        await Promise.allSettled([
-            $rootScope.EmployeeLocationAccess($scope, ''),
-            $scope.getData_RequestFrom(),
-            $scope.getData_DeliverTo(),
-            $scope.getData_Status()
-        ]);
-
-        $rootScope.LoadFilterState('TransferRequests', $scope);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.showData();
-    };
-
-    $scope.newTransfer = async function () {
-        // Implementation for new transfer request
-    }
-
-    $scope.shipment = async function () {
-        // Implementation for shipment
-    }
-
-    $scope.closeTransfer = async function () {
-        // Implementation for close transfer
-    }
-
-    $scope.printForm = async function () {
-        // Implementation for print
-    }
-
-    $scope.exportList = async function () {
-        // Implementation for export to excel
-    }
-
-    $scope.voidTransfer = async function () {
-        // Implementation for void transfer
-    }
-
-    $scope.initialize_Page();
-});
-angular.module('app.erp').controller('UomFormCtrl', function ($rootScope, $scope, $stateParams, $window, Utility_ERP, Uoms_Service) {
-    // Data to View
-    $scope.form = {};
-    $scope.form.submitted = false;
-
-    // CRUD: Create, Read, Update, Delete
-    $scope.Is_Read = false;
-    $scope.Is_Create = false;
-    $scope.Is_Update = false;
-    $scope.Is_Writeable = false;
-
-    $scope.still_processing = false;
-
-    let model_Template = {
-        Code: '',
-        Description: '',
-        ShortName: '',
-        Active: true,
-        IsPackingUom: false,
-        PackingLevel: 0,
-    };
-
-    $scope.model = { ...model_Template };
-
-    // some Functions
-    $scope.showData = async function () {
-        if (!$scope.Is_Read) return;
-
-        Utility_ERP.Still_Processing($scope, true);
-        let response = await Uoms_Service.DataSingle($scope.model.Code);
-        if (!response.success) {
-            Utility_ERP.Still_Processing($scope, false);
-            return;
-        }
-
-        if (!response.data) {
-            let code = $scope.model.Code;
-
-            // reset
-            $scope.model = { ...model_Template };
-
-            messageValidasi(`Data dengan code '${code}', tidak ditemukan`);
-            Utility_ERP.Still_Processing($scope, false);
-            return;
-        }
-
-        $scope.model = response.data;
-
-        Utility_ERP.Still_Processing($scope, false);
-    };
-
-    $scope.saveData = async function (skipConfirmation = false) {
-        if ($scope.still_processing) return;
-
-        $scope.form.submitted = true;
-        Utility_ERP.Still_Processing($scope, true);
-
-        if (!(await $scope.Valid_toSave(skipConfirmation))) {
-            Utility_ERP.Still_Processing($scope, false);
-
-            return;
-        }
-
-        let data = {
-            dataInput: $scope.model,
-        };
-
-        $rootScope.SanitizeInput(data, model_Template);
-
-        let resultSave = await Uoms_Service.Save(data.dataInput, $scope.Is_Create);
-
-        if (!resultSave.success) {
-            Utility_ERP.Still_Processing($scope, false);
-            $scope.form.submitted = false;
-
-            return;
-        }
-
-        messageInfo('Data berhasil disimpan');
-    };
-
-    $scope.Valid_toSave = async function (skipConfirmation) {
-        if ($rootScope.Not_ValidString($scope.model.Code)) {
-            messageValidasi('Code must not be empty');
-            return false;
-        }
-
-        if ($rootScope.Not_ValidString($scope.model.ShortName)) {
-            messageValidasi('ShortName must not be empty');
-            return false;
-        }
-
-        if ($rootScope.Not_ValidString($scope.model.Description)) {
-            messageValidasi('Description must not be empty');
-            return false;
-        }
-
-        return true;
-    };
-
-    function messageValidasi(content) {
-        $.bigBox({
-            title: 'Error: Message',
-            content: content,
-            color: '#C46A69',
-            icon: 'fa fa-warning shake animated',
-            number: '',
-            timeout: 5000,
-        });
-    }
-
-    function messageInfo(content) {
-        let alreadyBack = false;
-
-        $.bigBox(
-            {
-                title: 'Informasi',
-                content: content,
-                color: '#739E73',
-                timeout: $rootScope.Timeout_Save(),
-                icon: 'fa fa-check',
-                number: '',
-            },
-            function () {
-                Utility_ERP.Still_Processing($scope, false);
-                $scope.form.submitted = false;
-
-                alreadyBack = true;
-                $window.history.back();
-            }
-        );
-
-        setTimeout(() => {
-            Utility_ERP.Still_Processing($scope, false);
-            $scope.form.submitted = false;
-
-            if (alreadyBack) return;
-            $window.history.back();
-        }, $rootScope.Timeout_Save());
-    }
-
-    $scope.Toggle_debugScope_ = function () {
-        $rootScope.Toggle_debugScope($scope);
-    }
-
-    async function Data_References() { }
-
-    $scope.Set_Editable = async function () {
-        if ($scope.still_processing) return;
-
-        $scope.Is_Read = false;
-        $scope.Is_Create = false;
-        $scope.Is_Update = true;
-
-        $scope.Is_Writeable = $scope.Is_Create || $scope.Is_Update;
-
-        Data_References();
-    }
-
-    $scope.handleParameters = function () {
-        $scope.model.Code = $rootScope.Simple_Decode($rootScope.getParamValue($stateParams, 'code'));
-
-        $scope.Is_Read = $rootScope.Not_Null($scope.model.Code);
-
-        $scope.Is_Create = !$scope.Is_Read;
-        $scope.Is_Update = false;
-
-        $scope.Is_Writeable = $scope.Is_Create || $scope.Is_Update;
-    }
-
-    $scope.initialize_Page = async function () {
-        $scope.handleParameters();
-
-        await Data_References();
-
-        await $scope.showData();
-
-        // Langsung Mode Edit, jika sedang dalam kondisi Mode - Read
-        if ($scope.Is_Read) {
-            $scope.Set_Editable();
-        }
-    };
-
-    $scope.initialize_Page();
-
-});
-angular.module('app.erp').controller('UomsCtrl', function ($rootScope, $scope, Utility_ERP, Uoms_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-    $scope.activeOptions = [
-        { Value: null, Text: 'All' },
-        { Value: true, Text: 'Yes' },
-        { Value: false, Text: 'No' },
-    ];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Active: { PropertyName: 'Active', Operator: '=', Value: null },
-    };
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = Uoms_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Code', 'Code', 'Code', 'Text', true],
-            ['Short Name', 'ShortName', 'ShortName', 'Text', true],
-            ['Description', 'Description', 'Description', 'Text', true],
-            ['', 'Active', 'Active', 'Boolean', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-
-        $rootScope.SaveFilterState('UOM', $scope);
-    };
-
-    
-
-    async function Override_some_Filters() { }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.LoadFilterState('UOM', $scope);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.showData();
-    };
-
-    $scope.initialize_Page();
-});
-
-angular.module('app.erp').controller('WarehouseFormCtrl', function ($rootScope, $scope, Utility_ERP, Warehouses_Service) {
-});
-
-angular.module('app.erp').controller('WarehousesCtrl', function ($rootScope, $scope, Utility_ERP, Warehouses_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Branch: { PropertyName: 'BranchCode', Operator: 'in', Value: '' },
-    };
-
-    $scope.selectedBranch = '';
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = Warehouses_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Code', 'Code', 'Code', 'Text', true],
-            ['Description', 'Description', 'Description', 'Text', true],
-            ['Branch', 'BranchName', 'BranchName', 'Text', true],
-            ['Business Name', 'BusinessName', 'BusinessName', 'Text', true],
-            ['Address', 'AddressLine', 'AddressLine', 'Text', true],
-            ['D/S', 'IsDropshipWarehouse', 'IsDropshipWarehouse', 'Boolean', true],
-            ['', 'Active', 'Active', 'Boolean', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        if (!$scope.selectedBranch) {
-            $scope.filters.Branch.Operator = 'in';
-            $scope.filters.Branch.Value = Utility_ERP.Value_OperatorIN_($scope.data_EmployeeLocationAccess, 'Code');
-        } else {
-            $scope.filters.Branch.Operator = '=';
-            $scope.filters.Branch.Value = $scope.selectedBranch;
-        }
-
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-
-        $rootScope.SaveFilterState('Warehouse', $scope);
-    };
-
-    $scope.Branch_Changed = function () {
-        $scope.showData();
-    };
-
-    
-
-    async function Override_some_Filters() {
-        let branch = $scope.filters.Branch.Value;
-        if (branch && typeof branch === 'string' && branch.indexOf('(') >= 0) branch = '';
-
-        if ($scope.LoadFilterState_) {
-            $scope.selectedBranch = branch;
-        }
-    }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        $rootScope.LoadFilterState('Warehouse', $scope);
-
-        await Promise.allSettled([
-            $rootScope.EmployeeLocationAccess($scope, '')
-        ]);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.showData();
-    };
-
-    $scope.initialize_Page();
-});
-
-angular.module('app.erp').controller('WarehouseSelectionCtrl', function ($rootScope, $scope, Utility_ERP, WarehouseSelection_Service) {
-    // Dummy data, just for "Table: paging and searching"
-    $scope.dt = {};
-    $scope.dt.pageLength = 20;
-    $scope.searchKeyword = '';
-
-    // Data to View
-    $scope.pagesOptions = [10, 20, 50, 100];
-
-    $scope.still_processing = false;
-
-    // filter
-    $scope.filters = {
-        Branch: { PropertyName: 'LocationCode', Operator: 'in', Value: '' },
-    };
-
-    $scope.selectedBranch = '';
-
-    $scope.data_EmployeeLocationAccess = [];
-
-    // some Functions
-    $scope.CreateTable = function () {
-        $scope.dt = WarehouseSelection_Service.Table($scope);
-
-        // format: Title, DbField, SortField, Format, Show
-        let columns = [
-            ['Code', 'Code', 'Code', 'Text', true],
-            ['Description', 'Description', 'Description', 'Text', true],
-            ['Branch', 'Branch', 'Branch', 'Text', true],
-        ];
-
-        Utility_ERP.ProcessColumnsY($scope.dt, columns);
-    };
-
-    $scope.showData = async function () {
-        if (!$scope.selectedBranch) {
-            $scope.filters.Branch.Operator = 'in';
-            $scope.filters.Branch.Value = Utility_ERP.Value_OperatorIN_($scope.data_EmployeeLocationAccess, 'Code');
-        } else {
-            $scope.filters.Branch.Operator = '=';
-            $scope.filters.Branch.Value = $scope.selectedBranch;
-        }
-
-        Utility_ERP.Still_Processing($scope, true);
-        await $scope.dt.loadData();
-        Utility_ERP.Still_Processing($scope, false);
-
-        $rootScope.SaveFilterState('WarehouseSelection', $scope);
-    };
-
-    $scope.Branch_Changed = async function () {
-        await $scope.showData();
-    };
-
-    ;
-
-    async function Override_some_Filters() {
-        let branch = $scope.filters.Branch.Value;
-        if (branch && typeof branch === 'string' && branch.indexOf('(') >= 0) branch = '';
-
-        if ($scope.LoadFilterState_) {
-            $scope.selectedBranch = branch;
-        }
-    }
-
-    $scope.initialize_Page = async function () {
-        Utility_ERP.Still_Processing($scope, true);
-
-        await Promise.allSettled([
-            $rootScope.EmployeeLocationAccess($scope, '')
-        ]);
-
-        $rootScope.LoadFilterState('WarehouseSelection', $scope);
-
-        await Override_some_Filters();
-
-        $scope.CreateTable();
-
-        $rootScope.Proces_CheckBox_Kiri($scope);
-
-        $scope.showData();
-    };
-
-    $scope.addSelectedWarehouse = async function () {
-        // Implement add selected warehouse logic here
-    };
-
-    $scope.initialize_Page();
-});
 angular.module('app.erp').controller('AbcCtrl', function ($rootScope, $scope, Utility_ERP, AddressList_Service) {
     // Dummy data, just for "Table: paging and searching"
 });
@@ -54701,6 +54701,2466 @@ angular.module('app.erpUtils').factory('Warehouses_Service', [
     },
 ]);
 
+'use strict';
+
+angular.module('app.erpUtils').factory('BranchForm_Service', [
+    'BackEndService',
+    'DTService',
+    function (BackEndService, DTService) {
+        var service = {};
+
+        return service;
+    },
+]);
+
+"use strict";
+
+angular.module('app.erpUtils').factory('Branch_Service', [
+    'BackEndService',
+    'DTService',
+    function (BackEndService, DTService) {
+        var service = {};
+
+        service.Table = function (scope) {
+            let filterObject = scope.filters;
+            let pageLength = scope.dt.pageLength;
+            let afterRequestData = scope.afterRequestData;
+            let searchKeyword = scope.searchKeyword;
+
+            return DTService.GenerateDTInstance('XBranch', 'Code asc, Name', 'asc', filterObject, 'Code, Name, SubAccount', pageLength, afterRequestData, searchKeyword);
+        };
+
+        service.List = async function () {
+            let request = {
+                modelName: 'XBranch',
+                fieldNames: ['*'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [],
+                sortList: ['Code asc'],
+            };
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.Dropdown = async function () {
+            let request = {
+                modelName: 'XBranch',
+                fieldNames: ['Code', 'Name', 'SubAccount'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [{ PropertyName: 'Status', Operator: '=', Value: 'true' }],
+                sortList: ['Code asc'],
+            };
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.Dropdown2 = async function (val) {
+            var request = {
+                modelName: 'XBranch',
+                fieldNames: ['Code', 'Name', 'SubAccount'],
+                maximumResult: 20,
+                pageNumber: 1,
+                SQLCriteria: `(Status = 1) and ((Code like '%${val}%') or (Name like '%${val}%') or (SubAccount like '%${val}%'))`,
+                sortList: ['Code asc'],
+            };
+
+            var httpPromise = BackEndService.GetDataListHttpPromise(request);
+
+            return httpPromise.then(
+                async function (response) {
+                    return response.data.Data;
+                },
+                async function (response) { }
+            );
+        };
+
+        service.Dropdown3 = async function () {
+            let request = {
+                modelName: 'XBranch',
+                fieldNames: ['*'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [{ PropertyName: 'Status', Operator: '=', Value: 'true' }],
+                sortList: ['Code asc'],
+            };
+
+            let response = await BackEndService.RequestDataList_X(request);
+
+            return response.data.Data;
+        };
+
+        service.DataSingle = async function (code) {
+            let request = {
+                modelName: 'XBranch',
+                criteriaList: [{ PropertyName: 'Code', Operator: '=', Value: code }],
+            };
+
+            return await BackEndService.RequestDataSingle(request);
+        };
+
+        service.Save = async function (data, Is_Create) {
+            let request = {
+                actionController: 'BranchController',
+                actionName: Is_Create ? 'Create' : 'Update',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        service.Activate = async function (data) {
+            let request = {
+                actionController: 'BranchController',
+                actionName: 'Activate',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        service.DeActivate = async function (data) {
+            let request = {
+                actionController: 'BranchController',
+                actionName: 'DeActivate',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        return service;
+    },
+]);
+'use strict';
+
+angular.module('app.erpUtils').factory('CalenderSystemForm_Service', [
+    'BackEndService',
+    'DTService',
+    function (BackEndService, DTService) {
+        var service = {};
+
+        return service;
+    },
+]);
+
+'use strict';
+
+angular.module('app.erpUtils').factory('CalenderSystem_Service', [
+    'BackEndService',
+    'DTService',
+    function (BackEndService, DTService) {
+        var service = {};
+
+        return service;
+    },
+]);
+
+'use strict';
+
+angular.module('app.erpUtils').factory('CoaForm_Service', [
+    'BackEndService',
+    'DTService',
+    function (BackEndService, DTService) {
+        var service = {};
+
+        return service;
+    },
+]);
+
+'use strict';
+
+angular.module('app.erpUtils').factory('Coa_Service', [
+    'BackEndService',
+    'DTService',
+    function (BackEndService, DTService) {
+        var service = {};
+
+        return service;
+    },
+]);
+
+'use strict';
+
+angular.module('app.erpUtils').factory('CollectZoneForm_Service', [
+    'BackEndService',
+    'DTService',
+    function (BackEndService, DTService) {
+        var service = {};
+
+        return service;
+    },
+]);
+
+"use strict";
+
+angular.module('app.erpUtils').factory('CollectZone_Service', [
+    'BackEndService',
+    'DTService',
+    function (BackEndService, DTService) {
+        var service = {};
+
+        service.Table = function (scope) {
+            let filterObject = scope.filters;
+            let pageLength = scope.dt.pageLength;
+            let afterRequestData = scope.afterRequestData;
+            let searchKeyword = scope.searchKeyword;
+
+            return DTService.GenerateDTInstance('XCollectZone', 'Code asc, Name', 'asc', filterObject, 'Code, Name', pageLength, afterRequestData, searchKeyword);
+        };
+
+        service.List = async function () {
+            let request = {
+                modelName: 'XCollectZone',
+                fieldNames: ['*'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [],
+                sortList: ['Code asc'],
+            };
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.Dropdown = async function () {
+            let request = {
+                modelName: 'XCollectZone',
+                fieldNames: ['Code', 'Name'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [{ PropertyName: 'Status', Operator: '=', Value: 'true' }],
+                sortList: ['Code asc'],
+            };
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.Dropdown2 = async function (val) {
+            var request = {
+                modelName: 'XCollectZone',
+                fieldNames: ['Code', 'Name'],
+                maximumResult: 20,
+                pageNumber: 1,
+                SQLCriteria: `(Status = 1) and ((Code like '%${val}%') or (Name like '%${val}%'))`,
+                sortList: ['Code asc'],
+            };
+
+            var httpPromise = BackEndService.GetDataListHttpPromise(request);
+
+            return httpPromise.then(
+                async function (response) {
+                    return response.data.Data;
+                },
+                async function (response) { }
+            );
+        };
+
+        service.Dropdown3 = async function () {
+            let request = {
+                modelName: 'XCollectZone',
+                fieldNames: ['*'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [{ PropertyName: 'Status', Operator: '=', Value: 'true' }],
+                sortList: ['Code asc'],
+            };
+
+            let response = await BackEndService.RequestDataList_X(request);
+
+            return response.data.Data;
+        };
+
+        service.DataSingle = async function (code) {
+            let request = {
+                modelName: 'XCollectZone',
+                criteriaList: [{ PropertyName: 'Code', Operator: '=', Value: code }],
+            };
+
+            return await BackEndService.RequestDataSingle(request);
+        };
+
+        service.Save = async function (data, Is_Create) {
+            let request = {
+                actionController: 'CollectZoneController',
+                actionName: Is_Create ? 'Create' : 'Update',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        service.Activate = async function (data) {
+            let request = {
+                actionController: 'CollectZoneController',
+                actionName: 'Activate',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        service.DeActivate = async function (data) {
+            let request = {
+                actionController: 'CollectZoneController',
+                actionName: 'DeActivate',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        return service;
+    },
+]);
+'use strict';
+
+angular.module('app.erpUtils').factory('CompanyForm_Service', [
+    'BackEndService',
+    'DTService',
+    function (BackEndService, DTService) {
+        var service = {};
+
+        return service;
+    },
+]);
+
+'use strict';
+
+angular.module('app.erpUtils').factory('Company_Service', [
+    'BackEndService',
+    'DTService',
+    function (BackEndService, DTService) {
+        var service = {};
+
+        return service;
+    },
+]);
+
+"use strict";
+
+angular.module('app.erpUtils').factory('CustomerGradeForm_Service', [
+    'BackEndService',
+    'DTService',
+    function (BackEndService, DTService) {
+        var service = {};
+
+        // Base API endpoint
+        var apiEndpoint = '/api/customergrade';
+
+        /**
+         * Get customer grade by ID
+         * @param {string} id - Customer Grade ID
+         * @returns {Promise}
+         */
+        service.getById = function(id) {
+            return BackEndService.get(apiEndpoint + '/' + id);
+        };
+
+        /**
+         * Get all customer grades
+         * @returns {Promise}
+         */
+        service.getAll = function() {
+            return BackEndService.get(apiEndpoint);
+        };
+
+        /**
+         * Get active customer grades only
+         * @returns {Promise}
+         */
+        service.getActive = function() {
+            return BackEndService.get(apiEndpoint + '/active');
+        };
+
+        /**
+         * Create new customer grade
+         * @param {Object} data - Customer Grade data
+         * @returns {Promise}
+         */
+        service.create = function(data) {
+            var payload = {
+                Code: data.Code,
+                Name: data.Name,
+                Description: data.Description || '',
+                Active: data.Active !== undefined ? data.Active : true
+            };
+            return BackEndService.post(apiEndpoint, payload);
+        };
+
+        /**
+         * Update existing customer grade
+         * @param {Object} data - Customer Grade data with ID
+         * @returns {Promise}
+         */
+        service.update = function(data) {
+            var payload = {
+                Name: data.Name,
+                Description: data.Description || '',
+                Active: data.Active !== undefined ? data.Active : true
+            };
+            
+            return BackEndService.put(apiEndpoint + '/' + data.Id, payload);
+        };
+
+        /**
+         * Delete customer grade
+         * @param {string} id - Customer Grade ID
+         * @returns {Promise}
+         */
+        service.delete = function(id) {
+            return BackEndService.delete(apiEndpoint + '/' + id);
+        };
+
+        /**
+         * Check if code exists
+         * @param {string} code - Code to check
+         * @returns {Promise}
+         */
+        service.checkCodeExists = function(code) {
+            return BackEndService.get(apiEndpoint + '/check-code', { code: code });
+        };
+
+        /**
+         * Validate customer grade data
+         * @param {Object} data - Customer Grade data to validate
+         * @param {boolean} isCreate - Whether this is a create operation
+         * @returns {Object} Validation result
+         */
+        service.validateData = function(data, isCreate) {
+            var errors = [];
+
+            if (isCreate && (!data.Code || data.Code.trim() === '')) {
+                errors.push('Code is required');
+            }
+
+            if (!data.Name || data.Name.trim() === '') {
+                errors.push('Name is required');
+            }
+
+            if (data.Name && data.Name.length > 100) {
+                errors.push('Name cannot exceed 100 characters');
+            }
+
+            if (data.Description && data.Description.length > 500) {
+                errors.push('Description cannot exceed 500 characters');
+            }
+
+            return {
+                isValid: errors.length === 0,
+                errors: errors
+            };
+        };
+
+        /**
+         * Get customer grades for dropdown
+         * @returns {Promise}
+         */
+        service.getForDropdown = function() {
+            return BackEndService.get(apiEndpoint + '/dropdown');
+        };
+
+        return service;
+    },
+]);
+"use strict";
+
+angular.module('app.erpUtils').factory('CustomerGrade_Service', [
+    'BackEndService',
+    'DTService',
+    function (BackEndService, DTService) {
+        var service = {};
+
+        service.Table = function (scope) {
+            let filterObject = scope.filters;
+            let pageLength = scope.dt.pageLength;
+            let afterRequestData = scope.afterRequestData;
+            let searchKeyword = scope.searchKeyword;
+
+            return DTService.GenerateDTInstance('CustomerGrade', 'CustomerGradeCode asc', 'asc', filterObject, 'CustomerGradeCode, CustomerGradeName, Description', pageLength, afterRequestData, searchKeyword);
+        };
+
+        service.List = async function () {
+            let request = {
+                modelName: 'CustomerGrade',
+                fieldNames: ['*'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [],
+                sortList: ['CustomerGradeCode asc'],
+            };
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.Dropdown = async function () {
+            let request = {
+                modelName: 'CustomerGrade',
+                fieldNames: ['CustomerGradeCode', 'CustomerGradeName'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [{ PropertyName: 'Status', Operator: '=', Value: 'Active' }],
+                sortList: ['CustomerGradeCode asc'],
+            };
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.Dropdown2 = async function (val) {
+            var request = {
+                modelName: 'CustomerGrade',
+                fieldNames: ['CustomerGradeCode', 'CustomerGradeName'],
+                maximumResult: 20,
+                pageNumber: 1,
+                SQLCriteria: `(Status = 'Active') and ((CustomerGradeCode like '%${val}%') or (CustomerGradeName like '%${val}%'))`,
+                sortList: ['CustomerGradeCode asc'],
+            };
+
+            var httpPromise = BackEndService.GetDataListHttpPromise(request);
+
+            return httpPromise.then(
+                async function (response) {
+                    return response.data.Data;
+                },
+                async function (response) { }
+            );
+        };
+
+        service.DataSingle = async function (customerGradeCode) {
+            let request = {
+                modelName: 'CustomerGrade',
+                criteriaList: [{ PropertyName: 'CustomerGradeCode', Operator: '=', Value: customerGradeCode }],
+            };
+
+            return await BackEndService.RequestDataSingle(request);
+        };
+
+        service.Save = async function (data, Is_Create) {
+            let request = {
+                actionController: 'CustomerGradeController',
+                actionName: Is_Create ? 'Create' : 'Update',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        service.Activate = async function (data) {
+            let request = {
+                actionController: 'CustomerGradeController',
+                actionName: 'Activate',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        service.DeActivate = async function (data) {
+            let request = {
+                actionController: 'CustomerGradeController',
+                actionName: 'DeActivate',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        service.Delete = async function (data) {
+            let request = {
+                actionController: 'CustomerGradeController',
+                actionName: 'Delete',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        return service;
+    },
+]);
+'use strict';
+
+angular.module('app.erpUtils').factory('DeliveryZoneForm_Service', [
+    'BackEndService',
+    'DTService',
+    function (BackEndService, DTService) {
+        var service = {};
+
+        return service;
+    },
+]);
+
+"use strict";
+
+angular.module('app.erpUtils').factory('DeliveryZone_Service', [
+    'BackEndService',
+    'DTService',
+    function (BackEndService, DTService) {
+        var service = {};
+
+        service.Table = function (scope) {
+            let filterObject = scope.filters;
+            let pageLength = scope.dt.pageLength;
+            let afterRequestData = scope.afterRequestData;
+            let searchKeyword = scope.searchKeyword;
+
+            return DTService.GenerateDTInstance('XDeliveryZone', 'Code asc, Name', 'asc', filterObject, 'Code, Name', pageLength, afterRequestData, searchKeyword);
+        };
+
+        service.List = async function () {
+            let request = {
+                modelName: 'XDeliveryZone',
+                fieldNames: ['*'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [],
+                sortList: ['Code asc'],
+            };
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.Dropdown = async function () {
+            let request = {
+                modelName: 'XDeliveryZone',
+                fieldNames: ['Code', 'Name'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [{ PropertyName: 'Status', Operator: '=', Value: 'true' }],
+                sortList: ['Code asc'],
+            };
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.Dropdown2 = async function (val) {
+            var request = {
+                modelName: 'XDeliveryZone',
+                fieldNames: ['Code', 'Name'],
+                maximumResult: 20,
+                pageNumber: 1,
+                SQLCriteria: `(Status = 1) and ((Code like '%${val}%') or (Name like '%${val}%'))`,
+                sortList: ['Code asc'],
+            };
+
+            var httpPromise = BackEndService.GetDataListHttpPromise(request);
+
+            return httpPromise.then(
+                async function (response) {
+                    return response.data.Data;
+                },
+                async function (response) { }
+            );
+        };
+
+        service.Dropdown3 = async function () {
+            let request = {
+                modelName: 'XDeliveryZone',
+                fieldNames: ['*'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [{ PropertyName: 'Status', Operator: '=', Value: 'true' }],
+                sortList: ['Code asc'],
+            };
+
+            let response = await BackEndService.RequestDataList_X(request);
+
+            return response.data.Data;
+        };
+
+        service.DataSingle = async function (code) {
+            let request = {
+                modelName: 'XDeliveryZone',
+                criteriaList: [{ PropertyName: 'Code', Operator: '=', Value: code }],
+            };
+
+            return await BackEndService.RequestDataSingle(request);
+        };
+
+        service.Save = async function (data, Is_Create) {
+            let request = {
+                actionController: 'DeliveryZoneController',
+                actionName: Is_Create ? 'Create' : 'Update',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        service.Activate = async function (data) {
+            let request = {
+                actionController: 'DeliveryZoneController',
+                actionName: 'Activate',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        service.DeActivate = async function (data) {
+            let request = {
+                actionController: 'DeliveryZoneController',
+                actionName: 'DeActivate',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        return service;
+    },
+]);
+'use strict';
+
+angular.module('app.erpUtils').factory('DepartmentForm_Service', [
+    'BackEndService',
+    'DTService',
+    function (BackEndService, DTService) {
+        var service = {};
+
+        return service;
+    },
+]);
+
+"use strict";
+
+angular.module('app.erpUtils').factory('Department_Service', [
+    'BackEndService',
+    'DTService',
+    function (BackEndService, DTService) {
+        var service = {};
+
+        service.Table = function (scope) {
+            let filterObject = scope.filters;
+            let pageLength = scope.dt.pageLength;
+            let afterRequestData = scope.afterRequestData;
+            let searchKeyword = scope.searchKeyword;
+
+            return DTService.GenerateDTInstance('XDepartment', 'Code asc, Name', 'asc', filterObject, 'Code, Name, SubAccount', pageLength, afterRequestData, searchKeyword);
+        };
+
+        service.List = async function () {
+            let request = {
+                modelName: 'XDepartment',
+                fieldNames: ['*'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [],
+                sortList: ['Code asc'],
+            };
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.Dropdown = async function () {
+            let request = {
+                modelName: 'XDepartment',
+                fieldNames: ['Code', 'Name'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [{ PropertyName: 'Status', Operator: '=', Value: 'true' }],
+                sortList: ['Code asc'],
+            };
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.Dropdown2 = async function (val) {
+            var request = {
+                modelName: 'XDepartment',
+                fieldNames: ['Code', 'Name'],
+                maximumResult: 20,
+                pageNumber: 1,
+                SQLCriteria: `(Status = 1) and ((Code like '%${val}%') or (Name like '%${val}%'))`,
+                sortList: ['Code asc'],
+            };
+
+            var httpPromise = BackEndService.GetDataListHttpPromise(request);
+
+            return httpPromise.then(
+                async function (response) {
+                    return response.data.Data;
+                },
+                async function (response) { }
+            );
+        };
+
+        service.Dropdown3 = async function () {
+            let request = {
+                modelName: 'XDepartment',
+                fieldNames: ['*'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [{ PropertyName: 'Status', Operator: '=', Value: 'true' }],
+                sortList: ['Code asc'],
+            };
+
+            let response = await BackEndService.RequestDataList_X(request);
+
+            return response.data.Data;
+        };
+
+        service.DataSingle = async function (code) {
+            let request = {
+                modelName: 'XDepartment',
+                criteriaList: [{ PropertyName: 'Code', Operator: '=', Value: code }],
+            };
+
+            return await BackEndService.RequestDataSingle(request);
+        };
+
+        service.Save = async function (data, Is_Create) {
+            let request = {
+                actionController: 'DepartmentController',
+                actionName: Is_Create ? 'Create' : 'Update',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        service.Activate = async function (data) {
+            let request = {
+                actionController: 'DepartmentController',
+                actionName: 'Activate',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        service.DeActivate = async function (data) {
+            let request = {
+                actionController: 'DepartmentController',
+                actionName: 'DeActivate',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        return service;
+    },
+]);
+'use strict';
+
+angular.module('app.erpUtils').factory('MasterHolidayForm_Service', [
+    'BackEndService',
+    'DTService',
+    function (BackEndService, DTService) {
+        var service = {};
+
+        return service;
+    },
+]);
+
+'use strict';
+
+angular.module('app.erpUtils').factory('MasterHoliday_Service', [
+    'BackEndService',
+    'DTService',
+    function (BackEndService, DTService) {
+        var service = {};
+
+        return service;
+    },
+]);
+
+'use strict';
+
+angular.module('app.erpUtils').factory('MenuForm_Service', [
+    'BackEndService',
+    'DTService',
+    function (BackEndService, DTService) {
+        var service = {};
+
+        return service;
+    },
+]);
+
+'use strict';
+
+angular.module('app.erpUtils').factory('Menu_Service', [
+    'BackEndService',
+    'DTService',
+    function (BackEndService, DTService) {
+        var service = {};
+
+        return service;
+    },
+]);
+
+'use strict';
+
+angular.module('app.erpUtils').factory('OwnershipProjectForm_Service', [
+    'BackEndService',
+    'DTService',
+    function (BackEndService, DTService) {
+        var service = {};
+
+        return service;
+    },
+]);
+
+"use strict";
+
+angular.module('app.erpUtils').factory('Ownership_Service', [
+    'BackEndService',
+    'DTService',
+    function (BackEndService, DTService) {
+        var service = {};
+
+        service.Table = function (scope) {
+            let filterObject = scope.filters;
+            let pageLength = scope.dt.pageLength;
+            let afterRequestData = scope.afterRequestData;
+            let searchKeyword = scope.searchKeyword;
+
+            return DTService.GenerateDTInstance('Ownership', 'OwnershipID asc', 'asc', filterObject, 'OwnershipID, OwnershipName, Description', pageLength, afterRequestData, searchKeyword);
+        };
+
+        service.List = async function () {
+            let request = {
+                modelName: 'Ownership',
+                fieldNames: ['*'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [],
+                sortList: ['OwnershipID asc'],
+            };
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.Dropdown = async function () {
+            let request = {
+                modelName: 'Ownership',
+                fieldNames: ['OwnershipID', 'OwnershipName'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [{ PropertyName: 'Status', Operator: '=', Value: 'Active' }],
+                sortList: ['OwnershipID asc'],
+            };
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.Dropdown2 = async function (val) {
+            var request = {
+                modelName: 'Ownership',
+                fieldNames: ['OwnershipID', 'OwnershipName'],
+                maximumResult: 20,
+                pageNumber: 1,
+                SQLCriteria: `(Status = 'Active') and ((OwnershipID like '%${val}%') or (OwnershipName like '%${val}%'))`,
+                sortList: ['OwnershipID asc'],
+            };
+
+            var httpPromise = BackEndService.GetDataListHttpPromise(request);
+
+            return httpPromise.then(
+                async function (response) {
+                    return response.data.Data;
+                },
+                async function (response) { }
+            );
+        };
+
+        service.DataSingle = async function (ownershipID) {
+            let request = {
+                modelName: 'Ownership',
+                criteriaList: [{ PropertyName: 'OwnershipID', Operator: '=', Value: ownershipID }],
+            };
+
+            return await BackEndService.RequestDataSingle(request);
+        };
+
+        service.Save = async function (data, Is_Create) {
+            let request = {
+                actionController: 'OwnershipController',
+                actionName: Is_Create ? 'Create' : 'Update',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        service.Activate = async function (data) {
+            let request = {
+                actionController: 'OwnershipController',
+                actionName: 'Activate',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        service.DeActivate = async function (data) {
+            let request = {
+                actionController: 'OwnershipController',
+                actionName: 'DeActivate',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        service.Delete = async function (data) {
+            let request = {
+                actionController: 'OwnershipController',
+                actionName: 'Delete',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        return service;
+    },
+]);
+'use strict';
+
+angular.module('app.erpUtils').factory('JobPositionForm_Service', [
+    'BackEndService',
+    'DTService',
+    function (BackEndService, DTService) {
+        var service = {};
+
+        return service;
+    },
+]);
+
+"use strict";
+
+angular.module('app.erpUtils').factory('JobPosition_Service', [
+    'BackEndService',
+    'DTService',
+    function (BackEndService, DTService) {
+        var service = {};
+
+        service.Table = function (scope) {
+            let filterObject = scope.filters;
+            let pageLength = scope.dt.pageLength;
+            let afterRequestData = scope.afterRequestData;
+            let searchKeyword = scope.searchKeyword;
+
+            return DTService.GenerateDTInstance('XJobPosition', 'Code asc, Name', 'asc', filterObject, 'Code, Name, PositionLevel, SubAccount', pageLength, afterRequestData, searchKeyword);
+        };
+
+        service.List = async function () {
+            let request = {
+                modelName: 'XJobPosition',
+                fieldNames: ['*'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [],
+                sortList: ['Code asc'],
+            };
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.Dropdown = async function () {
+            let request = {
+                modelName: 'XJobPosition',
+                fieldNames: ['Code', 'Name'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [{ PropertyName: 'Status', Operator: '=', Value: 'true' }],
+                sortList: ['Code asc'],
+            };
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.Dropdown2 = async function (val) {
+            var request = {
+                modelName: 'XJobPosition',
+                fieldNames: ['Code', 'Name'],
+                maximumResult: 20,
+                pageNumber: 1,
+                SQLCriteria: `(Status = 1) and ((Code like '%${val}%') or (Name like '%${val}%'))`,
+                sortList: ['Code asc'],
+            };
+
+            var httpPromise = BackEndService.GetDataListHttpPromise(request);
+
+            return httpPromise.then(
+                async function (response) {
+                    return response.data.Data;
+                },
+                async function (response) { }
+            );
+        };
+
+        service.Dropdown3 = async function () {
+            let request = {
+                modelName: 'XJobPosition',
+                fieldNames: ['*'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [{ PropertyName: 'Status', Operator: '=', Value: 'true' }],
+                sortList: ['Code asc'],
+            };
+
+            let response = await BackEndService.RequestDataList_X(request);
+
+            return response.data.Data;
+        };
+
+        service.DataSingle = async function (code) {
+            let request = {
+                modelName: 'XJobPosition',
+                criteriaList: [{ PropertyName: 'Code', Operator: '=', Value: code }],
+            };
+
+            return await BackEndService.RequestDataSingle(request);
+        };
+
+        service.Save = async function (data, Is_Create) {
+            let request = {
+                actionController: 'JobPositionController',
+                actionName: Is_Create ? 'Create' : 'Update',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        service.Activate = async function (data) {
+            let request = {
+                actionController: 'JobPositionController',
+                actionName: 'Activate',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        service.DeActivate = async function (data) {
+            let request = {
+                actionController: 'JobPositionController',
+                actionName: 'DeActivate',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        return service;
+    },
+]);
+"use strict";
+
+angular.module('app.erpUtils').factory('RoleAccessForm_Service', [
+    'BackEndService',
+    'DTService',
+    function (BackEndService, DTService) {
+        var service = {};
+
+        // Base API endpoint
+        var apiEndpoint = '/api/role-access';
+
+        /**
+         * Get role access by ID
+         * @param {string} id - Role Access ID
+         * @returns {Promise}
+         */
+        service.getById = function(id) {
+            return BackEndService.get(apiEndpoint + '/' + id);
+        };
+
+        /**
+         * Get all role access
+         * @returns {Promise}
+         */
+        service.getAll = function() {
+            return BackEndService.get(apiEndpoint);
+        };
+
+        /**
+         * Create new role access
+         * @param {Object} data - Role access data
+         * @returns {Promise}
+         */
+        service.create = function(data) {
+            var payload = {
+                RoleName: data.RoleName,
+                RoleStatus: data.RoleStatus,
+                Description: data.Description,
+                Permissions: data.Permissions
+            };
+            return BackEndService.post(apiEndpoint, payload);
+        };
+
+        /**
+         * Update existing role access
+         * @param {Object} data - Role access data with ID
+         * @returns {Promise}
+         */
+        service.update = function(data) {
+            var payload = {
+                RoleName: data.RoleName,
+                RoleStatus: data.RoleStatus,
+                Description: data.Description,
+                Permissions: data.Permissions
+            };
+            
+            return BackEndService.put(apiEndpoint + '/' + data.Id, payload);
+        };
+
+        /**
+         * Delete role access
+         * @param {string} id - Role Access ID
+         * @returns {Promise}
+         */
+        service.delete = function(id) {
+            return BackEndService.delete(apiEndpoint + '/' + id);
+        };
+
+        /**
+         * Check if role name exists
+         * @param {string} roleName - Role name to check
+         * @returns {Promise}
+         */
+        service.checkRoleNameExists = function(roleName) {
+            return BackEndService.get(apiEndpoint + '/check-rolename', { roleName: roleName });
+        };
+
+        /**
+         * Get available modules
+         * @returns {Promise}
+         */
+        service.getModules = function() {
+            return BackEndService.get('/api/modules');
+        };
+
+        /**
+         * Get permissions by role
+         * @param {string} roleId - Role ID
+         * @returns {Promise}
+         */
+        service.getPermissionsByRole = function(roleId) {
+            return BackEndService.get(apiEndpoint + '/' + roleId + '/permissions');
+        };
+
+        /**
+         * Clone role access from existing role
+         * @param {string} sourceRoleId - Source Role ID to clone from
+         * @param {string} newRoleName - New role name
+         * @returns {Promise}
+         */
+        service.cloneRole = function(sourceRoleId, newRoleName) {
+            return BackEndService.post(apiEndpoint + '/clone', {
+                SourceRoleId: sourceRoleId,
+                NewRoleName: newRoleName
+            });
+        };
+
+        /**
+         * Get roles with permission count
+         * @returns {Promise}
+         */
+        service.getRolesWithPermissionCount = function() {
+            return BackEndService.get(apiEndpoint + '/summary');
+        };
+
+        /**
+         * Validate role access data
+         * @param {Object} data - Role access data to validate
+         * @returns {Object} Validation result
+         */
+        service.validateRoleAccessData = function(data) {
+            var errors = [];
+
+            if (!data.RoleName || data.RoleName.trim() === '') {
+                errors.push('Role Name is required');
+            }
+
+            if (!data.RoleStatus || data.RoleStatus.trim() === '') {
+                errors.push('Role Status is required');
+            }
+
+            if (!data.Permissions || data.Permissions.length === 0) {
+                errors.push('At least one permission must be assigned');
+            } else {
+                // Check if at least one permission is enabled
+                var hasPermission = false;
+                for (var i = 0; i < data.Permissions.length; i++) {
+                    var perm = data.Permissions[i];
+                    if (perm.read || perm.create || perm.edit || perm.delete || perm.approval) {
+                        hasPermission = true;
+                        break;
+                    }
+                    // Check submodules
+                    if (perm.submodules && perm.submodules.length > 0) {
+                        for (var j = 0; j < perm.submodules.length; j++) {
+                            var subPerm = perm.submodules[j];
+                            if (subPerm.read || subPerm.create || subPerm.edit || subPerm.delete || subPerm.approval) {
+                                hasPermission = true;
+                                break;
+                            }
+                        }
+                    }
+                    if (hasPermission) break;
+                }
+                
+                if (!hasPermission) {
+                    errors.push('At least one permission must be enabled');
+                }
+            }
+
+            return {
+                isValid: errors.length === 0,
+                errors: errors
+            };
+        };
+
+        /**
+         * Compare two roles and return differences
+         * @param {string} role1Id - First Role ID
+         * @param {string} role2Id - Second Role ID
+         * @returns {Promise}
+         */
+        service.compareRoles = function(role1Id, role2Id) {
+            return BackEndService.get(apiEndpoint + '/compare', {
+                role1: role1Id,
+                role2: role2Id
+            });
+        };
+
+        /**
+         * Export role access to Excel
+         * @param {string} roleId - Role ID to export
+         * @returns {Promise}
+         */
+        service.exportToExcel = function(roleId) {
+            return BackEndService.download(apiEndpoint + '/' + roleId + '/export', {
+                format: 'excel'
+            });
+        };
+
+        /**
+         * Import role access from Excel
+         * @param {File} file - Excel file
+         * @returns {Promise}
+         */
+        service.importFromExcel = function(file) {
+            var formData = new FormData();
+            formData.append('file', file);
+            
+            return BackEndService.upload(apiEndpoint + '/import', formData);
+        };
+
+        /**
+         * Get role access history/audit log
+         * @param {string} roleId - Role ID
+         * @returns {Promise}
+         */
+        service.getAuditLog = function(roleId) {
+            return BackEndService.get(apiEndpoint + '/' + roleId + '/audit-log');
+        };
+
+        /**
+         * Activate/Deactivate role
+         * @param {string} roleId - Role ID
+         * @param {string} status - 'Active' or 'Inactive'
+         * @returns {Promise}
+         */
+        service.updateStatus = function(roleId, status) {
+            return BackEndService.put(apiEndpoint + '/' + roleId + '/status', {
+                Status: status
+            });
+        };
+
+        /**
+         * Get users assigned to a role
+         * @param {string} roleId - Role ID
+         * @returns {Promise}
+         */
+        service.getUsersByRole = function(roleId) {
+            return BackEndService.get(apiEndpoint + '/' + roleId + '/users');
+        };
+
+        /**
+         * Bulk update permissions for multiple roles
+         * @param {Array} roles - Array of role IDs
+         * @param {Object} permissions - Permissions to apply
+         * @returns {Promise}
+         */
+        service.bulkUpdatePermissions = function(roles, permissions) {
+            return BackEndService.post(apiEndpoint + '/bulk-update', {
+                RoleIds: roles,
+                Permissions: permissions
+            });
+        };
+
+        return service;
+    },
+]);
+'use strict';
+
+angular.module('app.erpUtils').factory('RoleAkses_Service', [
+    'BackEndService',
+    'DTService',
+    function (BackEndService, DTService) {
+        var service = {};
+
+        return service;
+    },
+]);
+
+'use strict';
+
+angular.module('app.erpUtils').factory('RoleForm_Service', [
+    'BackEndService',
+    'DTService',
+    function (BackEndService, DTService) {
+        var service = {};
+
+        return service;
+    },
+]);
+
+"use strict";
+
+angular.module('app.erpUtils').factory('RoleList_Service', [
+    'BackEndService',
+    'DTService',
+    function (BackEndService, DTService) {
+        var service = {};
+
+        service.Table = function (scope) {
+            let filterObject = scope.filters;
+            let pageLength = scope.dt.pageLength;
+            let afterRequestData = scope.afterRequestData;
+            let searchKeyword = scope.searchKeyword;
+
+            return DTService.GenerateDTInstance('XSystemRole', 'RoleName asc', 'asc', filterObject, 'RoleName, Description, MenuAccess, Function', pageLength, afterRequestData, searchKeyword);
+        };
+
+        service.List = async function () {
+            let request = {
+                modelName: 'XSystemRole',
+                fieldNames: ['*'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [],
+                sortList: ['RoleName asc'],
+            };
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.Dropdown = async function () {
+            let request = {
+                modelName: 'XSystemRole',
+                fieldNames: ['RoleName', 'Description'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [{ PropertyName: 'Status', Operator: '=', Value: 'Active' }],
+                sortList: ['RoleName asc'],
+            };
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.Dropdown2 = async function (val) {
+            var request = {
+                modelName: 'XSystemRole',
+                fieldNames: ['RoleName', 'Description'],
+                maximumResult: 20,
+                pageNumber: 1,
+                SQLCriteria: `(Status = 'Active') and ((RoleName like '%${val}%') or (Description like '%${val}%'))`,
+                sortList: ['RoleName asc'],
+            };
+
+            var httpPromise = BackEndService.GetDataListHttpPromise(request);
+
+            return httpPromise.then(
+                async function (response) {
+                    return response.data.Data;
+                },
+                async function (response) { }
+            );
+        };
+
+        service.DataSingle = async function (rolename) {
+            let request = {
+                modelName: 'XSystemRole',
+                criteriaList: [{ PropertyName: 'RoleName', Operator: '=', Value: rolename }],
+            };
+
+            return await BackEndService.RequestDataSingle(request);
+        };
+
+        service.Save = async function (data, Is_Create) {
+            let request = {
+                actionController: 'SystemRoleController',
+                actionName: Is_Create ? 'Create' : 'Update',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        service.Activate = async function (data) {
+            let request = {
+                actionController: 'SystemRoleController',
+                actionName: 'Activate',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        service.DeActivate = async function (data) {
+            let request = {
+                actionController: 'SystemRoleController',
+                actionName: 'DeActivate',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        service.Delete = async function (data) {
+            let request = {
+                actionController: 'SystemRoleController',
+                actionName: 'Delete',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        return service;
+    },
+]);
+'use strict';
+
+angular.module('app.erpUtils').factory('SalesZoneForm_Service', [
+    'BackEndService',
+    'DTService',
+    function (BackEndService, DTService) {
+        var service = {};
+
+        return service;
+    },
+]);
+
+"use strict";
+
+angular.module('app.erpUtils').factory('SalesZone_Service', [
+    'BackEndService',
+    'DTService',
+    function (BackEndService, DTService) {
+        var service = {};
+
+        service.Table = function (scope) {
+            let filterObject = scope.filters;
+            let pageLength = scope.dt.pageLength;
+            let afterRequestData = scope.afterRequestData;
+            let searchKeyword = scope.searchKeyword;
+
+            return DTService.GenerateDTInstance('XSalesZone', 'Code asc, Name', 'asc', filterObject, 'Code, Name', pageLength, afterRequestData, searchKeyword);
+        };
+
+        service.List = async function () {
+            let request = {
+                modelName: 'XSalesZone',
+                fieldNames: ['*'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [],
+                sortList: ['Code asc'],
+            };
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.Dropdown = async function () {
+            let request = {
+                modelName: 'XSalesZone',
+                fieldNames: ['Code', 'Name'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [{ PropertyName: 'Status', Operator: '=', Value: 'true' }],
+                sortList: ['Code asc'],
+            };
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.Dropdown2 = async function (val) {
+            var request = {
+                modelName: 'XSalesZone',
+                fieldNames: ['Code', 'Name'],
+                maximumResult: 20,
+                pageNumber: 1,
+                SQLCriteria: `(Status = 1) and ((Code like '%${val}%') or (Name like '%${val}%'))`,
+                sortList: ['Code asc'],
+            };
+
+            var httpPromise = BackEndService.GetDataListHttpPromise(request);
+
+            return httpPromise.then(
+                async function (response) {
+                    return response.data.Data;
+                },
+                async function (response) { }
+            );
+        };
+
+        service.Dropdown3 = async function () {
+            let request = {
+                modelName: 'XSalesZone',
+                fieldNames: ['*'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [{ PropertyName: 'Status', Operator: '=', Value: 'true' }],
+                sortList: ['Code asc'],
+            };
+
+            let response = await BackEndService.RequestDataList_X(request);
+
+            return response.data.Data;
+        };
+
+        service.DataSingle = async function (code) {
+            let request = {
+                modelName: 'XSalesZone',
+                criteriaList: [{ PropertyName: 'Code', Operator: '=', Value: code }],
+            };
+
+            return await BackEndService.RequestDataSingle(request);
+        };
+
+        service.Save = async function (data, Is_Create) {
+            let request = {
+                actionController: 'SalesZoneController',
+                actionName: Is_Create ? 'Create' : 'Update',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        service.Activate = async function (data) {
+            let request = {
+                actionController: 'SalesZoneController',
+                actionName: 'Activate',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        service.DeActivate = async function (data) {
+            let request = {
+                actionController: 'SalesZoneController',
+                actionName: 'DeActivate',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        return service;
+    },
+]);
+'use strict';
+
+angular.module('app.erpUtils').factory('WarehouseForm_Service', [
+    'BackEndService',
+    'DTService',
+    function (BackEndService, DTService) {
+        var service = {};
+
+        return service;
+    },
+]);
+
+'use strict';
+
+angular.module('app.erpUtils').factory('SubAccountForm_Service', [
+    'BackEndService',
+    'DTService',
+    function (BackEndService, DTService) {
+        var service = {};
+
+        return service;
+    },
+]);
+
+"use strict";
+
+angular.module('app.erpUtils').factory('SubAccount_Service', [
+    'BackEndService',
+    'DTService',
+    function (BackEndService, DTService) {
+        var service = {};
+
+        service.Table = function (scope) {
+            let filterObject = scope.filters;
+            let pageLength = scope.dt.pageLength;
+            let afterRequestData = scope.afterRequestData;
+            let searchKeyword = scope.searchKeyword;
+
+            return DTService.GenerateDTInstance('XSubAccount', 'SubAccountCode asc, SubAccountName', 'asc', filterObject, 'SubAccountCode, SubAccountName, COACode, COAName', pageLength, afterRequestData, searchKeyword);
+        };
+
+        service.List = async function () {
+            let request = {
+                modelName: 'XSubAccount',
+                fieldNames: ['*'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [],
+                sortList: ['SubAccountCode asc'],
+            };
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.Dropdown = async function () {
+            let request = {
+                modelName: 'XSubAccount',
+                fieldNames: ['SubAccountCode', 'SubAccountName', 'COACode', 'COAName'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [{ PropertyName: 'Status', Operator: '=', Value: 'true' }],
+                sortList: ['SubAccountCode asc'],
+            };
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.Dropdown2 = async function (val) {
+            var request = {
+                modelName: 'XSubAccount',
+                fieldNames: ['SubAccountCode', 'SubAccountName', 'COACode', 'COAName'],
+                maximumResult: 20,
+                pageNumber: 1,
+                SQLCriteria: `(Status = 1) and ((SubAccountCode like '%${val}%') or (SubAccountName like '%${val}%') or (COACode like '%${val}%') or (COAName like '%${val}%'))`,
+                sortList: ['SubAccountCode asc'],
+            };
+
+            var httpPromise = BackEndService.GetDataListHttpPromise(request);
+
+            return httpPromise.then(
+                async function (response) {
+                    return response.data.Data;
+                },
+                async function (response) { }
+            );
+        };
+
+        service.Dropdown3 = async function () {
+            let request = {
+                modelName: 'XSubAccount',
+                fieldNames: ['*'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [{ PropertyName: 'Status', Operator: '=', Value: 'true' }],
+                sortList: ['SubAccountCode asc'],
+            };
+
+            let response = await BackEndService.RequestDataList_X(request);
+
+            return response.data.Data;
+        };
+
+        service.DataSingle = async function (code) {
+            let request = {
+                modelName: 'XSubAccount',
+                criteriaList: [{ PropertyName: 'SubAccountCode', Operator: '=', Value: code }],
+            };
+
+            return await BackEndService.RequestDataSingle(request);
+        };
+
+        service.Save = async function (data, Is_Create) {
+            let request = {
+                actionController: 'SubAccountController',
+                actionName: Is_Create ? 'Create' : 'Update',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        service.Activate = async function (data) {
+            let request = {
+                actionController: 'SubAccountController',
+                actionName: 'Activate',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        service.DeActivate = async function (data) {
+            let request = {
+                actionController: 'SubAccountController',
+                actionName: 'DeActivate',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        return service;
+    },
+]);
+'use strict';
+
+angular.module('app.erpUtils').factory('SuperAdminSystemForm_Service', [
+    'BackEndService',
+    'DTService',
+    function (BackEndService, DTService) {
+        var service = {};
+
+        return service;
+    },
+]);
+
+'use strict';
+
+angular.module('app.erpUtils').factory('SuperAdminSystem_Service', [
+    'BackEndService',
+    'DTService',
+    function (BackEndService, DTService) {
+        var service = {};
+
+        return service;
+    },
+]);
+
+'use strict';
+
+angular.module('app.erpUtils').factory('TaxForm_Service', [
+    'BackEndService',
+    'DTService',
+    function (BackEndService, DTService) {
+        var service = {};
+
+        return service;
+    },
+]);
+
+"use strict";
+
+angular.module('app.erpUtils').factory('TaxList_Service', [
+    'BackEndService',
+    'DTService',
+    function (BackEndService, DTService) {
+        var service = {};
+
+        service.Table = function (scope) {
+            let filterObject = scope.filters;
+            let pageLength = scope.dt.pageLength;
+            let afterRequestData = scope.afterRequestData;
+            let searchKeyword = scope.searchKeyword;
+
+            return DTService.GenerateDTInstance('XTax', 'TaxCode asc', 'asc', filterObject, 'TaxCode, TaxName, TaxType, TaxCategory', pageLength, afterRequestData, searchKeyword);
+        };
+
+        service.List = async function () {
+            let request = {
+                modelName: 'XTax',
+                fieldNames: ['*'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [],
+                sortList: ['TaxCode asc'],
+            };
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.Dropdown = async function () {
+            let request = {
+                modelName: 'XTax',
+                fieldNames: ['TaxCode', 'TaxName', 'TaxRate'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [{ PropertyName: 'Status', Operator: '=', Value: 'true' }],
+                sortList: ['TaxCode asc'],
+            };
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.Dropdown2 = async function (val) {
+            var request = {
+                modelName: 'XTax',
+                fieldNames: ['TaxCode', 'TaxName', 'TaxRate'],
+                maximumResult: 20,
+                pageNumber: 1,
+                SQLCriteria: `(Status = 1) and ((TaxCode like '%${val}%') or (TaxName like '%${val}%'))`,
+                sortList: ['TaxCode asc'],
+            };
+
+            var httpPromise = BackEndService.GetDataListHttpPromise(request);
+
+            return httpPromise.then(
+                async function (response) {
+                    return response.data.Data;
+                },
+                async function (response) { }
+            );
+        };
+
+        service.DataSingle = async function (taxCode) {
+            let request = {
+                modelName: 'XTax',
+                criteriaList: [{ PropertyName: 'TaxCode', Operator: '=', Value: taxCode }],
+            };
+
+            return await BackEndService.RequestDataSingle(request);
+        };
+
+        service.Save = async function (data, Is_Create) {
+            let request = {
+                actionController: 'TaxController',
+                actionName: Is_Create ? 'Create' : 'Update',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        service.Activate = async function (data) {
+            let request = {
+                actionController: 'TaxController',
+                actionName: 'Activate',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        service.DeActivate = async function (data) {
+            let request = {
+                actionController: 'TaxController',
+                actionName: 'DeActivate',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        service.Delete = async function (data) {
+            let request = {
+                actionController: 'TaxController',
+                actionName: 'Delete',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        return service;
+    },
+]);
+'use strict';
+
+angular.module('app.erpUtils').factory('TopGroupForm_Service', [
+    'BackEndService',
+    'DTService',
+    function (BackEndService, DTService) {
+        var service = {};
+
+        return service;
+    },
+]);
+
+'use strict';
+
+angular.module('app.erpUtils').factory('TopGroup_Service', [
+    'BackEndService',
+    'DTService',
+    function (BackEndService, DTService) {
+        var service = {};
+
+        return service;
+    },
+]);
+
+'use strict';
+
+angular.module('app.erpUtils').factory('UniverseBrandForm_Service', [
+    'BackEndService',
+    'DTService',
+    function (BackEndService, DTService) {
+        var service = {};
+
+        return service;
+    },
+]);
+
+'use strict';
+
+angular.module('app.erpUtils').factory('UniverseBrand_Service', [
+    'BackEndService',
+    'DTService',
+    function (BackEndService, DTService) {
+        var service = {};
+
+        return service;
+    },
+]);
+
+"use strict";
+
+angular.module('app.erpUtils').factory('UserForm_Service', [
+    'BackEndService',
+    'DTService',
+    function (BackEndService, DTService) {
+        var service = {};
+
+        // Base API endpoint
+        var apiEndpoint = '/api/users';
+
+        /**
+         * Get user by ID
+         * @param {string} id - User ID
+         * @returns {Promise}
+         */
+        service.getById = function(id) {
+            return BackEndService.get(apiEndpoint + '/' + id);
+        };
+
+        /**
+         * Get all users
+         * @returns {Promise}
+         */
+        service.getAll = function() {
+            return BackEndService.get(apiEndpoint);
+        };
+
+        /**
+         * Create new user
+         * @param {Object} data - User data
+         * @returns {Promise}
+         */
+        service.create = function(data) {
+            var payload = {
+                Employee: data.Employee,
+                FullName: data.FullName,
+                EmailAddress: data.EmailAddress,
+                Password: data.Password,
+                AssignRole: data.AssignRole
+            };
+            return BackEndService.post(apiEndpoint, payload);
+        };
+
+        /**
+         * Update existing user
+         * @param {Object} data - User data with ID
+         * @returns {Promise}
+         */
+        service.update = function(data) {
+            var payload = {
+                Employee: data.Employee,
+                FullName: data.FullName,
+                EmailAddress: data.EmailAddress,
+                AssignRole: data.AssignRole
+            };
+            
+            // Only include password if it's being changed
+            if (data.Password && data.Password.trim() !== '') {
+                payload.Password = data.Password;
+            }
+            
+            return BackEndService.put(apiEndpoint + '/' + data.Id, payload);
+        };
+
+        /**
+         * Delete user
+         * @param {string} id - User ID
+         * @returns {Promise}
+         */
+        service.delete = function(id) {
+            return BackEndService.delete(apiEndpoint + '/' + id);
+        };
+
+        /**
+         * Check if email exists
+         * @param {string} email - Email address to check
+         * @returns {Promise}
+         */
+        service.checkEmailExists = function(email) {
+            return BackEndService.get(apiEndpoint + '/check-email', { email: email });
+        };
+
+        /**
+         * Get available roles
+         * @returns {Promise}
+         */
+        service.getRoles = function() {
+            return BackEndService.get('/api/roles');
+        };
+
+        /**
+         * Search employees
+         * @param {string} searchTerm - Search term (NIK or Name)
+         * @returns {Promise}
+         */
+        service.searchEmployees = function(searchTerm) {
+            return BackEndService.get('/api/employees/search', { q: searchTerm });
+        };
+
+        /**
+         * Validate user data
+         * @param {Object} data - User data to validate
+         * @returns {Object} Validation result
+         */
+        service.validateUserData = function(data) {
+            var errors = [];
+
+            if (!data.Employee || data.Employee.trim() === '') {
+                errors.push('Employee is required');
+            }
+
+            if (!data.FullName || data.FullName.trim() === '') {
+                errors.push('Full Name is required');
+            }
+
+            if (!data.EmailAddress || data.EmailAddress.trim() === '') {
+                errors.push('Email Address is required');
+            } else {
+                // Basic email validation
+                var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+                if (!emailRegex.test(data.EmailAddress)) {
+                    errors.push('Invalid email format');
+                }
+            }
+
+            if (!data.Password || data.Password.trim() === '') {
+                errors.push('Password is required');
+            } else if (data.Password.length < 8) {
+                errors.push('Password must be at least 8 characters');
+            }
+
+            if (!data.ConfirmPassword || data.ConfirmPassword.trim() === '') {
+                errors.push('Confirm Password is required');
+            } else if (data.Password !== data.ConfirmPassword) {
+                errors.push('Passwords do not match');
+            }
+
+            if (!data.AssignRole || data.AssignRole.trim() === '') {
+                errors.push('Assign Role is required');
+            }
+
+            return {
+                isValid: errors.length === 0,
+                errors: errors
+            };
+        };
+
+        return service;
+    },
+]);
+"use strict";
+
+angular.module('app.erpUtils').factory('UserList_Service', [
+    'BackEndService',
+    'DTService',
+    function (BackEndService, DTService) {
+        var service = {};
+
+        service.Table = function (scope) {
+            let filterObject = scope.filters;
+            let pageLength = scope.dt.pageLength;
+            let afterRequestData = scope.afterRequestData;
+            let searchKeyword = scope.searchKeyword;
+
+            return DTService.GenerateDTInstance('XSystemUser', 'LastLogin desc', 'desc', filterObject, 'UserName, LinkedEmployee, Role', pageLength, afterRequestData, searchKeyword);
+        };
+
+        service.List = async function () {
+            let request = {
+                modelName: 'XSystemUser',
+                fieldNames: ['*'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [],
+                sortList: ['UserName asc'],
+            };
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.Dropdown = async function () {
+            let request = {
+                modelName: 'XSystemUser',
+                fieldNames: ['UserName', 'LinkedEmployee'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [{ PropertyName: 'UserStatus', Operator: '=', Value: 'true' }],
+                sortList: ['UserName asc'],
+            };
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.Dropdown2 = async function (val) {
+            var request = {
+                modelName: 'XSystemUser',
+                fieldNames: ['UserName', 'LinkedEmployee'],
+                maximumResult: 20,
+                pageNumber: 1,
+                SQLCriteria: `(UserStatus = 1) and ((UserName like '%${val}%') or (LinkedEmployee like '%${val}%'))`,
+                sortList: ['UserName asc'],
+            };
+
+            var httpPromise = BackEndService.GetDataListHttpPromise(request);
+
+            return httpPromise.then(
+                async function (response) {
+                    return response.data.Data;
+                },
+                async function (response) { }
+            );
+        };
+
+        service.DataSingle = async function (username) {
+            let request = {
+                modelName: 'XSystemUser',
+                criteriaList: [{ PropertyName: 'UserName', Operator: '=', Value: username }],
+            };
+
+            return await BackEndService.RequestDataSingle(request);
+        };
+
+        service.Save = async function (data, Is_Create) {
+            let request = {
+                actionController: 'SystemUserController',
+                actionName: Is_Create ? 'Create' : 'Update',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        service.Activate = async function (data) {
+            let request = {
+                actionController: 'SystemUserController',
+                actionName: 'Activate',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        service.DeActivate = async function (data) {
+            let request = {
+                actionController: 'SystemUserController',
+                actionName: 'DeActivate',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        service.ResetPassword = async function (data) {
+            let request = {
+                actionController: 'SystemUserController',
+                actionName: 'ResetPassword',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        return service;
+    },
+]);
+'use strict';
+
+angular.module('app.erpUtils').factory('WarehouseForm_Service', [
+    'BackEndService',
+    'DTService',
+    function (BackEndService, DTService) {
+        var service = {};
+
+        return service;
+    },
+]);
+
+"use strict";
+
+angular.module('app.erpUtils').factory('Warehouse_Service', [
+    'BackEndService',
+    'DTService',
+    function (BackEndService, DTService) {
+        var service = {};
+
+        service.Table = function (scope) {
+            let filterObject = scope.filters;
+            let pageLength = scope.dt.pageLength;
+            let afterRequestData = scope.afterRequestData;
+            let searchKeyword = scope.searchKeyword;
+
+            return DTService.GenerateDTInstance('XWarehouse', 'Code asc, Name', 'asc', filterObject, 'Code, Name, SubAccount', pageLength, afterRequestData, searchKeyword);
+        };
+
+        service.List = async function () {
+            let request = {
+                modelName: 'XWarehouse',
+                fieldNames: ['*'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [],
+                sortList: ['Code asc'],
+            };
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.Dropdown = async function () {
+            let request = {
+                modelName: 'XWarehouse',
+                fieldNames: ['Code', 'Name', 'SubAccount'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [{ PropertyName: 'Status', Operator: '=', Value: 'true' }],
+                sortList: ['Code asc'],
+            };
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.Dropdown2 = async function (val) {
+            var request = {
+                modelName: 'XWarehouse',
+                fieldNames: ['Code', 'Name', 'SubAccount'],
+                maximumResult: 20,
+                pageNumber: 1,
+                SQLCriteria: `(Status = 1) and ((Code like '%${val}%') or (Name like '%${val}%'))`,
+                sortList: ['Code asc'],
+            };
+
+            var httpPromise = BackEndService.GetDataListHttpPromise(request);
+
+            return httpPromise.then(
+                async function (response) {
+                    return response.data.Data;
+                },
+                async function (response) { }
+            );
+        };
+
+        service.Dropdown3 = async function () {
+            let request = {
+                modelName: 'XWarehouse',
+                fieldNames: ['*'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [{ PropertyName: 'Status', Operator: '=', Value: 'true' }],
+                sortList: ['Code asc'],
+            };
+
+            let response = await BackEndService.RequestDataList_X(request);
+
+            return response.data.Data;
+        };
+
+        service.DataSingle = async function (code) {
+            let request = {
+                modelName: 'XWarehouse',
+                criteriaList: [{ PropertyName: 'Code', Operator: '=', Value: code }],
+            };
+
+            return await BackEndService.RequestDataSingle(request);
+        };
+
+        service.Save = async function (data, Is_Create) {
+            let request = {
+                actionController: 'WarehouseController',
+                actionName: Is_Create ? 'Create' : 'Update',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        service.Activate = async function (data) {
+            let request = {
+                actionController: 'WarehouseController',
+                actionName: 'Activate',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        service.DeActivate = async function (data) {
+            let request = {
+                actionController: 'WarehouseController',
+                actionName: 'DeActivate',
+                actionParam: data,
+            };
+
+            return await BackEndService.RequestAction(request);
+        };
+
+        return service;
+    },
+]);
 // ini file Service.js
 'use strict';
 
@@ -63273,2466 +65733,6 @@ angular.module('app.erpUtils').factory('WHReconciliation_Service', [
 ]);
 'use strict';
 
-angular.module('app.erpUtils').factory('BranchForm_Service', [
-    'BackEndService',
-    'DTService',
-    function (BackEndService, DTService) {
-        var service = {};
-
-        return service;
-    },
-]);
-
-"use strict";
-
-angular.module('app.erpUtils').factory('Branch_Service', [
-    'BackEndService',
-    'DTService',
-    function (BackEndService, DTService) {
-        var service = {};
-
-        service.Table = function (scope) {
-            let filterObject = scope.filters;
-            let pageLength = scope.dt.pageLength;
-            let afterRequestData = scope.afterRequestData;
-            let searchKeyword = scope.searchKeyword;
-
-            return DTService.GenerateDTInstance('XBranch', 'Code asc, Name', 'asc', filterObject, 'Code, Name, SubAccount', pageLength, afterRequestData, searchKeyword);
-        };
-
-        service.List = async function () {
-            let request = {
-                modelName: 'XBranch',
-                fieldNames: ['*'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [],
-                sortList: ['Code asc'],
-            };
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.Dropdown = async function () {
-            let request = {
-                modelName: 'XBranch',
-                fieldNames: ['Code', 'Name', 'SubAccount'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [{ PropertyName: 'Status', Operator: '=', Value: 'true' }],
-                sortList: ['Code asc'],
-            };
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.Dropdown2 = async function (val) {
-            var request = {
-                modelName: 'XBranch',
-                fieldNames: ['Code', 'Name', 'SubAccount'],
-                maximumResult: 20,
-                pageNumber: 1,
-                SQLCriteria: `(Status = 1) and ((Code like '%${val}%') or (Name like '%${val}%') or (SubAccount like '%${val}%'))`,
-                sortList: ['Code asc'],
-            };
-
-            var httpPromise = BackEndService.GetDataListHttpPromise(request);
-
-            return httpPromise.then(
-                async function (response) {
-                    return response.data.Data;
-                },
-                async function (response) { }
-            );
-        };
-
-        service.Dropdown3 = async function () {
-            let request = {
-                modelName: 'XBranch',
-                fieldNames: ['*'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [{ PropertyName: 'Status', Operator: '=', Value: 'true' }],
-                sortList: ['Code asc'],
-            };
-
-            let response = await BackEndService.RequestDataList_X(request);
-
-            return response.data.Data;
-        };
-
-        service.DataSingle = async function (code) {
-            let request = {
-                modelName: 'XBranch',
-                criteriaList: [{ PropertyName: 'Code', Operator: '=', Value: code }],
-            };
-
-            return await BackEndService.RequestDataSingle(request);
-        };
-
-        service.Save = async function (data, Is_Create) {
-            let request = {
-                actionController: 'BranchController',
-                actionName: Is_Create ? 'Create' : 'Update',
-                actionParam: data,
-            };
-
-            return await BackEndService.RequestAction(request);
-        };
-
-        service.Activate = async function (data) {
-            let request = {
-                actionController: 'BranchController',
-                actionName: 'Activate',
-                actionParam: data,
-            };
-
-            return await BackEndService.RequestAction(request);
-        };
-
-        service.DeActivate = async function (data) {
-            let request = {
-                actionController: 'BranchController',
-                actionName: 'DeActivate',
-                actionParam: data,
-            };
-
-            return await BackEndService.RequestAction(request);
-        };
-
-        return service;
-    },
-]);
-'use strict';
-
-angular.module('app.erpUtils').factory('CalenderSystemForm_Service', [
-    'BackEndService',
-    'DTService',
-    function (BackEndService, DTService) {
-        var service = {};
-
-        return service;
-    },
-]);
-
-'use strict';
-
-angular.module('app.erpUtils').factory('CalenderSystem_Service', [
-    'BackEndService',
-    'DTService',
-    function (BackEndService, DTService) {
-        var service = {};
-
-        return service;
-    },
-]);
-
-'use strict';
-
-angular.module('app.erpUtils').factory('CoaForm_Service', [
-    'BackEndService',
-    'DTService',
-    function (BackEndService, DTService) {
-        var service = {};
-
-        return service;
-    },
-]);
-
-'use strict';
-
-angular.module('app.erpUtils').factory('Coa_Service', [
-    'BackEndService',
-    'DTService',
-    function (BackEndService, DTService) {
-        var service = {};
-
-        return service;
-    },
-]);
-
-'use strict';
-
-angular.module('app.erpUtils').factory('CollectZoneForm_Service', [
-    'BackEndService',
-    'DTService',
-    function (BackEndService, DTService) {
-        var service = {};
-
-        return service;
-    },
-]);
-
-"use strict";
-
-angular.module('app.erpUtils').factory('CollectZone_Service', [
-    'BackEndService',
-    'DTService',
-    function (BackEndService, DTService) {
-        var service = {};
-
-        service.Table = function (scope) {
-            let filterObject = scope.filters;
-            let pageLength = scope.dt.pageLength;
-            let afterRequestData = scope.afterRequestData;
-            let searchKeyword = scope.searchKeyword;
-
-            return DTService.GenerateDTInstance('XCollectZone', 'Code asc, Name', 'asc', filterObject, 'Code, Name', pageLength, afterRequestData, searchKeyword);
-        };
-
-        service.List = async function () {
-            let request = {
-                modelName: 'XCollectZone',
-                fieldNames: ['*'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [],
-                sortList: ['Code asc'],
-            };
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.Dropdown = async function () {
-            let request = {
-                modelName: 'XCollectZone',
-                fieldNames: ['Code', 'Name'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [{ PropertyName: 'Status', Operator: '=', Value: 'true' }],
-                sortList: ['Code asc'],
-            };
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.Dropdown2 = async function (val) {
-            var request = {
-                modelName: 'XCollectZone',
-                fieldNames: ['Code', 'Name'],
-                maximumResult: 20,
-                pageNumber: 1,
-                SQLCriteria: `(Status = 1) and ((Code like '%${val}%') or (Name like '%${val}%'))`,
-                sortList: ['Code asc'],
-            };
-
-            var httpPromise = BackEndService.GetDataListHttpPromise(request);
-
-            return httpPromise.then(
-                async function (response) {
-                    return response.data.Data;
-                },
-                async function (response) { }
-            );
-        };
-
-        service.Dropdown3 = async function () {
-            let request = {
-                modelName: 'XCollectZone',
-                fieldNames: ['*'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [{ PropertyName: 'Status', Operator: '=', Value: 'true' }],
-                sortList: ['Code asc'],
-            };
-
-            let response = await BackEndService.RequestDataList_X(request);
-
-            return response.data.Data;
-        };
-
-        service.DataSingle = async function (code) {
-            let request = {
-                modelName: 'XCollectZone',
-                criteriaList: [{ PropertyName: 'Code', Operator: '=', Value: code }],
-            };
-
-            return await BackEndService.RequestDataSingle(request);
-        };
-
-        service.Save = async function (data, Is_Create) {
-            let request = {
-                actionController: 'CollectZoneController',
-                actionName: Is_Create ? 'Create' : 'Update',
-                actionParam: data,
-            };
-
-            return await BackEndService.RequestAction(request);
-        };
-
-        service.Activate = async function (data) {
-            let request = {
-                actionController: 'CollectZoneController',
-                actionName: 'Activate',
-                actionParam: data,
-            };
-
-            return await BackEndService.RequestAction(request);
-        };
-
-        service.DeActivate = async function (data) {
-            let request = {
-                actionController: 'CollectZoneController',
-                actionName: 'DeActivate',
-                actionParam: data,
-            };
-
-            return await BackEndService.RequestAction(request);
-        };
-
-        return service;
-    },
-]);
-'use strict';
-
-angular.module('app.erpUtils').factory('CompanyForm_Service', [
-    'BackEndService',
-    'DTService',
-    function (BackEndService, DTService) {
-        var service = {};
-
-        return service;
-    },
-]);
-
-'use strict';
-
-angular.module('app.erpUtils').factory('Company_Service', [
-    'BackEndService',
-    'DTService',
-    function (BackEndService, DTService) {
-        var service = {};
-
-        return service;
-    },
-]);
-
-"use strict";
-
-angular.module('app.erpUtils').factory('CustomerGradeForm_Service', [
-    'BackEndService',
-    'DTService',
-    function (BackEndService, DTService) {
-        var service = {};
-
-        // Base API endpoint
-        var apiEndpoint = '/api/customergrade';
-
-        /**
-         * Get customer grade by ID
-         * @param {string} id - Customer Grade ID
-         * @returns {Promise}
-         */
-        service.getById = function(id) {
-            return BackEndService.get(apiEndpoint + '/' + id);
-        };
-
-        /**
-         * Get all customer grades
-         * @returns {Promise}
-         */
-        service.getAll = function() {
-            return BackEndService.get(apiEndpoint);
-        };
-
-        /**
-         * Get active customer grades only
-         * @returns {Promise}
-         */
-        service.getActive = function() {
-            return BackEndService.get(apiEndpoint + '/active');
-        };
-
-        /**
-         * Create new customer grade
-         * @param {Object} data - Customer Grade data
-         * @returns {Promise}
-         */
-        service.create = function(data) {
-            var payload = {
-                Code: data.Code,
-                Name: data.Name,
-                Description: data.Description || '',
-                Active: data.Active !== undefined ? data.Active : true
-            };
-            return BackEndService.post(apiEndpoint, payload);
-        };
-
-        /**
-         * Update existing customer grade
-         * @param {Object} data - Customer Grade data with ID
-         * @returns {Promise}
-         */
-        service.update = function(data) {
-            var payload = {
-                Name: data.Name,
-                Description: data.Description || '',
-                Active: data.Active !== undefined ? data.Active : true
-            };
-            
-            return BackEndService.put(apiEndpoint + '/' + data.Id, payload);
-        };
-
-        /**
-         * Delete customer grade
-         * @param {string} id - Customer Grade ID
-         * @returns {Promise}
-         */
-        service.delete = function(id) {
-            return BackEndService.delete(apiEndpoint + '/' + id);
-        };
-
-        /**
-         * Check if code exists
-         * @param {string} code - Code to check
-         * @returns {Promise}
-         */
-        service.checkCodeExists = function(code) {
-            return BackEndService.get(apiEndpoint + '/check-code', { code: code });
-        };
-
-        /**
-         * Validate customer grade data
-         * @param {Object} data - Customer Grade data to validate
-         * @param {boolean} isCreate - Whether this is a create operation
-         * @returns {Object} Validation result
-         */
-        service.validateData = function(data, isCreate) {
-            var errors = [];
-
-            if (isCreate && (!data.Code || data.Code.trim() === '')) {
-                errors.push('Code is required');
-            }
-
-            if (!data.Name || data.Name.trim() === '') {
-                errors.push('Name is required');
-            }
-
-            if (data.Name && data.Name.length > 100) {
-                errors.push('Name cannot exceed 100 characters');
-            }
-
-            if (data.Description && data.Description.length > 500) {
-                errors.push('Description cannot exceed 500 characters');
-            }
-
-            return {
-                isValid: errors.length === 0,
-                errors: errors
-            };
-        };
-
-        /**
-         * Get customer grades for dropdown
-         * @returns {Promise}
-         */
-        service.getForDropdown = function() {
-            return BackEndService.get(apiEndpoint + '/dropdown');
-        };
-
-        return service;
-    },
-]);
-"use strict";
-
-angular.module('app.erpUtils').factory('CustomerGrade_Service', [
-    'BackEndService',
-    'DTService',
-    function (BackEndService, DTService) {
-        var service = {};
-
-        service.Table = function (scope) {
-            let filterObject = scope.filters;
-            let pageLength = scope.dt.pageLength;
-            let afterRequestData = scope.afterRequestData;
-            let searchKeyword = scope.searchKeyword;
-
-            return DTService.GenerateDTInstance('CustomerGrade', 'CustomerGradeCode asc', 'asc', filterObject, 'CustomerGradeCode, CustomerGradeName, Description', pageLength, afterRequestData, searchKeyword);
-        };
-
-        service.List = async function () {
-            let request = {
-                modelName: 'CustomerGrade',
-                fieldNames: ['*'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [],
-                sortList: ['CustomerGradeCode asc'],
-            };
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.Dropdown = async function () {
-            let request = {
-                modelName: 'CustomerGrade',
-                fieldNames: ['CustomerGradeCode', 'CustomerGradeName'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [{ PropertyName: 'Status', Operator: '=', Value: 'Active' }],
-                sortList: ['CustomerGradeCode asc'],
-            };
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.Dropdown2 = async function (val) {
-            var request = {
-                modelName: 'CustomerGrade',
-                fieldNames: ['CustomerGradeCode', 'CustomerGradeName'],
-                maximumResult: 20,
-                pageNumber: 1,
-                SQLCriteria: `(Status = 'Active') and ((CustomerGradeCode like '%${val}%') or (CustomerGradeName like '%${val}%'))`,
-                sortList: ['CustomerGradeCode asc'],
-            };
-
-            var httpPromise = BackEndService.GetDataListHttpPromise(request);
-
-            return httpPromise.then(
-                async function (response) {
-                    return response.data.Data;
-                },
-                async function (response) { }
-            );
-        };
-
-        service.DataSingle = async function (customerGradeCode) {
-            let request = {
-                modelName: 'CustomerGrade',
-                criteriaList: [{ PropertyName: 'CustomerGradeCode', Operator: '=', Value: customerGradeCode }],
-            };
-
-            return await BackEndService.RequestDataSingle(request);
-        };
-
-        service.Save = async function (data, Is_Create) {
-            let request = {
-                actionController: 'CustomerGradeController',
-                actionName: Is_Create ? 'Create' : 'Update',
-                actionParam: data,
-            };
-
-            return await BackEndService.RequestAction(request);
-        };
-
-        service.Activate = async function (data) {
-            let request = {
-                actionController: 'CustomerGradeController',
-                actionName: 'Activate',
-                actionParam: data,
-            };
-
-            return await BackEndService.RequestAction(request);
-        };
-
-        service.DeActivate = async function (data) {
-            let request = {
-                actionController: 'CustomerGradeController',
-                actionName: 'DeActivate',
-                actionParam: data,
-            };
-
-            return await BackEndService.RequestAction(request);
-        };
-
-        service.Delete = async function (data) {
-            let request = {
-                actionController: 'CustomerGradeController',
-                actionName: 'Delete',
-                actionParam: data,
-            };
-
-            return await BackEndService.RequestAction(request);
-        };
-
-        return service;
-    },
-]);
-'use strict';
-
-angular.module('app.erpUtils').factory('DeliveryZoneForm_Service', [
-    'BackEndService',
-    'DTService',
-    function (BackEndService, DTService) {
-        var service = {};
-
-        return service;
-    },
-]);
-
-"use strict";
-
-angular.module('app.erpUtils').factory('DeliveryZone_Service', [
-    'BackEndService',
-    'DTService',
-    function (BackEndService, DTService) {
-        var service = {};
-
-        service.Table = function (scope) {
-            let filterObject = scope.filters;
-            let pageLength = scope.dt.pageLength;
-            let afterRequestData = scope.afterRequestData;
-            let searchKeyword = scope.searchKeyword;
-
-            return DTService.GenerateDTInstance('XDeliveryZone', 'Code asc, Name', 'asc', filterObject, 'Code, Name', pageLength, afterRequestData, searchKeyword);
-        };
-
-        service.List = async function () {
-            let request = {
-                modelName: 'XDeliveryZone',
-                fieldNames: ['*'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [],
-                sortList: ['Code asc'],
-            };
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.Dropdown = async function () {
-            let request = {
-                modelName: 'XDeliveryZone',
-                fieldNames: ['Code', 'Name'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [{ PropertyName: 'Status', Operator: '=', Value: 'true' }],
-                sortList: ['Code asc'],
-            };
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.Dropdown2 = async function (val) {
-            var request = {
-                modelName: 'XDeliveryZone',
-                fieldNames: ['Code', 'Name'],
-                maximumResult: 20,
-                pageNumber: 1,
-                SQLCriteria: `(Status = 1) and ((Code like '%${val}%') or (Name like '%${val}%'))`,
-                sortList: ['Code asc'],
-            };
-
-            var httpPromise = BackEndService.GetDataListHttpPromise(request);
-
-            return httpPromise.then(
-                async function (response) {
-                    return response.data.Data;
-                },
-                async function (response) { }
-            );
-        };
-
-        service.Dropdown3 = async function () {
-            let request = {
-                modelName: 'XDeliveryZone',
-                fieldNames: ['*'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [{ PropertyName: 'Status', Operator: '=', Value: 'true' }],
-                sortList: ['Code asc'],
-            };
-
-            let response = await BackEndService.RequestDataList_X(request);
-
-            return response.data.Data;
-        };
-
-        service.DataSingle = async function (code) {
-            let request = {
-                modelName: 'XDeliveryZone',
-                criteriaList: [{ PropertyName: 'Code', Operator: '=', Value: code }],
-            };
-
-            return await BackEndService.RequestDataSingle(request);
-        };
-
-        service.Save = async function (data, Is_Create) {
-            let request = {
-                actionController: 'DeliveryZoneController',
-                actionName: Is_Create ? 'Create' : 'Update',
-                actionParam: data,
-            };
-
-            return await BackEndService.RequestAction(request);
-        };
-
-        service.Activate = async function (data) {
-            let request = {
-                actionController: 'DeliveryZoneController',
-                actionName: 'Activate',
-                actionParam: data,
-            };
-
-            return await BackEndService.RequestAction(request);
-        };
-
-        service.DeActivate = async function (data) {
-            let request = {
-                actionController: 'DeliveryZoneController',
-                actionName: 'DeActivate',
-                actionParam: data,
-            };
-
-            return await BackEndService.RequestAction(request);
-        };
-
-        return service;
-    },
-]);
-'use strict';
-
-angular.module('app.erpUtils').factory('DepartmentForm_Service', [
-    'BackEndService',
-    'DTService',
-    function (BackEndService, DTService) {
-        var service = {};
-
-        return service;
-    },
-]);
-
-"use strict";
-
-angular.module('app.erpUtils').factory('Department_Service', [
-    'BackEndService',
-    'DTService',
-    function (BackEndService, DTService) {
-        var service = {};
-
-        service.Table = function (scope) {
-            let filterObject = scope.filters;
-            let pageLength = scope.dt.pageLength;
-            let afterRequestData = scope.afterRequestData;
-            let searchKeyword = scope.searchKeyword;
-
-            return DTService.GenerateDTInstance('XDepartment', 'Code asc, Name', 'asc', filterObject, 'Code, Name, SubAccount', pageLength, afterRequestData, searchKeyword);
-        };
-
-        service.List = async function () {
-            let request = {
-                modelName: 'XDepartment',
-                fieldNames: ['*'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [],
-                sortList: ['Code asc'],
-            };
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.Dropdown = async function () {
-            let request = {
-                modelName: 'XDepartment',
-                fieldNames: ['Code', 'Name'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [{ PropertyName: 'Status', Operator: '=', Value: 'true' }],
-                sortList: ['Code asc'],
-            };
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.Dropdown2 = async function (val) {
-            var request = {
-                modelName: 'XDepartment',
-                fieldNames: ['Code', 'Name'],
-                maximumResult: 20,
-                pageNumber: 1,
-                SQLCriteria: `(Status = 1) and ((Code like '%${val}%') or (Name like '%${val}%'))`,
-                sortList: ['Code asc'],
-            };
-
-            var httpPromise = BackEndService.GetDataListHttpPromise(request);
-
-            return httpPromise.then(
-                async function (response) {
-                    return response.data.Data;
-                },
-                async function (response) { }
-            );
-        };
-
-        service.Dropdown3 = async function () {
-            let request = {
-                modelName: 'XDepartment',
-                fieldNames: ['*'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [{ PropertyName: 'Status', Operator: '=', Value: 'true' }],
-                sortList: ['Code asc'],
-            };
-
-            let response = await BackEndService.RequestDataList_X(request);
-
-            return response.data.Data;
-        };
-
-        service.DataSingle = async function (code) {
-            let request = {
-                modelName: 'XDepartment',
-                criteriaList: [{ PropertyName: 'Code', Operator: '=', Value: code }],
-            };
-
-            return await BackEndService.RequestDataSingle(request);
-        };
-
-        service.Save = async function (data, Is_Create) {
-            let request = {
-                actionController: 'DepartmentController',
-                actionName: Is_Create ? 'Create' : 'Update',
-                actionParam: data,
-            };
-
-            return await BackEndService.RequestAction(request);
-        };
-
-        service.Activate = async function (data) {
-            let request = {
-                actionController: 'DepartmentController',
-                actionName: 'Activate',
-                actionParam: data,
-            };
-
-            return await BackEndService.RequestAction(request);
-        };
-
-        service.DeActivate = async function (data) {
-            let request = {
-                actionController: 'DepartmentController',
-                actionName: 'DeActivate',
-                actionParam: data,
-            };
-
-            return await BackEndService.RequestAction(request);
-        };
-
-        return service;
-    },
-]);
-'use strict';
-
-angular.module('app.erpUtils').factory('MasterHolidayForm_Service', [
-    'BackEndService',
-    'DTService',
-    function (BackEndService, DTService) {
-        var service = {};
-
-        return service;
-    },
-]);
-
-'use strict';
-
-angular.module('app.erpUtils').factory('MasterHoliday_Service', [
-    'BackEndService',
-    'DTService',
-    function (BackEndService, DTService) {
-        var service = {};
-
-        return service;
-    },
-]);
-
-'use strict';
-
-angular.module('app.erpUtils').factory('MenuForm_Service', [
-    'BackEndService',
-    'DTService',
-    function (BackEndService, DTService) {
-        var service = {};
-
-        return service;
-    },
-]);
-
-'use strict';
-
-angular.module('app.erpUtils').factory('Menu_Service', [
-    'BackEndService',
-    'DTService',
-    function (BackEndService, DTService) {
-        var service = {};
-
-        return service;
-    },
-]);
-
-'use strict';
-
-angular.module('app.erpUtils').factory('OwnershipProjectForm_Service', [
-    'BackEndService',
-    'DTService',
-    function (BackEndService, DTService) {
-        var service = {};
-
-        return service;
-    },
-]);
-
-"use strict";
-
-angular.module('app.erpUtils').factory('Ownership_Service', [
-    'BackEndService',
-    'DTService',
-    function (BackEndService, DTService) {
-        var service = {};
-
-        service.Table = function (scope) {
-            let filterObject = scope.filters;
-            let pageLength = scope.dt.pageLength;
-            let afterRequestData = scope.afterRequestData;
-            let searchKeyword = scope.searchKeyword;
-
-            return DTService.GenerateDTInstance('Ownership', 'OwnershipID asc', 'asc', filterObject, 'OwnershipID, OwnershipName, Description', pageLength, afterRequestData, searchKeyword);
-        };
-
-        service.List = async function () {
-            let request = {
-                modelName: 'Ownership',
-                fieldNames: ['*'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [],
-                sortList: ['OwnershipID asc'],
-            };
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.Dropdown = async function () {
-            let request = {
-                modelName: 'Ownership',
-                fieldNames: ['OwnershipID', 'OwnershipName'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [{ PropertyName: 'Status', Operator: '=', Value: 'Active' }],
-                sortList: ['OwnershipID asc'],
-            };
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.Dropdown2 = async function (val) {
-            var request = {
-                modelName: 'Ownership',
-                fieldNames: ['OwnershipID', 'OwnershipName'],
-                maximumResult: 20,
-                pageNumber: 1,
-                SQLCriteria: `(Status = 'Active') and ((OwnershipID like '%${val}%') or (OwnershipName like '%${val}%'))`,
-                sortList: ['OwnershipID asc'],
-            };
-
-            var httpPromise = BackEndService.GetDataListHttpPromise(request);
-
-            return httpPromise.then(
-                async function (response) {
-                    return response.data.Data;
-                },
-                async function (response) { }
-            );
-        };
-
-        service.DataSingle = async function (ownershipID) {
-            let request = {
-                modelName: 'Ownership',
-                criteriaList: [{ PropertyName: 'OwnershipID', Operator: '=', Value: ownershipID }],
-            };
-
-            return await BackEndService.RequestDataSingle(request);
-        };
-
-        service.Save = async function (data, Is_Create) {
-            let request = {
-                actionController: 'OwnershipController',
-                actionName: Is_Create ? 'Create' : 'Update',
-                actionParam: data,
-            };
-
-            return await BackEndService.RequestAction(request);
-        };
-
-        service.Activate = async function (data) {
-            let request = {
-                actionController: 'OwnershipController',
-                actionName: 'Activate',
-                actionParam: data,
-            };
-
-            return await BackEndService.RequestAction(request);
-        };
-
-        service.DeActivate = async function (data) {
-            let request = {
-                actionController: 'OwnershipController',
-                actionName: 'DeActivate',
-                actionParam: data,
-            };
-
-            return await BackEndService.RequestAction(request);
-        };
-
-        service.Delete = async function (data) {
-            let request = {
-                actionController: 'OwnershipController',
-                actionName: 'Delete',
-                actionParam: data,
-            };
-
-            return await BackEndService.RequestAction(request);
-        };
-
-        return service;
-    },
-]);
-'use strict';
-
-angular.module('app.erpUtils').factory('JobPositionForm_Service', [
-    'BackEndService',
-    'DTService',
-    function (BackEndService, DTService) {
-        var service = {};
-
-        return service;
-    },
-]);
-
-"use strict";
-
-angular.module('app.erpUtils').factory('JobPosition_Service', [
-    'BackEndService',
-    'DTService',
-    function (BackEndService, DTService) {
-        var service = {};
-
-        service.Table = function (scope) {
-            let filterObject = scope.filters;
-            let pageLength = scope.dt.pageLength;
-            let afterRequestData = scope.afterRequestData;
-            let searchKeyword = scope.searchKeyword;
-
-            return DTService.GenerateDTInstance('XJobPosition', 'Code asc, Name', 'asc', filterObject, 'Code, Name, PositionLevel, SubAccount', pageLength, afterRequestData, searchKeyword);
-        };
-
-        service.List = async function () {
-            let request = {
-                modelName: 'XJobPosition',
-                fieldNames: ['*'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [],
-                sortList: ['Code asc'],
-            };
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.Dropdown = async function () {
-            let request = {
-                modelName: 'XJobPosition',
-                fieldNames: ['Code', 'Name'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [{ PropertyName: 'Status', Operator: '=', Value: 'true' }],
-                sortList: ['Code asc'],
-            };
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.Dropdown2 = async function (val) {
-            var request = {
-                modelName: 'XJobPosition',
-                fieldNames: ['Code', 'Name'],
-                maximumResult: 20,
-                pageNumber: 1,
-                SQLCriteria: `(Status = 1) and ((Code like '%${val}%') or (Name like '%${val}%'))`,
-                sortList: ['Code asc'],
-            };
-
-            var httpPromise = BackEndService.GetDataListHttpPromise(request);
-
-            return httpPromise.then(
-                async function (response) {
-                    return response.data.Data;
-                },
-                async function (response) { }
-            );
-        };
-
-        service.Dropdown3 = async function () {
-            let request = {
-                modelName: 'XJobPosition',
-                fieldNames: ['*'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [{ PropertyName: 'Status', Operator: '=', Value: 'true' }],
-                sortList: ['Code asc'],
-            };
-
-            let response = await BackEndService.RequestDataList_X(request);
-
-            return response.data.Data;
-        };
-
-        service.DataSingle = async function (code) {
-            let request = {
-                modelName: 'XJobPosition',
-                criteriaList: [{ PropertyName: 'Code', Operator: '=', Value: code }],
-            };
-
-            return await BackEndService.RequestDataSingle(request);
-        };
-
-        service.Save = async function (data, Is_Create) {
-            let request = {
-                actionController: 'JobPositionController',
-                actionName: Is_Create ? 'Create' : 'Update',
-                actionParam: data,
-            };
-
-            return await BackEndService.RequestAction(request);
-        };
-
-        service.Activate = async function (data) {
-            let request = {
-                actionController: 'JobPositionController',
-                actionName: 'Activate',
-                actionParam: data,
-            };
-
-            return await BackEndService.RequestAction(request);
-        };
-
-        service.DeActivate = async function (data) {
-            let request = {
-                actionController: 'JobPositionController',
-                actionName: 'DeActivate',
-                actionParam: data,
-            };
-
-            return await BackEndService.RequestAction(request);
-        };
-
-        return service;
-    },
-]);
-"use strict";
-
-angular.module('app.erpUtils').factory('RoleAccessForm_Service', [
-    'BackEndService',
-    'DTService',
-    function (BackEndService, DTService) {
-        var service = {};
-
-        // Base API endpoint
-        var apiEndpoint = '/api/role-access';
-
-        /**
-         * Get role access by ID
-         * @param {string} id - Role Access ID
-         * @returns {Promise}
-         */
-        service.getById = function(id) {
-            return BackEndService.get(apiEndpoint + '/' + id);
-        };
-
-        /**
-         * Get all role access
-         * @returns {Promise}
-         */
-        service.getAll = function() {
-            return BackEndService.get(apiEndpoint);
-        };
-
-        /**
-         * Create new role access
-         * @param {Object} data - Role access data
-         * @returns {Promise}
-         */
-        service.create = function(data) {
-            var payload = {
-                RoleName: data.RoleName,
-                RoleStatus: data.RoleStatus,
-                Description: data.Description,
-                Permissions: data.Permissions
-            };
-            return BackEndService.post(apiEndpoint, payload);
-        };
-
-        /**
-         * Update existing role access
-         * @param {Object} data - Role access data with ID
-         * @returns {Promise}
-         */
-        service.update = function(data) {
-            var payload = {
-                RoleName: data.RoleName,
-                RoleStatus: data.RoleStatus,
-                Description: data.Description,
-                Permissions: data.Permissions
-            };
-            
-            return BackEndService.put(apiEndpoint + '/' + data.Id, payload);
-        };
-
-        /**
-         * Delete role access
-         * @param {string} id - Role Access ID
-         * @returns {Promise}
-         */
-        service.delete = function(id) {
-            return BackEndService.delete(apiEndpoint + '/' + id);
-        };
-
-        /**
-         * Check if role name exists
-         * @param {string} roleName - Role name to check
-         * @returns {Promise}
-         */
-        service.checkRoleNameExists = function(roleName) {
-            return BackEndService.get(apiEndpoint + '/check-rolename', { roleName: roleName });
-        };
-
-        /**
-         * Get available modules
-         * @returns {Promise}
-         */
-        service.getModules = function() {
-            return BackEndService.get('/api/modules');
-        };
-
-        /**
-         * Get permissions by role
-         * @param {string} roleId - Role ID
-         * @returns {Promise}
-         */
-        service.getPermissionsByRole = function(roleId) {
-            return BackEndService.get(apiEndpoint + '/' + roleId + '/permissions');
-        };
-
-        /**
-         * Clone role access from existing role
-         * @param {string} sourceRoleId - Source Role ID to clone from
-         * @param {string} newRoleName - New role name
-         * @returns {Promise}
-         */
-        service.cloneRole = function(sourceRoleId, newRoleName) {
-            return BackEndService.post(apiEndpoint + '/clone', {
-                SourceRoleId: sourceRoleId,
-                NewRoleName: newRoleName
-            });
-        };
-
-        /**
-         * Get roles with permission count
-         * @returns {Promise}
-         */
-        service.getRolesWithPermissionCount = function() {
-            return BackEndService.get(apiEndpoint + '/summary');
-        };
-
-        /**
-         * Validate role access data
-         * @param {Object} data - Role access data to validate
-         * @returns {Object} Validation result
-         */
-        service.validateRoleAccessData = function(data) {
-            var errors = [];
-
-            if (!data.RoleName || data.RoleName.trim() === '') {
-                errors.push('Role Name is required');
-            }
-
-            if (!data.RoleStatus || data.RoleStatus.trim() === '') {
-                errors.push('Role Status is required');
-            }
-
-            if (!data.Permissions || data.Permissions.length === 0) {
-                errors.push('At least one permission must be assigned');
-            } else {
-                // Check if at least one permission is enabled
-                var hasPermission = false;
-                for (var i = 0; i < data.Permissions.length; i++) {
-                    var perm = data.Permissions[i];
-                    if (perm.read || perm.create || perm.edit || perm.delete || perm.approval) {
-                        hasPermission = true;
-                        break;
-                    }
-                    // Check submodules
-                    if (perm.submodules && perm.submodules.length > 0) {
-                        for (var j = 0; j < perm.submodules.length; j++) {
-                            var subPerm = perm.submodules[j];
-                            if (subPerm.read || subPerm.create || subPerm.edit || subPerm.delete || subPerm.approval) {
-                                hasPermission = true;
-                                break;
-                            }
-                        }
-                    }
-                    if (hasPermission) break;
-                }
-                
-                if (!hasPermission) {
-                    errors.push('At least one permission must be enabled');
-                }
-            }
-
-            return {
-                isValid: errors.length === 0,
-                errors: errors
-            };
-        };
-
-        /**
-         * Compare two roles and return differences
-         * @param {string} role1Id - First Role ID
-         * @param {string} role2Id - Second Role ID
-         * @returns {Promise}
-         */
-        service.compareRoles = function(role1Id, role2Id) {
-            return BackEndService.get(apiEndpoint + '/compare', {
-                role1: role1Id,
-                role2: role2Id
-            });
-        };
-
-        /**
-         * Export role access to Excel
-         * @param {string} roleId - Role ID to export
-         * @returns {Promise}
-         */
-        service.exportToExcel = function(roleId) {
-            return BackEndService.download(apiEndpoint + '/' + roleId + '/export', {
-                format: 'excel'
-            });
-        };
-
-        /**
-         * Import role access from Excel
-         * @param {File} file - Excel file
-         * @returns {Promise}
-         */
-        service.importFromExcel = function(file) {
-            var formData = new FormData();
-            formData.append('file', file);
-            
-            return BackEndService.upload(apiEndpoint + '/import', formData);
-        };
-
-        /**
-         * Get role access history/audit log
-         * @param {string} roleId - Role ID
-         * @returns {Promise}
-         */
-        service.getAuditLog = function(roleId) {
-            return BackEndService.get(apiEndpoint + '/' + roleId + '/audit-log');
-        };
-
-        /**
-         * Activate/Deactivate role
-         * @param {string} roleId - Role ID
-         * @param {string} status - 'Active' or 'Inactive'
-         * @returns {Promise}
-         */
-        service.updateStatus = function(roleId, status) {
-            return BackEndService.put(apiEndpoint + '/' + roleId + '/status', {
-                Status: status
-            });
-        };
-
-        /**
-         * Get users assigned to a role
-         * @param {string} roleId - Role ID
-         * @returns {Promise}
-         */
-        service.getUsersByRole = function(roleId) {
-            return BackEndService.get(apiEndpoint + '/' + roleId + '/users');
-        };
-
-        /**
-         * Bulk update permissions for multiple roles
-         * @param {Array} roles - Array of role IDs
-         * @param {Object} permissions - Permissions to apply
-         * @returns {Promise}
-         */
-        service.bulkUpdatePermissions = function(roles, permissions) {
-            return BackEndService.post(apiEndpoint + '/bulk-update', {
-                RoleIds: roles,
-                Permissions: permissions
-            });
-        };
-
-        return service;
-    },
-]);
-'use strict';
-
-angular.module('app.erpUtils').factory('RoleAkses_Service', [
-    'BackEndService',
-    'DTService',
-    function (BackEndService, DTService) {
-        var service = {};
-
-        return service;
-    },
-]);
-
-'use strict';
-
-angular.module('app.erpUtils').factory('RoleForm_Service', [
-    'BackEndService',
-    'DTService',
-    function (BackEndService, DTService) {
-        var service = {};
-
-        return service;
-    },
-]);
-
-"use strict";
-
-angular.module('app.erpUtils').factory('RoleList_Service', [
-    'BackEndService',
-    'DTService',
-    function (BackEndService, DTService) {
-        var service = {};
-
-        service.Table = function (scope) {
-            let filterObject = scope.filters;
-            let pageLength = scope.dt.pageLength;
-            let afterRequestData = scope.afterRequestData;
-            let searchKeyword = scope.searchKeyword;
-
-            return DTService.GenerateDTInstance('XSystemRole', 'RoleName asc', 'asc', filterObject, 'RoleName, Description, MenuAccess, Function', pageLength, afterRequestData, searchKeyword);
-        };
-
-        service.List = async function () {
-            let request = {
-                modelName: 'XSystemRole',
-                fieldNames: ['*'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [],
-                sortList: ['RoleName asc'],
-            };
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.Dropdown = async function () {
-            let request = {
-                modelName: 'XSystemRole',
-                fieldNames: ['RoleName', 'Description'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [{ PropertyName: 'Status', Operator: '=', Value: 'Active' }],
-                sortList: ['RoleName asc'],
-            };
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.Dropdown2 = async function (val) {
-            var request = {
-                modelName: 'XSystemRole',
-                fieldNames: ['RoleName', 'Description'],
-                maximumResult: 20,
-                pageNumber: 1,
-                SQLCriteria: `(Status = 'Active') and ((RoleName like '%${val}%') or (Description like '%${val}%'))`,
-                sortList: ['RoleName asc'],
-            };
-
-            var httpPromise = BackEndService.GetDataListHttpPromise(request);
-
-            return httpPromise.then(
-                async function (response) {
-                    return response.data.Data;
-                },
-                async function (response) { }
-            );
-        };
-
-        service.DataSingle = async function (rolename) {
-            let request = {
-                modelName: 'XSystemRole',
-                criteriaList: [{ PropertyName: 'RoleName', Operator: '=', Value: rolename }],
-            };
-
-            return await BackEndService.RequestDataSingle(request);
-        };
-
-        service.Save = async function (data, Is_Create) {
-            let request = {
-                actionController: 'SystemRoleController',
-                actionName: Is_Create ? 'Create' : 'Update',
-                actionParam: data,
-            };
-
-            return await BackEndService.RequestAction(request);
-        };
-
-        service.Activate = async function (data) {
-            let request = {
-                actionController: 'SystemRoleController',
-                actionName: 'Activate',
-                actionParam: data,
-            };
-
-            return await BackEndService.RequestAction(request);
-        };
-
-        service.DeActivate = async function (data) {
-            let request = {
-                actionController: 'SystemRoleController',
-                actionName: 'DeActivate',
-                actionParam: data,
-            };
-
-            return await BackEndService.RequestAction(request);
-        };
-
-        service.Delete = async function (data) {
-            let request = {
-                actionController: 'SystemRoleController',
-                actionName: 'Delete',
-                actionParam: data,
-            };
-
-            return await BackEndService.RequestAction(request);
-        };
-
-        return service;
-    },
-]);
-'use strict';
-
-angular.module('app.erpUtils').factory('SalesZoneForm_Service', [
-    'BackEndService',
-    'DTService',
-    function (BackEndService, DTService) {
-        var service = {};
-
-        return service;
-    },
-]);
-
-"use strict";
-
-angular.module('app.erpUtils').factory('SalesZone_Service', [
-    'BackEndService',
-    'DTService',
-    function (BackEndService, DTService) {
-        var service = {};
-
-        service.Table = function (scope) {
-            let filterObject = scope.filters;
-            let pageLength = scope.dt.pageLength;
-            let afterRequestData = scope.afterRequestData;
-            let searchKeyword = scope.searchKeyword;
-
-            return DTService.GenerateDTInstance('XSalesZone', 'Code asc, Name', 'asc', filterObject, 'Code, Name', pageLength, afterRequestData, searchKeyword);
-        };
-
-        service.List = async function () {
-            let request = {
-                modelName: 'XSalesZone',
-                fieldNames: ['*'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [],
-                sortList: ['Code asc'],
-            };
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.Dropdown = async function () {
-            let request = {
-                modelName: 'XSalesZone',
-                fieldNames: ['Code', 'Name'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [{ PropertyName: 'Status', Operator: '=', Value: 'true' }],
-                sortList: ['Code asc'],
-            };
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.Dropdown2 = async function (val) {
-            var request = {
-                modelName: 'XSalesZone',
-                fieldNames: ['Code', 'Name'],
-                maximumResult: 20,
-                pageNumber: 1,
-                SQLCriteria: `(Status = 1) and ((Code like '%${val}%') or (Name like '%${val}%'))`,
-                sortList: ['Code asc'],
-            };
-
-            var httpPromise = BackEndService.GetDataListHttpPromise(request);
-
-            return httpPromise.then(
-                async function (response) {
-                    return response.data.Data;
-                },
-                async function (response) { }
-            );
-        };
-
-        service.Dropdown3 = async function () {
-            let request = {
-                modelName: 'XSalesZone',
-                fieldNames: ['*'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [{ PropertyName: 'Status', Operator: '=', Value: 'true' }],
-                sortList: ['Code asc'],
-            };
-
-            let response = await BackEndService.RequestDataList_X(request);
-
-            return response.data.Data;
-        };
-
-        service.DataSingle = async function (code) {
-            let request = {
-                modelName: 'XSalesZone',
-                criteriaList: [{ PropertyName: 'Code', Operator: '=', Value: code }],
-            };
-
-            return await BackEndService.RequestDataSingle(request);
-        };
-
-        service.Save = async function (data, Is_Create) {
-            let request = {
-                actionController: 'SalesZoneController',
-                actionName: Is_Create ? 'Create' : 'Update',
-                actionParam: data,
-            };
-
-            return await BackEndService.RequestAction(request);
-        };
-
-        service.Activate = async function (data) {
-            let request = {
-                actionController: 'SalesZoneController',
-                actionName: 'Activate',
-                actionParam: data,
-            };
-
-            return await BackEndService.RequestAction(request);
-        };
-
-        service.DeActivate = async function (data) {
-            let request = {
-                actionController: 'SalesZoneController',
-                actionName: 'DeActivate',
-                actionParam: data,
-            };
-
-            return await BackEndService.RequestAction(request);
-        };
-
-        return service;
-    },
-]);
-'use strict';
-
-angular.module('app.erpUtils').factory('WarehouseForm_Service', [
-    'BackEndService',
-    'DTService',
-    function (BackEndService, DTService) {
-        var service = {};
-
-        return service;
-    },
-]);
-
-'use strict';
-
-angular.module('app.erpUtils').factory('SubAccountForm_Service', [
-    'BackEndService',
-    'DTService',
-    function (BackEndService, DTService) {
-        var service = {};
-
-        return service;
-    },
-]);
-
-"use strict";
-
-angular.module('app.erpUtils').factory('SubAccount_Service', [
-    'BackEndService',
-    'DTService',
-    function (BackEndService, DTService) {
-        var service = {};
-
-        service.Table = function (scope) {
-            let filterObject = scope.filters;
-            let pageLength = scope.dt.pageLength;
-            let afterRequestData = scope.afterRequestData;
-            let searchKeyword = scope.searchKeyword;
-
-            return DTService.GenerateDTInstance('XSubAccount', 'SubAccountCode asc, SubAccountName', 'asc', filterObject, 'SubAccountCode, SubAccountName, COACode, COAName', pageLength, afterRequestData, searchKeyword);
-        };
-
-        service.List = async function () {
-            let request = {
-                modelName: 'XSubAccount',
-                fieldNames: ['*'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [],
-                sortList: ['SubAccountCode asc'],
-            };
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.Dropdown = async function () {
-            let request = {
-                modelName: 'XSubAccount',
-                fieldNames: ['SubAccountCode', 'SubAccountName', 'COACode', 'COAName'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [{ PropertyName: 'Status', Operator: '=', Value: 'true' }],
-                sortList: ['SubAccountCode asc'],
-            };
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.Dropdown2 = async function (val) {
-            var request = {
-                modelName: 'XSubAccount',
-                fieldNames: ['SubAccountCode', 'SubAccountName', 'COACode', 'COAName'],
-                maximumResult: 20,
-                pageNumber: 1,
-                SQLCriteria: `(Status = 1) and ((SubAccountCode like '%${val}%') or (SubAccountName like '%${val}%') or (COACode like '%${val}%') or (COAName like '%${val}%'))`,
-                sortList: ['SubAccountCode asc'],
-            };
-
-            var httpPromise = BackEndService.GetDataListHttpPromise(request);
-
-            return httpPromise.then(
-                async function (response) {
-                    return response.data.Data;
-                },
-                async function (response) { }
-            );
-        };
-
-        service.Dropdown3 = async function () {
-            let request = {
-                modelName: 'XSubAccount',
-                fieldNames: ['*'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [{ PropertyName: 'Status', Operator: '=', Value: 'true' }],
-                sortList: ['SubAccountCode asc'],
-            };
-
-            let response = await BackEndService.RequestDataList_X(request);
-
-            return response.data.Data;
-        };
-
-        service.DataSingle = async function (code) {
-            let request = {
-                modelName: 'XSubAccount',
-                criteriaList: [{ PropertyName: 'SubAccountCode', Operator: '=', Value: code }],
-            };
-
-            return await BackEndService.RequestDataSingle(request);
-        };
-
-        service.Save = async function (data, Is_Create) {
-            let request = {
-                actionController: 'SubAccountController',
-                actionName: Is_Create ? 'Create' : 'Update',
-                actionParam: data,
-            };
-
-            return await BackEndService.RequestAction(request);
-        };
-
-        service.Activate = async function (data) {
-            let request = {
-                actionController: 'SubAccountController',
-                actionName: 'Activate',
-                actionParam: data,
-            };
-
-            return await BackEndService.RequestAction(request);
-        };
-
-        service.DeActivate = async function (data) {
-            let request = {
-                actionController: 'SubAccountController',
-                actionName: 'DeActivate',
-                actionParam: data,
-            };
-
-            return await BackEndService.RequestAction(request);
-        };
-
-        return service;
-    },
-]);
-'use strict';
-
-angular.module('app.erpUtils').factory('SuperAdminSystemForm_Service', [
-    'BackEndService',
-    'DTService',
-    function (BackEndService, DTService) {
-        var service = {};
-
-        return service;
-    },
-]);
-
-'use strict';
-
-angular.module('app.erpUtils').factory('SuperAdminSystem_Service', [
-    'BackEndService',
-    'DTService',
-    function (BackEndService, DTService) {
-        var service = {};
-
-        return service;
-    },
-]);
-
-'use strict';
-
-angular.module('app.erpUtils').factory('TaxForm_Service', [
-    'BackEndService',
-    'DTService',
-    function (BackEndService, DTService) {
-        var service = {};
-
-        return service;
-    },
-]);
-
-"use strict";
-
-angular.module('app.erpUtils').factory('TaxList_Service', [
-    'BackEndService',
-    'DTService',
-    function (BackEndService, DTService) {
-        var service = {};
-
-        service.Table = function (scope) {
-            let filterObject = scope.filters;
-            let pageLength = scope.dt.pageLength;
-            let afterRequestData = scope.afterRequestData;
-            let searchKeyword = scope.searchKeyword;
-
-            return DTService.GenerateDTInstance('XTax', 'TaxCode asc', 'asc', filterObject, 'TaxCode, TaxName, TaxType, TaxCategory', pageLength, afterRequestData, searchKeyword);
-        };
-
-        service.List = async function () {
-            let request = {
-                modelName: 'XTax',
-                fieldNames: ['*'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [],
-                sortList: ['TaxCode asc'],
-            };
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.Dropdown = async function () {
-            let request = {
-                modelName: 'XTax',
-                fieldNames: ['TaxCode', 'TaxName', 'TaxRate'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [{ PropertyName: 'Status', Operator: '=', Value: 'true' }],
-                sortList: ['TaxCode asc'],
-            };
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.Dropdown2 = async function (val) {
-            var request = {
-                modelName: 'XTax',
-                fieldNames: ['TaxCode', 'TaxName', 'TaxRate'],
-                maximumResult: 20,
-                pageNumber: 1,
-                SQLCriteria: `(Status = 1) and ((TaxCode like '%${val}%') or (TaxName like '%${val}%'))`,
-                sortList: ['TaxCode asc'],
-            };
-
-            var httpPromise = BackEndService.GetDataListHttpPromise(request);
-
-            return httpPromise.then(
-                async function (response) {
-                    return response.data.Data;
-                },
-                async function (response) { }
-            );
-        };
-
-        service.DataSingle = async function (taxCode) {
-            let request = {
-                modelName: 'XTax',
-                criteriaList: [{ PropertyName: 'TaxCode', Operator: '=', Value: taxCode }],
-            };
-
-            return await BackEndService.RequestDataSingle(request);
-        };
-
-        service.Save = async function (data, Is_Create) {
-            let request = {
-                actionController: 'TaxController',
-                actionName: Is_Create ? 'Create' : 'Update',
-                actionParam: data,
-            };
-
-            return await BackEndService.RequestAction(request);
-        };
-
-        service.Activate = async function (data) {
-            let request = {
-                actionController: 'TaxController',
-                actionName: 'Activate',
-                actionParam: data,
-            };
-
-            return await BackEndService.RequestAction(request);
-        };
-
-        service.DeActivate = async function (data) {
-            let request = {
-                actionController: 'TaxController',
-                actionName: 'DeActivate',
-                actionParam: data,
-            };
-
-            return await BackEndService.RequestAction(request);
-        };
-
-        service.Delete = async function (data) {
-            let request = {
-                actionController: 'TaxController',
-                actionName: 'Delete',
-                actionParam: data,
-            };
-
-            return await BackEndService.RequestAction(request);
-        };
-
-        return service;
-    },
-]);
-'use strict';
-
-angular.module('app.erpUtils').factory('TopGroupForm_Service', [
-    'BackEndService',
-    'DTService',
-    function (BackEndService, DTService) {
-        var service = {};
-
-        return service;
-    },
-]);
-
-'use strict';
-
-angular.module('app.erpUtils').factory('TopGroup_Service', [
-    'BackEndService',
-    'DTService',
-    function (BackEndService, DTService) {
-        var service = {};
-
-        return service;
-    },
-]);
-
-'use strict';
-
-angular.module('app.erpUtils').factory('UniverseBrandForm_Service', [
-    'BackEndService',
-    'DTService',
-    function (BackEndService, DTService) {
-        var service = {};
-
-        return service;
-    },
-]);
-
-'use strict';
-
-angular.module('app.erpUtils').factory('UniverseBrand_Service', [
-    'BackEndService',
-    'DTService',
-    function (BackEndService, DTService) {
-        var service = {};
-
-        return service;
-    },
-]);
-
-"use strict";
-
-angular.module('app.erpUtils').factory('UserForm_Service', [
-    'BackEndService',
-    'DTService',
-    function (BackEndService, DTService) {
-        var service = {};
-
-        // Base API endpoint
-        var apiEndpoint = '/api/users';
-
-        /**
-         * Get user by ID
-         * @param {string} id - User ID
-         * @returns {Promise}
-         */
-        service.getById = function(id) {
-            return BackEndService.get(apiEndpoint + '/' + id);
-        };
-
-        /**
-         * Get all users
-         * @returns {Promise}
-         */
-        service.getAll = function() {
-            return BackEndService.get(apiEndpoint);
-        };
-
-        /**
-         * Create new user
-         * @param {Object} data - User data
-         * @returns {Promise}
-         */
-        service.create = function(data) {
-            var payload = {
-                Employee: data.Employee,
-                FullName: data.FullName,
-                EmailAddress: data.EmailAddress,
-                Password: data.Password,
-                AssignRole: data.AssignRole
-            };
-            return BackEndService.post(apiEndpoint, payload);
-        };
-
-        /**
-         * Update existing user
-         * @param {Object} data - User data with ID
-         * @returns {Promise}
-         */
-        service.update = function(data) {
-            var payload = {
-                Employee: data.Employee,
-                FullName: data.FullName,
-                EmailAddress: data.EmailAddress,
-                AssignRole: data.AssignRole
-            };
-            
-            // Only include password if it's being changed
-            if (data.Password && data.Password.trim() !== '') {
-                payload.Password = data.Password;
-            }
-            
-            return BackEndService.put(apiEndpoint + '/' + data.Id, payload);
-        };
-
-        /**
-         * Delete user
-         * @param {string} id - User ID
-         * @returns {Promise}
-         */
-        service.delete = function(id) {
-            return BackEndService.delete(apiEndpoint + '/' + id);
-        };
-
-        /**
-         * Check if email exists
-         * @param {string} email - Email address to check
-         * @returns {Promise}
-         */
-        service.checkEmailExists = function(email) {
-            return BackEndService.get(apiEndpoint + '/check-email', { email: email });
-        };
-
-        /**
-         * Get available roles
-         * @returns {Promise}
-         */
-        service.getRoles = function() {
-            return BackEndService.get('/api/roles');
-        };
-
-        /**
-         * Search employees
-         * @param {string} searchTerm - Search term (NIK or Name)
-         * @returns {Promise}
-         */
-        service.searchEmployees = function(searchTerm) {
-            return BackEndService.get('/api/employees/search', { q: searchTerm });
-        };
-
-        /**
-         * Validate user data
-         * @param {Object} data - User data to validate
-         * @returns {Object} Validation result
-         */
-        service.validateUserData = function(data) {
-            var errors = [];
-
-            if (!data.Employee || data.Employee.trim() === '') {
-                errors.push('Employee is required');
-            }
-
-            if (!data.FullName || data.FullName.trim() === '') {
-                errors.push('Full Name is required');
-            }
-
-            if (!data.EmailAddress || data.EmailAddress.trim() === '') {
-                errors.push('Email Address is required');
-            } else {
-                // Basic email validation
-                var emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-                if (!emailRegex.test(data.EmailAddress)) {
-                    errors.push('Invalid email format');
-                }
-            }
-
-            if (!data.Password || data.Password.trim() === '') {
-                errors.push('Password is required');
-            } else if (data.Password.length < 8) {
-                errors.push('Password must be at least 8 characters');
-            }
-
-            if (!data.ConfirmPassword || data.ConfirmPassword.trim() === '') {
-                errors.push('Confirm Password is required');
-            } else if (data.Password !== data.ConfirmPassword) {
-                errors.push('Passwords do not match');
-            }
-
-            if (!data.AssignRole || data.AssignRole.trim() === '') {
-                errors.push('Assign Role is required');
-            }
-
-            return {
-                isValid: errors.length === 0,
-                errors: errors
-            };
-        };
-
-        return service;
-    },
-]);
-"use strict";
-
-angular.module('app.erpUtils').factory('UserList_Service', [
-    'BackEndService',
-    'DTService',
-    function (BackEndService, DTService) {
-        var service = {};
-
-        service.Table = function (scope) {
-            let filterObject = scope.filters;
-            let pageLength = scope.dt.pageLength;
-            let afterRequestData = scope.afterRequestData;
-            let searchKeyword = scope.searchKeyword;
-
-            return DTService.GenerateDTInstance('XSystemUser', 'LastLogin desc', 'desc', filterObject, 'UserName, LinkedEmployee, Role', pageLength, afterRequestData, searchKeyword);
-        };
-
-        service.List = async function () {
-            let request = {
-                modelName: 'XSystemUser',
-                fieldNames: ['*'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [],
-                sortList: ['UserName asc'],
-            };
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.Dropdown = async function () {
-            let request = {
-                modelName: 'XSystemUser',
-                fieldNames: ['UserName', 'LinkedEmployee'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [{ PropertyName: 'UserStatus', Operator: '=', Value: 'true' }],
-                sortList: ['UserName asc'],
-            };
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.Dropdown2 = async function (val) {
-            var request = {
-                modelName: 'XSystemUser',
-                fieldNames: ['UserName', 'LinkedEmployee'],
-                maximumResult: 20,
-                pageNumber: 1,
-                SQLCriteria: `(UserStatus = 1) and ((UserName like '%${val}%') or (LinkedEmployee like '%${val}%'))`,
-                sortList: ['UserName asc'],
-            };
-
-            var httpPromise = BackEndService.GetDataListHttpPromise(request);
-
-            return httpPromise.then(
-                async function (response) {
-                    return response.data.Data;
-                },
-                async function (response) { }
-            );
-        };
-
-        service.DataSingle = async function (username) {
-            let request = {
-                modelName: 'XSystemUser',
-                criteriaList: [{ PropertyName: 'UserName', Operator: '=', Value: username }],
-            };
-
-            return await BackEndService.RequestDataSingle(request);
-        };
-
-        service.Save = async function (data, Is_Create) {
-            let request = {
-                actionController: 'SystemUserController',
-                actionName: Is_Create ? 'Create' : 'Update',
-                actionParam: data,
-            };
-
-            return await BackEndService.RequestAction(request);
-        };
-
-        service.Activate = async function (data) {
-            let request = {
-                actionController: 'SystemUserController',
-                actionName: 'Activate',
-                actionParam: data,
-            };
-
-            return await BackEndService.RequestAction(request);
-        };
-
-        service.DeActivate = async function (data) {
-            let request = {
-                actionController: 'SystemUserController',
-                actionName: 'DeActivate',
-                actionParam: data,
-            };
-
-            return await BackEndService.RequestAction(request);
-        };
-
-        service.ResetPassword = async function (data) {
-            let request = {
-                actionController: 'SystemUserController',
-                actionName: 'ResetPassword',
-                actionParam: data,
-            };
-
-            return await BackEndService.RequestAction(request);
-        };
-
-        return service;
-    },
-]);
-'use strict';
-
-angular.module('app.erpUtils').factory('WarehouseForm_Service', [
-    'BackEndService',
-    'DTService',
-    function (BackEndService, DTService) {
-        var service = {};
-
-        return service;
-    },
-]);
-
-"use strict";
-
-angular.module('app.erpUtils').factory('Warehouse_Service', [
-    'BackEndService',
-    'DTService',
-    function (BackEndService, DTService) {
-        var service = {};
-
-        service.Table = function (scope) {
-            let filterObject = scope.filters;
-            let pageLength = scope.dt.pageLength;
-            let afterRequestData = scope.afterRequestData;
-            let searchKeyword = scope.searchKeyword;
-
-            return DTService.GenerateDTInstance('XWarehouse', 'Code asc, Name', 'asc', filterObject, 'Code, Name, SubAccount', pageLength, afterRequestData, searchKeyword);
-        };
-
-        service.List = async function () {
-            let request = {
-                modelName: 'XWarehouse',
-                fieldNames: ['*'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [],
-                sortList: ['Code asc'],
-            };
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.Dropdown = async function () {
-            let request = {
-                modelName: 'XWarehouse',
-                fieldNames: ['Code', 'Name', 'SubAccount'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [{ PropertyName: 'Status', Operator: '=', Value: 'true' }],
-                sortList: ['Code asc'],
-            };
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.Dropdown2 = async function (val) {
-            var request = {
-                modelName: 'XWarehouse',
-                fieldNames: ['Code', 'Name', 'SubAccount'],
-                maximumResult: 20,
-                pageNumber: 1,
-                SQLCriteria: `(Status = 1) and ((Code like '%${val}%') or (Name like '%${val}%'))`,
-                sortList: ['Code asc'],
-            };
-
-            var httpPromise = BackEndService.GetDataListHttpPromise(request);
-
-            return httpPromise.then(
-                async function (response) {
-                    return response.data.Data;
-                },
-                async function (response) { }
-            );
-        };
-
-        service.Dropdown3 = async function () {
-            let request = {
-                modelName: 'XWarehouse',
-                fieldNames: ['*'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [{ PropertyName: 'Status', Operator: '=', Value: 'true' }],
-                sortList: ['Code asc'],
-            };
-
-            let response = await BackEndService.RequestDataList_X(request);
-
-            return response.data.Data;
-        };
-
-        service.DataSingle = async function (code) {
-            let request = {
-                modelName: 'XWarehouse',
-                criteriaList: [{ PropertyName: 'Code', Operator: '=', Value: code }],
-            };
-
-            return await BackEndService.RequestDataSingle(request);
-        };
-
-        service.Save = async function (data, Is_Create) {
-            let request = {
-                actionController: 'WarehouseController',
-                actionName: Is_Create ? 'Create' : 'Update',
-                actionParam: data,
-            };
-
-            return await BackEndService.RequestAction(request);
-        };
-
-        service.Activate = async function (data) {
-            let request = {
-                actionController: 'WarehouseController',
-                actionName: 'Activate',
-                actionParam: data,
-            };
-
-            return await BackEndService.RequestAction(request);
-        };
-
-        service.DeActivate = async function (data) {
-            let request = {
-                actionController: 'WarehouseController',
-                actionName: 'DeActivate',
-                actionParam: data,
-            };
-
-            return await BackEndService.RequestAction(request);
-        };
-
-        return service;
-    },
-]);
-'use strict';
-
 angular.module('app.erpUtils').factory('ApprovalWorkFlowForm_Service', [
     'BackEndService',
     'DTService',
@@ -69672,6 +69672,304 @@ angular.module('app.erpUtils').factory('VerifySalesOrders_Service', [
     },
 ]);
 
+'use strict';
+
+angular.module('app.erpUtils').factory('BusinessRelation_Service', [
+    'BackEndService',
+    function (BackEndService) {
+        var service = {};
+
+        service.getData_BusinessRelation = async function (code, fieldNames = ['*']) {
+            let request = {
+                modelName: 'XSmBusinessRelationR',
+                criteriaList: [{ PropertyName: 'Code', Operator: '=', Value: code }],
+                fieldNames: fieldNames,
+            };
+
+            return BackEndService.RequestDataSingle(request);
+        };
+
+        service.Customer_Dropdown = async function (val, locationCode = '', locationOperator = '=') {
+            let request = {
+                modelName: 'XSmBusinessRelation',
+                fieldNames: ['Code', 'Name', 'StatusId', 'StatusName'],
+                maximumResult: 20,
+                pageNumber: 1,
+                SQLCriteria: `(Active = 1) and (IsCustomer = 1) and ((Code like '%${val}%') or (Name like '%${val}%'))`,
+                sortList: ['Code asc'],
+            };
+
+            if (locationCode != '' && locationCode != `('')`) {
+                // "Bungkus" nilai locationCode dengan Tanda Petik
+                if (!locationCode.startsWith('(')) locationCode = `'${locationCode}'`;
+
+                // tambahkan ke criteria
+                request.SQLCriteria += ` and LocationCode ${locationOperator} ${locationCode}`;
+            }
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.Personel_Dropdown = async function (val, locationCode = '', locationOperator = '=') {
+            let request = {
+                modelName: 'XSmBusinessRelation',
+                fieldNames: ['Code', 'Name', 'StatusId', 'StatusName'],
+                maximumResult: 20,
+                pageNumber: 1,
+                SQLCriteria: `(Active = 1) and (IsPersonnel = 1) and ((Code like '%${val}%') or (Name like '%${val}%'))`,
+                sortList: ['Code asc'],
+            };
+
+            if (locationCode != '' && locationCode != `('')`) {
+                // "Bungkus" nilai locationCode dengan Tanda Petik
+                if (!locationCode.startsWith('(')) locationCode = `'${locationCode}'`;
+
+                // tambahkan ke criteria
+                request.SQLCriteria += ` and LocationCode ${locationOperator} ${locationCode}`;
+            }
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.getData_Customer = async function (val, locationCode = '', locationOperator = '=') {
+            let request = {
+                modelName: 'XSmBusinessRelation',
+                fieldNames: ['Code', 'Name', 'StatusId', 'StatusName'],
+                maximumResult: 20,
+                pageNumber: 1,
+                criteriaList: [
+                    {
+                        PropertyName: 'Active',
+                        Operator: '=',
+                        Value: true,
+                    },
+                    {
+                        PropertyName: 'IsCustomer',
+                        Operator: '=',
+                        Value: true,
+                    },
+                    {
+                        PropertyName: 'Name',
+                        Operator: 'like',
+                        Value: '%' + val + '%',
+                    },
+                ],
+                sortList: ['Name asc'],
+            };
+
+            if (locationCode != '' && locationCode != `('')`) {
+                request.criteriaList.push({
+                    PropertyName: 'LocationCode',
+                    Operator: locationOperator,
+                    Value: locationCode,
+                });
+            }
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.Supplier_Dropdown = async function (val, locationCode = '', locationOperator = '=') {
+            let request = {
+                modelName: 'XSmBusinessRelation',
+                fieldNames: ['Code', 'Name', 'StatusId', 'StatusName'],
+                maximumResult: 20,
+                pageNumber: 1,
+                SQLCriteria: `(Active = 1) and (IsSupplier = 1) and ((Code like '%${val}%') or (Name like '%${val}%'))`,
+                sortList: ['Code asc'],
+            };
+
+            if (locationCode != '' && locationCode != `('')`) {
+                // "Bungkus" nilai locationCode dengan Tanda Petik
+                if (!locationCode.startsWith('(')) locationCode = `'${locationCode}'`;
+
+                // tambahkan ke criteria
+                request.SQLCriteria += ` and LocationCode ${locationOperator} ${locationCode}`;
+            }
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.getData_Supplier = async function (val, locationCode = '', locationOperator = '=') {
+            let request = {
+                modelName: 'XSmBusinessRelation',
+                fieldNames: ['Code', 'Name', 'StatusId', 'StatusName'],
+                maximumResult: 20,
+                pageNumber: 1,
+                criteriaList: [
+                    {
+                        PropertyName: 'Active',
+                        Operator: '=',
+                        Value: true,
+                    },
+                    {
+                        PropertyName: 'IsSupplier',
+                        Operator: '=',
+                        Value: true,
+                    },
+
+                    {
+                        PropertyName: 'Name',
+                        Operator: 'like',
+                        Value: '%' + val + '%',
+                    },
+                ],
+                sortList: ['Name asc'],
+            };
+
+            if (locationCode != '' && locationCode != `('')`) {
+                request.criteriaList.push({
+                    PropertyName: 'LocationCode',
+                    Operator: locationOperator,
+                    Value: locationCode,
+                });
+            }
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.GetBusinessRelationBillingAddressNames = async function (brCode) {
+            let request = {
+                modelName: 'XSmAddress',
+                fieldNames: ['*'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [
+                    {
+                        PropertyName: 'BusinessRelationCode',
+                        Operator: '=',
+                        Value: brCode,
+                    },
+                ],
+                sortList: ['Number asc'],
+            };
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.getData_ContactPerson = async function (brCode) {
+            let request = {
+                modelName: 'XSmContactPerson',
+                fieldNames: ['Number', 'Name'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [
+                    {
+                        PropertyName: 'BusinessRelationCode',
+                        Operator: '=',
+                        Value: brCode,
+                    },
+                    // {
+                    //     PropertyName: 'Active',
+                    //     Operator: '=',
+                    //     Value: true,
+                    // },
+                ],
+                sortList: ['Number asc, Name asc'],
+            };
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.PriceGroupList = async function (brCode) {
+            let request = {
+                modelName: 'XSmBusinessRelationPriceGroupR',
+                fieldNames: ['*'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [
+                    {
+                        PropertyName: 'BusinessRelationCode',
+                        Operator: '=',
+                        Value: brCode,
+                    },
+                ],
+                sortList: ['Number asc, ItemCode asc, ItemDescription asc'],
+            };
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        return service;
+    },
+]);
+
+'use strict';
+
+angular.module('app.erpUtils').factory('Employee_Service', [
+    'BackEndService',
+    function (BackEndService) {
+        var service = {};
+
+        service.LocationAccess = async function () {
+            let request = {
+                applicationId: '',
+                actionController: 'EmployeeController',
+                actionName: 'GetEmployeeLocationAccess',
+                actionParam: {},
+            };
+
+            let response = await BackEndService.RequestAction(request);
+            return response.data.Value;
+        };
+
+        service.WarehouseByLocation = async function () {
+            let request = {
+                applicationId: '',
+                actionController: 'EmployeeController',
+                actionName: 'GetSalesWarehouseListByLocation',
+                actionParam: {},
+            };
+
+            let response = await BackEndService.RequestAction(request);
+            return response.data.Value;
+        };
+
+        service.User_Dropdown = async function (val) {
+            let request = {
+                modelName: 'XSmUsers',
+                fieldNames: ['Code', 'Name'],
+                maximumResult: 20,
+                pageNumber: 1,
+                SQLCriteria: `(Active = 1) and ((Code like '%${val}%') or (Name like '%${val}%'))`,
+                sortList: ['Code asc'],
+            };
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        return service;
+    },
+]);
+
+'use strict';
+
+angular.module('app.erpUtils').factory('Inventory_Service', [
+    'BackEndService',
+    function (BackEndService) {
+        var service = {};
+        
+        return service;
+    },
+]);
+
 // ini file Service.js
 // ini file Service.js
 'use strict';
@@ -71782,304 +72080,6 @@ angular.module('app.erpUtils').factory('Shipment_Service', [
             return response.data.Data;
         };
 
-        return service;
-    },
-]);
-
-'use strict';
-
-angular.module('app.erpUtils').factory('BusinessRelation_Service', [
-    'BackEndService',
-    function (BackEndService) {
-        var service = {};
-
-        service.getData_BusinessRelation = async function (code, fieldNames = ['*']) {
-            let request = {
-                modelName: 'XSmBusinessRelationR',
-                criteriaList: [{ PropertyName: 'Code', Operator: '=', Value: code }],
-                fieldNames: fieldNames,
-            };
-
-            return BackEndService.RequestDataSingle(request);
-        };
-
-        service.Customer_Dropdown = async function (val, locationCode = '', locationOperator = '=') {
-            let request = {
-                modelName: 'XSmBusinessRelation',
-                fieldNames: ['Code', 'Name', 'StatusId', 'StatusName'],
-                maximumResult: 20,
-                pageNumber: 1,
-                SQLCriteria: `(Active = 1) and (IsCustomer = 1) and ((Code like '%${val}%') or (Name like '%${val}%'))`,
-                sortList: ['Code asc'],
-            };
-
-            if (locationCode != '' && locationCode != `('')`) {
-                // "Bungkus" nilai locationCode dengan Tanda Petik
-                if (!locationCode.startsWith('(')) locationCode = `'${locationCode}'`;
-
-                // tambahkan ke criteria
-                request.SQLCriteria += ` and LocationCode ${locationOperator} ${locationCode}`;
-            }
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.Personel_Dropdown = async function (val, locationCode = '', locationOperator = '=') {
-            let request = {
-                modelName: 'XSmBusinessRelation',
-                fieldNames: ['Code', 'Name', 'StatusId', 'StatusName'],
-                maximumResult: 20,
-                pageNumber: 1,
-                SQLCriteria: `(Active = 1) and (IsPersonnel = 1) and ((Code like '%${val}%') or (Name like '%${val}%'))`,
-                sortList: ['Code asc'],
-            };
-
-            if (locationCode != '' && locationCode != `('')`) {
-                // "Bungkus" nilai locationCode dengan Tanda Petik
-                if (!locationCode.startsWith('(')) locationCode = `'${locationCode}'`;
-
-                // tambahkan ke criteria
-                request.SQLCriteria += ` and LocationCode ${locationOperator} ${locationCode}`;
-            }
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.getData_Customer = async function (val, locationCode = '', locationOperator = '=') {
-            let request = {
-                modelName: 'XSmBusinessRelation',
-                fieldNames: ['Code', 'Name', 'StatusId', 'StatusName'],
-                maximumResult: 20,
-                pageNumber: 1,
-                criteriaList: [
-                    {
-                        PropertyName: 'Active',
-                        Operator: '=',
-                        Value: true,
-                    },
-                    {
-                        PropertyName: 'IsCustomer',
-                        Operator: '=',
-                        Value: true,
-                    },
-                    {
-                        PropertyName: 'Name',
-                        Operator: 'like',
-                        Value: '%' + val + '%',
-                    },
-                ],
-                sortList: ['Name asc'],
-            };
-
-            if (locationCode != '' && locationCode != `('')`) {
-                request.criteriaList.push({
-                    PropertyName: 'LocationCode',
-                    Operator: locationOperator,
-                    Value: locationCode,
-                });
-            }
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.Supplier_Dropdown = async function (val, locationCode = '', locationOperator = '=') {
-            let request = {
-                modelName: 'XSmBusinessRelation',
-                fieldNames: ['Code', 'Name', 'StatusId', 'StatusName'],
-                maximumResult: 20,
-                pageNumber: 1,
-                SQLCriteria: `(Active = 1) and (IsSupplier = 1) and ((Code like '%${val}%') or (Name like '%${val}%'))`,
-                sortList: ['Code asc'],
-            };
-
-            if (locationCode != '' && locationCode != `('')`) {
-                // "Bungkus" nilai locationCode dengan Tanda Petik
-                if (!locationCode.startsWith('(')) locationCode = `'${locationCode}'`;
-
-                // tambahkan ke criteria
-                request.SQLCriteria += ` and LocationCode ${locationOperator} ${locationCode}`;
-            }
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.getData_Supplier = async function (val, locationCode = '', locationOperator = '=') {
-            let request = {
-                modelName: 'XSmBusinessRelation',
-                fieldNames: ['Code', 'Name', 'StatusId', 'StatusName'],
-                maximumResult: 20,
-                pageNumber: 1,
-                criteriaList: [
-                    {
-                        PropertyName: 'Active',
-                        Operator: '=',
-                        Value: true,
-                    },
-                    {
-                        PropertyName: 'IsSupplier',
-                        Operator: '=',
-                        Value: true,
-                    },
-
-                    {
-                        PropertyName: 'Name',
-                        Operator: 'like',
-                        Value: '%' + val + '%',
-                    },
-                ],
-                sortList: ['Name asc'],
-            };
-
-            if (locationCode != '' && locationCode != `('')`) {
-                request.criteriaList.push({
-                    PropertyName: 'LocationCode',
-                    Operator: locationOperator,
-                    Value: locationCode,
-                });
-            }
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.GetBusinessRelationBillingAddressNames = async function (brCode) {
-            let request = {
-                modelName: 'XSmAddress',
-                fieldNames: ['*'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [
-                    {
-                        PropertyName: 'BusinessRelationCode',
-                        Operator: '=',
-                        Value: brCode,
-                    },
-                ],
-                sortList: ['Number asc'],
-            };
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.getData_ContactPerson = async function (brCode) {
-            let request = {
-                modelName: 'XSmContactPerson',
-                fieldNames: ['Number', 'Name'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [
-                    {
-                        PropertyName: 'BusinessRelationCode',
-                        Operator: '=',
-                        Value: brCode,
-                    },
-                    // {
-                    //     PropertyName: 'Active',
-                    //     Operator: '=',
-                    //     Value: true,
-                    // },
-                ],
-                sortList: ['Number asc, Name asc'],
-            };
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.PriceGroupList = async function (brCode) {
-            let request = {
-                modelName: 'XSmBusinessRelationPriceGroupR',
-                fieldNames: ['*'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [
-                    {
-                        PropertyName: 'BusinessRelationCode',
-                        Operator: '=',
-                        Value: brCode,
-                    },
-                ],
-                sortList: ['Number asc, ItemCode asc, ItemDescription asc'],
-            };
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        return service;
-    },
-]);
-
-'use strict';
-
-angular.module('app.erpUtils').factory('Employee_Service', [
-    'BackEndService',
-    function (BackEndService) {
-        var service = {};
-
-        service.LocationAccess = async function () {
-            let request = {
-                applicationId: '',
-                actionController: 'EmployeeController',
-                actionName: 'GetEmployeeLocationAccess',
-                actionParam: {},
-            };
-
-            let response = await BackEndService.RequestAction(request);
-            return response.data.Value;
-        };
-
-        service.WarehouseByLocation = async function () {
-            let request = {
-                applicationId: '',
-                actionController: 'EmployeeController',
-                actionName: 'GetSalesWarehouseListByLocation',
-                actionParam: {},
-            };
-
-            let response = await BackEndService.RequestAction(request);
-            return response.data.Value;
-        };
-
-        service.User_Dropdown = async function (val) {
-            let request = {
-                modelName: 'XSmUsers',
-                fieldNames: ['Code', 'Name'],
-                maximumResult: 20,
-                pageNumber: 1,
-                SQLCriteria: `(Active = 1) and ((Code like '%${val}%') or (Name like '%${val}%'))`,
-                sortList: ['Code asc'],
-            };
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        return service;
-    },
-]);
-
-'use strict';
-
-angular.module('app.erpUtils').factory('Inventory_Service', [
-    'BackEndService',
-    function (BackEndService) {
-        var service = {};
-        
         return service;
     },
 ]);
