@@ -14,7 +14,7 @@ angular.module('app.erpUtils').controller('LoginXCtrl', function ($scope, $rootS
 
         var [userName, domain] = $scope.inputLogin.split('@');
 
-        domain = 'Company_Domain';
+        domain = 'Organization_Domain';
 
         let response = await AuthenticationService.Check_UserDomain(userName, domain);
 
