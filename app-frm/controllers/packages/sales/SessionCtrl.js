@@ -8,8 +8,8 @@ angular.module('app.frm').controller('SessionCtrl', function ($rootScope, $scope
     $scope.pagesOptions = [10, 20, 50, 100];
     $scope.activeOptions = [
         { Value: null, Text: 'All' },
-        { Value: 'Active', Text: 'Yes' },
-        { Value: 'InActive', Text: 'No' },
+        { Value: 'Active', Text: 'Active' },
+        { Value: 'Logout', Text: 'Logout' },
     ];
 
     $scope.still_processing = false;
@@ -25,13 +25,12 @@ angular.module('app.frm').controller('SessionCtrl', function ($rootScope, $scope
 
         // format: Title, DbField, SortField, Format, Show
         let columns = [
-            ['Name', 'Name', 'Name', 'Text', true],
-            ['Domain Name', 'DomainName', 'DomainName', 'Text', true],
-            ['Insert Stamp', 'InsertStamp', 'InsertStamp', 'Date', true],
-            ['Inserted By', 'InsertedBy', 'InsertedBy', 'Text', true],
-            ['Update Stamp', 'UpdateStamp', 'UpdateStamp', 'Date', true],
-            ['Updated By', 'UpdatedBy', 'UpdatedBy', 'Text', true],
+            ['User Name', 'UserName2', 'UserName2', 'Text', true],
+            ['Issue Date', 'IssueDate', 'IssueDate', 'DateTime', true],
+            ['Expired Date', 'ExpiredDate', 'ExpiredDate', 'DateTime', true],
             ['Status', 'Status', 'Status', 'Text', true],
+            ['Organization', 'Organization', 'Organization', 'Text', true],
+            ['Application', 'Application', 'Application', 'Text', true],
         ];
 
         Utility_ERP.ProcessColumnsY($scope.dt, columns);

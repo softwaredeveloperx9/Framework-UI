@@ -25,13 +25,10 @@ angular.module('app.frm').controller('SessionDetailCtrl', function ($rootScope, 
 
         // format: Title, DbField, SortField, Format, Show
         let columns = [
-            ['Name', 'Name', 'Name', 'Text', true],
-            ['Domain Name', 'DomainName', 'DomainName', 'Text', true],
-            ['Insert Stamp', 'InsertStamp', 'InsertStamp', 'Date', true],
-            ['Inserted By', 'InsertedBy', 'InsertedBy', 'Text', true],
-            ['Update Stamp', 'UpdateStamp', 'UpdateStamp', 'Date', true],
-            ['Updated By', 'UpdatedBy', 'UpdatedBy', 'Text', true],
-            ['Status', 'Status', 'Status', 'Text', true],
+            ['User Name', 'UserName2', 'UserName2', 'Text', true],
+            ['Date', 'CreatedDate', 'CreatedDate', 'DateTime', true],
+            ['Status', 'Token_Status', 'Token_Status', 'Text', true],
+            ['ID', 'ID', 'ID', 'Text', true],
         ];
 
         Utility_ERP.ProcessColumnsY($scope.dt, columns);

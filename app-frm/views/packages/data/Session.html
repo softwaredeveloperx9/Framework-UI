@@ -74,6 +74,7 @@
                                 <span ng-if="col.Format == 'Text' && col.DbField == 'Code'"><a ng-click="sdr_GoToForm({code: row[col.DbField]})">{{ row[col.DbField] }}</a></span>
                                 <span ng-if="col.Format == 'Currency'" style="text-align: right; width: 100%; display: block">Rp. {{ row[col.DbField] | number : 2}}</span>
                                 <span ng-if="col.Format == 'Date'" style="text-align: center; width: 100%; display: block">{{ row[col.DbField] | date : 'dd/MM/yyyy'}}</span>
+                                <span ng-if="col.Format == 'DateTime'" style="text-align: center; width: 100%; display: block">{{ row[col.DbField] | date : 'dd/MM/yyyy HH:mm'}}</span>
                                 <span ng-if="col.Format == 'Number'" style="text-align: right; width: 100%; display: block">{{ row[col.DbField] | number : 0}}</span>
                                 <span ng-if="col.Format == 'Boolean'" style="text-align: center; width: 100%; display: block"><input type="checkbox" ng-model="row[col.DbField]" /></span>
                                 <span ng-if="col.Format == 'BooleanX'" style="text-align: center; width: 100%; display: block"><input type="radio" ng-model="row[col.DbField]" name="BooleanXradio" /></span>

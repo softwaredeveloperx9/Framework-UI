@@ -12,7 +12,7 @@ angular.module('app.frmUtils').factory('SessionDetail_Service', [
             let afterRequestData = scope.afterRequestData;
             let searchKeyword = scope.searchKeyword;
 
-            return DTService.GenerateDTInstance('XFRM_SDet', 'Name', 'asc', filterObject, 'Name', pageLength, afterRequestData, searchKeyword);
+            return DTService.GenerateDTInstance('XFRM_SDet', 'ID', 'desc', filterObject, 'UserName', pageLength, afterRequestData, searchKeyword);
         };
 
         service.List = async function () {
