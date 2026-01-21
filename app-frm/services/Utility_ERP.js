@@ -4,10 +4,7 @@ angular.module('app.erpUtils').factory('Utility_ERP', [
     'OurStorage',
     'BackEndService',
     'Employee_Service',
-    'BusinessRelation_Service',
-    'Inventory_Service',
-    'PriceGroups_Service',
-    function (OurStorage, BackEndService, Employee_Service, BusinessRelation_Service, Inventory_Service, PriceGroups_Service) {
+    function (OurStorage, BackEndService, Employee_Service) {
         var utility = {};
 
         utility.getData_Currency = async function () {
