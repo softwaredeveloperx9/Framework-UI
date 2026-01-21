@@ -32,7 +32,7 @@ angular
         } catch (e) { }
 
         if (ERP_CurrentUser) {
-            $urlRouterProvider.otherwise('/erp/sales/SalesOrders');
+            $urlRouterProvider.otherwise('/frm/data/Session');
         } else {
             localStorage.setItem(appPath + 'logout', 'true');
 
