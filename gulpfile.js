@@ -30,12 +30,12 @@ var source = {
             // other js files [controllers, services, etc.]
             'app/**/!(module)*.js',
 
-            'app-erp/module.js',
+            'app-frm/module.js',
 
-            'app-erp/routes/*.js',
+            'app-frm/routes/*.js',
 
             // other js files [controllers, services, etc.]
-            'app-erp/**/!(module|*.routes)*.js'
+            'app-frm/**/!(module|*.routes)*.js'
         ],
         tpl: 'app/**/*.tpl.html'
     }

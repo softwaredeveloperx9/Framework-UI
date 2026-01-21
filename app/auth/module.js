@@ -57,7 +57,7 @@ angular
                 url: '/login',
                 views: {
                     root: {
-                        templateUrl: 'app-erp/views/loginApp.html',
+                        templateUrl: 'app-frm/views/loginApp.html',
                     },
                 },
                 data: {

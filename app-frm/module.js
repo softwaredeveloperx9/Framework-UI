@@ -18,10 +18,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/utama.html',
+                    templateUrl: 'app-frm/_menu/utama.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/utama.html',
+                    templateUrl: 'app-frm/views/utama.html',
                 },
             },
         });

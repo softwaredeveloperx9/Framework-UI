@@ -575,7 +575,7 @@ angular
                 url: '/login',
                 views: {
                     root: {
-                        templateUrl: 'app-erp/views/loginApp.html',
+                        templateUrl: 'app-frm/views/loginApp.html',
                     },
                 },
                 data: {
@@ -699,6 +699,29 @@ angular
 
     angular.module('SmartAdmin.UI', []);
 })();
+"use strict";
+
+angular.module('app.auth').controller('LoginCtrl', function ($scope, $state, GooglePlus, User, ezfb) {
+
+    $scope.$on('event:google-plus-signin-success', function (event, authResult) {
+        if (authResult.status.method == 'PROMPT') {
+            GooglePlus.getUser().then(function (user) {
+                User.username = user.name;
+                User.picture = user.picture;
+                $state.go('app.dashboard');
+            });
+        }
+    });
+
+    $scope.$on('event:facebook-signin-success', function (event, authResult) {
+        ezfb.api('/me', function (res) {
+            User.username = res.name;
+            User.picture = 'https://graph.facebook.com/' + res.id + '/picture';
+            $state.go('app.dashboard');
+        });
+    });
+})
+
 'use strict';
 
 angular.module('app.auth').directive('loginInfo', function (User, $rootScope) {
@@ -743,29 +766,6 @@ angular.module('app.auth').factory('User', function ($http, $q, APP_CONFIG) {
 
     return UserModel;
 });
-
-"use strict";
-
-angular.module('app.auth').controller('LoginCtrl', function ($scope, $state, GooglePlus, User, ezfb) {
-
-    $scope.$on('event:google-plus-signin-success', function (event, authResult) {
-        if (authResult.status.method == 'PROMPT') {
-            GooglePlus.getUser().then(function (user) {
-                User.username = user.name;
-                User.picture = user.picture;
-                $state.go('app.dashboard');
-            });
-        }
-    });
-
-    $scope.$on('event:facebook-signin-success', function (event, authResult) {
-        ezfb.api('/me', function (res) {
-            User.username = res.name;
-            User.picture = 'https://graph.facebook.com/' + res.id + '/picture';
-            $state.go('app.dashboard');
-        });
-    });
-})
 
 "use strict";
 
@@ -2188,43 +2188,6 @@ angular.module('SmartAdmin.Layout').directive('stateBreadcrumbs', function ($roo
         }
     }
 });
-
-"use strict";
-
-angular.module('SmartAdmin.UI').directive('smartPopoverHtml', function () {
-    return {
-        restrict: "A",
-        link: function(scope, element, attributes){
-            var options = {};
-            options.content = attributes.smartPopoverHtml;
-            options.placement = attributes.popoverPlacement || 'top';
-            options.html = true;
-            options.trigger =  attributes.popoverTrigger || 'click';
-            options.title =  attributes.popoverTitle || attributes.title;
-            element.popover(options)
-
-        }
-
-    };
-});
-
-
-"use strict";
-
-angular.module('SmartAdmin.UI').directive('smartTooltipHtml', function () {
-        return {
-            restrict: 'A',
-            link: function(scope, element, attributes){
-                element.tooltip({
-                    placement: attributes.tooltipPlacement || 'top',
-                    html: true,
-                    title: attributes.smartTooltipHtml
-                })
-            }
-        };
-    }
-);
-
 'use strict';
 
 angular.module('SmartAdmin.Layout').factory('lazyScript', function($q, $http){
@@ -2369,6 +2332,43 @@ angular.module('SmartAdmin.Layout').factory('SmartCss', function ($rootScope, $t
 
 
 
+
+
+"use strict";
+
+angular.module('SmartAdmin.UI').directive('smartPopoverHtml', function () {
+    return {
+        restrict: "A",
+        link: function(scope, element, attributes){
+            var options = {};
+            options.content = attributes.smartPopoverHtml;
+            options.placement = attributes.popoverPlacement || 'top';
+            options.html = true;
+            options.trigger =  attributes.popoverTrigger || 'click';
+            options.title =  attributes.popoverTitle || attributes.title;
+            element.popover(options)
+
+        }
+
+    };
+});
+
+
+"use strict";
+
+angular.module('SmartAdmin.UI').directive('smartTooltipHtml', function () {
+        return {
+            restrict: 'A',
+            link: function(scope, element, attributes){
+                element.tooltip({
+                    placement: attributes.tooltipPlacement || 'top',
+                    html: true,
+                    title: attributes.smartTooltipHtml
+                })
+            }
+        };
+    }
+);
 
 "use strict";
 
@@ -4673,10 +4673,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/utama.html',
+                    templateUrl: 'app-frm/_menu/utama.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/utama.html',
+                    templateUrl: 'app-frm/views/utama.html',
                 },
             },
         });
@@ -10332,10 +10332,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/_WebPage.html',
+                    templateUrl: 'app-frm/views/packages/sales/_WebPage.html',
                 },
             },
         })
@@ -10347,10 +10347,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/AddressList.html',
+                    templateUrl: 'app-frm/views/packages/sales/AddressList.html',
                 },
             },
         })
@@ -10362,10 +10362,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/AddressListForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/AddressListForm.html',
                 },
             },
         })
@@ -10377,10 +10377,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/ApprovalWorkFlowForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/ApprovalWorkFlowForm.html',
                 },
             },
         })
@@ -10392,10 +10392,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/ApprovalWorkflows.html',
+                    templateUrl: 'app-frm/views/packages/sales/ApprovalWorkflows.html',
                 },
             },
         })
@@ -10407,10 +10407,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/CloseOrders.html',
+                    templateUrl: 'app-frm/views/packages/sales/CloseOrders.html',
                 },
             },
         })
@@ -10422,10 +10422,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/ContractForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/ContractForm.html',
                 },
             },
         })
@@ -10437,10 +10437,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/Contracts.html',
+                    templateUrl: 'app-frm/views/packages/sales/Contracts.html',
                 },
             },
         })
@@ -10452,10 +10452,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/CreditLimitForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/CreditLimitForm.html',
                 },
             },
         })
@@ -10467,10 +10467,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/CreditLimitRequests.html',
+                    templateUrl: 'app-frm/views/packages/sales/CreditLimitRequests.html',
                 },
             },
         })
@@ -10482,10 +10482,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/CustomerPricing.html',
+                    templateUrl: 'app-frm/views/packages/sales/CustomerPricing.html',
                 },
             },
         })
@@ -10497,10 +10497,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/CustomerRequests.html',
+                    templateUrl: 'app-frm/views/packages/sales/CustomerRequests.html',
                 },
             },
         })
@@ -10512,10 +10512,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/CustomerRequestsForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/CustomerRequestsForm.html',
                 },
             },
         })
@@ -10527,10 +10527,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/Customers.html',
+                    templateUrl: 'app-frm/views/packages/sales/Customers.html',
                 },
             },
         })
@@ -10542,10 +10542,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/CustomersForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/CustomersForm.html',
                 },
             },
         })
@@ -10557,10 +10557,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/DiscountForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/DiscountForm.html',
                 },
             },
         })
@@ -10572,10 +10572,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/Discounts.html',
+                    templateUrl: 'app-frm/views/packages/sales/Discounts.html',
                 },
             },
         })
@@ -10587,10 +10587,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/DropshipShipments.html',
+                    templateUrl: 'app-frm/views/packages/sales/DropshipShipments.html',
                 },
             },
         })
@@ -10602,10 +10602,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/InterbranchOrders.html',
+                    templateUrl: 'app-frm/views/packages/sales/InterbranchOrders.html',
                 },
             },
         })
@@ -10617,10 +10617,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/NewCustomerForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/NewCustomerForm.html',
                 },
             },
         })
@@ -10632,10 +10632,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/OnDemandItems.html',
+                    templateUrl: 'app-frm/views/packages/sales/OnDemandItems.html',
                 },
             },
         })
@@ -10647,10 +10647,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/OutstandingItems.html',
+                    templateUrl: 'app-frm/views/packages/sales/OutstandingItems.html',
                 },
             },
         })
@@ -10662,10 +10662,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/OutstandingOrders.html',
+                    templateUrl: 'app-frm/views/packages/sales/OutstandingOrders.html',
                 },
             },
         })
@@ -10677,10 +10677,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/Personnels.html',
+                    templateUrl: 'app-frm/views/packages/sales/Personnels.html',
                 },
             },
         })
@@ -10692,10 +10692,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/PriceAvailability.html',
+                    templateUrl: 'app-frm/views/packages/sales/PriceAvailability.html',
                 },
             },
         })
@@ -10707,10 +10707,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/PriceGroupForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/PriceGroupForm.html',
                 },
             },
         })
@@ -10722,10 +10722,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/PriceGroups.html',
+                    templateUrl: 'app-frm/views/packages/sales/PriceGroups.html',
                 },
             },
         })
@@ -10737,10 +10737,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/PricingSchemaForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/PricingSchemaForm.html',
                 },
             },
         })
@@ -10752,10 +10752,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/PricingSchema.html',
+                    templateUrl: 'app-frm/views/packages/sales/PricingSchema.html',
                 },
             },
         })
@@ -10767,10 +10767,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/ProjectDashboard.html',
+                    templateUrl: 'app-frm/views/packages/sales/ProjectDashboard.html',
                 },
             },
         })
@@ -10782,10 +10782,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/ProjectForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/ProjectForm.html',
                 },
             },
         })
@@ -10797,10 +10797,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/Projects02.html',
+                    templateUrl: 'app-frm/views/packages/sales/Projects02.html',
                 },
             },
         })
@@ -10812,10 +10812,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/Projects.html',
+                    templateUrl: 'app-frm/views/packages/sales/Projects.html',
                 },
             },
         })
@@ -10827,10 +10827,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/Revisions.html',
+                    templateUrl: 'app-frm/views/packages/sales/Revisions.html',
                 },
             },
         })
@@ -10842,10 +10842,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/SalesOrderForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/SalesOrderForm.html',
                 },
             },
         })
@@ -10857,10 +10857,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/SalesOrders.html',
+                    templateUrl: 'app-frm/views/packages/sales/SalesOrders.html',
                 },
             },
         })
@@ -10872,10 +10872,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/SalesOrdersTemplate.html',
+                    templateUrl: 'app-frm/views/packages/sales/SalesOrdersTemplate.html',
                 },
             },
         })
@@ -10887,10 +10887,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/SalesPrices.html',
+                    templateUrl: 'app-frm/views/packages/sales/SalesPrices.html',
                 },
             },
         })
@@ -10902,10 +10902,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/SalesQuotationForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/SalesQuotationForm.html',
                 },
             },
         })
@@ -10917,10 +10917,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/SalesQuotations.html',
+                    templateUrl: 'app-frm/views/packages/sales/SalesQuotations.html',
                 },
             },
         })
@@ -10932,10 +10932,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/SalesReturnForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/SalesReturnForm.html',
                 },
             },
         })
@@ -10947,10 +10947,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/SalesReturns.html',
+                    templateUrl: 'app-frm/views/packages/sales/SalesReturns.html',
                 },
             },
         })
@@ -10962,10 +10962,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/SupplierForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/SupplierForm.html',
                 },
             },
         })
@@ -10977,10 +10977,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/Vendors.html',
+                    templateUrl: 'app-frm/views/packages/sales/Vendors.html',
                 },
             },
         })
@@ -10992,10 +10992,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/SalesOrderType.html',
+                    templateUrl: 'app-frm/views/packages/sales/SalesOrderType.html',
                 },
             },
         })
@@ -11007,10 +11007,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/SalesOrderTypeForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/SalesOrderTypeForm.html',
                 },
             },
         })
@@ -11022,10 +11022,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/ReleaseBlock.html',
+                    templateUrl: 'app-frm/views/packages/sales/ReleaseBlock.html',
                 },
             },
         })
@@ -11037,10 +11037,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/CreditLine.html',
+                    templateUrl: 'app-frm/views/packages/sales/CreditLine.html',
                 },
             },
         })
@@ -11052,10 +11052,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/CreditLineForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/CreditLineForm.html',
                 },
             },
         })
@@ -11067,10 +11067,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/TOPChangeRequest.html',
+                    templateUrl: 'app-frm/views/packages/sales/TOPChangeRequest.html',
                 },
             },
         })
@@ -11082,10 +11082,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/TOPChangeRequestForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/TOPChangeRequestForm.html',
                 },
             },
         })
@@ -11097,10 +11097,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/CustomerHold.html',
+                    templateUrl: 'app-frm/views/packages/sales/CustomerHold.html',
                 },
             },
         })
@@ -11112,10 +11112,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/SalesPromo.html',
+                    templateUrl: 'app-frm/views/packages/sales/SalesPromo.html',
                 },
             },
         })
@@ -11127,10 +11127,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/SalesPromoForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/SalesPromoForm.html',
                 },
             },
         })
@@ -11142,10 +11142,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/VerifySalesOrders.html',
+                    templateUrl: 'app-frm/views/packages/sales/VerifySalesOrders.html',
                 },
             },
         })
@@ -11157,10 +11157,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/ReopenOrders.html',
+                    templateUrl: 'app-frm/views/packages/sales/ReopenOrders.html',
                 },
             },
         })
@@ -11172,10 +11172,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/ReopenOrdersForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/ReopenOrdersForm.html',
                 },
             },
         })
@@ -11187,10 +11187,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/CloseRequestMonitoring.html',
+                    templateUrl: 'app-frm/views/packages/sales/CloseRequestMonitoring.html',
                 },
             },
         })
@@ -11202,10 +11202,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/CloseRequestMonitoringForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/CloseRequestMonitoringForm.html',
                 },
             },
         })
@@ -11217,10 +11217,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/SwapReservation.html',
+                    templateUrl: 'app-frm/views/packages/sales/SwapReservation.html',
                 },
             },
         })
@@ -11232,10 +11232,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/ReservedItems.html',
+                    templateUrl: 'app-frm/views/packages/sales/ReservedItems.html',
                 },
             },
         })
@@ -11247,10 +11247,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/DocumentTree.html',
+                    templateUrl: 'app-frm/views/packages/sales/DocumentTree.html',
                 },
             },
         })
@@ -11262,10 +11262,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/DeliveredAndClosedDOSelection.html',
+                    templateUrl: 'app-frm/views/packages/sales/DeliveredAndClosedDOSelection.html',
                 },
             },
         })
@@ -11277,10 +11277,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/CancelPurchase.html',
+                    templateUrl: 'app-frm/views/packages/sales/CancelPurchase.html',
                 },
             },
         })
@@ -11292,10 +11292,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/SOReopenForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/SOReopenForm.html',
                 },
             },
         })
@@ -11307,10 +11307,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/SOClosingForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/SOClosingForm.html',
                 },
             },
         })
@@ -11322,10 +11322,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/ReleaseBlockedSO.html',
+                    templateUrl: 'app-frm/views/packages/sales/ReleaseBlockedSO.html',
                 },
             },
         })
@@ -11337,10 +11337,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/ExtendSORequest.html',
+                    templateUrl: 'app-frm/views/packages/sales/ExtendSORequest.html',
                 },
             },
         })
@@ -11352,10 +11352,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/ExtendSOItemReservation.html',
+                    templateUrl: 'app-frm/views/packages/sales/ExtendSOItemReservation.html',
                 },
             },
         })
@@ -11367,10 +11367,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/DeliveryRequestForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/DeliveryRequestForm.html',
                 },
             },
         })
@@ -11382,10 +11382,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/CancelShipmentForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/CancelShipmentForm.html',
                 },
             },
         })
@@ -11397,10 +11397,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/CancelPurchaseForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/CancelPurchaseForm.html',
                 },
             },
         })
@@ -14775,304 +14775,6 @@ angular.module('app.erpUtils').controller('LoginXCtrl', function ($scope, $rootS
         });
     }
 });
-
-'use strict';
-
-angular.module('app.erpUtils').factory('BusinessRelation_Service', [
-    'BackEndService',
-    function (BackEndService) {
-        var service = {};
-
-        service.getData_BusinessRelation = async function (code, fieldNames = ['*']) {
-            let request = {
-                modelName: 'XSmBusinessRelationR',
-                criteriaList: [{ PropertyName: 'Code', Operator: '=', Value: code }],
-                fieldNames: fieldNames,
-            };
-
-            return BackEndService.RequestDataSingle(request);
-        };
-
-        service.Customer_Dropdown = async function (val, locationCode = '', locationOperator = '=') {
-            let request = {
-                modelName: 'XSmBusinessRelation',
-                fieldNames: ['Code', 'Name', 'StatusId', 'StatusName'],
-                maximumResult: 20,
-                pageNumber: 1,
-                SQLCriteria: `(Active = 1) and (IsCustomer = 1) and ((Code like '%${val}%') or (Name like '%${val}%'))`,
-                sortList: ['Code asc'],
-            };
-
-            if (locationCode != '' && locationCode != `('')`) {
-                // "Bungkus" nilai locationCode dengan Tanda Petik
-                if (!locationCode.startsWith('(')) locationCode = `'${locationCode}'`;
-
-                // tambahkan ke criteria
-                request.SQLCriteria += ` and LocationCode ${locationOperator} ${locationCode}`;
-            }
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.Personel_Dropdown = async function (val, locationCode = '', locationOperator = '=') {
-            let request = {
-                modelName: 'XSmBusinessRelation',
-                fieldNames: ['Code', 'Name', 'StatusId', 'StatusName'],
-                maximumResult: 20,
-                pageNumber: 1,
-                SQLCriteria: `(Active = 1) and (IsPersonnel = 1) and ((Code like '%${val}%') or (Name like '%${val}%'))`,
-                sortList: ['Code asc'],
-            };
-
-            if (locationCode != '' && locationCode != `('')`) {
-                // "Bungkus" nilai locationCode dengan Tanda Petik
-                if (!locationCode.startsWith('(')) locationCode = `'${locationCode}'`;
-
-                // tambahkan ke criteria
-                request.SQLCriteria += ` and LocationCode ${locationOperator} ${locationCode}`;
-            }
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.getData_Customer = async function (val, locationCode = '', locationOperator = '=') {
-            let request = {
-                modelName: 'XSmBusinessRelation',
-                fieldNames: ['Code', 'Name', 'StatusId', 'StatusName'],
-                maximumResult: 20,
-                pageNumber: 1,
-                criteriaList: [
-                    {
-                        PropertyName: 'Active',
-                        Operator: '=',
-                        Value: true,
-                    },
-                    {
-                        PropertyName: 'IsCustomer',
-                        Operator: '=',
-                        Value: true,
-                    },
-                    {
-                        PropertyName: 'Name',
-                        Operator: 'like',
-                        Value: '%' + val + '%',
-                    },
-                ],
-                sortList: ['Name asc'],
-            };
-
-            if (locationCode != '' && locationCode != `('')`) {
-                request.criteriaList.push({
-                    PropertyName: 'LocationCode',
-                    Operator: locationOperator,
-                    Value: locationCode,
-                });
-            }
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.Supplier_Dropdown = async function (val, locationCode = '', locationOperator = '=') {
-            let request = {
-                modelName: 'XSmBusinessRelation',
-                fieldNames: ['Code', 'Name', 'StatusId', 'StatusName'],
-                maximumResult: 20,
-                pageNumber: 1,
-                SQLCriteria: `(Active = 1) and (IsSupplier = 1) and ((Code like '%${val}%') or (Name like '%${val}%'))`,
-                sortList: ['Code asc'],
-            };
-
-            if (locationCode != '' && locationCode != `('')`) {
-                // "Bungkus" nilai locationCode dengan Tanda Petik
-                if (!locationCode.startsWith('(')) locationCode = `'${locationCode}'`;
-
-                // tambahkan ke criteria
-                request.SQLCriteria += ` and LocationCode ${locationOperator} ${locationCode}`;
-            }
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.getData_Supplier = async function (val, locationCode = '', locationOperator = '=') {
-            let request = {
-                modelName: 'XSmBusinessRelation',
-                fieldNames: ['Code', 'Name', 'StatusId', 'StatusName'],
-                maximumResult: 20,
-                pageNumber: 1,
-                criteriaList: [
-                    {
-                        PropertyName: 'Active',
-                        Operator: '=',
-                        Value: true,
-                    },
-                    {
-                        PropertyName: 'IsSupplier',
-                        Operator: '=',
-                        Value: true,
-                    },
-
-                    {
-                        PropertyName: 'Name',
-                        Operator: 'like',
-                        Value: '%' + val + '%',
-                    },
-                ],
-                sortList: ['Name asc'],
-            };
-
-            if (locationCode != '' && locationCode != `('')`) {
-                request.criteriaList.push({
-                    PropertyName: 'LocationCode',
-                    Operator: locationOperator,
-                    Value: locationCode,
-                });
-            }
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.GetBusinessRelationBillingAddressNames = async function (brCode) {
-            let request = {
-                modelName: 'XSmAddress',
-                fieldNames: ['*'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [
-                    {
-                        PropertyName: 'BusinessRelationCode',
-                        Operator: '=',
-                        Value: brCode,
-                    },
-                ],
-                sortList: ['Number asc'],
-            };
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.getData_ContactPerson = async function (brCode) {
-            let request = {
-                modelName: 'XSmContactPerson',
-                fieldNames: ['Number', 'Name'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [
-                    {
-                        PropertyName: 'BusinessRelationCode',
-                        Operator: '=',
-                        Value: brCode,
-                    },
-                    // {
-                    //     PropertyName: 'Active',
-                    //     Operator: '=',
-                    //     Value: true,
-                    // },
-                ],
-                sortList: ['Number asc, Name asc'],
-            };
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        service.PriceGroupList = async function (brCode) {
-            let request = {
-                modelName: 'XSmBusinessRelationPriceGroupR',
-                fieldNames: ['*'],
-                maximumResult: 100,
-                pageNumber: 1,
-                criteriaList: [
-                    {
-                        PropertyName: 'BusinessRelationCode',
-                        Operator: '=',
-                        Value: brCode,
-                    },
-                ],
-                sortList: ['Number asc, ItemCode asc, ItemDescription asc'],
-            };
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        return service;
-    },
-]);
-
-'use strict';
-
-angular.module('app.erpUtils').factory('Employee_Service', [
-    'BackEndService',
-    function (BackEndService) {
-        var service = {};
-
-        service.LocationAccess = async function () {
-            let request = {
-                applicationId: '',
-                actionController: 'EmployeeController',
-                actionName: 'GetEmployeeLocationAccess',
-                actionParam: {},
-            };
-
-            let response = await BackEndService.RequestAction(request);
-            return response.data.Value;
-        };
-
-        service.WarehouseByLocation = async function () {
-            let request = {
-                applicationId: '',
-                actionController: 'EmployeeController',
-                actionName: 'GetSalesWarehouseListByLocation',
-                actionParam: {},
-            };
-
-            let response = await BackEndService.RequestAction(request);
-            return response.data.Value;
-        };
-
-        service.User_Dropdown = async function (val) {
-            let request = {
-                modelName: 'XSmUsers',
-                fieldNames: ['Code', 'Name'],
-                maximumResult: 20,
-                pageNumber: 1,
-                SQLCriteria: `(Active = 1) and ((Code like '%${val}%') or (Name like '%${val}%'))`,
-                sortList: ['Code asc'],
-            };
-
-            let response = await BackEndService.RequestDataList(request);
-
-            return response.data.Data;
-        };
-
-        return service;
-    },
-]);
-
-'use strict';
-
-angular.module('app.erpUtils').factory('Inventory_Service', [
-    'BackEndService',
-    function (BackEndService) {
-        var service = {};
-        
-        return service;
-    },
-]);
 
 angular.module('app.erp').controller('AbcCtrl', function ($rootScope, $scope, Utility_ERP, AddressList_Service) {
     // Dummy data, just for "Table: paging and searching"
@@ -20502,6 +20204,304 @@ angular.module('app.erp').controller('TopChangeRequestCtrl', function ($rootScop
 // ini file Controller.js
 //
 // ini file Controller.js
+
+'use strict';
+
+angular.module('app.erpUtils').factory('BusinessRelation_Service', [
+    'BackEndService',
+    function (BackEndService) {
+        var service = {};
+
+        service.getData_BusinessRelation = async function (code, fieldNames = ['*']) {
+            let request = {
+                modelName: 'XSmBusinessRelationR',
+                criteriaList: [{ PropertyName: 'Code', Operator: '=', Value: code }],
+                fieldNames: fieldNames,
+            };
+
+            return BackEndService.RequestDataSingle(request);
+        };
+
+        service.Customer_Dropdown = async function (val, locationCode = '', locationOperator = '=') {
+            let request = {
+                modelName: 'XSmBusinessRelation',
+                fieldNames: ['Code', 'Name', 'StatusId', 'StatusName'],
+                maximumResult: 20,
+                pageNumber: 1,
+                SQLCriteria: `(Active = 1) and (IsCustomer = 1) and ((Code like '%${val}%') or (Name like '%${val}%'))`,
+                sortList: ['Code asc'],
+            };
+
+            if (locationCode != '' && locationCode != `('')`) {
+                // "Bungkus" nilai locationCode dengan Tanda Petik
+                if (!locationCode.startsWith('(')) locationCode = `'${locationCode}'`;
+
+                // tambahkan ke criteria
+                request.SQLCriteria += ` and LocationCode ${locationOperator} ${locationCode}`;
+            }
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.Personel_Dropdown = async function (val, locationCode = '', locationOperator = '=') {
+            let request = {
+                modelName: 'XSmBusinessRelation',
+                fieldNames: ['Code', 'Name', 'StatusId', 'StatusName'],
+                maximumResult: 20,
+                pageNumber: 1,
+                SQLCriteria: `(Active = 1) and (IsPersonnel = 1) and ((Code like '%${val}%') or (Name like '%${val}%'))`,
+                sortList: ['Code asc'],
+            };
+
+            if (locationCode != '' && locationCode != `('')`) {
+                // "Bungkus" nilai locationCode dengan Tanda Petik
+                if (!locationCode.startsWith('(')) locationCode = `'${locationCode}'`;
+
+                // tambahkan ke criteria
+                request.SQLCriteria += ` and LocationCode ${locationOperator} ${locationCode}`;
+            }
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.getData_Customer = async function (val, locationCode = '', locationOperator = '=') {
+            let request = {
+                modelName: 'XSmBusinessRelation',
+                fieldNames: ['Code', 'Name', 'StatusId', 'StatusName'],
+                maximumResult: 20,
+                pageNumber: 1,
+                criteriaList: [
+                    {
+                        PropertyName: 'Active',
+                        Operator: '=',
+                        Value: true,
+                    },
+                    {
+                        PropertyName: 'IsCustomer',
+                        Operator: '=',
+                        Value: true,
+                    },
+                    {
+                        PropertyName: 'Name',
+                        Operator: 'like',
+                        Value: '%' + val + '%',
+                    },
+                ],
+                sortList: ['Name asc'],
+            };
+
+            if (locationCode != '' && locationCode != `('')`) {
+                request.criteriaList.push({
+                    PropertyName: 'LocationCode',
+                    Operator: locationOperator,
+                    Value: locationCode,
+                });
+            }
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.Supplier_Dropdown = async function (val, locationCode = '', locationOperator = '=') {
+            let request = {
+                modelName: 'XSmBusinessRelation',
+                fieldNames: ['Code', 'Name', 'StatusId', 'StatusName'],
+                maximumResult: 20,
+                pageNumber: 1,
+                SQLCriteria: `(Active = 1) and (IsSupplier = 1) and ((Code like '%${val}%') or (Name like '%${val}%'))`,
+                sortList: ['Code asc'],
+            };
+
+            if (locationCode != '' && locationCode != `('')`) {
+                // "Bungkus" nilai locationCode dengan Tanda Petik
+                if (!locationCode.startsWith('(')) locationCode = `'${locationCode}'`;
+
+                // tambahkan ke criteria
+                request.SQLCriteria += ` and LocationCode ${locationOperator} ${locationCode}`;
+            }
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.getData_Supplier = async function (val, locationCode = '', locationOperator = '=') {
+            let request = {
+                modelName: 'XSmBusinessRelation',
+                fieldNames: ['Code', 'Name', 'StatusId', 'StatusName'],
+                maximumResult: 20,
+                pageNumber: 1,
+                criteriaList: [
+                    {
+                        PropertyName: 'Active',
+                        Operator: '=',
+                        Value: true,
+                    },
+                    {
+                        PropertyName: 'IsSupplier',
+                        Operator: '=',
+                        Value: true,
+                    },
+
+                    {
+                        PropertyName: 'Name',
+                        Operator: 'like',
+                        Value: '%' + val + '%',
+                    },
+                ],
+                sortList: ['Name asc'],
+            };
+
+            if (locationCode != '' && locationCode != `('')`) {
+                request.criteriaList.push({
+                    PropertyName: 'LocationCode',
+                    Operator: locationOperator,
+                    Value: locationCode,
+                });
+            }
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.GetBusinessRelationBillingAddressNames = async function (brCode) {
+            let request = {
+                modelName: 'XSmAddress',
+                fieldNames: ['*'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [
+                    {
+                        PropertyName: 'BusinessRelationCode',
+                        Operator: '=',
+                        Value: brCode,
+                    },
+                ],
+                sortList: ['Number asc'],
+            };
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.getData_ContactPerson = async function (brCode) {
+            let request = {
+                modelName: 'XSmContactPerson',
+                fieldNames: ['Number', 'Name'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [
+                    {
+                        PropertyName: 'BusinessRelationCode',
+                        Operator: '=',
+                        Value: brCode,
+                    },
+                    // {
+                    //     PropertyName: 'Active',
+                    //     Operator: '=',
+                    //     Value: true,
+                    // },
+                ],
+                sortList: ['Number asc, Name asc'],
+            };
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        service.PriceGroupList = async function (brCode) {
+            let request = {
+                modelName: 'XSmBusinessRelationPriceGroupR',
+                fieldNames: ['*'],
+                maximumResult: 100,
+                pageNumber: 1,
+                criteriaList: [
+                    {
+                        PropertyName: 'BusinessRelationCode',
+                        Operator: '=',
+                        Value: brCode,
+                    },
+                ],
+                sortList: ['Number asc, ItemCode asc, ItemDescription asc'],
+            };
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        return service;
+    },
+]);
+
+'use strict';
+
+angular.module('app.erpUtils').factory('Employee_Service', [
+    'BackEndService',
+    function (BackEndService) {
+        var service = {};
+
+        service.LocationAccess = async function () {
+            let request = {
+                applicationId: '',
+                actionController: 'EmployeeController',
+                actionName: 'GetEmployeeLocationAccess',
+                actionParam: {},
+            };
+
+            let response = await BackEndService.RequestAction(request);
+            return response.data.Value;
+        };
+
+        service.WarehouseByLocation = async function () {
+            let request = {
+                applicationId: '',
+                actionController: 'EmployeeController',
+                actionName: 'GetSalesWarehouseListByLocation',
+                actionParam: {},
+            };
+
+            let response = await BackEndService.RequestAction(request);
+            return response.data.Value;
+        };
+
+        service.User_Dropdown = async function (val) {
+            let request = {
+                modelName: 'XSmUsers',
+                fieldNames: ['Code', 'Name'],
+                maximumResult: 20,
+                pageNumber: 1,
+                SQLCriteria: `(Active = 1) and ((Code like '%${val}%') or (Name like '%${val}%'))`,
+                sortList: ['Code asc'],
+            };
+
+            let response = await BackEndService.RequestDataList(request);
+
+            return response.data.Data;
+        };
+
+        return service;
+    },
+]);
+
+'use strict';
+
+angular.module('app.erpUtils').factory('Inventory_Service', [
+    'BackEndService',
+    function (BackEndService) {
+        var service = {};
+        
+        return service;
+    },
+]);
 
 // ini file Service.js
 "use strict";

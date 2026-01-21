@@ -9,10 +9,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/_WebPage.html',
+                    templateUrl: 'app-frm/views/packages/sales/_WebPage.html',
                 },
             },
         })
@@ -24,10 +24,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/AddressList.html',
+                    templateUrl: 'app-frm/views/packages/sales/AddressList.html',
                 },
             },
         })
@@ -39,10 +39,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/AddressListForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/AddressListForm.html',
                 },
             },
         })
@@ -54,10 +54,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/ApprovalWorkFlowForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/ApprovalWorkFlowForm.html',
                 },
             },
         })
@@ -69,10 +69,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/ApprovalWorkflows.html',
+                    templateUrl: 'app-frm/views/packages/sales/ApprovalWorkflows.html',
                 },
             },
         })
@@ -84,10 +84,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/CloseOrders.html',
+                    templateUrl: 'app-frm/views/packages/sales/CloseOrders.html',
                 },
             },
         })
@@ -99,10 +99,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/ContractForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/ContractForm.html',
                 },
             },
         })
@@ -114,10 +114,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/Contracts.html',
+                    templateUrl: 'app-frm/views/packages/sales/Contracts.html',
                 },
             },
         })
@@ -129,10 +129,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/CreditLimitForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/CreditLimitForm.html',
                 },
             },
         })
@@ -144,10 +144,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/CreditLimitRequests.html',
+                    templateUrl: 'app-frm/views/packages/sales/CreditLimitRequests.html',
                 },
             },
         })
@@ -159,10 +159,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/CustomerPricing.html',
+                    templateUrl: 'app-frm/views/packages/sales/CustomerPricing.html',
                 },
             },
         })
@@ -174,10 +174,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/CustomerRequests.html',
+                    templateUrl: 'app-frm/views/packages/sales/CustomerRequests.html',
                 },
             },
         })
@@ -189,10 +189,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/CustomerRequestsForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/CustomerRequestsForm.html',
                 },
             },
         })
@@ -204,10 +204,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/Customers.html',
+                    templateUrl: 'app-frm/views/packages/sales/Customers.html',
                 },
             },
         })
@@ -219,10 +219,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/CustomersForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/CustomersForm.html',
                 },
             },
         })
@@ -234,10 +234,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/DiscountForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/DiscountForm.html',
                 },
             },
         })
@@ -249,10 +249,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/Discounts.html',
+                    templateUrl: 'app-frm/views/packages/sales/Discounts.html',
                 },
             },
         })
@@ -264,10 +264,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/DropshipShipments.html',
+                    templateUrl: 'app-frm/views/packages/sales/DropshipShipments.html',
                 },
             },
         })
@@ -279,10 +279,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/InterbranchOrders.html',
+                    templateUrl: 'app-frm/views/packages/sales/InterbranchOrders.html',
                 },
             },
         })
@@ -294,10 +294,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/NewCustomerForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/NewCustomerForm.html',
                 },
             },
         })
@@ -309,10 +309,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/OnDemandItems.html',
+                    templateUrl: 'app-frm/views/packages/sales/OnDemandItems.html',
                 },
             },
         })
@@ -324,10 +324,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/OutstandingItems.html',
+                    templateUrl: 'app-frm/views/packages/sales/OutstandingItems.html',
                 },
             },
         })
@@ -339,10 +339,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/OutstandingOrders.html',
+                    templateUrl: 'app-frm/views/packages/sales/OutstandingOrders.html',
                 },
             },
         })
@@ -354,10 +354,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/Personnels.html',
+                    templateUrl: 'app-frm/views/packages/sales/Personnels.html',
                 },
             },
         })
@@ -369,10 +369,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/PriceAvailability.html',
+                    templateUrl: 'app-frm/views/packages/sales/PriceAvailability.html',
                 },
             },
         })
@@ -384,10 +384,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/PriceGroupForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/PriceGroupForm.html',
                 },
             },
         })
@@ -399,10 +399,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/PriceGroups.html',
+                    templateUrl: 'app-frm/views/packages/sales/PriceGroups.html',
                 },
             },
         })
@@ -414,10 +414,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/PricingSchemaForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/PricingSchemaForm.html',
                 },
             },
         })
@@ -429,10 +429,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/PricingSchema.html',
+                    templateUrl: 'app-frm/views/packages/sales/PricingSchema.html',
                 },
             },
         })
@@ -444,10 +444,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/ProjectDashboard.html',
+                    templateUrl: 'app-frm/views/packages/sales/ProjectDashboard.html',
                 },
             },
         })
@@ -459,10 +459,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/ProjectForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/ProjectForm.html',
                 },
             },
         })
@@ -474,10 +474,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/Projects02.html',
+                    templateUrl: 'app-frm/views/packages/sales/Projects02.html',
                 },
             },
         })
@@ -489,10 +489,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/Projects.html',
+                    templateUrl: 'app-frm/views/packages/sales/Projects.html',
                 },
             },
         })
@@ -504,10 +504,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/Revisions.html',
+                    templateUrl: 'app-frm/views/packages/sales/Revisions.html',
                 },
             },
         })
@@ -519,10 +519,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/SalesOrderForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/SalesOrderForm.html',
                 },
             },
         })
@@ -534,10 +534,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/SalesOrders.html',
+                    templateUrl: 'app-frm/views/packages/sales/SalesOrders.html',
                 },
             },
         })
@@ -549,10 +549,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/SalesOrdersTemplate.html',
+                    templateUrl: 'app-frm/views/packages/sales/SalesOrdersTemplate.html',
                 },
             },
         })
@@ -564,10 +564,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/SalesPrices.html',
+                    templateUrl: 'app-frm/views/packages/sales/SalesPrices.html',
                 },
             },
         })
@@ -579,10 +579,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/SalesQuotationForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/SalesQuotationForm.html',
                 },
             },
         })
@@ -594,10 +594,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/SalesQuotations.html',
+                    templateUrl: 'app-frm/views/packages/sales/SalesQuotations.html',
                 },
             },
         })
@@ -609,10 +609,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/SalesReturnForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/SalesReturnForm.html',
                 },
             },
         })
@@ -624,10 +624,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/SalesReturns.html',
+                    templateUrl: 'app-frm/views/packages/sales/SalesReturns.html',
                 },
             },
         })
@@ -639,10 +639,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/SupplierForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/SupplierForm.html',
                 },
             },
         })
@@ -654,10 +654,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/Vendors.html',
+                    templateUrl: 'app-frm/views/packages/sales/Vendors.html',
                 },
             },
         })
@@ -669,10 +669,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/SalesOrderType.html',
+                    templateUrl: 'app-frm/views/packages/sales/SalesOrderType.html',
                 },
             },
         })
@@ -684,10 +684,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/SalesOrderTypeForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/SalesOrderTypeForm.html',
                 },
             },
         })
@@ -699,10 +699,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/ReleaseBlock.html',
+                    templateUrl: 'app-frm/views/packages/sales/ReleaseBlock.html',
                 },
             },
         })
@@ -714,10 +714,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/CreditLine.html',
+                    templateUrl: 'app-frm/views/packages/sales/CreditLine.html',
                 },
             },
         })
@@ -729,10 +729,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/CreditLineForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/CreditLineForm.html',
                 },
             },
         })
@@ -744,10 +744,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/TOPChangeRequest.html',
+                    templateUrl: 'app-frm/views/packages/sales/TOPChangeRequest.html',
                 },
             },
         })
@@ -759,10 +759,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/TOPChangeRequestForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/TOPChangeRequestForm.html',
                 },
             },
         })
@@ -774,10 +774,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/CustomerHold.html',
+                    templateUrl: 'app-frm/views/packages/sales/CustomerHold.html',
                 },
             },
         })
@@ -789,10 +789,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/SalesPromo.html',
+                    templateUrl: 'app-frm/views/packages/sales/SalesPromo.html',
                 },
             },
         })
@@ -804,10 +804,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/SalesPromoForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/SalesPromoForm.html',
                 },
             },
         })
@@ -819,10 +819,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/VerifySalesOrders.html',
+                    templateUrl: 'app-frm/views/packages/sales/VerifySalesOrders.html',
                 },
             },
         })
@@ -834,10 +834,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/ReopenOrders.html',
+                    templateUrl: 'app-frm/views/packages/sales/ReopenOrders.html',
                 },
             },
         })
@@ -849,10 +849,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/ReopenOrdersForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/ReopenOrdersForm.html',
                 },
             },
         })
@@ -864,10 +864,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/CloseRequestMonitoring.html',
+                    templateUrl: 'app-frm/views/packages/sales/CloseRequestMonitoring.html',
                 },
             },
         })
@@ -879,10 +879,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/CloseRequestMonitoringForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/CloseRequestMonitoringForm.html',
                 },
             },
         })
@@ -894,10 +894,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/SwapReservation.html',
+                    templateUrl: 'app-frm/views/packages/sales/SwapReservation.html',
                 },
             },
         })
@@ -909,10 +909,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/ReservedItems.html',
+                    templateUrl: 'app-frm/views/packages/sales/ReservedItems.html',
                 },
             },
         })
@@ -924,10 +924,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/DocumentTree.html',
+                    templateUrl: 'app-frm/views/packages/sales/DocumentTree.html',
                 },
             },
         })
@@ -939,10 +939,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/DeliveredAndClosedDOSelection.html',
+                    templateUrl: 'app-frm/views/packages/sales/DeliveredAndClosedDOSelection.html',
                 },
             },
         })
@@ -954,10 +954,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/CancelPurchase.html',
+                    templateUrl: 'app-frm/views/packages/sales/CancelPurchase.html',
                 },
             },
         })
@@ -969,10 +969,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/SOReopenForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/SOReopenForm.html',
                 },
             },
         })
@@ -984,10 +984,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/SOClosingForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/SOClosingForm.html',
                 },
             },
         })
@@ -999,10 +999,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/ReleaseBlockedSO.html',
+                    templateUrl: 'app-frm/views/packages/sales/ReleaseBlockedSO.html',
                 },
             },
         })
@@ -1014,10 +1014,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/ExtendSORequest.html',
+                    templateUrl: 'app-frm/views/packages/sales/ExtendSORequest.html',
                 },
             },
         })
@@ -1029,10 +1029,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/ExtendSOItemReservation.html',
+                    templateUrl: 'app-frm/views/packages/sales/ExtendSOItemReservation.html',
                 },
             },
         })
@@ -1044,10 +1044,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/DeliveryRequestForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/DeliveryRequestForm.html',
                 },
             },
         })
@@ -1059,10 +1059,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/CancelShipmentForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/CancelShipmentForm.html',
                 },
             },
         })
@@ -1074,10 +1074,10 @@ angular.module('app.erp').config(function ($stateProvider) {
             },
             views: {
                 'erpMenu@app': {
-                    templateUrl: 'app-erp/_menu/sales.html',
+                    templateUrl: 'app-frm/_menu/sales.html',
                 },
                 'content@app': {
-                    templateUrl: 'app-erp/views/packages/sales/CancelPurchaseForm.html',
+                    templateUrl: 'app-frm/views/packages/sales/CancelPurchaseForm.html',
                 },
             },
         })
