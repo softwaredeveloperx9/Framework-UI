@@ -2,9 +2,9 @@
 
 /**
  * @ngdoc overview
- * @name app [erp-new-frontend]
+ * @name app [framework-ui]
  * @description
- * # app [erp-new-frontend]
+ * # app [framework-ui]
  *
  * Main module of the application.
  */

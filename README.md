@@ -1,4 +1,4 @@
-# ERP NEW - FrontEnd Version 2026.01.04
+# Framework - UI Version 2026.01.04
 
 ## development
 
@@ -19,12 +19,12 @@ Now with all dependencies installed
 
 To build minified version:
 
--   Run `npm run prod`
+- Run `npm run prod`
 
 ---
 
 ## resources
 
--   [complete project demo](http://pastigroup.co.id)
+- [complete project demo](http://pastigroup.co.id)
 
 ---

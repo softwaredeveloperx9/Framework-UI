@@ -1,5 +1,5 @@
 {
-  "name": "erp-new-frontend",
+  "name": "framework-ui",
   "version": "2026.01.04.22.12",
   "dependencies": {
     "angular": "~1.4.9",
