@@ -7,9 +7,9 @@ angular.module('app.frmUtils').factory('OurStorage', [
 
         ourStorage.getPrefix = function () {
             let pathSegments = window.location.pathname.split('/');
-            let appPath = pathSegments[1]; // Gets 'newdev', 'new', 'xpdev', or 'xp'
+            let appPath = pathSegments[1]; // Gets 'sub-folder'
 
-            if (!appPath) appPath = 'localmachine';
+            if (!appPath) appPath = 'nosubfolder';
 
             return appPath + '_';
         };

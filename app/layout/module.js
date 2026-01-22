@@ -19,9 +19,9 @@ angular
         // load from LocalStorage
         try {
             let pathSegments = window.location.pathname.split('/');
-            appPath = pathSegments[1]; // Gets 'newdev', 'new', 'xpdev', or 'xp'
+            appPath = pathSegments[1]; // Gets 'sub-folder'
 
-            if (!appPath) appPath = 'localmachine';
+            if (!appPath) appPath = 'nosubfolder';
 
             appPath += '_';
 
