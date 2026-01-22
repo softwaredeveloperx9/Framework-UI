@@ -25,10 +25,9 @@ angular.module('app.frmUtils').factory('Global_Data_FRM', [
                 parameter_rootScope.appSettings = JSON.parse(appSetting) || {};
 
                 let x = OurStorage.getItem();
-                parameter_rootScope.ERP = JSON.parse(x) || {};
+                parameter_rootScope.FRM = JSON.parse(x) || {};
 
-                if (!parameter_rootScope.ERP.currentUser) parameter_rootScope.ERP.currentUser = '';
-                if (!parameter_rootScope.ERP.userERP) parameter_rootScope.ERP.userERP = { Name: '' };
+                if (!parameter_rootScope.FRM.currentUser) parameter_rootScope.FRM.currentUser = '';
             } catch (e) { }
 
             parameter_rootScope.ValidString = function (str) {
@@ -400,9 +399,9 @@ angular.module('app.frmUtils').factory('Global_Data_FRM', [
             //TODO: Access Controll
             parameter_rootScope.CheckAccess = function (moduleName, accessType) {
                 // accessType: 'Read', 'Create', 'Update', 'Delete', 'Print', 'Approve'
-                if (parameter_rootScope.ERP.currentUser === '') return false;
-                if (parameter_rootScope.ERP.currentUser.IsAdmin) return true;
-                if (!parameter_rootScope.ERP.currentUser.Roles) return false;
+                if (parameter_rootScope.FRM.currentUser === '') return false;
+                if (parameter_rootScope.FRM.currentUser.IsAdmin) return true;
+                if (!parameter_rootScope.FRM.currentUser.Roles) return false;
             };
 
             parameter_rootScope.Simple_Encode = function (str) {

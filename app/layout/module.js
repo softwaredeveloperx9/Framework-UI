@@ -13,7 +13,7 @@ angular
             },
         });
 
-        var ERP_CurrentUser = false;
+        var FRM_CurrentUser = false;
         let appPath = '';
 
         // load from LocalStorage
@@ -26,12 +26,12 @@ angular
             appPath += '_';
 
             let x = localStorage.getItem(appPath);
-            let ERP = JSON.parse(x) || {};
+            let FRM = JSON.parse(x) || {};
 
-            if (ERP.currentUser) ERP_CurrentUser = true;
+            if (FRM.currentUser) FRM_CurrentUser = true;
         } catch (e) { }
 
-        if (ERP_CurrentUser) {
+        if (FRM_CurrentUser) {
             $urlRouterProvider.otherwise('/frm/data/Session');
         } else {
             localStorage.setItem(appPath + 'logout', 'true');

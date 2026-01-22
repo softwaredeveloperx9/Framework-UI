@@ -202,8 +202,8 @@ angular
             Global_Data_FRM.Generate($rootScope);
 
             // keep user logged in after page refresh
-            if ($rootScope.ERP.currentUser) {
-                $http.defaults.headers.common['Authorization'] = 'Bearer ' + $rootScope.ERP.currentUser.token;
+            if ($rootScope.FRM.currentUser) {
+                $http.defaults.headers.common['Authorization'] = 'Bearer ' + $rootScope.FRM.currentUser.token;
             }
 
             //$rootScope.$on('$locationChangeStart', function (event, next, current) {
@@ -213,12 +213,12 @@ angular
                 if ($location.path() == '/login') return;
                 if ($location.path() == '/forgotpassword') return;
 
-                if (!$rootScope.ERP) {
+                if (!$rootScope.FRM) {
                     //$location.path('/login');
                     return;
                 }
 
-                if (!$rootScope.ERP.currentUser) {
+                if (!$rootScope.FRM.currentUser) {
                     //$location.path('/login');
                     return;
                 }
